@@ -37,7 +37,7 @@ my $prg_makeindex = 'makeindex';
 my $prg_move = 'mv';
 my $prg_java = 'java';
 my $prg_zip = 'zip -9r';
-my $prg_ps2pdf = 'ps2pdf';
+my $prg_epstopdf = 'epstopdf';
 
 my $error = "!!! Error:";
 
@@ -274,7 +274,7 @@ END_DUMMY
 END_CODE
     $code =~ s/\s//g;
     system("$prg_pdflatex '$code'");
-    system("$prg_ps2pdf a.ps");
+    system("$prg_epstopdf a.ps");
     chdir $cwd;
 }
 
