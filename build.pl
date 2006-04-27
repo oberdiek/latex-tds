@@ -261,8 +261,6 @@ END_CODE
     chdir $cwd;
 }
 
-END_DUMMY
-
 ### Generate documentation for cyrillic
 {
     chdir "$dir_build/cyrillic";
