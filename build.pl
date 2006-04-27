@@ -29,7 +29,7 @@ my $file_tmp_o = "$cwd/$dir_build/tmp-o.pdf";
 my $prg_wget = 'wget';
 my $prg_unzip = 'unzip';
 my $prg_docstrip = 'tex -shell-escape';
-$ENV{'TEXINPUTS'} = "$cwd:";
+$ENV{'TEXINPUTS'} = "$cwd:.:";
 my $prg_copy = 'cp -p';
 my $prg_mkdir = 'mkdir -p';
 my $prg_pdflatex = 'pdflatex';
@@ -220,8 +220,6 @@ END_CODE
     chdir $cwd;
 }
 
-END_DUMMY
-
 ### Generate documentation for tools
 {
     chdir "$dir_build/tools";
@@ -243,6 +241,8 @@ END_DUMMY
     }
     chdir $cwd;
 }
+
+END_DUMMY
 
 ### Generate documentation for cyrillic
 {
@@ -275,6 +275,10 @@ END_CODE
     $code =~ s/\s//g;
     system("$prg_pdflatex '$code'");
     system("$prg_epstopdf a.ps");
+    system("$prg_pdflatex grfguide");
+    system("$prg_pdflatex grfguide");
+    system("$prg_pdflatex grfguide");
+    install_pdf('graphics', 'grfguide');
     chdir $cwd;
 }
 
