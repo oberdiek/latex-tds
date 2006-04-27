@@ -34,7 +34,7 @@ my $prg_copy = 'cp -p';
 my $prg_mkdir = 'mkdir -p';
 my $prg_pdflatex = 'pdflatex';
 my $prg_makeindex = 'makeindex';
-my $prg_move = 'move';
+my $prg_move = 'mv';
 my $prg_java = 'java';
 my $prg_zip = 'zip -9r';
 
@@ -66,6 +66,8 @@ my $error = "!!! Error:";
         system("$prg_unzip $dir_incoming/$pkg.zip -d$dir_build");
     }
 }
+
+my $dummy = <<'END_DUMMY';
 
 ### Install TDS/source
 {
@@ -196,12 +198,13 @@ my $error = "!!! Error:";
     install_pdf('base', 'lppl');
     my $code = <<'END_TXT';
 \let\SavedDocumentclass\documentclass
-\def\documentclass[#1]#2{%
+\def\documentclass[#1]#2{
   \SavedDocumentclass[{#1}]{#2}
   \usepackage[colorlinks,pdfusetitle]{hyperref}
 }
 \input{ltx3info}
 END_TXT
+    $code =~ s/\s//g;
     system("$prg_pdflatex '$code'");
     system("$prg_pdflatex '$code'");
     install_pdf('base', 'ltx3info');
@@ -216,13 +219,40 @@ END_TXT
     chdir $cwd;
 }
 
+END_DUMMY
+
+### Generate documentation for tools
+{
+    chdir "$dir_build/tools";
+    my @list = glob("*.dtx");
+    map { s/\.dtx$//; } @list;
+    foreach my $entry (@list) {
+        system("$prg_pdflatex $entry.dtx");
+        system("$prg_makeindex -s gind.ist $entry.idx")
+            if -f "$entry.idx";
+        system("$prg_makeindex -s gglo.ist -o $entry.glo $entry.gls")
+            if -f "$entry.gls";
+        system("$prg_pdflatex $entry.dtx");
+        system("$prg_makeindex -s gind.ist $entry.idx")
+            if -f "$entry.idx";
+        system("$prg_makeindex -s gglo.ist -o $entry.glo $entry.gls")
+            if -f "$entry.gls";
+        system("$prg_pdflatex $entry.dtx");
+        install_pdf('tools', $entry);
+    }
+    chdir $cwd;
+}
+
 ### Pack result
 {
     -d $dir_distrib or mkdir $dir_distrib;
     for my $pkg (@pkg_list) {
-        chdir "$dir_build/$pkg/texmf";
-        system("prg_zip $cwd/$dir_distrib/$pkg-tds.zip *");
-        chdir $cwd;
+        my $dir_tds = "$dir_build/$pkg/texmf";
+        if (-d $dir_tds) {
+            chdir $dir_tds;
+            system("$prg_zip $cwd/$dir_distrib/$pkg-tds.zip *");
+            chdir $cwd;
+        }
     }
 }
 
@@ -239,8 +269,10 @@ sub install_pdf {
     my $pkg = $_[0];
     my $file_base = $_[1];
     my $file_source = "$file_base.pdf";
-    my $file_dest = "texmf/doc/latex/$pkg/$file_base.pdf";\
+    my $dir_dest = "texmf/doc/latex/$pkg";
+    my $file_dest = "$dir_dest/$file_base.pdf";
 
+    system("$prg_mkdir $dir_dest") unless -d $dir_dest;
     printsize($file_source, 0);
     system("$prg_java -jar $jar_pdfbox_rewrite $file_source $file_tmp");
     system("$prg_java -cp $jar_multivalent tool.pdf.Compress -old $file_tmp");
