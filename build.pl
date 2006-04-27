@@ -243,6 +243,19 @@ END_DUMMY
     chdir $cwd;
 }
 
+### Generate documentation for cyrillic
+{
+    chdir "$dir_build/cyrillic";
+    my @list = glob("*.dtx");
+    map { s/\.dtx$//; } @list;
+    foreach my $entry (@list) {
+        system("$prg_pdflatex $entry.dtx");
+        system("$prg_pdflatex $entry.dtx");
+        install_pdf('cyrillic', $entry);
+    }
+    chdir $cwd;
+}
+
 ### Pack result
 {
     -d $dir_distrib or mkdir $dir_distrib;
