@@ -37,6 +37,7 @@ my $prg_makeindex = 'makeindex';
 my $prg_move = 'mv';
 my $prg_java = 'java';
 my $prg_zip = 'zip -9r';
+my $prg_ps2pdf = 'ps2pdf';
 
 my $error = "!!! Error:";
 
@@ -196,14 +197,14 @@ my $dummy = <<'END_DUMMY';
     system("$prg_pdflatex doc_lppl");
     system("$prg_move doc_lppl.pdf lppl.pdf");
     install_pdf('base', 'lppl');
-    my $code = <<'END_TXT';
+    my $code = <<'END_CODE';
 \let\SavedDocumentclass\documentclass
 \def\documentclass[#1]#2{
   \SavedDocumentclass[{#1}]{#2}
   \usepackage[colorlinks,pdfusetitle]{hyperref}
 }
 \input{ltx3info}
-END_TXT
+END_CODE
     $code =~ s/\s//g;
     system("$prg_pdflatex '$code'");
     system("$prg_pdflatex '$code'");
@@ -253,6 +254,27 @@ END_DUMMY
         system("$prg_pdflatex $entry.dtx");
         install_pdf('cyrillic', $entry);
     }
+    chdir $cwd;
+}
+
+### Generate documentation for graphics
+{
+    chdir "$dir_build/graphics";
+    my @list = glob("*.dtx");
+    map { s/\.dtx$//; } @list;
+    foreach my $entry (@list) {
+        system("$prg_pdflatex $entry.dtx");
+        system("$prg_pdflatex $entry.dtx");
+        install_pdf('graphics', $entry);
+    }
+    my $code = <<'END_CODE';
+\makeatletter
+\let\documentclass\@@end
+\input{grfguide}
+END_CODE
+    $code =~ s/\s//g;
+    system("$prg_pdflatex '$code'");
+    system("$prg_ps2pdf a.ps");
     chdir $cwd;
 }
 
