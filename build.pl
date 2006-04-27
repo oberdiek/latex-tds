@@ -68,8 +68,6 @@ my $error = "!!! Error:";
     }
 }
 
-my $dummy = <<'END_DUMMY';
-
 ### Install TDS/source
 {
     sub install_source {
@@ -118,11 +116,19 @@ my $dummy = <<'END_DUMMY';
     docstrip('tools', 'tools');
 }
 
-### Correction for *.ist files
+### Correction for base: *.ist files
 {
     chdir "$dir_build/base";
     system("prg_mkdir texmf/makeindex");
     system("prg_move texmf/tex/latex/base/*.ist texmf/makeindex");
+    chdir $cwd;
+}
+
+### Correction for babel: *.drv files
+{
+    chdir "$dir_build/babel";
+    system("prg_move texmf/tex/generic/babel/*.drv .");
+    chdir $cwd;
 }
 
 ### Install TDS/tex, TDS/doc files
@@ -165,6 +171,19 @@ my $dummy = <<'END_DUMMY';
         '*.txt'
     ]);
     chdir $cwd;
+    
+#    chdir "$dir_build/babel";
+#    install('texmf/tex/generic/bghyph', [
+#        'bghyphen.txt',
+#        'bghyphsi.tex',
+#        'catmik.tex',
+#        'mik2t2.tex'
+#    ]);
+#    install('texmf/tex/generic/hyphen', [
+#        'icehyph.tex',
+#        'lahyph.tex'
+#    ]);
+#    chdir $cwd;
 }
 
 ### Generate documentation for base
