@@ -281,7 +281,7 @@ my $error = "!!! Error:";
     );
     system("$prg_sed -i -e '"
            . 's/\\\\documentclass{article}/'
-           . '\\\\documentclass{article}\\n\\\\input{manual.cfg}'
+           . '\\\\documentclass{article}\\n\\\\input{manual.cfg}/'
            . "' manual.err");
     system("$prg_pdflatex manual.err");
     system("$prg_pdflatex manual.err");
