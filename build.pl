@@ -219,7 +219,7 @@ my $error = "!!! Error:";
         system("$prg_pdflatex $dtx");
         system("$prg_makeindex -s gind.ist $base.idx");
         system("$prg_makeindex -s gglo.ist -o $base.glo $base.gls");
-        system("$prg_pdflatex $base");
+        system("$prg_pdflatex $dtx");
         system("$prg_makeindex -s gind.ist $base.idx");
         system("$prg_makeindex -s gglo.ist -o $base.glo $base.gls");
         system("$prg_pdflatex $dtx");
