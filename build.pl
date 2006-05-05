@@ -232,7 +232,7 @@ my $error = "!!! Error:";
         my $err = "$base.err";
         system("$prg_pdflatex $err");
         system("$prg_sed -i -e '"
-               . 's/\\endinput/\\input{errata.cfg}\n\\endinput'
+               . 's/\\endinput/\\input{errata.cfg}\n\\endinput/'
                . "' $base.cfg");
         system("$prg_pdflatex $err");
         system("$prg_pdflatex $err");
@@ -280,8 +280,8 @@ my $error = "!!! Error:";
         'webcompg'
     );
     system("$prg_sed -i -e '"
-           . 's/\\documentclass\{article\}/\\documentclass{article}/'
-           . '\\documentclass{article}\n\\input{manual.cfg}/'
+           . 's/\\documentclass{article}/'
+           . '\\documentclass{article}\n\\input{manual.cfg}'
            . "' manual.err");
     system("$prg_pdflatex manual.err");
     system("$prg_pdflatex manual.err");
