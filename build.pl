@@ -38,6 +38,7 @@ my $prg_move = 'mv';
 my $prg_java = 'java';
 my $prg_zip = 'zip -9r';
 my $prg_epstopdf = 'epstopdf';
+my $prg_patch = "patch";
 
 my $error = "!!! Error:";
 
@@ -66,6 +67,13 @@ my $error = "!!! Error:";
     foreach my $pkg (@pkg_list) {
         system("$prg_unzip $dir_incoming/$pkg.zip -d$dir_build");
     }
+}
+
+### Correction of documentation bug of inputenc.dtx:
+{
+    chdir "$dir_build/base";
+    system("$prg_patch inputenc.dtx <$cwd/inputenc.dtx.diff");
+    chdir $cwd;
 }
 
 ### Install TDS/source
@@ -196,6 +204,27 @@ my $error = "!!! Error:";
         install_pdf('base', $guide);
         1;
     }
+    sub simple_dtx {
+        my $base = $_[0];
+        my $dtx = "$base.dtx";
+        system("$prg_pdflatex $dtx");
+        system("$prg_pdflatex $dtx");
+        system("$prg_pdflatex $dtx");
+        install_pdf('base', $base);
+        1;
+    }
+    sub complex_dtx {
+        my $base = $_[0];
+        my $dtx = "$base.dtx";
+        system("$prg_pdflatex $dtx");
+        system("$prg_makeindex -s gind.ist $base.idx");
+        system("$prg_makeindex -s gglo.ist -o $base.glo $base.gls");
+        system("$prg_pdflatex $base");
+        system("$prg_makeindex -s gind.ist $base.idx");
+        system("$prg_makeindex -s gglo.ist -o $base.glo $base.gls");
+        system("$prg_pdflatex $dtx");
+        install_pdf('base', "$base");
+    }
     chdir "$dir_build/base";
     system("$prg_pdflatex source2e");
     system("$prg_makeindex -s gind.ist source2e.idx");
@@ -205,10 +234,30 @@ my $error = "!!! Error:";
     system("$prg_makeindex -s gglo.ist -o souce2e.glo source2e.gls");
     system("$prg_pdflatex source2e");
     install_pdf('base', 'source2e');
-    system("$prg_pdflatex fixltx2e.dtx");
-    system("$prg_pdflatex fixltx2e.dtx");
-    system("$prg_pdflatex fixltx2e.dtx");
-    install_pdf('base', 'fixltx2e');
+    map { complex_dtx $_ } (
+        'doc',
+        'docstrip',
+        'letter'
+    );
+    map { simple_dtx $_ } (
+        'alltt',
+        'classes',
+        'exscale',
+        'fixltx2e',
+        'graphpap',
+        'ifthen',
+        'inputenc',
+        'latex209',
+        'latexsym',
+        'ltxdoc',
+        'makeindx',
+        'newlfont',
+        'oldlfont',
+        'proc',
+        'slides',
+        'syntonly',
+        'utf8ienc'
+    );
     base_guide('cfg');
     base_guide('cls');
     base_guide('cyr');
