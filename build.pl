@@ -39,6 +39,7 @@ my $prg_java = 'java';
 my $prg_zip = 'zip -9r';
 my $prg_epstopdf = 'epstopdf';
 my $prg_patch = "patch";
+my $prg_sed = "sed";
 
 my $error = "!!! Error:";
 
@@ -224,6 +225,19 @@ my $error = "!!! Error:";
         system("$prg_makeindex -s gglo.ist -o $base.glo $base.gls");
         system("$prg_pdflatex $dtx");
         install_pdf('base', "$base");
+        1;
+    }
+    sub book_err {
+        my $base = $_[0];
+        my $err = "$base.err";
+        system("$prg_pdflatex $err");
+        system("$prg_sed -i -e '"
+               . 's/\\endinput/\\input{errata.cfg}\n\\endinput'
+               . "' $base.cfg");
+        system("$prg_pdflatex $err");
+        system("$prg_pdflatex $err");
+        install_pdf('base', "$base");
+        1;
     }
     chdir "$dir_build/base";
     system("$prg_pdflatex source2e");
@@ -258,6 +272,20 @@ my $error = "!!! Error:";
         'syntonly',
         'utf8ienc'
     );
+    map { book_err $_ } (
+        'tlc2',
+        'lb2',
+        'grphcomp',
+        'webcomp',
+        'webcompg'
+    );
+    system("$prg_sed -i -e '"
+           . 's/\\documentclass\{article\}/\\documentclass{article}/'
+           . '\\documentclass{article}\n\\input{manual.cfg}/'
+           . "' manual.err");
+    system("$prg_pdflatex manual.err");
+    system("$prg_pdflatex manual.err");
+    install_pdf('base', 'manual');
     base_guide('cfg');
     base_guide('cls');
     base_guide('cyr');
