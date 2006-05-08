@@ -257,7 +257,6 @@ my $error = "!!! Error:";
         'alltt',
         'classes',
         'exscale',
-        'fixltx2e',
         'graphpap',
         'ifthen',
         'inputenc',
@@ -272,6 +271,9 @@ my $error = "!!! Error:";
         'syntonly',
         'utf8ienc'
     );
+    simple_dts('fixltx2e');
+    # Bug in Multivalent
+    system("$prg_copy $file_tmp texmf/doc/latex/base/fixltx2e.pdf");
     map { book_err $_ } (
         'tlc2',
         'lb2',
