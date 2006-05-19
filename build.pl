@@ -145,7 +145,6 @@ my $error = "!!! Error:";
     chdir "$dir_build/base";
     install('texmf/doc/latex/base', [
         '*.txt',
-        '*.err',
         'sample2e.tex',
         'small2e.tex'
     ]);
