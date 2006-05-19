@@ -128,8 +128,8 @@ my $error = "!!! Error:";
 ### Correction for base: *.ist files
 {
     chdir "$dir_build/base";
-    system("prg_mkdir texmf/makeindex");
-    system("prg_move texmf/tex/latex/base/*.ist texmf/makeindex");
+    system("prg_mkdir texmf/makeindex/base");
+    system("prg_move texmf/tex/latex/base/*.ist texmf/makeindex/base");
     chdir $cwd;
 }
 
