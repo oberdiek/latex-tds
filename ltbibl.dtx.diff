@@ -1,0 +1,19 @@
+*** ltbibl.dtx.org	2006-05-21 19:26:52.000000000 +0200
+--- ltbibl.dtx	2006-05-27 14:10:34.000000000 +0200
+***************
+*** 309,315 ****
+  %
+  %  \begin{macro}{\nocite}
+  %    (Added 14 Jun 85)
+! % \changes{v1.1c}{1994/11/10}{Fix \cs{nocite}\texttt{\char`\{*\char`\\}}}
+  %   
+  %    This puts information on the |.aux| file that causes
+  %    \BibTeX{} to include the citation list in the bibliography,
+--- 309,315 ----
+  %
+  %  \begin{macro}{\nocite}
+  %    (Added 14 Jun 85)
+! % \changes{v1.1c}{1994/11/10}{Fix \cs{nocite}\texttt{\char`\{*\char`\}}}
+  %   
+  %    This puts information on the |.aux| file that causes
+  %    \BibTeX{} to include the citation list in the bibliography,

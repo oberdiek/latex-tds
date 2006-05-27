@@ -70,6 +70,11 @@ my $error = "!!! Error:";
     }
 }
 
+### Fixes
+{
+    system("$prg_patch $dir_build/base/ltbibl.dtx <ltbibl.dtx.diff");
+}
+
 ### Install TDS/source
 {
     sub install_source {
