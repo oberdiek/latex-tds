@@ -118,20 +118,12 @@ my $error = "!!! Error:";
     docstrip('tools', 'tools');
 }
 
-### Correction for base: *.ist files
-{
-    chdir "$dir_build/base";
-    system("prg_mkdir texmf/makeindex/base");
-    system("prg_move texmf/tex/latex/base/*.ist texmf/makeindex/base");
-    chdir $cwd;
-}
-
 ### Correction for babel: *.drv files
-{
-    chdir "$dir_build/babel";
-    system("prg_move texmf/tex/generic/babel/*.drv .");
-    chdir $cwd;
-}
+#{
+#    chdir "$dir_build/babel";
+#    system("prg_move texmf/tex/generic/babel/*.drv .");
+#    chdir $cwd;
+#}
 
 ### Install TDS/tex, TDS/doc files
 {
