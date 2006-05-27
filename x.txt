@@ -2,3 +2,8 @@ CTAN:language/armenian
 CTAN:fonts/tipa
 CTAN:fonts/wsuipa
 CTAN:fonts/fc
+
+2006/05/27
+* Update because the CTAN files have changed
+  because of bug fixes (inputenc.dtx, xspace.dtx, ...),
+  but also new bug (ltbibl.dtx).
