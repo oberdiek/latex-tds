@@ -70,13 +70,6 @@ my $error = "!!! Error:";
     }
 }
 
-### Correction of documentation bug of inputenc.dtx:
-{
-    chdir "$dir_build/base";
-    system("$prg_patch inputenc.dtx <$cwd/inputenc.dtx.diff");
-    chdir $cwd;
-}
-
 ### Install TDS/source
 {
     sub install_source {
