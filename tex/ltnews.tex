@@ -1,0 +1,39 @@
+\NeedsTeXFormat{LaTeX2e}
+
+\newcommand*{\lastissue}{17}
+
+\pdfinfo{%
+  /Title(LaTeX News)%
+  /Subject(Issues 1--\lastissue)%
+  /Author(The LaTeX Project)%
+  /Creator(LaTeX)%
+}
+\newtoks\pdfinfo
+
+\documentclass{ltnews}
+
+\newcounter{issue}
+\renewcommand*{\theissue}{%
+  \ifnum\value{issue}<10 0\fi
+  \number\value{issue}%
+}
+
+\begin{document}
+\begingroup
+  \renewcommand*{\documentclass}[2][]{%
+    \pdfbookmark[0]{Issue \theissue}{issue\theissue}%
+    \gobbleopt
+  }%
+  \newcommand*{\gobbleopt}[1][]{}%
+  \renewenvironment{document}{%
+    \clearpage
+  }{%
+    \clearpage
+  }%
+  \loop
+  \ifnum\value{issue}<\lastissue
+    \stepcounter{issue}%
+    \input{ltnews\theissue}%
+  \repeat 
+\endgroup
+\end{document}
