@@ -298,14 +298,19 @@ END_CODE
     system("$prg_pdflatex '$code'");
     system("$prg_pdflatex '$code'");
     install_pdf('base', 'ltx3info');
-    for (my $i = 1; $i <= 17; $i++) {
-        my $ltnews = 'ltnews';
-        $ltnews .= '0' if $i < 10;
-        $ltnews .= $i;
-        system("$prg_pdflatex $ltnews");
-        system("$prg_pdflatex $ltnews");
-        install_pdf('base', $ltnews);
-    }
+#    for (my $i = 1; $i <= 17; $i++) {
+#        my $ltnews = 'ltnews';
+#        $ltnews .= '0' if $i < 10;
+#        $ltnews .= $i;
+#        system("$prg_pdflatex $ltnews");
+#        system("$prg_pdflatex $ltnews");
+#        install_pdf('base', $ltnews);
+#    }
+    my $ltnews = 'ltnews';
+    system("$prg_pdflatex $ltnews");
+    system("$prg_pdflatex $ltnews");
+    system("$prg_pdflatex $ltnews");
+    install_pdf('base', $ltnews);
     chdir $cwd;
 }
 
