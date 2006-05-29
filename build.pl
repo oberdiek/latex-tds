@@ -40,6 +40,7 @@ my $prg_zip = 'zip -9r';
 my $prg_epstopdf = 'epstopdf';
 my $prg_patch = "patch";
 my $prg_sed = "sed";
+my $prg_chmod = "chmod";
 
 my $error = "!!! Error:";
 
@@ -381,6 +382,7 @@ END_CODE
         my $dir_tds = "$dir_build/$pkg/texmf";
         if (-d $dir_tds) {
             chdir $dir_tds;
+            system("$prg_chmod -R g-w .");
             system("$prg_zip $cwd/$dir_distrib/$pkg-tds.zip *");
             chdir $cwd;
         }
