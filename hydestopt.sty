@@ -1,7 +1,23 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{hydestopt}[2006/05/30]
+\ProvidesPackage{hydestopt}[2006/05/30 Remove/rename destinations (HO)]
 
-\RequirePackage{alphalph}
+\RequirePackage{alphalph}[2006/05/30]
+
+\RequirePackage{ifpdf}
+\ifpdf
+\else
+  \PackageError{hydestopt}{%
+    This package requires pdfTeX%
+  }\@ehc
+  \expandafter\endinput
+\fi
+
+\@ifundefined{pdfescapehex}{%
+  \PackageError{hydestopt}{%
+    This pdfTeX is too old%
+  }\@ehc
+  \endinput
+}{}
 
 \begingroup
   \toks0{%
@@ -125,5 +141,4 @@
     }%
   }%
 }
-
 \endinput
