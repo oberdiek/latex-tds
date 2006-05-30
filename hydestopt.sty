@@ -66,13 +66,39 @@
     E8\or E9\or EA\or EB\or EC\or ED\or EE\or EF\or
     F0\or F1\or F2\or F3\or F4\or F5\or F6\or F7\or
     F8\or F9\or FA\or FB\or FC\or FD\or FE\or FF%
-  \else XX%
   \fi
 }
 \newalphalph\HyDest@hexstring\HyDest@hexchar{252}% 256 - 4
 \renewcommand*{\theHyDest}{%
+  \expandafter\HyDest@uccheck
   \pdfunescapehex{\HyDest@hexstring{\value{HyDest}}}%
+  \@empty\@empty\@nil
 }
+% avoid unicode marker at the begin
+\begingroup
+  \catcode`\^=7 %
+  \@makeother\^^ff%
+  \@makeother\^^fe%
+  \gdef\HyDest@uccheck#1#2#3\@nil{%
+    \ifx#1^^ff%
+      \ifx#2^^fe%
+        \string\(#3%
+      \else
+        #1#2#3%
+      \fi
+    \else
+      \ifx#1^^fe%
+        \ifx#2^^ff%
+          \string\)#3%
+        \else
+          #1#2#3%
+        \fi
+      \else
+        #1#2#3%
+      \fi
+    \fi
+  }%
+\endgroup
 
 \def\hydest@use#1{%
   \begingroup
@@ -82,10 +108,24 @@
     \expandafter\ifx\x\relax
       \stepcounter{HyDest}%
 % \typeout{* hydest@use: \number\value{HyDest} (\pdfescapehex{\theHyDest})
-%  \pdfunescapehex{#1}}%
+% \pdfunescapehex{#1}}%
       \expandafter\xdef\x{\theHyDest}%
     \fi
+% \typeout{******************}%
   \endgroup
+}
+
+\AtBeginDocument{%
+  \def\hydest@use#1{}%
+}
+
+\def\HyDest@markused#1{%
+% \typeout{* #1 (\pdfescapehex{#1})}%
+  \if@filesw
+    \immediate\write\@auxout{%
+      \string\hydest@use{\pdfescapehex{#1}}%
+    }%
+  \fi
 }
 
 \AtBeginDocument{%
@@ -96,8 +136,8 @@
       \let\pdfdest\HyDest@org@pdfdest
       \@ifundefined{HyD@##2}{%
       }{%
-  % \typeout{* DEST: ##2 (\pdfescapehex{##2})
-  % -> \pdfescapehex{\csname HyD@##2\endcsname}}%
+% \typeout{* DEST: ##2 (\pdfescapehex{##2})
+% -> \pdfescapehex{\csname HyD@##2\endcsname}}%
         \pdfdest##1name{\csname HyD@##2\endcsname}##3\relax
       }%
     }%
@@ -109,11 +149,7 @@
     \let\HyDest@org@pdfstartlink\pdfstartlink
     \def\pdfstartlink##1goto name##2{%
       \let\pdfstartlink\HyDest@org@pdfstartlink
-      \if@filesw
-        \immediate\write\@auxout{%
-          \string\hydest@use{\pdfescapehex{##2}}%
-        }%
-      \fi
+      \HyDest@markused{##2}%
       \pdfstartlink##1goto name{%
         \@ifundefined{HyD@##2}{%
           ##2%
@@ -124,15 +160,21 @@
     }%
     \HyDest@org@find@pdflink
   }%
+  %
+  \let\HyDest@org@@writetorep\@@writetorep
+  \renewcommand*{\@@writetorep}[5]{%
+    \begingroup
+      \edef\Hy@tempa{#5}%
+      \ifx\Hy@tempa\Hy@bookmarkstype
+        \HyDest@markused{#3}%
+      \fi
+    \endgroup
+    \HyDest@org@@writetorep{#1}{#2}{#3}{#4}{#5}%
+  }%
 }
 
 \let\HyDest@org@pdfoutline\pdfoutline
 \def\pdfoutline goto name#1{%
-  \if@filesw
-    \immediate\write\@auxout{%
-      \string\hydest@use{\pdfescapehex{#1}}%
-    }%
-  \fi
   \HyDest@org@pdfoutline goto name{%
     \@ifundefined{HyD@#1}{%
       #1%

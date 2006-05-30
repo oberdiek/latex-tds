@@ -73,7 +73,7 @@ my $error = "!!! Error:";
 
 ### Patches
 {
-    # currently none
+    ; # currently none
 }
 
 ### Install TDS/source
