@@ -149,13 +149,13 @@ my $error = "!!! Error:";
         'testpage.tex'
     ]);
     chdir $cwd;
-    
+
     chdir "$dir_build/tools";
     install('texmf/doc/latex/tools', [
         '*.txt'
     ]);
     chdir $cwd;
-    
+
     chdir "$dir_build/graphics";
     install('texmf/doc/latex/graphics', [
         '*.txt'
@@ -164,13 +164,13 @@ my $error = "!!! Error:";
         '*.def'
     ]);
     chdir $cwd;
-    
+
     chdir "$dir_build/cyrillic";
     install('texmf/doc/latex/cyrillic', [
         '*.txt'
     ]);
     chdir $cwd;
-    
+
 #    chdir "$dir_build/babel";
 #    install('texmf/tex/generic/bghyph', [
 #        'bghyphen.txt',
@@ -419,7 +419,7 @@ sub install_pdf {
     system("$prg_java -jar $jar_pdfbox_rewrite $file_source $file_tmp");
     system("$prg_java -cp $jar_multivalent tool.pdf.Compress -old $file_tmp");
     system("$prg_move $file_tmp_o $file_dest");
-    printsize($file_dest, 1);    
+    printsize($file_dest, 1);
     1;
 }
 
