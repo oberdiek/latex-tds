@@ -214,6 +214,7 @@ my $error = "!!! Error:";
         system("$prg_makeindex -s gind.ist $base.idx");
         system("$prg_makeindex -s gglo.ist -o $base.glo $base.gls");
         system("$prg_pdflatex $dtx");
+        system("$prg_pdflatex $dtx"); # hydestopt
         install_pdf('base', "$base");
         1;
     }
@@ -226,6 +227,7 @@ my $error = "!!! Error:";
                . "' $base.cfg");
         system("$prg_pdflatex $err");
         system("$prg_pdflatex $err");
+        system("$prg_pdflatex $err"); # hydestopt
         install_pdf('base', "$base");
         1;
     }
@@ -237,6 +239,7 @@ my $error = "!!! Error:";
     system("$prg_makeindex -s gind.ist source2e.idx");
     system("$prg_makeindex -s gglo.ist -o souce2e.glo source2e.gls");
     system("$prg_pdflatex source2e");
+    system("$prg_pdflatex source2e"); # hydestopt
     install_pdf('base', 'source2e');
     map { complex_dtx $_ } (
         'doc',
@@ -275,6 +278,7 @@ my $error = "!!! Error:";
            . "' manual.err");
     system("$prg_pdflatex manual.err");
     system("$prg_pdflatex manual.err");
+    system("$prg_pdflatex manual.err"); # hydestopt
     install_pdf('base', 'manual');
     base_guide('cfg');
     base_guide('cls');
@@ -285,6 +289,7 @@ my $error = "!!! Error:";
     base_guide('usr');
     system("$prg_pdflatex doc_lppl");
     system("$prg_pdflatex doc_lppl");
+    system("$prg_pdflatex doc_lppl"); # hydestopt
     system("$prg_move doc_lppl.pdf lppl.pdf");
     install_pdf('base', 'lppl');
     my $code = <<'END_CODE';
@@ -298,6 +303,7 @@ END_CODE
     $code =~ s/\s//g;
     system("$prg_pdflatex '$code'");
     system("$prg_pdflatex '$code'");
+    system("$prg_pdflatex '$code'"); # hydestopt
     install_pdf('base', 'ltx3info');
 #    for (my $i = 1; $i <= 17; $i++) {
 #        my $ltnews = 'ltnews';
@@ -332,6 +338,7 @@ END_CODE
         system("$prg_makeindex -s gglo.ist -o $entry.glo $entry.gls")
             if -f "$entry.gls";
         system("$prg_pdflatex $entry.dtx");
+        system("$prg_pdflatex $entry.dtx"); # hydestopt
         install_pdf('tools', $entry);
     }
     chdir $cwd;
@@ -345,6 +352,7 @@ END_CODE
     foreach my $entry (@list) {
         system("$prg_pdflatex $entry.dtx");
         system("$prg_pdflatex $entry.dtx");
+        system("$prg_pdflatex $entry.dtx"); # hydestopt
         install_pdf('cyrillic', $entry);
     }
     chdir $cwd;
@@ -358,6 +366,7 @@ END_CODE
     foreach my $entry (@list) {
         system("$prg_pdflatex $entry.dtx");
         system("$prg_pdflatex $entry.dtx");
+        system("$prg_pdflatex $entry.dtx"); # hydestopt
         install_pdf('graphics', $entry);
     }
     my $code = <<'END_CODE';
