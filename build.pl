@@ -2,9 +2,11 @@
 use strict;
 $^W=1;
 
-my $ctan_url = 'ftp://dante.ctan.org/tex-archive';
+my $url_ctan = 'ftp://dante.ctan.org/tex-archive';
+my $url_ams = 'ftp://ftp.ams.org/pub/tex';
+
 my @required_list = (
-#    'amslatex',
+    'amslatex',
 #    'babel',
 #    'psnfss',
     'cyrillic',
@@ -15,6 +17,8 @@ my @pkg_list = ('base');
 push @pkg_list, @required_list;
 
 my $dir_incoming = 'incoming';
+my $dir_incoming_ctan = "$dir_incoming/ctan";
+my $dir_incoming_ams = "$dir_incoming/ams";
 my $dir_build = 'build';
 my $dir_lib = 'lib';
 my $dir_distrib = 'distrib';
@@ -27,11 +31,12 @@ my $file_tmp = "$cwd/$dir_build/tmp.pdf";
 my $file_tmp_o = "$cwd/$dir_build/tmp-o.pdf";
 
 my $prg_wget = 'wget';
+my $prg_curl = 'curl';
 my $prg_unzip = 'unzip';
 my $prg_docstrip = 'tex -shell-escape';
 $ENV{'TEXINPUTS'} = "$cwd:.:texmf:";
 my $prg_copy = 'cp -p';
-my $prg_mkdir = 'mkdir -p';
+my $prg_mkdir = 'mkdir';
 my $prg_pdflatex = 'pdflatex';
 my $prg_makeindex = 'makeindex';
 my $prg_move = 'mv';
@@ -41,46 +46,149 @@ my $prg_epstopdf = 'epstopdf';
 my $prg_patch = "patch";
 my $prg_sed = "sed";
 my $prg_chmod = "chmod";
+my $prg_rm = "rm";
+my $prg_ls = "ls";
 
 my $error = "!!! Error:";
 
-### Download
-{
-    -d $dir_incoming or mkdir $dir_incoming;
-    chdir $dir_incoming;
-    -f 'base.zip' or system("$prg_wget $ctan_url/macros/latex/base.zip");
-    foreach my $pkg (@required_list) {
-        my $pkg_zip = "$pkg.zip";
-        my $ctan_pkg = "$ctan_url/macros/latex/required/$pkg_zip";
-        -f $pkg_zip or system("$prg_wget $ctan_pkg");
-    }
-    # check result
-    my @not_found = ();
+### Option handling
+
+my $usage = <<"END_OF_USAGE";
+Usage: build.pl [options]
+Options for bundle selection:
+  --(no)base
+  --(no)tools
+  --(no)graphics
+  --(no)cyrillic
+  --(no)amslatex  (not implemented)
+  --(no)psnfss    (not implemented)
+  --(no)babel     (not implemented)
+  --(no)all
+Other options:
+  --download      (check for newer files)
+END_OF_USAGE
+
+$::opt_download = 0;
+$::opt_all      = 0;
+my %modules;
+
+use Getopt::Long;
+GetOptions(
+    'base!'     => \$modules{'base'},
+    'tools!'    => \$modules{'tools'},
+    'graphics!' => \$modules{'graphics'},
+    'cyrillic!' => \$modules{'cyrillic'},
+    'amslatex!' => \$modules{'amslatex'},
+    'psnfss!'   => \$modules{'psnfss'},
+    'babel!'    => \$modules{'babel'},
+    'all!',
+    'download!'
+) or die $usage;
+@ARGV == 0 or die $usage;
+if ($::opt_all) {
     foreach my $pkg (@pkg_list) {
-       -f "$pkg.zip" or push @not_found, $pkg;
+        $modules{$pkg} = 1;
     }
-    chdir $cwd;
-    @not_found == 0 or die "$error: Failed downloads: @not_found!\n";
+}
+
+### Download
+if ($::opt_download) {
+    section('Download');
+
+    sub download_ctan {
+        my $file = $_[0];
+        my $ctan_path  = $_[1];
+        ensure_directory($dir_incoming_ctan);
+        download("$dir_incoming_ctan/$file.zip",
+                 "$url_ctan/$ctan_path/$file.zip");
+    }
+    sub download_ams {
+        my $file = $_[0];
+        ensure_directory($dir_incoming_ams);
+        download("$dir_incoming_ams/$file.zip",
+                 "$url_ams/$file.zip");
+    }
+    sub download {
+        my $file = $_[0];
+        my $url  = $_[1];
+        info("download $url\n           --> $file");
+        my $cmd = $prg_curl;
+        $cmd .= " --disable-epsv";                # for ftp.ams.org
+        $cmd .= " --time-cond $file" if -f $file; # download only if newer
+        $cmd .= " --remote-time";                 # set file date
+        $cmd .= " --output $file";                # target file
+        $cmd .= " $url";                          # url
+        run($cmd);
+        -f $file or die "$error Download failed ($url)!\n";
+    }
+
+    download_ctan('base',     'macros/latex');
+    download_ctan('tools',    'macros/latex/required');
+    download_ctan('graphics', 'macros/latex/required');
+    download_ctan('cyrillic', 'macros/latex/required');
+    download_ctan('babel',    'macros/latex/required');
+    download_ctan('amslatex', 'macros/latex/required');
+    download_ams('amslatex');
+    download_ams('amsrefs');
+}
+
+### Remove previous build
+section('Remove previous build');
+{
+    foreach my $pkg (@pkg_list) {
+        $modules{$pkg} or next;
+        run("$prg_rm -rf $dir_build/$pkg");
+        my $distribfile = "$dir_distrib/$pkg-tds.zip";
+        unlink $distribfile if -f $distribfile;
+    }
 }
 
 ### Unpack
+section('Unpacking');
 {
-    -d $dir_build or mkdir $dir_build;
-    foreach my $pkg (@pkg_list) {
-        system("$prg_unzip $dir_incoming/$pkg.zip -d$dir_build");
+    sub unpacking {
+        my $pkg     = $_[0];
+        my $zipfile = $_[1];
+        my $dir     = $_[2];
+        run("$prg_unzip $zipfile -d$dir");
     }
+    sub unpack_ctan {
+        my $pkg = $_[0];
+        $modules{$pkg} or return 1;
+        unpacking($pkg,
+                  "$dir_incoming_ctan/$pkg.zip",
+                  $dir_build);
+    }
+    sub unpack_ams {
+        my $ams_pkg = $_[0];
+        $modules{'amslatex'} or return 1;
+        unpacking('amslatex',
+                  "$dir_incoming_ams/$ams_pkg.zip",
+                  "$dir_build/amslatex/texmf");
+    }
+
+    ensure_directory($dir_build);
+    unpack_ctan('base');
+    foreach my $pkg (@required_list) {
+        unpack_ctan($pkg);
+    }
+    unpack_ams('amslatex');
+    unpack_ams('amsrefs');
 }
 
 ### Patches
+section('Patches');
 {
     ; # currently none
 }
 
 ### Install TDS/source
+section('Install source');
 {
     sub install_source {
         my $pkg = $_[0];
         my $ref_list = $_[1];
+        $modules{$pkg} or return 1;
         chdir "$dir_build/$pkg";
         install("texmf/source/latex/$pkg", $ref_list);
         chdir $cwd;
@@ -106,12 +214,14 @@ my $error = "!!! Error:";
 }
 
 ### Docstrip
+section('Docstrip');
 {
     sub docstrip {
         my $pkg = $_[0];
         my $ins = $_[1];
+        $modules{$pkg} or return 1;
         chdir "$dir_build/$pkg";
-        system("$prg_docstrip $ins.ins");
+        run("$prg_docstrip $ins.ins");
         chdir $cwd;
         1;
     }
@@ -132,114 +242,129 @@ my $error = "!!! Error:";
 #}
 
 ### Install TDS/tex, TDS/doc files
+section('Install tex doc');
 {
-    chdir "$dir_build/base";
-    install('texmf/doc/latex/base', [
-        '*.txt',
-        'sample2e.tex',
-        'small2e.tex'
-    ]);
-    install('texmf/tex/latex/base', [
-        '*.cls',
-        'ltpatch.ltx',
-        'idx.tex',
-        'lablst.tex',
-        'latexbug.tex',
-        'lppl.tex',
-        'testpage.tex'
-    ]);
-    chdir $cwd;
+    if ($modules{'base'}) {
+        chdir "$dir_build/base";
+        install('texmf/doc/latex/base', [
+            '*.txt',
+            'sample2e.tex',
+            'small2e.tex'
+        ]);
+        install('texmf/tex/latex/base', [
+            '*.cls',
+            'ltpatch.ltx',
+            'idx.tex',
+            'lablst.tex',
+            'latexbug.tex',
+            'lppl.tex',
+            'testpage.tex'
+        ]);
+        chdir $cwd;
+    }
 
-    chdir "$dir_build/tools";
-    install('texmf/doc/latex/tools', [
-        '*.txt'
-    ]);
-    chdir $cwd;
+    if ($modules{'tools'}) {
+        chdir "$dir_build/tools";
+        install('texmf/doc/latex/tools', [
+            '*.txt'
+        ]);
+        chdir $cwd;
+    }
 
-    chdir "$dir_build/graphics";
-    install('texmf/doc/latex/graphics', [
-        '*.txt'
-    ]);
-    install('texmf/tex/latex/graphics', [
-        '*.def'
-    ]);
-    chdir $cwd;
+    if ($modules{'graphics'}) {
+        chdir "$dir_build/graphics";
+        install('texmf/doc/latex/graphics', [
+            '*.txt'
+        ]);
+        install('texmf/tex/latex/graphics', [
+            '*.def'
+        ]);
+        chdir $cwd;
+    }
 
-    chdir "$dir_build/cyrillic";
-    install('texmf/doc/latex/cyrillic', [
-        '*.txt'
-    ]);
-    chdir $cwd;
+    if ($modules{'cyrillic'}) {
+        chdir "$dir_build/cyrillic";
+        install('texmf/doc/latex/cyrillic', [
+            '*.txt'
+        ]);
+        chdir $cwd;
+    }
 
-#    chdir "$dir_build/babel";
-#    install('texmf/tex/generic/bghyph', [
-#        'bghyphen.txt',
-#        'bghyphsi.tex',
-#        'catmik.tex',
-#        'mik2t2.tex'
-#    ]);
-#    install('texmf/tex/generic/hyphen', [
-#        'icehyph.tex',
-#        'lahyph.tex'
-#    ]);
-#    chdir $cwd;
+my $dummy = <<'END_DUMMY';
+    if ($modules{'babel'}) {
+        chdir "$dir_build/babel";
+        install('texmf/tex/generic/bghyph', [
+            'bghyphen.txt',
+            'bghyphsi.tex',
+            'catmik.tex',
+            'mik2t2.tex'
+        ]);
+        install('texmf/tex/generic/hyphen', [
+            'icehyph.tex',
+            'lahyph.tex'
+        ]);
+        chdir $cwd;
+    }
+END_DUMMY
 }
 
 ### Generate documentation for base
-{
+if ($modules{'base'}) {
+    section('Documenation: base');
+
     sub base_guide {
         my $guide = "$_[0]guide";
-        system("$prg_pdflatex $guide");
-        system("$prg_pdflatex $guide");
-        system("$prg_pdflatex $guide");
+        run("$prg_pdflatex $guide");
+        run("$prg_pdflatex $guide");
+        run("$prg_pdflatex $guide");
         install_pdf('base', $guide);
         1;
     }
     sub simple_dtx {
         my $base = $_[0];
         my $dtx = "$base.dtx";
-        system("$prg_pdflatex $dtx");
-        system("$prg_pdflatex $dtx");
-        system("$prg_pdflatex $dtx");
+        run("$prg_pdflatex $dtx");
+        run("$prg_pdflatex $dtx");
+        run("$prg_pdflatex $dtx");
         install_pdf('base', $base);
         1;
     }
     sub complex_dtx {
         my $base = $_[0];
         my $dtx = "$base.dtx";
-        system("$prg_pdflatex $dtx");
-        system("$prg_makeindex -s gind.ist $base.idx");
-        system("$prg_makeindex -s gglo.ist -o $base.glo $base.gls");
-        system("$prg_pdflatex $dtx");
-        system("$prg_makeindex -s gind.ist $base.idx");
-        system("$prg_makeindex -s gglo.ist -o $base.glo $base.gls");
-        system("$prg_pdflatex $dtx");
-        system("$prg_pdflatex $dtx"); # hydestopt
+        run("$prg_pdflatex $dtx");
+        run("$prg_makeindex -s gind.ist $base.idx");
+        run("$prg_makeindex -s gglo.ist -o $base.glo $base.gls");
+        run("$prg_pdflatex $dtx");
+        run("$prg_makeindex -s gind.ist $base.idx");
+        run("$prg_makeindex -s gglo.ist -o $base.glo $base.gls");
+        run("$prg_pdflatex $dtx");
+        run("$prg_pdflatex $dtx"); # hydestopt
         install_pdf('base', "$base");
         1;
     }
     sub book_err {
         my $base = $_[0];
         my $err = "$base.err";
-        system("$prg_pdflatex $err");
-        system("$prg_sed -i -e '"
+        run("$prg_pdflatex $err");
+        run("$prg_sed -i -e '"
                . 's/\\\\endinput/\\\\input{errata.cfg}\\n\\\\endinput/'
                . "' $base.cfg");
-        system("$prg_pdflatex $err");
-        system("$prg_pdflatex $err");
-        system("$prg_pdflatex $err"); # hydestopt
+        run("$prg_pdflatex $err");
+        run("$prg_pdflatex $err");
+        run("$prg_pdflatex $err"); # hydestopt
         install_pdf('base', "$base");
         1;
     }
     chdir "$dir_build/base";
-    system("$prg_pdflatex source2e");
-    system("$prg_makeindex -s gind.ist source2e.idx");
-    system("$prg_makeindex -s gglo.ist -o souce2e.glo source2e.gls");
-    system("$prg_pdflatex source2e");
-    system("$prg_makeindex -s gind.ist source2e.idx");
-    system("$prg_makeindex -s gglo.ist -o souce2e.glo source2e.gls");
-    system("$prg_pdflatex source2e");
-    system("$prg_pdflatex source2e"); # hydestopt
+    run("$prg_pdflatex source2e");
+    run("$prg_makeindex -s gind.ist source2e.idx");
+    run("$prg_makeindex -s gglo.ist -o souce2e.glo source2e.gls");
+    run("$prg_pdflatex source2e");
+    run("$prg_makeindex -s gind.ist source2e.idx");
+    run("$prg_makeindex -s gglo.ist -o souce2e.glo source2e.gls");
+    run("$prg_pdflatex source2e");
+    run("$prg_pdflatex source2e"); # hydestopt
     install_pdf('base', 'source2e');
     map { complex_dtx $_ } (
         'doc',
@@ -272,13 +397,13 @@ my $error = "!!! Error:";
         'webcomp',
         'webcompg'
     );
-    system("$prg_sed -i -e '"
+    run("$prg_sed -i -e '"
            . 's/\\\\documentclass{article}/'
            . '\\\\documentclass{article}\\n\\\\input{manual.cfg}/'
            . "' manual.err");
-    system("$prg_pdflatex manual.err");
-    system("$prg_pdflatex manual.err");
-    system("$prg_pdflatex manual.err"); # hydestopt
+    run("$prg_pdflatex manual.err");
+    run("$prg_pdflatex manual.err");
+    run("$prg_pdflatex manual.err"); # hydestopt
     install_pdf('base', 'manual');
     base_guide('cfg');
     base_guide('cls');
@@ -287,10 +412,10 @@ my $error = "!!! Error:";
     base_guide('fnt');
     base_guide('mod');
     base_guide('usr');
-    system("$prg_pdflatex doc_lppl");
-    system("$prg_pdflatex doc_lppl");
-    system("$prg_pdflatex doc_lppl"); # hydestopt
-    system("$prg_move doc_lppl.pdf lppl.pdf");
+    run("$prg_pdflatex doc_lppl");
+    run("$prg_pdflatex doc_lppl");
+    run("$prg_pdflatex doc_lppl"); # hydestopt
+    run("$prg_move doc_lppl.pdf lppl.pdf");
     install_pdf('base', 'lppl');
     my $code = <<'END_CODE';
 \let\SavedDocumentclass\documentclass
@@ -301,72 +426,78 @@ my $error = "!!! Error:";
 \input{ltx3info}
 END_CODE
     $code =~ s/\s//g;
-    system("$prg_pdflatex '$code'");
-    system("$prg_pdflatex '$code'");
-    system("$prg_pdflatex '$code'"); # hydestopt
+    run("$prg_pdflatex '$code'");
+    run("$prg_pdflatex '$code'");
+    run("$prg_pdflatex '$code'"); # hydestopt
     install_pdf('base', 'ltx3info');
 #    for (my $i = 1; $i <= 17; $i++) {
 #        my $ltnews = 'ltnews';
 #        $ltnews .= '0' if $i < 10;
 #        $ltnews .= $i;
-#        system("$prg_pdflatex $ltnews");
-#        system("$prg_pdflatex $ltnews");
+#        run("$prg_pdflatex $ltnews");
+#        run("$prg_pdflatex $ltnews");
 #        install_pdf('base', $ltnews);
 #    }
     my $ltnews = 'ltnews';
-    system("$prg_pdflatex $ltnews");
-    system("$prg_pdflatex $ltnews");
-    system("$prg_pdflatex $ltnews");
+    run("$prg_pdflatex $ltnews");
+    run("$prg_pdflatex $ltnews");
+    run("$prg_pdflatex $ltnews");
     install_pdf('base', $ltnews);
     chdir $cwd;
 }
 
 ### Generate documentation for tools
-{
+if ($modules{'tools'}) {
+    section('Documentation: tools');
+
     chdir "$dir_build/tools";
     my @list = glob("*.dtx");
     map { s/\.dtx$//; } @list;
     foreach my $entry (@list) {
-        system("$prg_pdflatex $entry.dtx");
-        system("$prg_makeindex -s gind.ist $entry.idx")
+        run("$prg_pdflatex $entry.dtx");
+        run("$prg_makeindex -s gind.ist $entry.idx")
             if -f "$entry.idx";
-        system("$prg_makeindex -s gglo.ist -o $entry.glo $entry.gls")
+        run("$prg_makeindex -s gglo.ist -o $entry.glo $entry.gls")
             if -f "$entry.gls";
-        system("$prg_pdflatex $entry.dtx");
-        system("$prg_makeindex -s gind.ist $entry.idx")
+        run("$prg_pdflatex $entry.dtx");
+        run("$prg_makeindex -s gind.ist $entry.idx")
             if -f "$entry.idx";
-        system("$prg_makeindex -s gglo.ist -o $entry.glo $entry.gls")
+        run("$prg_makeindex -s gglo.ist -o $entry.glo $entry.gls")
             if -f "$entry.gls";
-        system("$prg_pdflatex $entry.dtx");
-        system("$prg_pdflatex $entry.dtx"); # hydestopt
+        run("$prg_pdflatex $entry.dtx");
+        run("$prg_pdflatex $entry.dtx"); # hydestopt
         install_pdf('tools', $entry);
     }
     chdir $cwd;
 }
 
 ### Generate documentation for cyrillic
-{
+if ($modules{'cyrillic'}) {
+    section('Documentation: cyrillic');
+
     chdir "$dir_build/cyrillic";
     my @list = glob("*.dtx");
     map { s/\.dtx$//; } @list;
     foreach my $entry (@list) {
-        system("$prg_pdflatex $entry.dtx");
-        system("$prg_pdflatex $entry.dtx");
-        system("$prg_pdflatex $entry.dtx"); # hydestopt
+        run("$prg_pdflatex $entry.dtx");
+        run("$prg_pdflatex $entry.dtx");
+        run("$prg_pdflatex $entry.dtx"); # hydestopt
         install_pdf('cyrillic', $entry);
     }
     chdir $cwd;
 }
 
 ### Generate documentation for graphics
-{
+if ($modules{'graphics'}) {
+    section('Documentation: graphics');
+
     chdir "$dir_build/graphics";
     my @list = glob("*.dtx");
     map { s/\.dtx$//; } @list;
     foreach my $entry (@list) {
-        system("$prg_pdflatex $entry.dtx");
-        system("$prg_pdflatex $entry.dtx");
-        system("$prg_pdflatex $entry.dtx"); # hydestopt
+        run("$prg_pdflatex $entry.dtx");
+        run("$prg_pdflatex $entry.dtx");
+        run("$prg_pdflatex $entry.dtx"); # hydestopt
         install_pdf('graphics', $entry);
     }
     my $code = <<'END_CODE';
@@ -375,25 +506,42 @@ END_CODE
 \input{grfguide}
 END_CODE
     $code =~ s/\s//g;
-    system("$prg_pdflatex '$code'");
-    system("$prg_epstopdf a.ps");
-    system("$prg_pdflatex grfguide");
-    system("$prg_pdflatex grfguide");
-    system("$prg_pdflatex grfguide");
+    run("$prg_pdflatex '$code'");
+    run("$prg_epstopdf a.ps");
+    run("$prg_pdflatex grfguide");
+    run("$prg_pdflatex grfguide");
+    run("$prg_pdflatex grfguide");
     install_pdf('graphics', 'grfguide');
     chdir $cwd;
 }
 
 ### Pack result
+section('Distrib');
 {
-    -d $dir_distrib or mkdir $dir_distrib;
+    ensure_directory($dir_distrib);
     for my $pkg (@pkg_list) {
         my $dir_tds = "$dir_build/$pkg/texmf";
-        if (-d $dir_tds) {
+        my $file_distrib = "$cwd/$dir_distrib/$pkg-tds.zip";
+        if (-d $dir_tds and $modules{$pkg}) {
             chdir $dir_tds;
-            system("$prg_chmod -R g-w .");
-            system("$prg_zip $cwd/$dir_distrib/$pkg-tds.zip *");
+            run("$prg_chmod -R g-w .");
+            run("$prg_zip $file_distrib *");
             chdir $cwd;
+        }
+    }
+}
+
+### Display result
+section('Result');
+{
+    for my $pkg (@pkg_list) {
+        $modules{$pkg} or next;
+        my $file = "$dir_distrib/$pkg-tds.zip";
+        if (-f $file) {
+            system("$prg_ls -l $file");
+        }
+        else {
+            print "Failed: $pkg\n";
         }
     }
 }
@@ -402,8 +550,8 @@ sub install {
     my $dir_target = $_[0];
     my @list = @{$_[1]};
 
-    -d $dir_target or system("$prg_mkdir $dir_target");
-    system("$prg_copy @list $dir_target/");
+    ensure_directory($dir_target);
+    run("$prg_copy @list $dir_target/");
     1;
 }
 
@@ -414,11 +562,11 @@ sub install_pdf {
     my $dir_dest = "texmf/doc/latex/$pkg";
     my $file_dest = "$dir_dest/$file_base.pdf";
 
-    system("$prg_mkdir $dir_dest") unless -d $dir_dest;
+    ensure_directory($dir_dest);
     printsize($file_source, 0);
-    system("$prg_java -jar $jar_pdfbox_rewrite $file_source $file_tmp");
-    system("$prg_java -cp $jar_multivalent tool.pdf.Compress -old $file_tmp");
-    system("$prg_move $file_tmp_o $file_dest");
+    run("$prg_java -jar $jar_pdfbox_rewrite $file_source $file_tmp");
+    run("$prg_java -cp $jar_multivalent tool.pdf.Compress -old $file_tmp");
+    run("$prg_move $file_tmp_o $file_dest");
     printsize($file_dest, 1);
     1;
 }
@@ -440,6 +588,50 @@ sub printsize {
         print "*" x 78 . "\n";
         print "\n";
     }
+}
+
+sub ensure_directory {
+    my $dir = $_[0];
+
+    return 1 if -d $dir;
+    run("$prg_mkdir -p '$dir'");
+    return 1 if -d $dir;
+    die "$error Cannot generate directory `$dir'!\n";
+}
+
+sub section {
+    my $title = $_[0];
+
+    print "\n=== $title ===\n";
+    1;
+}
+
+sub run {
+    my $cmd = $_[0];
+
+    info("system: $cmd");
+    my $ret = system($cmd);
+    if ($ret != 0) {
+        if ($? == -1) {
+            die "$error Failed to execute: $!\n";
+        }
+        elsif ($? & 127) {
+            die "$error Child died with signal "
+                . ($? & 127)
+                . (($? & 128) ? ' with coredump' : '')
+                . "!\n";
+        }
+        else {
+            die "$error Child exited with value " . ($? >> 8) . "!\n";
+        }
+    }
+    1;
+}
+
+sub info {
+    my $msg = $_[0];
+    print "* $msg\n";
+    1;
 }
 
 __END__
