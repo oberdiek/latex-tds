@@ -76,19 +76,15 @@ my %modules;
 
 use Getopt::Long;
 GetOptions(
-    'base!'     => \$modules{'base'},
-    'tools!'    => \$modules{'tools'},
-    'graphics!' => \$modules{'graphics'},
-    'cyrillic!' => \$modules{'cyrillic'},
-    'amslatex!' => \$modules{'amslatex'},
-    'psnfss!'   => \$modules{'psnfss'},
-    'babel!'    => \$modules{'babel'},
-    'all!'      => sub { map { $modules{$_} = 1; } @pkg_list; },
+    ( map { ("$_!" => \$modules{$_}); } @pkg_list ),
+    'all!' => sub { map { $modules{$_} = 1; } @pkg_list; },
     'download!'
 ) or die $usage;
 @ARGV == 0 or die $usage;
 
 info("Build modules: " . join ' ', sort grep {$modules{$_}} @pkg_list);
+
+exit(1);
 
 ### Download
 if ($::opt_download) {
