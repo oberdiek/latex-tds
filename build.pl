@@ -31,24 +31,25 @@ my $jar_multivalent = "$cwd/$dir_lib/Multivalent20060102.jar";
 my $file_tmp = "$cwd/$dir_build/tmp.pdf";
 my $file_tmp_o = "$cwd/$dir_build/tmp-o.pdf";
 
-my $prg_wget = 'wget';
-my $prg_curl = 'curl';
-my $prg_unzip = 'unzip';
-my $prg_docstrip = 'tex -shell-escape';
-$ENV{'TEXINPUTS'} = "$cwd/tex:.:texmf!!:";
-my $prg_copy = 'cp -p';
-my $prg_mkdir = 'mkdir';
-my $prg_pdflatex = 'pdflatex';
+my $prg_chmod     = "chmod";
+my $prg_copy      = 'cp -p';
+my $prg_curl      = 'curl';
+my $prg_docstrip  = 'tex -shell-escape';
+my $prg_epstopdf  = 'epstopdf';
+my $prg_java      = 'java';
+my $prg_ls        = "ls";
 my $prg_makeindex = 'makeindex';
-my $prg_move = 'mv';
-my $prg_java = 'java';
-my $prg_zip = 'zip -9r';
-my $prg_epstopdf = 'epstopdf';
-my $prg_patch = "patch";
-my $prg_sed = "sed";
-my $prg_chmod = "chmod";
-my $prg_rm = "rm";
-my $prg_ls = "ls";
+my $prg_mkdir     = 'mkdir';
+my $prg_move      = 'mv';
+my $prg_patch     = "patch";
+my $prg_pdflatex  = 'pdflatex';
+my $prg_rm        = "rm";
+my $prg_sed       = "sed";
+my $prg_unzip     = 'unzip';
+my $prg_wget      = 'wget';
+my $prg_zip       = 'zip -9r';
+
+$ENV{'TEXINPUTS'} = "$cwd/tex:.:texmf!!:";
 
 my $error = "!!! Error:";
 
