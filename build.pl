@@ -21,6 +21,7 @@ my $dir_incoming_ctan = "$dir_incoming/ctan";
 my $dir_incoming_ams = "$dir_incoming/ams";
 my $dir_build = 'build';
 my $dir_lib = 'lib';
+my $dir_tex = 'tex';
 my $dir_distrib = 'distrib';
 chomp(my $cwd = `pwd`);
 
@@ -34,7 +35,7 @@ my $prg_wget = 'wget';
 my $prg_curl = 'curl';
 my $prg_unzip = 'unzip';
 my $prg_docstrip = 'tex -shell-escape';
-$ENV{'TEXINPUTS'} = "$cwd:.:texmf:";
+$ENV{'TEXINPUTS'} = "$cwd/tex:.:texmf!!:";
 my $prg_copy = 'cp -p';
 my $prg_mkdir = 'mkdir';
 my $prg_pdflatex = 'pdflatex';
