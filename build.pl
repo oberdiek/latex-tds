@@ -61,10 +61,10 @@ Options for bundle selection:
   --(no)tools
   --(no)graphics
   --(no)cyrillic
-  --(no)amslatex  (not implemented)
+  --(no)amslatex
   --(no)psnfss    (not implemented)
   --(no)babel     (not implemented)
-  --(no)all
+  --all           select all modules
 Other options:
   --download      (check for newer files)
 END_OF_USAGE
@@ -82,15 +82,12 @@ GetOptions(
     'amslatex!' => \$modules{'amslatex'},
     'psnfss!'   => \$modules{'psnfss'},
     'babel!'    => \$modules{'babel'},
-    'all!',
+    'all!'      => sub { map { $modules{$_} = 1; } @pkg_list; },
     'download!'
 ) or die $usage;
 @ARGV == 0 or die $usage;
-if ($::opt_all) {
-    foreach my $pkg (@pkg_list) {
-        $modules{$pkg} = 1;
-    }
-}
+
+info("Build modules: " . join ' ', sort grep {$modules{$_}} @pkg_list);
 
 ### Download
 if ($::opt_download) {
@@ -241,6 +238,26 @@ section('Docstrip');
 #    system("prg_move texmf/tex/generic/babel/*.drv .");
 #    chdir $cwd;
 #}
+
+section('TDS corrections');
+{
+    if ($modules{'amslatex'}) {
+        my $dir_tds = "$dir_build/amslatex/texmf";
+        my $dir;
+        $dir = "$dir_tds/bibtex";
+        rmdir "$dir/bib/ams";
+        rmdir "$dir/bib";
+        $dir = "$dir_tds/source/latex/amsrefs";
+        unlink "$dir/amsrefs.pdf";
+        unlink "$dir/amsrefs.dvi";
+        unlink "$dir/mathscinet.pdf";
+        unlink "$dir/textcmds.pdf";
+        unlink "$dir/textcmds.dvi";
+        $dir = "$dir_tds/doc/latex/amscls";
+        unlink "$dir/amsrefs.dvi";
+        unlink "$dir/textcmds.dvi";
+    }
+}
 
 ### Install TDS/tex, TDS/doc files
 section('Install tex doc');
