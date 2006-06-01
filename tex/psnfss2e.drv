@@ -1,5 +1,19 @@
 \NeedsTeXFormat{LaTeX2e}
 \RequirePackage[patch]{kvoptions}
 \PassOptionsToPackage{colorlinks=false,pdfborder={0 0 0}}{hyperref}
+\AtBeginDocument{%
+  \utopiatrue
+}
+\let\SavedDocumentclass\documentclass
+\def\documentclass[#1]#2[#3]{%
+  \let\documentclass\SavedDocumentclass
+  \documentclass[{#1}]{#2}[{#3}]%
+  \addtolength{\textheight}{\headheight}%
+  \addtolength{\textheight}{\headsep}%
+  \setlength{\headheight}{0pt}%
+  \setlength{\headsep}{0pt}%
+  \addtolength{\textheight}{20mm}%
+  \addtolength{\topmargin}{-10mm}%
+}
 \input{\jobname.tex}
 \endinput
