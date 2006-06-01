@@ -260,6 +260,8 @@ section('TDS corrections');
         unlink "$dir/textcmds.dvi";
         run("$prg_cp $dir_build/amslatex/other/amsbooka.sty"
             . " $dir_tds/tex/latex/amscls/amsbooka.sty");
+        run("$prg_cp $dir_build/amslatex/other/amsbooka.sty"
+            . " $dir_tds/source/latex/amscls/amsbooka.sty");
     }
 }
 
