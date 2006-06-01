@@ -49,7 +49,8 @@ my $prg_unzip     = 'unzip';
 my $prg_wget      = 'wget';
 my $prg_zip       = 'zip -9r';
 
-$ENV{'TEXINPUTS'} = "$cwd/tex:.:texmf//:";
+$ENV{'TEXINPUTS'} = "$cwd/tex:.:texmf/tex//:";
+$ENV{'BSTINPUTS'} = ".:texmf/bibtex//:";
 
 my $error = "!!! Error:";
 
@@ -589,9 +590,8 @@ if (0) {
     symlink '../texmf', 'texmf';
     map { generate_doc 'amscls', $_; } qw[
         cite-xa cite-xb cite-xh cite-xs
-        amsxport ifoption pcatcode rkeyval textcmds
+        amsrefs amsxport ifoption mathscinet pcatcode rkeyval textcmds
     ];
-    # amsrefs mathscinet
     chdir $cwd;
 }
 
