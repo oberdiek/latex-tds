@@ -13,8 +13,7 @@ my @required_list = (
     'graphics',
     'tools'
 );
-my @pkg_list = ('base');
-push @pkg_list, @required_list;
+my @pkg_list = ('base', @required_list);
 
 my $dir_incoming = 'incoming';
 my $dir_incoming_ctan = "$dir_incoming/ctan";
@@ -525,6 +524,36 @@ END_CODE
     run("$prg_pdflatex grfguide");
     run("$prg_pdflatex grfguide");
     install_pdf('graphics', 'grfguide');
+    chdir $cwd;
+}
+
+### Generate documentation for amslatex
+if ($modules{'amslatex'}) {
+    section('Documentation: amslatex');
+
+    sub generate_doc ($$) {
+        my $amspkg = shift;
+        my $doc = shift;
+        my $ams_drv = "$cwd/$dir_tex/ams.drv";
+
+        symlink $ams_drv, "$doc.drv";
+        run("$prg_pdflatex $doc.drv");
+        run("$prg_makeindex $doc.idx") if -f "$doc.idx";
+        run("$prg_pdflatex $doc.drv");
+        run("$prg_makeindex $doc.idx") if -f "$doc.idx";
+        run("$prg_pdflatex $doc.drv");
+        run("$prg_makeindex $doc.idx") if -f "$doc.idx";
+        run("$prg_pdflatex $doc.drv");
+        install_pdf($amspkg, $doc);
+    }
+
+    chdir "$dir_build/amslatex/math";
+    symlink '../texmf', 'texmf';
+    map { generate_doc 'amsmath', $_; } qw[
+        amsldoc subeqn technote testmath
+        amsbsy amscd amsgen amsmath amsopn amstext amsxtra
+    ];
+
     chdir $cwd;
 }
 
