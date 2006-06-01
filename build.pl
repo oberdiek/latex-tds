@@ -352,6 +352,12 @@ section('Install tex doc');
         install('texmf/doc/latex/psnfss/test',
             '*test*.tex'
         );
+        install('texmf/fonts/enc/dvips/psnfss',
+            '8r.enc'
+        );
+        install('texmf/fonts/map/dvips/psnfss',
+            '*.map'
+        );
         chdir $cwd;
     }
 
