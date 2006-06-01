@@ -7,3 +7,8 @@ CTAN:fonts/fc
 * Update because the CTAN files have changed
   because of bug fixes (inputenc.dtx, xspace.dtx, ...),
   but also new bug (ltbibl.dtx).
+
+2006/06/01
+* amslatex added.
+
+latex-tds-src.zip
