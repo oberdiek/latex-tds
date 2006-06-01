@@ -351,10 +351,10 @@ if ($modules{'base'}) {
         my $dtx = "$base.dtx";
         run("$prg_pdflatex $dtx");
         run("$prg_makeindex -s gind.ist $base.idx");
-        run("$prg_makeindex -s gglo.ist -o $base.glo $base.gls");
+        run("$prg_makeindex -s gglo.ist -o $base.gls $base.glo");
         run("$prg_pdflatex $dtx");
         run("$prg_makeindex -s gind.ist $base.idx");
-        run("$prg_makeindex -s gglo.ist -o $base.glo $base.gls");
+        run("$prg_makeindex -s gglo.ist -o $base.gls $base.glo");
         run("$prg_pdflatex $dtx");
         run("$prg_pdflatex $dtx"); # hydestopt
         install_pdf('base', "$base");
@@ -474,12 +474,12 @@ if ($modules{'tools'}) {
         run("$prg_pdflatex $entry.dtx");
         run("$prg_makeindex -s gind.ist $entry.idx")
             if -f "$entry.idx";
-        run("$prg_makeindex -s gglo.ist -o $entry.glo $entry.gls")
+        run("$prg_makeindex -s gglo.ist -o $entry.gls $entry.glo")
             if -f "$entry.gls";
         run("$prg_pdflatex $entry.dtx");
         run("$prg_makeindex -s gind.ist $entry.idx")
             if -f "$entry.idx";
-        run("$prg_makeindex -s gglo.ist -o $entry.glo $entry.gls")
+        run("$prg_makeindex -s gglo.ist -o $entry.gls $entry.glo")
             if -f "$entry.gls";
         run("$prg_pdflatex $entry.dtx");
         run("$prg_pdflatex $entry.dtx"); # hydestopt
