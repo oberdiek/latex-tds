@@ -258,6 +258,8 @@ section('TDS corrections');
         $dir = "$dir_tds/doc/latex/amscls";
         unlink "$dir/amsrefs.dvi";
         unlink "$dir/textcmds.dvi";
+        run("$prg_cp $dir_build/amslatex/other/amsbooka.sty"
+            . " $dir_tds/tex/latex/amscls/amsbooka.sty");
     }
 }
 
