@@ -49,7 +49,7 @@ my $prg_unzip     = 'unzip';
 my $prg_wget      = 'wget';
 my $prg_zip       = 'zip -9r';
 
-$ENV{'TEXINPUTS'} = "$cwd/tex:.:texmf/tex//:";
+$ENV{'TEXINPUTS'} = "$cwd/tex:.:texmf//:";
 
 my $error = "!!! Error:";
 
