@@ -84,28 +84,26 @@ GetOptions(
 
 info("Build modules: " . join ' ', sort grep {$modules{$_}} @pkg_list);
 
-exit(1);
-
 ### Download
 if ($::opt_download) {
     section('Download');
 
-    sub download_ctan {
-        my $file = $_[0];
-        my $ctan_path  = $_[1];
+    sub download_ctan ($$) {
+        my $file      = shift;
+        my $ctan_path = shift;
         ensure_directory($dir_incoming_ctan);
         download("$dir_incoming_ctan/$file.zip",
                  "$url_ctan/$ctan_path/$file.zip");
     }
-    sub download_ams {
-        my $file = $_[0];
+    sub download_ams ($) {
+        my $file = shift;
         ensure_directory($dir_incoming_ams);
         download("$dir_incoming_ams/$file.zip",
                  "$url_ams/$file.zip");
     }
-    sub download {
-        my $file = $_[0];
-        my $url  = $_[1];
+    sub download ($$) {
+        my $file = shift;
+        my $url  = shift;
         info("download $url\n           --> $file");
         my $cmd = $prg_curl;
         $cmd .= " --disable-epsv";                # for ftp.ams.org
@@ -141,21 +139,21 @@ section('Remove previous build');
 ### Unpack
 section('Unpacking');
 {
-    sub unpacking {
-        my $pkg     = $_[0];
-        my $zipfile = $_[1];
-        my $dir     = $_[2];
+    sub unpacking ($$$) {
+        my $pkg     = shift;
+        my $zipfile = shift;
+        my $dir     = shift;
         run("$prg_unzip $zipfile -d$dir");
     }
-    sub unpack_ctan {
-        my $pkg = $_[0];
+    sub unpack_ctan ($) {
+        my $pkg = shift;
         $modules{$pkg} or return 1;
         unpacking($pkg,
                   "$dir_incoming_ctan/$pkg.zip",
                   $dir_build);
     }
-    sub unpack_ams {
-        my $ams_pkg = $_[0];
+    sub unpack_ams ($) {
+        my $ams_pkg = shift;
         $modules{'amslatex'} or return 1;
         unpacking('amslatex',
                   "$dir_incoming_ams/$ams_pkg.zip",
@@ -180,40 +178,40 @@ section('Patches');
 ### Install TDS/source
 section('Install source');
 {
-    sub install_source {
-        my $pkg = $_[0];
-        my $ref_list = $_[1];
+    sub install_source ($@) {
+        my $pkg  = shift;
+        my @list = @_;
         $modules{$pkg} or return 1;
         chdir "$dir_build/$pkg";
-        install("texmf/source/latex/$pkg", $ref_list);
+        install("texmf/source/latex/$pkg", @list);
         chdir $cwd;
     }
-    install_source('base', [
+    install_source('base',
         '*.*'
-    ]);
-    install_source('tools', [
+    );
+    install_source('tools',
         '*.dtx',
         '*.ins',
         '*.txt'
-    ]);
-    install_source('graphics', [
+    );
+    install_source('graphics',
         '*.dtx',
         '*.ins',
         '*.txt',
         '*.tex',
         '*.def'
-    ]);
-    install_source('cyrillic', [
+    );
+    install_source('cyrillic',
         '*.*'
-    ]);
+    );
 }
 
 ### Docstrip
 section('Docstrip');
 {
-    sub docstrip {
-        my $pkg = $_[0];
-        my $ins = $_[1];
+    sub docstrip ($$) {
+        my $pkg = shift;
+        my $ins = shift;
         $modules{$pkg} or return 1;
         chdir "$dir_build/$pkg";
         run("$prg_docstrip $ins.ins");
@@ -261,12 +259,12 @@ section('Install tex doc');
 {
     if ($modules{'base'}) {
         chdir "$dir_build/base";
-        install('texmf/doc/latex/base', [
+        install('texmf/doc/latex/base',
             '*.txt',
             'sample2e.tex',
             'small2e.tex'
-        ]);
-        install('texmf/tex/latex/base', [
+        );
+        install('texmf/tex/latex/base',
             '*.cls',
             'ltpatch.ltx',
             'idx.tex',
@@ -274,50 +272,50 @@ section('Install tex doc');
             'latexbug.tex',
             'lppl.tex',
             'testpage.tex'
-        ]);
+        );
         chdir $cwd;
     }
 
     if ($modules{'tools'}) {
         chdir "$dir_build/tools";
-        install('texmf/doc/latex/tools', [
+        install('texmf/doc/latex/tools',
             '*.txt'
-        ]);
+        );
         chdir $cwd;
     }
 
     if ($modules{'graphics'}) {
         chdir "$dir_build/graphics";
-        install('texmf/doc/latex/graphics', [
+        install('texmf/doc/latex/graphics',
             '*.txt'
-        ]);
-        install('texmf/tex/latex/graphics', [
+        );
+        install('texmf/tex/latex/graphics',
             '*.def'
-        ]);
+        );
         chdir $cwd;
     }
 
     if ($modules{'cyrillic'}) {
         chdir "$dir_build/cyrillic";
-        install('texmf/doc/latex/cyrillic', [
+        install('texmf/doc/latex/cyrillic',
             '*.txt'
-        ]);
+        );
         chdir $cwd;
     }
 
 my $dummy = <<'END_DUMMY';
     if ($modules{'babel'}) {
         chdir "$dir_build/babel";
-        install('texmf/tex/generic/bghyph', [
+        install('texmf/tex/generic/bghyph',
             'bghyphen.txt',
             'bghyphsi.tex',
             'catmik.tex',
             'mik2t2.tex'
-        ]);
-        install('texmf/tex/generic/hyphen', [
+        );
+        install('texmf/tex/generic/hyphen',
             'icehyph.tex',
             'lahyph.tex'
-        ]);
+        );
         chdir $cwd;
     }
 END_DUMMY
@@ -327,7 +325,7 @@ END_DUMMY
 if ($modules{'base'}) {
     section('Documenation: base');
 
-    sub base_guide {
+    sub base_guide ($) {
         my $guide = "$_[0]guide";
         run("$prg_pdflatex $guide");
         run("$prg_pdflatex $guide");
@@ -335,8 +333,8 @@ if ($modules{'base'}) {
         install_pdf('base', $guide);
         1;
     }
-    sub simple_dtx {
-        my $base = $_[0];
+    sub simple_dtx ($) {
+        my $base = shift;
         my $dtx = "$base.dtx";
         run("$prg_pdflatex $dtx");
         run("$prg_pdflatex $dtx");
@@ -344,8 +342,8 @@ if ($modules{'base'}) {
         install_pdf('base', $base);
         1;
     }
-    sub complex_dtx {
-        my $base = $_[0];
+    sub complex_dtx ($) {
+        my $base = shift;
         my $dtx = "$base.dtx";
         run("$prg_pdflatex $dtx");
         run("$prg_makeindex -s gind.ist $base.idx");
@@ -358,8 +356,8 @@ if ($modules{'base'}) {
         install_pdf('base', "$base");
         1;
     }
-    sub book_err {
-        my $base = $_[0];
+    sub book_err ($) {
+        my $base = shift;
         my $err = "$base.err";
         run("$prg_pdflatex $err");
         run("$prg_sed -i -e '"
@@ -561,21 +559,21 @@ section('Result');
     }
 }
 
-sub install {
-    my $dir_target = $_[0];
-    my @list = @{$_[1]};
+sub install ($@) {
+    my $dir_target = shift;
+    my @list       = @_;
 
     ensure_directory($dir_target);
     run("$prg_copy @list $dir_target/");
     1;
 }
 
-sub install_pdf {
-    my $pkg = $_[0];
-    my $file_base = $_[1];
+sub install_pdf ($$) {
+    my $pkg         = shift;
+    my $file_base   = shift;
     my $file_source = "$file_base.pdf";
-    my $dir_dest = "texmf/doc/latex/$pkg";
-    my $file_dest = "$dir_dest/$file_base.pdf";
+    my $dir_dest    = "texmf/doc/latex/$pkg";
+    my $file_dest   = "$dir_dest/$file_base.pdf";
 
     ensure_directory($dir_dest);
     printsize($file_source, 0);
@@ -586,11 +584,10 @@ sub install_pdf {
     1;
 }
 
-sub printsize {
-    my $file = $_[0];
-    my $modus = $_[1];
-    my @stat = stat($file);
-    my $size = @stat[7];
+sub printsize ($$) {
+    my $file  = shift;
+    my $modus = shift;
+    my $size  = (stat($file))[7];
     $size =~ s/(\d)(\d{6})$/$1.$2/;
     $size =~ s/(\d)(\d{3})$/$1.$2/;
     $size = " " x (9 - length($size)) . $size;
@@ -605,8 +602,8 @@ sub printsize {
     }
 }
 
-sub ensure_directory {
-    my $dir = $_[0];
+sub ensure_directory ($) {
+    my $dir = shift;
 
     return 1 if -d $dir;
     run("$prg_mkdir -p '$dir'");
@@ -614,15 +611,15 @@ sub ensure_directory {
     die "$error Cannot generate directory `$dir'!\n";
 }
 
-sub section {
-    my $title = $_[0];
+sub section ($) {
+    my $title = shift;
 
     print "\n=== $title ===\n";
     1;
 }
 
-sub run {
-    my $cmd = $_[0];
+sub run ($) {
+    my $cmd = shift;
 
     info("system: $cmd");
     my $ret = system($cmd);
@@ -643,8 +640,8 @@ sub run {
     1;
 }
 
-sub info {
-    my $msg = $_[0];
+sub info ($) {
+    my $msg = shift;
     print "* $msg\n";
     1;
 }
