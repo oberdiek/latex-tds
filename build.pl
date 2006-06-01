@@ -203,8 +203,7 @@ section('Install source');
         '*.dtx',
         '*.ins',
         '*.txt',
-        '*.tex',
-        '*.def'
+        '*.tex'
     );
     install_source('cyrillic',
         '*.*'
