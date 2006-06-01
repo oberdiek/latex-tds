@@ -2,6 +2,7 @@ CTAN:language/armenian
 CTAN:fonts/tipa
 CTAN:fonts/wsuipa
 CTAN:fonts/fc
+CTAN:fonts/utopia (psnfss/psnfss2e.tex)
 
 2006/05/27
 * Update because the CTAN files have changed
