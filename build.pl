@@ -46,6 +46,7 @@ my $prg_move      = 'mv';
 my $prg_patch     = "patch";
 my $prg_pdflatex  = 'pdflatex';
 my $prg_rm        = "rm";
+my $prg_rsync     = "rsync";
 my $prg_sed       = "sed";
 my $prg_unzip     = 'unzip';
 my $prg_wget      = 'wget';
@@ -603,7 +604,20 @@ if ($modules{$prj}) {
 
     my $dir = "$dir_build/$prj";
     ensure_directory($dir);
-    
+    my $cmd_rsync = "$prg_rsync " . join ' ', qw[
+        --recursive
+        --times
+        --perms
+        --owner
+        --group
+        --hard-links
+    ];
+    for (@pkg_list) {
+        next if $_ eq $prj;
+        my $reftree = "$dir_build/$_";
+        next unless -d "$reftree/texmf";
+        run("$cmd_rsync --link-dest=$cwd/$reftree $reftree/texmf $dir");
+    }
 }
 
 ### Pack result
