@@ -34,7 +34,7 @@ my $file_tmp_o = "$cwd/$dir_build/tmp-o.pdf";
 
 my $prg_bibtex    = "bibtex";
 my $prg_chmod     = "chmod";
-my $prg_copy      = 'cp -p';
+my $prg_cp        = 'cp -p';
 my $prg_curl      = 'curl';
 my $prg_docstrip  = 'tex -shell-escape';
 my $prg_epstopdf  = 'epstopdf';
@@ -62,16 +62,18 @@ my $error = "!!! Error:";
 my $usage = <<"END_OF_USAGE";
 Usage: build.pl [options]
 General options:
-  --download      (check for newer files)
+  --(no)download      (check for newer files)
+  --(no)postprocess   (pdf files are postprocessed, enabled by default)
 Module options:
-  --all           (select all modules)
+  --all               (select all modules)
 END_OF_USAGE
 for (@pkg_list) {
     $usage .= "  --(no)$_\n";
 }
 
-my $opt_download = 0;
-my $opt_all      = 0;
+my $opt_download    = 0;
+my $opt_postprocess = 1;
+my $opt_all         = 0;
 my %modules;
 my @list_modules;
 
@@ -83,7 +85,8 @@ GetOptions(
             $opt_all = 1;
             map { $modules{$_} = 1; } @pkg_list;
         },
-    'download!' => \$opt_download
+    'download!'    => \$opt_download,
+    'postprocess!' => \$opt_postprocess
 ) or die $usage;
 @ARGV == 0 or die $usage;
 @list_modules = grep { $modules{$_}; } @pkg_list;
@@ -350,11 +353,11 @@ if ($modules{'base'}) {
         my $base = shift;
         my $dtx = "$base.dtx";
         run("$prg_pdflatex $dtx");
-        run("$prg_makeindex -s gind.ist $base.idx");
-        run("$prg_makeindex -s gglo.ist -o $base.gls $base.glo");
+        run_makeindex("$base.idx", 'gind.ist');
+        run_makeindex("$base.glo", 'gglo.ist', "$base.gls");
         run("$prg_pdflatex $dtx");
-        run("$prg_makeindex -s gind.ist $base.idx");
-        run("$prg_makeindex -s gglo.ist -o $base.gls $base.glo");
+        run_makeindex("$base.idx", 'gind.ist');
+        run_makeindex("$base.glo", 'gglo.ist', "$base.gls");
         run("$prg_pdflatex $dtx");
         run("$prg_pdflatex $dtx"); # hydestopt
         install_pdf('base', "$base");
@@ -375,11 +378,11 @@ if ($modules{'base'}) {
     }
     chdir "$dir_build/base";
     run("$prg_pdflatex source2e");
-    run("$prg_makeindex -s gind.ist source2e.idx");
-    run("$prg_makeindex -s gglo.ist -o souce2e.gls source2e.glo");
+    run_makeindex('source2e.idx', 'gind.ist');
+    run_makeindex('source2e.glo', 'gglo.ist', 'source2e.gls');
     run("$prg_pdflatex source2e");
-    run("$prg_makeindex -s gind.ist source2e.idx");
-    run("$prg_makeindex -s gglo.ist -o souce2e.gls source2e.glo");
+    run_makeindex('source2e.idx', 'gind.ist');
+    run_makeindex('source2e.glo', 'gglo.ist', 'source2e.gls');
     run("$prg_pdflatex source2e");
     run("$prg_pdflatex source2e"); # hydestopt
     install_pdf('base', 'source2e');
@@ -472,15 +475,11 @@ if ($modules{'tools'}) {
     map { s/\.dtx$//; } @list;
     foreach my $entry (@list) {
         run("$prg_pdflatex $entry.dtx");
-        run("$prg_makeindex -s gind.ist $entry.idx")
-            if -f "$entry.idx";
-        run("$prg_makeindex -s gglo.ist -o $entry.gls $entry.glo")
-            if -f "$entry.gls";
+        run_makeindex("$entry.idx", 'gind.ist');
+        run_makeindex("$entry.glo", 'gglo.ist', "$entry.gls");
         run("$prg_pdflatex $entry.dtx");
-        run("$prg_makeindex -s gind.ist $entry.idx")
-            if -f "$entry.idx";
-        run("$prg_makeindex -s gglo.ist -o $entry.gls $entry.glo")
-            if -f "$entry.gls";
+        run_makeindex("$entry.idx", 'gind.ist');
+        run_makeindex("$entry.glo", 'gglo.ist', "$entry.gls");
         run("$prg_pdflatex $entry.dtx");
         run("$prg_pdflatex $entry.dtx"); # hydestopt
         install_pdf('tools', $entry);
@@ -538,12 +537,9 @@ if ($modules{'amslatex'}) {
 
     sub makeindex ($) {
         my $doc = shift;
-
-        -f "$doc.idx" or return 1;
-        my $cmd = $prg_makeindex;
-        $cmd .= " -s gind.ist" unless $doc eq 'amsldoc';
-        $cmd .= " $doc.idx";
-        run($cmd);
+        my $style;
+        $style = 'gind.ist' unless $doc eq 'amsldoc';
+        run_makeindex("$doc.idx", $style);
     }
 
     sub bibtex ($) {
@@ -657,7 +653,7 @@ sub install ($@) {
     my @list       = @_;
 
     ensure_directory($dir_target);
-    run("$prg_copy @list $dir_target/");
+    run("$prg_cp @list $dir_target/");
     1;
 }
 
@@ -669,11 +665,16 @@ sub install_pdf ($$) {
     my $file_dest   = "$dir_dest/$file_base.pdf";
 
     ensure_directory($dir_dest);
-    printsize($file_source, 0);
-    run("$prg_java -jar $jar_pdfbox_rewrite $file_source $file_tmp");
-    run("$prg_java -cp $jar_multivalent tool.pdf.Compress -old $file_tmp");
-    run("$prg_move $file_tmp_o $file_dest");
-    printsize($file_dest, 1);
+    if ($opt_postprocess) {
+        printsize($file_source, 0);
+        run("$prg_java -jar $jar_pdfbox_rewrite $file_source $file_tmp");
+        run("$prg_java -cp $jar_multivalent tool.pdf.Compress -old $file_tmp");
+        run("$prg_move $file_tmp_o $file_dest");
+        printsize($file_dest, 1);
+    }
+    else {
+        run("$prg_cp $file_source $file_dest");
+    }
     1;
 }
 
@@ -731,6 +732,19 @@ sub run ($) {
         }
     }
     1;
+}
+
+sub run_makeindex ($;$$) {
+    my $input_file  = shift;
+    my $style_file  = shift;
+    my $output_file = shift;
+
+    return 1 unless -f $input_file;
+    my $cmd = $prg_makeindex;
+    $cmd .= " -s $style_file" if $style_file;
+    $cmd .= " -o $output_file" if $output_file;
+    $cmd .= " $input_file";
+    run($cmd);
 }
 
 sub info ($) {
