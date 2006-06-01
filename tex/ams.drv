@@ -53,8 +53,21 @@
       \textbackslash end\{##1\}%
     }%
     \def\and{, }%
+    \def\linebreak[##1]{}%
   }%
 }
+
+%%% Patch for cite-xh.tex
+\begingroup
+  \edef\x{\jobname}%
+  \def\y{cite-xh}%
+  \@onelevel@sanitize\y
+\expandafter\endgroup
+\ifx\x\y
+  \PassOptionsToPackage{%
+    colorlinks,citecolor=red,pagebackref,hypertexnames=false,hypertexnames%
+  }{hyperref}%
+\fi
 
 %%% Patch theindex for amsldoc.tex
 \begingroup
