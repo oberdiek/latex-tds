@@ -42,6 +42,7 @@
   }%
   \pdfstringdefDisableCommands{%
     \let\pkg\@firstofone
+    \let\cls\@firstofone
     \let\opt\@firstofone
     \let\ntt\relax
     \let\fn\@firstofone
