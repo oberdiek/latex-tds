@@ -1,0 +1,4 @@
+\documentclass{ltxdoc}
+\begin{document}
+\DocInput{ltxcheck.tex}
+\end{document}
