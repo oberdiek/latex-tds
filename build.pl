@@ -565,6 +565,7 @@ if ($modules{'amslatex'}) {
         run("$prg_pdflatex $doc.drv");
         makeindex($doc);
         run("$prg_pdflatex $doc.drv");
+        run("$prg_pdflatex $doc.drv") if $doc eq 'amsrefs';
         install_pdf($amspkg, $doc);
     }
 
