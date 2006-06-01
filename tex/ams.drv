@@ -81,7 +81,9 @@
   \InputIfFileExists{\jobname.dtx}{%
     \typeout{* Document source: \jobname.dtx}%
   }{%
-    \PackageError{ams.drv}{Cannot find document source}\@ehc
+    \PackageError{ams.drv}{%
+      Cannot find document source
+    }{\csname @ehc\endcsname}%
   }%
 }
 \endinput
