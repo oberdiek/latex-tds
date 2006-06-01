@@ -30,6 +30,7 @@ my $jar_multivalent = "$cwd/$dir_lib/Multivalent20060102.jar";
 my $file_tmp = "$cwd/$dir_build/tmp.pdf";
 my $file_tmp_o = "$cwd/$dir_build/tmp-o.pdf";
 
+my $prg_bibtex    = "bibtex";
 my $prg_chmod     = "chmod";
 my $prg_copy      = 'cp -p';
 my $prg_curl      = 'curl';
@@ -48,7 +49,7 @@ my $prg_unzip     = 'unzip';
 my $prg_wget      = 'wget';
 my $prg_zip       = 'zip -9r';
 
-$ENV{'TEXINPUTS'} = "$cwd/tex:.:texmf!!:";
+$ENV{'TEXINPUTS'} = "$cwd/tex:.:texmf/tex//:";
 
 my $error = "!!! Error:";
 
@@ -530,6 +531,24 @@ END_CODE
 ### Generate documentation for amslatex
 if ($modules{'amslatex'}) {
     section('Documentation: amslatex');
+    
+    sub makeindex ($) {
+        my $doc = shift;
+        
+        -f "$doc.idx" or return 1;
+        my $cmd = $prg_makeindex;
+        $cmd .= " -s gind.ist" unless $doc eq 'amsldoc';
+        $cmd .= " $doc.idx";
+        run($cmd);
+    }
+    
+    sub bibtex ($) {
+        my $doc = shift;
+
+        if ($doc =~ /^cite-x[bh]$/) {
+            run("$prg_bibtex $doc");
+        }
+    }
 
     sub generate_doc ($$) {
         my $amspkg = shift;
@@ -538,22 +557,41 @@ if ($modules{'amslatex'}) {
 
         symlink $ams_drv, "$doc.drv";
         run("$prg_pdflatex $doc.drv");
-        run("$prg_makeindex $doc.idx") if -f "$doc.idx";
+        makeindex($doc);
+        bibtex($doc);
         run("$prg_pdflatex $doc.drv");
-        run("$prg_makeindex $doc.idx") if -f "$doc.idx";
+        makeindex($doc);
         run("$prg_pdflatex $doc.drv");
-        run("$prg_makeindex $doc.idx") if -f "$doc.idx";
+        makeindex($doc);
         run("$prg_pdflatex $doc.drv");
-        install_pdf($amspkg, $doc);
+#        install_pdf($amspkg, $doc);
     }
 
+if (0) {
     chdir "$dir_build/amslatex/math";
     symlink '../texmf', 'texmf';
     map { generate_doc 'amsmath', $_; } qw[
         amsldoc subeqn technote testmath
         amsbsy amscd amsgen amsmath amsopn amstext amsxtra
     ];
+    chdir $cwd;
 
+    chdir "$dir_build/amslatex/classes";
+    symlink '../texmf', 'texmf';
+    map { generate_doc 'amscls', $_; } qw[
+        amsthdoc instr-l thmtest
+        amsclass amsdtx amsmidx upref
+    ];
+    chdir $cwd;
+}
+
+    chdir "$dir_build/amslatex/amsrefs";
+    symlink '../texmf', 'texmf';
+    map { generate_doc 'amscls', $_; } qw[
+        cite-xa cite-xb cite-xh cite-xs
+        amsxport ifoption pcatcode rkeyval textcmds
+    ];
+    # amsrefs mathscinet
     chdir $cwd;
 }
 
