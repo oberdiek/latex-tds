@@ -2,6 +2,8 @@
 use strict;
 $^W=1;
 
+my $prj = 'latex-tds';
+
 my $url_ctan = 'ftp://dante.ctan.org/tex-archive';
 my $url_ams = 'ftp://ftp.ams.org/pub/tex';
 
@@ -13,7 +15,7 @@ my @required_list = (
     'graphics',
     'tools'
 );
-my @pkg_list = ('base', @required_list);
+my @pkg_list = ('base', @required_list, $prj);
 
 my $dir_incoming = 'incoming';
 my $dir_incoming_ctan = "$dir_incoming/ctan";
@@ -58,35 +60,37 @@ my $error = "!!! Error:";
 
 my $usage = <<"END_OF_USAGE";
 Usage: build.pl [options]
-Options for bundle selection:
-  --(no)base
-  --(no)tools
-  --(no)graphics
-  --(no)cyrillic
-  --(no)amslatex
-  --(no)psnfss    (not implemented)
-  --(no)babel     (not implemented)
-  --all           select all modules
-Other options:
+General options:
   --download      (check for newer files)
+Module options:
+  --all           (select all modules)
 END_OF_USAGE
+for (@pkg_list) {
+    $usage .= "  --(no)$_\n";
+}
 
-$::opt_download = 0;
-$::opt_all      = 0;
+my $opt_download = 0;
+my $opt_all      = 0;
 my %modules;
+my @list_modules;
 
 use Getopt::Long;
 GetOptions(
     ( map { ("$_!" => \$modules{$_}); } @pkg_list ),
-    'all!' => sub { map { $modules{$_} = 1; } @pkg_list; },
-    'download!'
+    'all' =>
+        sub {
+            $opt_all = 1;
+            map { $modules{$_} = 1; } @pkg_list;
+        },
+    'download!' => \$opt_download
 ) or die $usage;
 @ARGV == 0 or die $usage;
+@list_modules = grep { $modules{$_}; } @pkg_list;
 
-info("Build modules: " . join ' ', sort grep {$modules{$_}} @pkg_list);
+info("Build modules: @list_modules");
 
 ### Download
-if ($::opt_download) {
+if ($opt_download) {
     section('Download');
 
     sub download_ctan ($$) {
@@ -129,8 +133,7 @@ if ($::opt_download) {
 ### Remove previous build
 section('Remove previous build');
 {
-    foreach my $pkg (@pkg_list) {
-        $modules{$pkg} or next;
+    foreach my $pkg (@list_modules) {
         run("$prg_rm -rf $dir_build/$pkg");
         my $distribfile = "$dir_distrib/$pkg-tds.zip";
         unlink $distribfile if -f $distribfile;
@@ -594,18 +597,30 @@ if ($modules{'amslatex'}) {
     chdir $cwd;
 }
 
+### Module latex-tds
+if ($modules{$prj}) {
+    section('Module latex-tds');
+
+    my $dir = "$dir_build/$prj";
+    ensure_directory($dir);
+    
+}
+
 ### Pack result
 section('Distrib');
 {
     ensure_directory($dir_distrib);
-    for my $pkg (@pkg_list) {
+    for my $pkg (@list_modules) {
         my $dir_tds = "$dir_build/$pkg/texmf";
         my $file_distrib = "$cwd/$dir_distrib/$pkg-tds.zip";
-        if (-d $dir_tds and $modules{$pkg}) {
+        if (-d $dir_tds) {
             chdir $dir_tds;
             run("$prg_chmod -R g-w .");
             run("$prg_zip $file_distrib *");
             chdir $cwd;
+        }
+        else {
+            print "!!! Warning: Missing TDS tree for `$pkg'!\n";
         }
     }
 }
@@ -613,14 +628,13 @@ section('Distrib');
 ### Display result
 section('Result');
 {
-    for my $pkg (@pkg_list) {
-        $modules{$pkg} or next;
+    for my $pkg (@list_modules) {
         my $file = "$dir_distrib/$pkg-tds.zip";
         if (-f $file) {
             system("$prg_ls -l $file");
         }
         else {
-            print "Failed: $pkg\n";
+            print "!!! Warning: Missing distribution for `$pkg'!\n";
         }
     }
 }
