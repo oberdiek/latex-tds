@@ -50,6 +50,28 @@
     \def\and{, }%
   }%
 }
+
+%%% Patch theindex for amsldoc.tex
+\begingroup
+  \edef\x{\jobname}%
+  \def\y{amsldoc}%
+  \@onelevel@sanitize\y
+\expandafter\endgroup
+\ifx\x\y
+\else
+  \expandafter\@gobbletwo
+\fi
+\AtBeginDocument{%
+  \let\PATCH@ORG@theindex\theindex
+  \def\theindex{%
+     \let\endtheindex\relax
+     \end{theindex}%
+     \let\theindex\PATCH@ORG@theindex
+     \InputIfFileExists{\jobname.ind}{}{}%
+     \end{document}%
+  }%
+}
+
 \makeatother
 
 %%% Load document source file
