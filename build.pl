@@ -9,7 +9,7 @@ my $url_ams = 'ftp://ftp.ams.org/pub/tex';
 
 my @required_list = (
     'amslatex',
-#    'babel',
+    'babel',
     'psnfss',
     'cyrillic',
     'graphics',
@@ -43,7 +43,7 @@ my $prg_java      = 'java';
 my $prg_ls        = "ls";
 my $prg_makeindex = 'makeindex';
 my $prg_mkdir     = 'mkdir';
-my $prg_move      = 'mv';
+my $prg_mv        = 'mv';
 my $prg_patch     = "patch";
 my $prg_pdflatex  = 'pdflatex';
 my $prg_rm        = "rm";
@@ -216,30 +216,40 @@ section('Install source');
         chdir $cwd;
     }
     install_source('base',
-        '*.*'
+        '*.dtx',
+        '*.fdd',
+        '*.ins',
+        '*guide.tex',
+        'ltnews*.tex',
+        'source2e.tex',
+        'ltx3info.tex',
+        'latexbug.el'
     );
     install_source('tools',
         '*.dtx',
         '*.ins',
-        '*.txt'
     );
     install_source('graphics',
         '*.dtx',
         '*.ins',
-        '*.txt',
         '*.tex'
     );
     install_source('cyrillic',
-        '*.*'
+        '*.dtx',
+        '*.fdd',
+        '*.ins',
     );
     install_source('psnfss',
-        '*.txt',
-        '*.enc',
-        '*.map',
-        '*.zip',
-        '*.tex',
+        'psnfss2e.tex',
         '*.dtx',
         '*.ins'
+    );
+    install_source('babel',
+        '*.ins',
+        '*.dtx',
+        '*.fdd',
+        #?# '*.tex',
+        '*.dat',
     );
 }
 
@@ -256,20 +266,13 @@ section('Docstrip');
         1;
     }
     docstrip('base', 'unpack');
-#    docstrip('babel', 'base');
+    docstrip('babel', 'base');
     docstrip('psnfss', 'psfonts');
     docstrip('cyrillic', 'cyrlatex');
     docstrip('graphics', 'graphics');
     docstrip('graphics', 'graphics-drivers');
     docstrip('tools', 'tools');
 }
-
-### Correction for babel: *.drv files
-#{
-#    chdir "$dir_build/babel";
-#    system("prg_move texmf/tex/generic/babel/*.drv .");
-#    chdir $cwd;
-#}
 
 section('TDS corrections');
 {
@@ -293,6 +296,16 @@ section('TDS corrections');
         run("$prg_cp $dir_build/amslatex/other/amsbooka.sty"
             . " $dir_tds/source/latex/amscls/amsbooka.sty");
     }
+
+    if ($modules{'babel'}) {
+        ### Correction for *.drv files
+        my $basedir = "$dir_build/babel";
+        run("$prg_mv $basedir/texmf/tex/generic/babel/*.drv $basedir");
+        ### Correction for *.ist files
+        my $dir = "$basedir/texmf/makeindex/babel";
+        ensure_directory($dir);
+        run("$prg_mv $basedir/texmf/tex/generic/babel/*.ist $dir");
+    }
 }
 
 ### Install TDS/tex, TDS/doc files
@@ -312,7 +325,8 @@ section('Install tex doc');
             'lablst.tex',
             'latexbug.tex',
             'lppl.tex',
-            'testpage.tex'
+            'testpage.tex',
+            'ltxcheck.tex'
         );
         chdir $cwd;
     }
@@ -357,6 +371,19 @@ section('Install tex doc');
         );
         install('texmf/fonts/map/dvips/psnfss',
             '*.map'
+        );
+        chdir $cwd;
+    }
+    
+    if ($modules{'babel'}) {
+        chdir "$dir_build/babel";
+        install('texmf/doc/generic/babel',
+            '*.txt',
+            '*.heb',
+            '*.bbl',
+            '*.dat',
+            '*.skeleton',
+            'install.OzTeX*'
         );
         chdir $cwd;
     }
@@ -486,8 +513,11 @@ if ($modules{'base'}) {
     run("$prg_pdflatex doc_lppl");
     run("$prg_pdflatex doc_lppl");
     run("$prg_pdflatex doc_lppl"); # hydestopt
-    run("$prg_move doc_lppl.pdf lppl.pdf");
+    run("$prg_mv doc_lppl.pdf lppl.pdf");
     install_pdf('base', 'lppl');
+    run("$prg_pdflatex ltxcheck.drv");
+    run("$prg_pdflatex ltxcheck.drv");
+    install_pdf('base', 'ltxcheck');
     my $code = <<'END_CODE';
 \let\SavedDocumentclass\documentclass
 \def\documentclass[#1]#2{
@@ -737,7 +767,7 @@ sub install_pdf ($$) {
         printsize($file_source, 0);
         run("$prg_java -jar $jar_pdfbox_rewrite $file_source $file_tmp");
         run("$prg_java -cp $jar_multivalent tool.pdf.Compress -old $file_tmp");
-        run("$prg_move $file_tmp_o $file_dest");
+        run("$prg_mv $file_tmp_o $file_dest");
         printsize($file_dest, 1);
     }
     else {
