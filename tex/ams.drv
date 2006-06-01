@@ -1,0 +1,65 @@
+\NeedsTeXFormat{LaTeX2e}
+\makeatletter
+
+%%% Paper size
+\@for\reserved@a:=article,report,book,amsdtx\do{%
+  \PassOptionsToClass{a4paper}{\reserved@a}%
+}
+
+%%% Patch \documentclass
+\let\PATCH@ORG@documentclass\documentclass
+\renewcommand*{\documentclass}[2][]{%
+  \let\documentclass\PATCH@ORG@documentclass
+  \begingroup
+    \toks@{\documentclass}%
+    \def\x{#1}%
+    \ifx\x\@empty
+    \else
+      \toks@\expandafter{\the\toks@[{#1}]}%
+    \fi
+    \toks@\expandafter{\the\toks@{#2}}%
+    \PATCH@documentclass
+}
+\newcommand*{\PATCH@documentclass}[1][]{%
+    \def\x{#1}%
+    \ifx\x\@empty
+    \else
+      \toks@\expandafter{\the\toks@[#1]}%
+    \fi
+  \expandafter\endgroup
+  \the\toks@
+  %
+  %%% Add hyperref support
+  \usepackage[pdfusetitle]{hyperref}%
+  \hypersetup{
+    draft=false,
+    colorlinks,
+    bookmarksnumbered,
+  }%
+  \pdfstringdefDisableCommands{%
+    \let\pkg\@firstofone
+    \let\opt\@firstofone
+    \let\ntt\relax
+    \let\fn\@firstofone
+    \let\env\@firstofone
+    \def\cn{\textbackslash}%
+    \def\begend##1{%
+      \textbackslash begin\{##1\} \dots\space
+      \textbackslash end\{##1\}%
+    }%
+    \def\and{, }%
+  }%
+}
+\makeatother
+
+%%% Load document source file
+\InputIfFileExists{\jobname.tex}{%
+  \typeout{* Document source: \jobname.tex}%
+}{%
+  \InputIfFileExists{\jobname.dtx}{%
+    \typeout{* Document source: \jobname.dtx}%
+  }{%
+    \PackageError{ams.drv}{Cannot find document source}\@ehc
+  }%
+}
+\endinput
