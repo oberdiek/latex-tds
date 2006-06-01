@@ -10,7 +10,7 @@ my $url_ams = 'ftp://ftp.ams.org/pub/tex';
 my @required_list = (
     'amslatex',
 #    'babel',
-#    'psnfss',
+    'psnfss',
     'cyrillic',
     'graphics',
     'tools'
@@ -32,6 +32,7 @@ my $jar_multivalent = "$cwd/$dir_lib/Multivalent20060102.jar";
 my $file_tmp = "$cwd/$dir_build/tmp.pdf";
 my $file_tmp_o = "$cwd/$dir_build/tmp-o.pdf";
 
+my $prg_checksum  = "adjust_checksum";
 my $prg_bibtex    = "bibtex";
 my $prg_chmod     = "chmod";
 my $prg_cp        = 'cp -p';
@@ -53,7 +54,9 @@ my $prg_wget      = 'wget';
 my $prg_zip       = 'zip -9r';
 
 $ENV{'TEXINPUTS'} = "$cwd/tex:.:texmf/tex//:";
-$ENV{'BSTINPUTS'} = ".:texmf/bibtex//:";
+$ENV{'BSTINPUTS'} = '.:texmf/bibtex//:';  # amslatex
+$ENV{'TFMFONTS'}  = 'texmf/fonts/tfm//:'; # psnfss
+$ENV{'VFFONTS'}   = 'texmf/fonts/vf//:';  # psnfss
 
 my $error = "!!! Error:";
 
@@ -94,7 +97,7 @@ GetOptions(
 info("Build modules: @list_modules");
 
 ### Download
-if ($opt_download) {
+{
     section('Download');
 
     sub download_ctan ($$) {
@@ -113,6 +116,7 @@ if ($opt_download) {
     sub download ($$) {
         my $file = shift;
         my $url  = shift;
+        return 1 if -f $file and !$opt_download;
         info("download $url\n           --> $file");
         my $cmd = $prg_curl;
         $cmd .= " --disable-epsv";                # for ftp.ams.org
@@ -130,6 +134,7 @@ if ($opt_download) {
     download_ctan('cyrillic', 'macros/latex/required');
     download_ctan('babel',    'macros/latex/required');
     download_ctan('amslatex', 'macros/latex/required');
+    download_ctan('psnfss',   'macros/latex/required');
     download_ams('amslatex');
     download_ams('amsrefs');
 }
@@ -161,11 +166,19 @@ section('Unpacking');
                   $dir_build);
     }
     sub unpack_ams ($) {
-        my $ams_pkg = shift;
+        my $name = shift;
         $modules{'amslatex'} or return 1;
         unpacking('amslatex',
-                  "$dir_incoming_ams/$ams_pkg.zip",
+                  "$dir_incoming_ams/$name.zip",
                   "$dir_build/amslatex/texmf");
+    }
+    sub unpack_psnfss ($) {
+        my $name = shift;
+        my $dir = "$dir_build/psnfss";
+        $modules{'psnfss'} or return 1;
+        unpacking('psnfss',
+                  "$dir/$name.zip",
+                  "$dir/texmf");
     }
 
     ensure_directory($dir_build);
@@ -175,12 +188,20 @@ section('Unpacking');
     }
     unpack_ams('amslatex');
     unpack_ams('amsrefs');
+    unpack_psnfss('lw35nfss');
+    unpack_psnfss('freenfss');
 }
 
 ### Patches
 section('Patches');
 {
-    ; # currently none
+    ; #
+    
+    if ($modules{'psnfss'}) {
+        chdir "$dir_build/psnfss";
+        run("$prg_checksum psfonts.dtx");
+        chdir $cwd;
+    }
 }
 
 ### Install TDS/source
@@ -211,6 +232,15 @@ section('Install source');
     install_source('cyrillic',
         '*.*'
     );
+    install_source('psnfss',
+        '*.txt',
+        '*.enc',
+        '*.map',
+        '*.zip',
+        '*.tex',
+        '*.dtx',
+        '*.ins'
+    );
 }
 
 ### Docstrip
@@ -227,7 +257,7 @@ section('Docstrip');
     }
     docstrip('base', 'unpack');
 #    docstrip('babel', 'base');
-#    docstrip('psnfss', 'psfonts');
+    docstrip('psnfss', 'psfonts');
     docstrip('cyrillic', 'cyrlatex');
     docstrip('graphics', 'graphics');
     docstrip('graphics', 'graphics-drivers');
@@ -310,6 +340,17 @@ section('Install tex doc');
         chdir "$dir_build/cyrillic";
         install('texmf/doc/latex/cyrillic',
             '*.txt'
+        );
+        chdir $cwd;
+    }
+    
+    if ($modules{'psnfss'}) {
+        chdir "$dir_build/psnfss";
+        install('texmf/doc/latex/psnfss',
+            '*.txt'
+        );
+        install('texmf/doc/latex/psnfss/test',
+            '*test*.tex'
         );
         chdir $cwd;
     }
@@ -594,6 +635,23 @@ if ($modules{'amslatex'}) {
         cite-xa cite-xb cite-xh cite-xs
         amsrefs amsxport ifoption mathscinet pcatcode rkeyval textcmds
     ];
+    chdir $cwd;
+}
+
+### Generate documentation for psnfss
+if ($modules{'psnfss'}) {
+    section('Documentation: psnfss');
+
+    chdir "$dir_build/psnfss";
+    run("$prg_pdflatex psfonts.dtx");
+    run("$prg_pdflatex psfonts.dtx");
+    install_pdf('psnfss', 'psfonts');
+    
+    run("$prg_pdflatex psnfss2e.drv");
+    run("$prg_pdflatex psnfss2e.drv");
+    run("$prg_pdflatex psnfss2e.drv");
+    install_pdf('psnfss', 'psnfss2e');
+    
     chdir $cwd;
 }
 
