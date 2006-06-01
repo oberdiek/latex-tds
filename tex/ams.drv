@@ -31,7 +31,9 @@
   %
   %%% Add hyperref support
   \PassOptionsToPackage{hyperref}{draft=false}%
-  \IfFileExists{\jobname.dtx}{\RequirePackage{hypdoc}}{}{}%
+  \IfFileExists{\jobname.dtx}{%
+    \RequirePackage{hypdoc}[2006/06/01]%
+  }{}{}%
   \usepackage[pdfusetitle]{hyperref}%
   \hypersetup{
     draft=false,
