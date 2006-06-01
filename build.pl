@@ -565,10 +565,9 @@ if ($modules{'amslatex'}) {
         run("$prg_pdflatex $doc.drv");
         makeindex($doc);
         run("$prg_pdflatex $doc.drv");
-#        install_pdf($amspkg, $doc);
+        install_pdf($amspkg, $doc);
     }
 
-if (0) {
     chdir "$dir_build/amslatex/math";
     symlink '../texmf', 'texmf';
     map { generate_doc 'amsmath', $_; } qw[
@@ -584,7 +583,6 @@ if (0) {
         amsclass amsdtx amsmidx upref
     ];
     chdir $cwd;
-}
 
     chdir "$dir_build/amslatex/amsrefs";
     symlink '../texmf', 'texmf';
