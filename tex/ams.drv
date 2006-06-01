@@ -6,6 +6,22 @@
   \PassOptionsToClass{a4paper}{\reserved@a}%
 }
 
+%%% Skip for cite-xa (unsupported)
+\begingroup
+  \edef\x{\jobname}%
+  \def\y{cite-xa}%
+  \@onelevel@sanitize\y
+\expandafter\endgroup
+\ifx\x\y
+  \expandafter\@firstofone
+\else
+  \expandafter\@gobble
+\fi
+{%
+  \input{\jobname.tex}%
+  \endinput
+}
+
 %%% Patch \documentclass
 \let\PATCH@ORG@documentclass\documentclass
 \renewcommand*{\documentclass}[2][]{%
