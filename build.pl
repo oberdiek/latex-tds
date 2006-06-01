@@ -376,10 +376,10 @@ if ($modules{'base'}) {
     chdir "$dir_build/base";
     run("$prg_pdflatex source2e");
     run("$prg_makeindex -s gind.ist source2e.idx");
-    run("$prg_makeindex -s gglo.ist -o souce2e.glo source2e.gls");
+    run("$prg_makeindex -s gglo.ist -o souce2e.gls source2e.glo");
     run("$prg_pdflatex source2e");
     run("$prg_makeindex -s gind.ist source2e.idx");
-    run("$prg_makeindex -s gglo.ist -o souce2e.glo source2e.gls");
+    run("$prg_makeindex -s gglo.ist -o souce2e.gls source2e.glo");
     run("$prg_pdflatex source2e");
     run("$prg_pdflatex source2e"); # hydestopt
     install_pdf('base', 'source2e');
