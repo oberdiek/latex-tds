@@ -536,17 +536,17 @@ END_CODE
 ### Generate documentation for amslatex
 if ($modules{'amslatex'}) {
     section('Documentation: amslatex');
-    
+
     sub makeindex ($) {
         my $doc = shift;
-        
+
         -f "$doc.idx" or return 1;
         my $cmd = $prg_makeindex;
         $cmd .= " -s gind.ist" unless $doc eq 'amsldoc';
         $cmd .= " $doc.idx";
         run($cmd);
     }
-    
+
     sub bibtex ($) {
         my $doc = shift;
 
