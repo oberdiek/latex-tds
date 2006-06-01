@@ -41,9 +41,11 @@
     bookmarksnumbered,
   }%
   \pdfstringdefDisableCommands{%
+    \def\BibTeX{BibTeX}%
     \let\pkg\@firstofone
     \let\cls\@firstofone
     \let\opt\@firstofone
+    \let\fld\@firstofone
     \let\ntt\relax
     \let\fn\@firstofone
     \let\env\@firstofone
