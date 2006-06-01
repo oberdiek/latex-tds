@@ -2,7 +2,7 @@
 \makeatletter
 
 %%% Paper size
-\@for\reserved@a:=article,report,book,amsdtx\do{%
+\@for\reserved@a:=article,report,book,amsdtx,amsart\do{%
   \PassOptionsToClass{a4paper}{\reserved@a}%
 }
 
@@ -30,6 +30,8 @@
   \the\toks@
   %
   %%% Add hyperref support
+  \PassOptionsToPackage{hyperref}{draft=false}%
+  \IfFileExists{\jobname.dtx}{\RequirePackage{hypdoc}}{}{}%
   \usepackage[pdfusetitle]{hyperref}%
   \hypersetup{
     draft=false,
@@ -80,6 +82,8 @@
 }{%
   \InputIfFileExists{\jobname.dtx}{%
     \typeout{* Document source: \jobname.dtx}%
+    \AtBeginDocument{\CodelineIndex}%
+    \AtEndDocument{\PrintIndex}%
   }{%
     \PackageError{ams.drv}{%
       Cannot find document source
