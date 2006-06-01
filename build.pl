@@ -62,7 +62,7 @@ my $error = "!!! Error:";
 my $usage = <<"END_OF_USAGE";
 Usage: build.pl [options]
 General options:
-  --(no)download      (check for newer files)
+  --(no)download      (check for newer files, disabled by default)
   --(no)postprocess   (pdf files are postprocessed, enabled by default)
 Module options:
   --all               (select all modules)
