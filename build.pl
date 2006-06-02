@@ -471,12 +471,13 @@ if ($modules{'base'}) {
         install_pdf('base', $guide);
         1;
     }
-    sub simple_dtx ($) {
+    sub simple_gen ($$) {
+        my $ext  = shift;
         my $base = shift;
-        my $dtx = "$base.dtx";
-        run("$prg_pdflatex $dtx");
-        run("$prg_pdflatex $dtx");
-        run("$prg_pdflatex $dtx");
+        my $file = "$base.$ext";
+        run("$prg_pdflatex $file");
+        run("$prg_pdflatex $file");
+        run("$prg_pdflatex $file");
         install_pdf('base', $base);
         1;
     }
@@ -517,37 +518,41 @@ if ($modules{'base'}) {
     run("$prg_pdflatex source2e");
     run("$prg_pdflatex source2e"); # hydestopt
     install_pdf('base', 'source2e');
-    map { complex_dtx $_ } (
-        'doc',
-        'docstrip',
-        'letter'
-    );
-    map { simple_dtx $_ } (
-        'alltt',
-        'classes',
-        'exscale',
-        'fixltx2e',
-        'graphpap',
-        'ifthen',
-        'inputenc',
-        'latex209',
-        'latexsym',
-        'ltxdoc',
-        'makeindx',
-        'newlfont',
-        'oldlfont',
-        'proc',
-        'slides',
-        'syntonly',
-        'utf8ienc'
-    );
-    map { book_err $_ } (
-        'tlc2',
-        'lb2',
-        'grphcomp',
-        'webcomp',
-        'webcompg'
-    );
+    map { complex_dtx $_ } qw[
+        doc
+        docstrip
+        letter
+    ];
+    map { simple_gen 'dtx', $_ } qw[
+        alltt
+        classes
+        exscale
+        fixltx2e
+        graphpap
+        ifthen
+        inputenc
+        latex209
+        latexsym
+        ltxdoc
+        makeindx
+        newlfont
+        oldlfont
+        proc
+        slides
+        syntonly
+        utf8ienc
+    ];
+    map { simple_gen 'fdd', $_ } qw[
+        cmfonts
+        slifonts
+    ];
+    map { book_err $_ } qw[
+        tlc2
+        lb2
+        grphcomp
+        webcomp
+        webcompg
+    ];
     run("$prg_sed -i -e '"
            . 's/\\\\documentclass{article}/'
            . '\\\\documentclass{article}\\n\\\\input{manual.cfg}/'
@@ -690,12 +695,12 @@ if ($modules{'cyrillic'}) {
     section('Documentation: cyrillic');
 
     chdir "$dir_build/cyrillic";
-    my @list = glob("*.dtx");
-    map { s/\.dtx$//; } @list;
+    my @list = (glob("*.dtx"), glob("*.fdd"));
     foreach my $entry (@list) {
-        run("$prg_pdflatex $entry.dtx");
-        run("$prg_pdflatex $entry.dtx");
-        run("$prg_pdflatex $entry.dtx"); # hydestopt
+        run("$prg_pdflatex $entry");
+        run("$prg_pdflatex $entry");
+        run("$prg_pdflatex $entry"); # hydestopt
+        $entry =~ s/\.(dtx|fdd)$//;
         install_pdf('cyrillic', $entry);
     }
     chdir $cwd;
