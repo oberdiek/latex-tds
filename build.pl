@@ -51,6 +51,7 @@ my $dir_incoming_ams = "$dir_incoming/ams";
 my $dir_build = 'build';
 my $dir_lib = 'lib';
 my $dir_tex = 'tex';
+my $dir_patch = 'patch';
 my $dir_distrib = 'distrib';
 chomp(my $cwd = `pwd`);
 
@@ -234,6 +235,17 @@ section('Patches');
         run("$prg_checksum psfonts.dtx");
         chdir $cwd;
     }
+    
+    if ($modules{'babel'}) {
+        map { patch("babel/$_"); } qw[
+            greek.ins
+            bbcompat.dtx
+            athnum.dtx
+            albanian.dtx
+            finnish.dtx
+            frenchb.dtx
+        ];
+    }
 }
 
 ### Install TDS/source
@@ -350,13 +362,17 @@ section('TDS cleanup');
     }
 
     if ($modules{'babel'}) {
+        my $tds_dir  = "$dir_build/babel/texmf";
+        my $from_dir = "$tds_dir/tex/generic/babel";
+        my $dest_dir;
+  
         ### Correction for *.drv files
-        my $basedir = "$dir_build/babel";
-        run("$prg_mv $basedir/texmf/tex/generic/babel/*.drv $basedir");
+        run("$prg_mv $from_dir/*.drv $dir_build/babel");
+        
         ### Correction for *.ist files
-        my $dir = "$basedir/texmf/makeindex/babel";
-        ensure_directory($dir);
-        run("$prg_mv $basedir/texmf/tex/generic/babel/*.ist $dir");
+        $dest_dir = "$tds_dir/makeindex/babel";
+        ensure_directory($dest_dir);
+        run("$prg_mv $from_dir/*.ist $dest_dir");
     }
 }
 
@@ -809,6 +825,7 @@ if ($modules{'psnfss'}) {
     section('Documentation: psnfss');
 
     chdir "$dir_build/psnfss";
+    
     run("$prg_pdflatex psfonts.dtx");
     run("$prg_pdflatex psfonts.dtx");
     install_pdf('psnfss', 'psfonts');
@@ -818,6 +835,51 @@ if ($modules{'psnfss'}) {
     run("$prg_pdflatex psnfss2e.drv");
     install_pdf('psnfss', 'psnfss2e');
     
+    chdir $cwd;
+}
+
+### Generate documentation for babel
+if ($modules{'babel'}) {
+    section('Documentation: babel');
+    
+    sub install_babel_pdf ($) {
+        install_gen_pdf('generic', 'babel', shift);
+    }
+    sub simple_doc ($) {
+        my $file = shift;
+        
+        run("$prg_pdflatex $file");
+        run("$prg_pdflatex $file");
+        $file =~ s/\.\w{3}$//;
+        install_babel_pdf($file);
+    }
+
+    chdir "$dir_build/babel";
+    
+    my $greek_fdd = 'greek-fdd.drv';
+    open(OUT, ">$greek_fdd") or die "$error Cannot open `$greek_fdd'!\n";
+    print OUT "\\input{greek.fdd}\n";
+    close(OUT);
+    
+    map { simple_doc($_); }
+        $greek_fdd, qw[
+        athnum.dtx
+        grmath.dtx
+        grsymb.dtx
+        bbidxglo.dtx
+        bbcompat.dtx
+    ];
+    
+    run("$prg_pdflatex babel.tex");
+    run_makeindex('babel.idx', 'bbind.ist');
+    run_makeindex('babel.glo', 'bbglo.ist', 'babel.gls');
+    run("$prg_pdflatex babel.tex");
+    run_makeindex('babel.idx', 'bbind.ist');
+    run_makeindex('babel.glo', 'bbglo.ist', 'babel.gls');
+    run("$prg_pdflatex babel.tex");
+    run("$prg_pdflatex babel.tex");
+    install_babel_pdf('babel');
+
     chdir $cwd;
 }
 
@@ -905,11 +967,12 @@ sub install ($@) {
     1;
 }
 
-sub install_pdf ($$) {
+sub install_gen_pdf ($$$) {
+    my $fmt         = shift;
     my $pkg         = shift;
     my $file_base   = shift;
     my $file_source = "$file_base.pdf";
-    my $dir_dest    = "texmf/doc/latex/$pkg";
+    my $dir_dest    = "texmf/doc/$fmt/$pkg";
     my $file_dest   = "$dir_dest/$file_base.pdf";
 
     ensure_directory($dir_dest);
@@ -924,6 +987,12 @@ sub install_pdf ($$) {
         run("$prg_cp $file_source $file_dest");
     }
     1;
+}
+sub install_pdf ($$) {
+    my $pkg       = shift;
+    my $file_base = shift;
+    
+    install_gen_pdf('latex', $pkg, $file_base);
 }
 
 sub printsize ($$) {
@@ -1006,6 +1075,13 @@ sub cvs ($) {
     s/^\$\w+:?\s*(\S*).*\$$/$1/;
     $_ = "v$_" if /\./;
     $_;
+}
+
+sub patch ($) {
+    my $file  = shift;
+    my $patch = $file;
+    $patch =~ s/^.*\/([^\/]+)$/$1/;
+    run("$prg_patch $dir_build/$file $dir_patch/$patch.diff");
 }
 
 __END__
