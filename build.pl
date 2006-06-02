@@ -25,9 +25,8 @@ chomp(my $license = <<"END_LICENSE");
 %
 % The Current Maintainer of this work is Heiko Oberdiek.
 %
-% The list of all files belonging to the project `$prj' is
-% given in the file `manifest.txt'. See also `readme.txt' for
-% additional information.
+% See `readme.txt' for a list of all files belonging to the
+% project `$prj' and additional information.
 %
 END_LICENSE
 
