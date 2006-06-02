@@ -66,6 +66,10 @@
   \expandafter\endgroup
   \the\toks@
   %
+  % page layout
+  \addtolength{\topmargin}{-10mm}%
+  \addtolength{\textheight}{20mm}%
+  %
   %%% Add hyperref support
   \PassOptionsToPackage{hyperref}{draft=false}%
   \IfFileExists{\jobname.dtx}{%
