@@ -82,10 +82,11 @@ my $prg_unzip     = 'unzip';
 my $prg_wget      = 'wget';
 my $prg_zip       = 'zip -9r';
 
-$ENV{'TEXINPUTS'} = "$cwd/tex:.:texmf/tex//:";
-$ENV{'BSTINPUTS'} = '.:texmf/bibtex//:';  # amslatex
-$ENV{'TFMFONTS'}  = 'texmf/fonts/tfm//:'; # psnfss
-$ENV{'VFFONTS'}   = 'texmf/fonts/vf//:';  # psnfss
+$ENV{'TEXINPUTS'}  = "$cwd/tex:.:texmf/tex//:";
+$ENV{'BSTINPUTS'}  = '.:texmf/bibtex//:';    # amslatex
+$ENV{'TFMFONTS'}   = 'texmf/fonts/tfm//:';   # psnfss
+$ENV{'VFFONTS'}    = 'texmf/fonts/vf//:';    # psnfss
+$ENV{'INDEXSTYLE'} = '.:texmf/makeindex//:'; # babel
 
 my $error = "!!! Error:";
 
