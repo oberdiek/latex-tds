@@ -21,6 +21,7 @@
 % See `readme.txt' for a list of all files belonging to the
 % project `latex-tds' and additional information.
 %
+\makeatletter
 
 % There are a lot of unnumbered sections `References'
 % among numbered sections. That looks too poor.
@@ -29,7 +30,6 @@
 % The first environment `thebibliography' belongs to babel.dtx,
 % but the following are part of the other language definition files.
 % Thus we must move the \section to the \subsection level here.
-\makeatletter
 \newif\if@FirstBib
 \@FirstBibtrue
 \AtBeginDocument{%
@@ -43,6 +43,27 @@
     \def\section{\subsection}%
   \fi
   \Saved@TheBibliography
+}
+
+% Add bookmark for `Change History'
+\AtBeginDocument{%
+  \let\Saved@TheGlossary\theglossary
+  \let\theglossary\New@TheGlossary
+}
+\def\New@TheGlossary{%
+  \clearpage
+  \pdfbookmark[1]{Change History}{gloss}%
+  \Saved@TheGlossary
+}
+
+% Index not numbered
+\AtBeginDocument{%
+  \let\Saved@TheIndex\theindex
+  \let\theindex\New@TheIndex
+}
+\def\New@TheIndex{%
+  \csname HD@numberedfalse\endcsname
+  \Saved@TheIndex
 }
 \makeatother
 
