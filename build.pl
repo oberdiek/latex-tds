@@ -867,7 +867,7 @@ if ($modules{'babel'}) {
         $file =~ s/\.\w{3}$//;
         install_babel_pdf($file);
     }
-    sub generate_doc ($) {
+    sub generate_babel_doc ($) {
         my $doc  = shift;
         my $drv  = "$cwd/$dir_tex/ams.drv";
 
@@ -896,7 +896,7 @@ if ($modules{'babel'}) {
         greek-usage.tex
     ];
     
-    map { generate_doc($_); } qw[
+    map { generate_babel_doc($_); } qw[
         tb1202
         tb1401
         tb1604
@@ -922,6 +922,7 @@ if ($modules{'src'}) {
     my $dest_dir = "$dir_build/src/texmf/source/latex/latex-tds";
     install $dest_dir, qw[
         build.pl
+        readme.txt
     ];
     install "$dest_dir/tex", glob("$dir_tex/*.*");
 }
