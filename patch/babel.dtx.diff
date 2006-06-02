@@ -1,0 +1,23 @@
+*** babel.dtx.org	2005-11-23 22:03:00.000000000 +0100
+--- babel.dtx	2006-06-02 19:12:18.000000000 +0200
+***************
+*** 1,5 ****
+--- 1,8 ----
+  % \iffalse meta-comment
+  %
++ % Patched by Heiko Oberdiek for project latex-tds:
++ % * 2006/06/02: \DocInput{greek.fdd} added.
++ %
+  % Copyright 1989-2005 Johannes L. Braams and any individual authors
+  % listed elsewhere in this file.  All rights reserved.
+  % 
+***************
+*** 5726,5731 ****
+--- 5729,5735 ----
+  \langdeffile{scottish.dtx}
+  %
+  \langdeffile{greek.dtx}
++ \DocInput{greek.fdd}
+  %
+  \langdeffile{frenchb.dtx}
+  \langdeffile{italian.dtx}
