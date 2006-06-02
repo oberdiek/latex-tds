@@ -1,0 +1,30 @@
+*** bbcompat.dtx.org	2005-11-23 22:23:00.000000000 +0100
+--- bbcompat.dtx	2006-06-02 18:57:27.000000000 +0200
+***************
+*** 1,5 ****
+--- 1,8 ----
+  % \iffalse meta-comment
+  %
++ % Patched by Heiko Oberdiek for project latex-tds:
++ % * 2006/06/02: Documentation bug fix: \cd -> \cs (typo)
++ %
+  % Copyright 1989-2005 Johannes L. Braams and any individual authors
+  % listed elsewhere in this file.  All rights reserved.
+  % 
+***************
+*** 59,65 ****
+  % \changes{bbcompat-1.2}{1996/11/02}{Added the check for \cs{LdfInit}}
+  % \changes{bbcompat-1.2d}{1999/04/12}{When these files are read by a
+  %    non-babel plain format the @ has still category code `other' so
+! %    can't use \cd{@undefined}} 
+  %    \begin{macrocode}
+  \ifx\LdfInit\undefined
+    \def\LdfInit{%
+--- 62,68 ----
+  % \changes{bbcompat-1.2}{1996/11/02}{Added the check for \cs{LdfInit}}
+  % \changes{bbcompat-1.2d}{1999/04/12}{When these files are read by a
+  %    non-babel plain format the @ has still category code `other' so
+! %    can't use \cs{@undefined}} 
+  %    \begin{macrocode}
+  \ifx\LdfInit\undefined
+    \def\LdfInit{%

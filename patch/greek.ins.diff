@@ -1,0 +1,20 @@
+*** greek.ins.org	2005-04-01 00:39:00.000000000 +0200
+--- greek.ins	2006-06-02 18:31:55.000000000 +0200
+***************
+*** 1,3 ****
+--- 1,5 ----
++ %% Patched by Heiko Oberdiek for project latex-tds:
++ %% * 2006/06/02: generation of grsymb.sty added.
+  %%
+  %% This file will generate fast loadable files and documentation
+  %% driver files from the doc files in this package when run through
+***************
+*** 129,134 ****
+--- 131,137 ----
+  \generate{\file{greek.ldf}{\from{greek.dtx}{code}}
+            \file{athnum.sty}{\from{athnum.dtx}{package}}
+            \file{grmath.sty}{\from{grmath.dtx}{package}}
++           \file{grsymb.sty}{\from{grsymb.dtx}{package}}
+            }
+  \usepreamble\fdpreamble
+  \generate{\file{lgrenc.def}{\from{greek.fdd}{LGRenc}}
