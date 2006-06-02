@@ -249,12 +249,10 @@ section('Install source');
         source2e.tex
         ltx3info.tex
         latexbug.el
-        manifest.txt
     ];
     install_source 'tools', qw[
         *.dtx
         *.ins
-        manifest.txt
     ];
     install_source('graphics',
         '*.dtx',
@@ -365,6 +363,7 @@ section('Install tex doc');
             bugs.txt
             changes.txt
             l*.txt
+            manifest.txt
             patches.txt
             t*.txt
             sample2e.tex
@@ -387,6 +386,7 @@ section('Install tex doc');
         chdir "$dir_build/tools";
         install 'texmf/doc/latex/tools', qw[
             changes.txt
+            manifest.txt
             readme.txt
         ];
         chdir $cwd;
