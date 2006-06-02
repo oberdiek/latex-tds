@@ -16,7 +16,7 @@ my @required_list = (
     'graphics',
     'tools'
 );
-my @pkg_list = ('base', @required_list, $prj);
+my @pkg_list = ('base', @required_list, $prj, 'src');
 
 my $dir_incoming = 'incoming';
 my $dir_incoming_ctan = "$dir_incoming/ctan";
@@ -61,6 +61,31 @@ $ENV{'VFFONTS'}   = 'texmf/fonts/vf//:';  # psnfss
 
 my $error = "!!! Error:";
 
+my $license_tex = <<'END_LICENSE';
+%
+% Copyright 2006 Heiko Oberdiek
+%
+% This file is part of project `latex-tds'.
+%
+% It may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License, either version 1.3
+% of this license or (at your option) any later version.
+% The latest version of this license is in
+%   http://www.latex-project.org/lppl.txt
+% and version 1.3c or later is part of all distributions of LaTeX
+% version 2005/12/01 or later.
+%
+% This work has the LPPL maintenance status `maintained'.
+% 
+% The Current Maintainer of this work is Heiko Oberdiek.
+%
+% The list of all files belonging to the project `latex-tds' is
+% given in the file `manifest.txt'. See also `readme.txt' for
+% additional information.
+%
+END_LICENSE
+chomp $license_tex;
+
 sub install ($@);
 
 ### Option handling
@@ -73,9 +98,7 @@ General options:
 Module options:
   --all               (select all modules)
 END_OF_USAGE
-for (@pkg_list) {
-    $usage .= "  --(no)$_\n";
-}
+map { $usage .= "  --(no)$_\n"; } @pkg_list;
 
 my $opt_download    = 0;
 my $opt_postprocess = 1;
@@ -186,9 +209,7 @@ section('Unpacking');
 
     ensure_directory($dir_build);
     unpack_ctan('base');
-    foreach my $pkg (@required_list) {
-        unpack_ctan($pkg);
-    }
+    map { unpack_ctan($_); } @required_list;
     unpack_ams('amslatex');
     unpack_ams('amsrefs');
     unpack_psnfss('lw35nfss');
@@ -572,9 +593,14 @@ END_CODE
 #        install_pdf('base', $ltnews);
 #    }
     my $ltnews = 'ltnews';
-    run("$prg_pdflatex $ltnews");
-    run("$prg_pdflatex $ltnews");
-    run("$prg_pdflatex $ltnews");
+    my $lastissue = 0;
+    map { $lastissue = $1 if /ltnews(\d+)\.tex/ and $lastissue < $1; }
+        glob('ltnews*.tex');
+    my $cmd_ltnews =
+            "$prg_pdflatex '\\def\\lastissue{$lastissue}\\input{$ltnews}'";
+    run($cmd_ltnews);
+    run($cmd_ltnews);
+    run($cmd_ltnews);
     install_pdf('base', $ltnews);
     chdir $cwd;
 }
@@ -601,18 +627,18 @@ if ($modules{'tools'}) {
     # Generate overview
     my $infile = 'manifest.txt';
     my $texfile = "$cwd/$dir_tex/tools.tex";
+    my @time = localtime(time);
+    my ($mday, $month, $year) = splice @time, 3, 3;
+    my $release_info = sprintf "%04d/%02d/%02d Tools overview (HO)",
+        $year + 1900, $month + 1, $mday;
     open(OUT, ">$texfile") or die "$error Cannot open `$texfile'!\n";
-    print OUT <<'END_HEADER';
-%% tools.tex
-%%
-%% This file belongs to the project `latex-tds', see
-%%   `TDS:source/latex/latex-tds/readme.txt'.
-%% There it is automatically generated using the data found in
-%%   `latex/tools/manifest.txt'.
-%%
-\NeedsTeXFormat{LaTeX2e}
-\documentclass{tools-overview}
-\begin{document}
+    print OUT <<"END_HEADER";
+\\NeedsTeXFormat{LaTeX2e}
+\\ProvidesFile{tools.tex}%
+  [$release_info]
+$license_tex
+\\documentclass{tools-overview}
+\\begin{document}
 END_HEADER
     my $entry;
     my %db;
@@ -780,6 +806,17 @@ if ($modules{'psnfss'}) {
     install_pdf('psnfss', 'psnfss2e');
     
     chdir $cwd;
+}
+
+### Module src
+if ($modules{'src'}) {
+    section('Module src');
+    
+    my $dest_dir = "$dir_build/src/texmf/source/latex/latex-tds";
+    install $dest_dir, qw[
+        build.pl
+    ];
+    install "$dest_dir/tex", glob("$dir_tex/*.*");
 }
 
 ### Module latex-tds
