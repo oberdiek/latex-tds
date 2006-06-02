@@ -61,6 +61,8 @@ $ENV{'VFFONTS'}   = 'texmf/fonts/vf//:';  # psnfss
 
 my $error = "!!! Error:";
 
+sub install ($@);
+
 ### Option handling
 
 my $usage = <<"END_OF_USAGE";
@@ -213,23 +215,26 @@ section('Install source');
         my @list = @_;
         $modules{$pkg} or return 1;
         chdir "$dir_build/$pkg";
-        install("texmf/source/latex/$pkg", @list);
+        install "texmf/source/latex/$pkg", @list;
         chdir $cwd;
     }
-    install_source('base',
-        '*.dtx',
-        '*.fdd',
-        '*.ins',
-        '*guide.tex',
-        'ltnews*.tex',
-        'source2e.tex',
-        'ltx3info.tex',
-        'latexbug.el'
-    );
-    install_source('tools',
-        '*.dtx',
-        '*.ins',
-    );
+
+    install_source 'base', qw[
+        *.dtx
+        *.fdd
+        *.ins
+        *guide.tex
+        ltnews*.tex
+        source2e.tex
+        ltx3info.tex
+        latexbug.el
+        manifest.txt
+    ];
+    install_source 'tools', qw[
+        *.dtx
+        *.ins
+        manifest.txt
+    ];
     install_source('graphics',
         '*.dtx',
         '*.ins',
@@ -333,29 +338,36 @@ section('Install tex doc');
 {
     if ($modules{'base'}) {
         chdir "$dir_build/base";
-        install('texmf/doc/latex/base',
-            '*.txt',
-            'sample2e.tex',
-            'small2e.tex'
-        );
-        install('texmf/tex/latex/base',
-            '*.cls',
-            'ltpatch.ltx',
-            'idx.tex',
-            'lablst.tex',
-            'latexbug.tex',
-            'lppl.tex',
-            'testpage.tex',
-            'ltxcheck.tex'
-        );
+        install 'texmf/doc/latex/base', qw[
+            00readme.txt
+            autoload.txt
+            bugs.txt
+            changes.txt
+            l*.txt
+            patches.txt
+            t*.txt
+            sample2e.tex
+            small2e.tex
+        ];
+        install 'texmf/tex/latex/base', qw[
+            *.cls
+            ltpatch.ltx
+            idx.tex
+            lablst.tex
+            latexbug.tex
+            lppl.tex
+            testpage.tex
+            ltxcheck.tex
+        ];
         chdir $cwd;
     }
 
     if ($modules{'tools'}) {
         chdir "$dir_build/tools";
-        install('texmf/doc/latex/tools',
-            '*.txt'
-        );
+        install 'texmf/doc/latex/tools', qw[
+            changes.txt
+            readme.txt
+        ];
         chdir $cwd;
     }
 
@@ -585,6 +597,65 @@ if ($modules{'tools'}) {
         run("$prg_pdflatex $entry.dtx"); # hydestopt
         install_pdf('tools', $entry);
     }
+    
+    # Generate overview
+    my $infile = 'manifest.txt';
+    my $texfile = "$cwd/$dir_tex/tools.tex";
+    open(OUT, ">$texfile") or die "$error Cannot open `$texfile'!\n";
+    print OUT <<'END_HEADER';
+%% tools.tex
+%%
+%% This file belongs to the project `latex-tds', see
+%%   `TDS:source/latex/latex-tds/readme.txt'.
+%% There it is automatically generated using the data found in
+%%   `latex/tools/manifest.txt'.
+%%
+\NeedsTeXFormat{LaTeX2e}
+\documentclass{tools-overview}
+\begin{document}
+END_HEADER
+    my $entry;
+    my %db;
+    open(IN, $infile) or die "$error Cannot open `$infile'!\n";
+    while (<IN>) {
+        next if /^%/;
+        next if /^\s*$/;
+        if (/^(\S+)\.dtx/) {
+            $entry = $1;
+            $db{$entry} = '';
+            next;
+        }
+        s/\\(\w+)/\\cs{\1}/g;
+        s/(LaTeX|TeX)/\\\1\{\}/g;
+        s/`([^']+)'/\\emph{\1}/g;
+        s/Indent The/Indent the/; # typo
+        s/Requies/Requires/; # typo
+        $db{$entry} .= $_;
+    }
+    close(IN);
+    $db{'layout'} = <<'END_LAYOUT';
+    Produces an overview of the layout of the current document.
+END_LAYOUT
+    $db{'trace'} = <<'END_TRACE';
+    The package helps to suppress and to control the amount of tracing
+    output (\cs{tracingall}) by taming calc and making NFSS less noisy.
+END_TRACE
+    for my $entry (sort keys %db) {
+        my $text = $db{$entry};
+        $text =~ s/^\s*/  /mg;
+        chomp $text;
+        print OUT <<"END_ENTRY";
+\\entry{$entry}{%
+$text
+}%
+END_ENTRY
+    }
+    print OUT <<'END_TRAILER';
+\end{document}
+END_TRAILER
+    close(OUT);
+    run("$prg_pdflatex tools.tex");
+    install_pdf('tools', 'tools');
     chdir $cwd;
 }
 
