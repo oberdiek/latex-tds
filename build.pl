@@ -8,7 +8,7 @@ my $version = cvs('$Revision$');
 my $date    = cvs('$Date$');
 my $author  = 'Heiko Oberdiek';
 my $copyright = "Copyright 2006 $author";
-my $license = <<"END_LICENSE";
+chomp(my $license = <<"END_LICENSE");
 % $copyright
 %
 % This file is part of project `$prj'.
@@ -30,7 +30,6 @@ my $license = <<"END_LICENSE";
 % additional information.
 %
 END_LICENSE
-chomp $license;
 
 my $time_start = time;
 
@@ -94,13 +93,8 @@ sub install ($@);
 
 ### Print title
 {
-    my $prj_underline = "=" x length($prj);
-    print <<"END_TITLE";
-Building $prj
-=========$prj_underline
-* $copyright
-* Version: $date $version
-END_TITLE
+    my $line = "Building $prj, $date $version, $copyright";
+    print "$line\n", "=" x length($line), "\n";
 }
 
 ### Option handling
@@ -1010,7 +1004,8 @@ sub info ($) {
 
 sub cvs ($) {
     $_ = shift;
-    s/^\$\w+:?\s*(|.*\S)\s*\$/$1/;
+    s/^\$\w+:?\s*(\S*).*\$$/$1/;
+    $_ = "v$_" if /\./;
     $_;
 }
 
