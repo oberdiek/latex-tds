@@ -1,0 +1,30 @@
+*** frenchb.dtx.org	2005-04-01 00:39:00.000000000 +0200
+--- frenchb.dtx	2006-06-02 19:59:31.000000000 +0200
+***************
+*** 1,5 ****
+--- 1,8 ----
+  % \iffalse meta-comment
+  %
++ % Patched by Heiko Oberdiek for project latex-tds:
++ % * 2006/06/02: Documentation bug: "!" cannot be used inside \changes.
++ %
+  % Copyright 1989-2005 Johannes L. Braams and any individual authors
+  % listed elsewhere in this file.  All rights reserved.
+  % 
+***************
+*** 679,685 ****
+  %
+  % \changes{frenchb-1.5g}{2001/09/09}{Let \cs{LdfInit} check for
+  %     \cs{datefrench} instead of \cs{NoAutoSpaceBeforeFDP},
+! %     as the later is also defined by russianb.ldf!}
+  %
+  %    \begin{macrocode}
+  %<*code>
+--- 682,688 ----
+  %
+  % \changes{frenchb-1.5g}{2001/09/09}{Let \cs{LdfInit} check for
+  %     \cs{datefrench} instead of \cs{NoAutoSpaceBeforeFDP},
+! %     as the later is also defined by russianb.ldf}
+  %
+  %    \begin{macrocode}
+  %<*code>
