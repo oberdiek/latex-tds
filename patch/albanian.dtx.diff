@@ -1,0 +1,32 @@
+*** albanian.dtx.org	2005-11-23 22:23:00.000000000 +0100
+--- albanian.dtx	2006-06-02 19:20:50.000000000 +0200
+***************
+*** 1,5 ****
+--- 1,9 ----
+  % \iffalse meta-comment
+  %
++ % Patched by Heiko Oberdiek for project latex-tds:
++ % * 2006/06/02: Documentation bug: incomplete first paragraph
++ %               with open \footnote macro.
++ %
+  % Copyright 1989-2005 Johannes L. Braams and any individual authors
+  % listed elsewhere in this file.  All rights reserved.
+  % 
+***************
+*** 69,75 ****
+  %
+  %    The file \file{\filename}\footnote{The file described in this
+  %    section has version number \fileversion\ and was last revised on
+! %    \filedate.  
+  %
+  %    Albanian is written in a latin script, but it has 36 leters, 
+  %    9 which are diletters (dh, gj, ll, nj, rr, sh, th, xh, zh), 
+--- 73,80 ----
+  %
+  %    The file \file{\filename}\footnote{The file described in this
+  %    section has version number \fileversion\ and was last revised on
+! %    \filedate.} defines all the language definition macros for the
+! %    Albanian language.
+  %
+  %    Albanian is written in a latin script, but it has 36 leters, 
+  %    9 which are diletters (dh, gj, ll, nj, rr, sh, th, xh, zh), 
