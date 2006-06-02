@@ -2,6 +2,7 @@
 \ProvidesClass{tools-overview}
   [2006/06/02 Overview for packages of latex/tools]
 
+\nofiles
 \LoadClass[a4paper,12pt]{article}
 
 % page layout
