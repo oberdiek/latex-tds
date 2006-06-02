@@ -274,27 +274,46 @@ section('Docstrip');
     docstrip('tools', 'tools');
 }
 
-section('TDS corrections');
+section('TDS cleanup');
 {
     if ($modules{'amslatex'}) {
-        my $dir_tds = "$dir_build/amslatex/texmf";
-        my $dir;
-        $dir = "$dir_tds/bibtex";
-        rmdir "$dir/bib/ams";
-        rmdir "$dir/bib";
-        $dir = "$dir_tds/source/latex/amsrefs";
-        unlink "$dir/amsrefs.pdf";
-        unlink "$dir/amsrefs.dvi";
-        unlink "$dir/mathscinet.pdf";
-        unlink "$dir/textcmds.pdf";
-        unlink "$dir/textcmds.dvi";
-        $dir = "$dir_tds/doc/latex/amscls";
-        unlink "$dir/amsrefs.dvi";
-        unlink "$dir/textcmds.dvi";
+        sub cleanup_tds ($@) {
+            my $dir_tds = "$dir_build/amslatex/texmf";
+            my $sub_tree = shift;
+            
+            my @list = map { glob("$dir_tds/$sub_tree/$_"); } @_;
+            unlink grep { -f $_; } @list;
+            map { rmdir; } grep { -d $_; } @list;
+        }
+
+        cleanup_tds 'bibtex', qw[
+            bib/ams
+            bib
+        ];
+        cleanup_tds 'source/latex/amscls', qw[
+            *.bst
+            *.template
+            diffs-c.txt
+        ];
+        cleanup_tds 'source/latex/amsmath', qw[
+            diffs-m.txt
+            amstex.sty
+        ];
+        cleanup_tds 'source/latex/amsrefs', qw[
+            *.dvi
+            *.pdf
+            amsrefs.faq
+            cite-x*.tex
+            jr.bib
+            gktest.ltb
+        ];
+        cleanup_tds 'doc/latex/amscls', qw[
+            amsrefs.dvi
+            textcmds.dvi
+        ];
+        # CTAN:macros/latex/required/amslatex/other/*
         run("$prg_cp $dir_build/amslatex/other/amsbooka.sty"
-            . " $dir_tds/tex/latex/amscls/amsbooka.sty");
-        run("$prg_cp $dir_build/amslatex/other/amsbooka.sty"
-            . " $dir_tds/source/latex/amscls/amsbooka.sty");
+            . " $dir_build/amslatex/texmf/tex/latex/amscls/amsbooka.sty");
     }
 
     if ($modules{'babel'}) {
