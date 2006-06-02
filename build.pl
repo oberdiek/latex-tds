@@ -2,6 +2,7 @@
 use strict;
 $^W=1;
 
+my $time_start = time;
 my $prj = 'latex-tds';
 
 my $url_ctan = 'ftp://dante.ctan.org/tex-archive';
@@ -763,6 +764,15 @@ section('Result');
             print "!!! Warning: Missing distribution for `$pkg'!\n";
         }
     }
+    
+    # display time
+    my $time_diff = time - $time_start;
+    my $time_str = sprintf "%d:%02d:%02d\n",
+                           $time_diff / 3600,
+                           ($time_diff % 3600) / 60,
+                           ($time_diff % 3600) % 60;
+    $time_str =~ s/^0:0?//;
+    print "* Elapsed time: $time_str\n";    
 }
 
 sub install ($@) {
