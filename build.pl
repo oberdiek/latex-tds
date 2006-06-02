@@ -2,8 +2,37 @@
 use strict;
 $^W=1;
 
+my $prj     = 'latex-tds';
+my $file    = 'build.pl';
+my $version = cvs('$Revision$');
+my $date    = cvs('$Date$');
+my $author  = 'Heiko Oberdiek';
+my $copyright = "Copyright 2006 $author";
+my $license = <<"END_LICENSE";
+% $copyright
+%
+% This file is part of project `$prj'.
+%
+% It may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License, either version 1.3
+% of this license or (at your option) any later version.
+% The latest version of this license is in
+%  http://www.latex-project.org/lppl.txt
+% and version 1.3c or later is part of all distributions of LaTeX
+% version 2005/12/01 or later.
+%
+% This work has the LPPL maintenance status `maintained'.
+%
+% The Current Maintainer of this work is Heiko Oberdiek.
+%
+% The list of all files belonging to the project `$prj' is
+% given in the file `manifest.txt'. See also `readme.txt' for
+% additional information.
+%
+END_LICENSE
+chomp $license;
+
 my $time_start = time;
-my $prj = 'latex-tds';
 
 my $url_ctan = 'ftp://dante.ctan.org/tex-archive';
 my $url_ams = 'ftp://ftp.ams.org/pub/tex';
@@ -61,32 +90,18 @@ $ENV{'VFFONTS'}   = 'texmf/fonts/vf//:';  # psnfss
 
 my $error = "!!! Error:";
 
-my $license_tex = <<'END_LICENSE';
-%
-% Copyright 2006 Heiko Oberdiek
-%
-% This file is part of project `latex-tds'.
-%
-% It may be distributed and/or modified under the
-% conditions of the LaTeX Project Public License, either version 1.3
-% of this license or (at your option) any later version.
-% The latest version of this license is in
-%   http://www.latex-project.org/lppl.txt
-% and version 1.3c or later is part of all distributions of LaTeX
-% version 2005/12/01 or later.
-%
-% This work has the LPPL maintenance status `maintained'.
-% 
-% The Current Maintainer of this work is Heiko Oberdiek.
-%
-% The list of all files belonging to the project `latex-tds' is
-% given in the file `manifest.txt'. See also `readme.txt' for
-% additional information.
-%
-END_LICENSE
-chomp $license_tex;
-
 sub install ($@);
+
+### Print title
+{
+    my $prj_underline = "=" x length($prj);
+    print <<"END_TITLE";
+Building $prj
+=========$prj_underline
+* $copyright
+* Version: $date $version
+END_TITLE
+}
 
 ### Option handling
 
@@ -641,7 +656,7 @@ if ($modules{'tools'}) {
 \\NeedsTeXFormat{LaTeX2e}
 \\ProvidesFile{tools.tex}%
   [$release_info]
-$license_tex
+$license
 \\documentclass{tools-overview}
 \\begin{document}
 END_HEADER
@@ -991,6 +1006,12 @@ sub info ($) {
     my $msg = shift;
     print "* $msg\n";
     1;
+}
+
+sub cvs ($) {
+    $_ = shift;
+    s/^\$\w+:?\s*(|.*\S)\s*\$/$1/;
+    $_;
 }
 
 __END__
