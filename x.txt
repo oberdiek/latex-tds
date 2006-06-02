@@ -3,6 +3,7 @@ CTAN:fonts/tipa
 CTAN:fonts/wsuipa
 CTAN:fonts/fc
 CTAN:fonts/utopia (psnfss/psnfss2e.tex)
+CTAN:fonts/greek/cbfonts (babel/usage.tex)
 
 2006/05/27
 * Update because the CTAN files have changed
@@ -13,6 +14,8 @@ CTAN:fonts/utopia (psnfss/psnfss2e.tex)
 * amslatex added.
 
 latex-tds-src.zip
+
+babel: some files are outsourced in bghyphen project
 
 General design principles:
 * Remove redundant files. A file should not be present

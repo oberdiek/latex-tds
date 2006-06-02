@@ -252,13 +252,19 @@ section('Patches');
 ### Install TDS/source
 section('Install source');
 {
-    sub install_source ($@) {
+    sub install_gen_source ($$@) {
+        my $fmt  = shift;
         my $pkg  = shift;
         my @list = @_;
         $modules{$pkg} or return 1;
         chdir "$dir_build/$pkg";
-        install "texmf/source/latex/$pkg", @list;
+        install "texmf/source/$fmt/$pkg", @list;
         chdir $cwd;
+    }
+    sub install_source ($@) {
+        my $pkg = shift;
+        my @list = @_;
+        install_gen_source('latex', $pkg, @list);
     }
 
     install_source 'base', qw[
@@ -290,13 +296,15 @@ section('Install source');
         '*.dtx',
         '*.ins'
     );
-    install_source('babel',
-        '*.ins',
-        '*.dtx',
-        '*.fdd',
-        #?# '*.tex',
-        '*.dat',
-    );
+    install_gen_source('generic', 'babel', qw[
+        *.ins
+        *.dtx
+        *.fdd
+        *.dat
+        usage.tex
+        tb*.tex
+    ]);
+    # *.tex
 }
 
 ### Docstrip
@@ -311,13 +319,13 @@ section('Docstrip');
         chdir $cwd;
         1;
     }
-    docstrip('base', 'unpack');
-    docstrip('babel', 'base');
-    docstrip('psnfss', 'psfonts');
+    docstrip('base',     'unpack');
+    docstrip('psnfss',   'psfonts');
     docstrip('cyrillic', 'cyrlatex');
     docstrip('graphics', 'graphics');
     docstrip('graphics', 'graphics-drivers');
-    docstrip('tools', 'tools');
+    docstrip('tools',    'tools');
+    docstrip('babel',    'babel');
 }
 
 section('TDS cleanup');
@@ -455,14 +463,14 @@ section('Install tex doc');
     
     if ($modules{'babel'}) {
         chdir "$dir_build/babel";
-        install('texmf/doc/generic/babel',
-            '*.txt',
-            '*.heb',
-            '*.bbl',
-            '*.dat',
-            '*.skeleton',
-            'install.OzTeX*'
-        );
+        install('texmf/doc/generic/babel', qw[
+            *.txt
+            *.heb
+            *.bbl
+            *.dat
+            *.skeleton
+            install.OzTeX*
+        ]);
         chdir $cwd;
     }
 
@@ -854,6 +862,17 @@ if ($modules{'babel'}) {
         $file =~ s/\.\w{3}$//;
         install_babel_pdf($file);
     }
+    sub generate_doc ($) {
+        my $doc  = shift;
+        my $drv  = "$cwd/$dir_tex/ams.drv";
+
+        symlink $drv, "$doc.drv";
+        run("$prg_pdflatex $doc.drv");
+        run("$prg_pdflatex $doc.drv");
+        run("$prg_pdflatex $doc.drv");
+        run("$prg_pdflatex $doc.drv");
+        install_babel_pdf($doc);
+    }
 
     chdir "$dir_build/babel";
     
@@ -869,6 +888,13 @@ if ($modules{'babel'}) {
         grsymb.dtx
         bbidxglo.dtx
         bbcompat.dtx
+        greek-usage.tex
+    ];
+    
+    map { generate_doc($_); } qw[
+        tb1202
+        tb1401
+        tb1604
     ];
     
     run("$prg_pdflatex babel.tex");
