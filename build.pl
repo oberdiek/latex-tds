@@ -303,6 +303,7 @@ section('Install source');
         *.dat
         usage.tex
         tb*.tex
+        lahyph.tex
     ]);
     # *.tex
 }
@@ -470,6 +471,10 @@ section('Install tex doc');
             *.dat
             *.skeleton
             install.OzTeX*
+        ]);
+        install('texmf/tex/generic/hyphen', qw[
+            iahyphen.tex
+            icehyph.tex
         ]);
         chdir $cwd;
     }
