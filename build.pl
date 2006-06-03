@@ -1101,14 +1101,14 @@ sub run_zip ($$) {
     my $zip_file  = shift; # with absolute path
     my $dir_start = shift;
     my $lst_file  = "$cwd/$dir_build/zip.lst";
-    
+
     chdir $dir_start;
-    
+
     # find and check entries and write sorted file list
     open(OUT, ">$lst_file") or die "$error Cannot open `$lst_file'!\n";
     traverse_dir('');
     close(OUT);
-    
+
     # run zip
     run("$prg_zip -9o $zip_file -\@<$lst_file");
 
@@ -1125,15 +1125,15 @@ sub traverse_dir ($);
 sub traverse_dir ($) {
     my $dir = shift;
     my $glob = (($dir) ? "$dir/" : '') . "*";
-    
+
     print OUT "$dir\n" if $dir;
-    
+
     my @sub_dirs  = sort grep { -d $_; } glob $glob;
     my @sub_files = sort grep { -f $_; } glob $glob;
-    
+
     map { traverse_dir $_ } @sub_dirs;
     map { print OUT "$_\n"; } @sub_files;
-    
+
     my $time_max = 0;
     my $mode_dir   =  040755;
     my $mode_file  = 0100644;
