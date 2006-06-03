@@ -2,18 +2,35 @@ readme.txt for project latex-tds 2006/06/03
 
 TABLE OF CONTENTS
 =================
-A. Project latex-tds
-B. Download
-C. Installation Hints
-D. Copyright, License
-E. Manifest
-F. Design Principles
-G. Remarks
-H. Build Hints
-I. History
+A. Abbreviations, Glossary
+B. Project latex-tds
+C. Download
+D. Installation Hints
+E. Copyright, License
+F. Manifest
+G. Design Principles
+H. Remarks
+I. Build Hints
+J. History
+K. Future
 
 
-A. PROJECT LATEX-TDS
+A. ABBREVIATIONS, GLOSSARY
+==========================
+[CTAN]
+    Comprehensive TeX Archive Network.
+    FAQ entry: http://www.tex.ac.uk/cgi-bin/texfaq2html?label=archives
+    For example, you can resolve the prefix `CTAN:' by using
+    `ftp://ftp.ctan.org/tex-archive/'.
+[latex-tds]
+    The name of this project.
+[TDS]
+    TeX Directory Structure.
+    FAQ entry: http://www.tex.ac.uk/cgi-bin/texfaq2html?label=tds
+    Specification: CTAN:tds.zip
+
+
+B. PROJECT LATEX-TDS
 ====================
 
 How it has started
@@ -28,72 +45,105 @@ the afternoon at the day of the announcement ...
 
 Goals of the project
 --------------------
-* ZIP files where the files are already given as TDS tree.
-* The documentation is generated as PDF files with bookmarks
-  and link support.
-* Scope: CTAN:macros/latex/base and the bundles in
-  CTAN:macros/latex/required. The base distribution and the
-  bundles in the required directory are called `modules' in
-  the following.
+* From the sources a TDS compliant tree is constructed and populated.
+  The zipped result is distributed.
+* All the documenation is generated from the sources. The PDF files
+  are user friendly and provide navigational support with bookmarks
+  and links.
+* The PDF files are postprocessed to reduce the file size.
+
+Scope
+-----
+I don't have the time to assemble a TeX distribution with
+thousands of packages. Therefore I restricted me to the
+LaTeX base distribution and the required bundles.
+In the following I will use the term `module' for a package bundle.
 
 Module list
 -----------
-* base      (latex/base)
-* tools     (required/tools)
-* cyrillic  (required/cyrillic)
-* amslatex  (required/amslatex)
-* psnfss    (required/psnfss)
-* babel     (required/babel)
+* base      CTAN:macros/latex/base.zip
+* tools     CTAN:macros/latex/required/tools.zip
+* cyrillic  CTAN:macros/latex/required/cyrillic.zip
+* amslatex  CTAN:macros/latex/required/amslatex.zip
+            ftp://ftp.ams.org/pub/tex/amslatex.zip
+            ftp://ftp.ams.org/pub/tex/amsrefs.zip
+* psnfss    CTAN:macros/latex/required/psnfss.zip
+* babel     CTAN:macros/latex/required/babel.zip
 
 Author
 ------
 Heiko Oberdiek <oberdiek at uni-freiburg.de>
 
 
-B. DOWNLOAD
+C. DOWNLOAD
 ===========
 
 --> At time of writing, the project is not yet available on CTAN.
---> Thus I am describing a proposal only.
+--> Thus I am describing here a proposal only.
 
 The home of the project is located at:
   CTAN:macros/latex/contrib/latex-tds/
-with the following files:
+
+From there the following files can be downloaded:
 * readme.txt (this file)
-* Module given as TDS tree and zipped:
+* The module distribution files, see the module list above
+  for the available modules, e.g:
     base-tds.zip
     tools-tds.zip
     ...
-* Source files of these project (also with TDS directory strucure):
+* The sources, mainly the build script, configuration and
+  driver files, and patches:
     src-tds.zip
-* All-in-on ZIP file:
+* And the universe, the contents of all the other ZIP files,
+  merged together:
     latex-tds-tds.zip
 
 
 C. INSTALLATION HINTS
 =====================
 
-Unzip the all-in-one zip file latex-tds-tds.zip at the root
-of your destination TDS tree, e.g.:
+Hopefully the result of this project helps you in the installation
+process. You get a TDS compliant tree just by unpacking.
+
+Example:
   cd /some/where/texmf
   unzip latex-tds-tds
-Or generate a new texmf tree:
-  unzip latex-tds-tds -d/some/where/texmf-new
-Instead of the all-in-one file you can also select the desired modules.
+or unzip's option `-d':
+  unzip latex-tds-tds -d /some/where/texmf
+
+Instead of the universe ZIP files single modules can be selected.
+
+Important to remember, point your unpack process right in
+the root directory of your TDS tree. The directory structure
+in the ZIP files start with the top-level directories:
+  doc/latex/base/...
+  tex/latex/tools/...
+  source/...
+Rationale: The root directory of a TDS tree can have different
+names, such as texmf-dist, texmf-local, ...
 
 Hints
 -----
-* Old, perhaps wrong files aren't deleted, if they are not overwritten.
-* Several aspects need configuring (texmf trees, language configuration,
-  map files, ...). Consult the doucumentation of your TeX distribution
-  and the modules itself.
-* Base:
-  * formats need rebuilding (see e.g. fmtutil)
-* Babel:
-  * language configuration (language.dat)
-  * formats need rebuilding
-* Psnfss:
-  * the map files need further configuring (see e.g. updmap).
+* Refresh the file name database.
+* Be aware that unpacking can insert and update files, but never
+  deletes obsolete ones. Remainders of previous releases can
+  cause trouble.
+* Depending on the module further installation steps can be
+  necessary, consult the module's own documentation.
+
+[base]
+  * Formats need rebuilding (e.g., fmtutil).
+[babel]
+  * Most hyphenation patterns aren't provided here. Usually you can
+    find them somewhere below CTAN:language/hyphenation.
+  * Language configuration (language.dat), see the documentation of
+    your TeX distribution.
+  * Formats need rebuilding.
+[psnfss]
+  * The map files need further configuring (e.g., updmap).
+[graphics]
+  * Module graphics doesn't provide all driver files, because some are
+    developed independently (pdftex.def, ...).
 
 
 D. COPYRIGHT, LICENSE
@@ -115,8 +165,8 @@ This work has the LPPL maintenance status `maintained'.
 
 The Current Maintainer of this work is Heiko Oberdiek.
 
-See section `Manifest' for a list of all files belonging to the
-project `latex-tds'.
+See the following section `Manifest' for a list of all files
+belonging to the project `latex-tds'.
 
 
 E. MANIFEST
@@ -170,11 +220,10 @@ F. DESIGN PRINCIPLES
 ====================
 
 * Compliance with the latest TDS specification.
-* Redundance removal.
-* Documentation PDF files in _high_ quality:
+* No redundancy.
+* User friendly PDF files with navigational support:
   * bookmarks
   * links
-  * small
 * Complete documentation. The documentation generation with
   enhanced PDF files is the tricky part and should be saved
   from the user.
@@ -298,3 +347,17 @@ I. HISTORY
   * Modules psnfss and babel added, now the all modules are covered.
 2006/06/??
   * The project hits CTAN.
+
+
+K. FUTURE
+=========
+
+Possible extensions
+-------------------
+* graphics-add
+  Uptodate graphics drivers that are missing in the graphics bundle:
+  - pdftex.def
+  - ???
+* CTAN:macros/latex/contrib/hyperref/
+  CTAN:macros/latex/contrib/oberdiek/
+  The amount of integration work would be very small for me.
