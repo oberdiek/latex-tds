@@ -68,6 +68,7 @@ my $prg_cp        = 'cp -p';
 my $prg_curl      = 'curl';
 my $prg_docstrip  = 'tex -shell-escape';
 my $prg_epstopdf  = 'epstopdf';
+my $prg_find      = 'find';
 my $prg_java      = 'java';
 my $prg_ls        = "ls";
 my $prg_makeindex = 'makeindex';
@@ -78,9 +79,10 @@ my $prg_pdflatex  = 'pdflatex';
 my $prg_rm        = "rm";
 my $prg_rsync     = "rsync";
 my $prg_sed       = "sed";
+my $prg_sort      = "sort";
 my $prg_unzip     = 'unzip';
 my $prg_wget      = 'wget';
-my $prg_zip       = 'zip -9r';
+my $prg_zip       = 'zip';
 
 $ENV{'TEXINPUTS'}  = "$cwd/tex:.:texmf/tex//:";
 $ENV{'BSTINPUTS'}  = '.:texmf/bibtex//:';    # amslatex
@@ -925,6 +927,7 @@ if ($modules{'src'}) {
         readme.txt
     ];
     install "$dest_dir/tex", glob("$dir_tex/*.*");
+    install "$dest_dir/patch", glob("$dir_patch/*.*");
 }
 
 ### Module latex-tds
@@ -957,10 +960,7 @@ section('Distrib');
         my $dir_tds = "$dir_build/$pkg/texmf";
         my $file_distrib = "$cwd/$dir_distrib/$pkg-tds.zip";
         if (-d $dir_tds) {
-            chdir $dir_tds;
-            run("$prg_chmod -R g-w .");
-            run("$prg_zip $file_distrib *");
-            chdir $cwd;
+            run_zip($file_distrib, $dir_tds);
         }
         else {
             print "!!! Warning: Missing TDS tree for `$pkg'!\n";
@@ -1095,6 +1095,67 @@ sub run_makeindex ($;$$) {
     $cmd .= " -o $output_file" if $output_file;
     $cmd .= " $input_file";
     run($cmd);
+}
+
+sub run_zip ($$) {
+    my $zip_file  = shift; # with absolute path
+    my $dir_start = shift;
+    my $lst_file  = "$cwd/$dir_build/zip.lst";
+    
+    chdir $dir_start;
+    
+    # find and check entries and write sorted file list
+    open(OUT, ">$lst_file") or die "$error Cannot open `$lst_file'!\n";
+    traverse_dir('');
+    close(OUT);
+    
+    # run zip
+    run("$prg_zip -9o $zip_file -\@<$lst_file");
+
+    chdir $cwd;
+}
+
+# Tasks of traverse_dir:
+# * Sorted file listing
+#   * Depth first
+#   * Inside a directory: sub directories first, files last
+# * Fix the date of the directory reflecting the latest entry
+# * Fix permissions
+sub traverse_dir ($);
+sub traverse_dir ($) {
+    my $dir = shift;
+    my $glob = (($dir) ? "$dir/" : '') . "*";
+    
+    print OUT "$dir\n" if $dir;
+    
+    my @sub_dirs  = sort grep { -d $_; } glob $glob;
+    my @sub_files = sort grep { -f $_; } glob $glob;
+    
+    map { traverse_dir $_ } @sub_dirs;
+    map { print OUT "$_\n"; } @sub_files;
+    
+    my $time_max = 0;
+    my $mode_dir   =  040755;
+    my $mode_file  = 0100644;
+    my $mode_xfile = 0100755;
+    for (@sub_dirs, @sub_files) {
+        my @stat  = stat $_;
+        my $mode  = $stat[2];
+        my $mtime = $stat[9];
+        $time_max = $mtime if $mtime > $time_max;
+        if (-d $_) {
+            chmod $mode_dir, $_ unless $mode == $mode_dir;
+        }
+        else {
+            if (-x $_) {
+                chmod $mode_xfile, $_ unless $mode == $mode_xfile;
+            }
+            else {
+                chmod $mode_file, $_ unless $mode == $mode_file;
+            }
+        }
+    }
+    utime $time_max, $time_max, $dir if $dir;
 }
 
 sub info ($) {
