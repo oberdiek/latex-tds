@@ -1,18 +1,104 @@
-readme.txt for project latex-tds 2006/06/02 v1.0
+readme.txt for project latex-tds 2006/06/03
 
 TABLE OF CONTENTS
 =================
 A. Project latex-tds
-B. Copyright, License
-C. Manifest
-D. Design Principles
+B. Download
+C. Installation Hints
+D. Copyright, License
+E. Manifest
+F. Design Principles
+G. Remarks
+H. Build Hints
+I. History
+
 
 A. PROJECT LATEX-TDS
 ====================
-TODO.
 
-B. COPYRIGHT, LICENSE
+How it has started
+------------------
+The project started as I wanted to install the new LaTeX release 2005/12/01
+that was announced at 2006/04/27. However the files aren't packed in
+TDS format, ready for unpacking in the destination directory. And
+the documentation files were not yes generated or the provided
+PDF files misses basic features such as bookmarks or link support.
+Thus this project has started, I thought I could finish it during
+the afternoon at the day of the announcement ...
+
+Goals of the project
+--------------------
+* ZIP files where the files are already given as TDS tree.
+* The documentation is generated as PDF files with bookmarks
+  and link support.
+* Scope: CTAN:macros/latex/base and the bundles in
+  CTAN:macros/latex/required. The base distribution and the
+  bundles in the required directory are called `modules' in
+  the following.
+
+Module list
+-----------
+* base      (latex/base)
+* tools     (required/tools)
+* cyrillic  (required/cyrillic)
+* amslatex  (required/amslatex)
+* psnfss    (required/psnfss)
+* babel     (required/babel)
+
+Author
+------
+Heiko Oberdiek <oberdiek at uni-freiburg.de>
+
+
+B. DOWNLOAD
+===========
+
+--> At time of writing, the project is not yet available on CTAN.
+--> Thus I am describing a proposal only.
+
+The home of the project is located at:
+  CTAN:macros/latex/contrib/latex-tds/
+with the following files:
+* readme.txt (this file)
+* Module given as TDS tree and zipped:
+    base-tds.zip
+    tools-tds.zip
+    ...
+* Source files of these project (also with TDS directory strucure):
+    src-tds.zip
+* All-in-on ZIP file:
+    latex-tds-tds.zip
+
+
+C. INSTALLATION HINTS
 =====================
+
+Unzip the all-in-one zip file latex-tds-tds.zip at the root
+of your destination TDS tree, e.g.:
+  cd /some/where/texmf
+  unzip latex-tds-tds
+Or generate a new texmf tree:
+  unzip latex-tds-tds -d/some/where/texmf-new
+Instead of the all-in-one file you can also select the desired modules.
+
+Hints
+-----
+* Old, perhaps wrong files aren't deleted, if they are not overwritten.
+* Several aspects need configuring (texmf trees, language configuration,
+  map files, ...). Consult the doucumentation of your TeX distribution
+  and the modules itself.
+* Base:
+  * formats need rebuilding (see e.g. fmtutil)
+* Babel:
+  * language configuration (language.dat)
+  * formats need rebuilding
+* Psnfss:
+  * the map files need further configuring (see e.g. updmap).
+
+
+D. COPYRIGHT, LICENSE
+=====================
+
 Copyright 2006 Heiko Oberdiek.
 
 License is LPPL 1.3c:
@@ -32,8 +118,10 @@ The Current Maintainer of this work is Heiko Oberdiek.
 See section `Manifest' for a list of all files belonging to the
 project `latex-tds'.
 
-C. MANIFEST
+
+E. MANIFEST
 ===========
+
 Documentation
 -------------
   readme.txt                this file
@@ -44,28 +132,28 @@ Scripts
 
 Configuration
 -------------
-  docstrip.cfg              enables TDS feature and creates directories
-  errata.cfg                for errata lists of latex/base
-  hyperref.cfg              hyperref config file
-  ltnews.cfg                for LaTeX News of latex/base
-  ltxdoc.cfg                setup for class ltxdoc
-  ltxguide.cfg              setup for the guide manuals in latex/base
+  tex/docstrip.cfg          enables TDS feature and creates directories
+  tex/errata.cfg            for errata lists of latex/base
+  tex/hyperref.cfg          hyperref config file
+  tex/ltnews.cfg            for LaTeX News of latex/base
+  tex/ltxdoc.cfg            setup for class ltxdoc
+  tex/ltxguide.cfg          setup for the guide manuals in latex/base
                             and required/psnfss.
-  manual.cfg                setup for errata list of the LaTeX manual
+  tex/manual.cfg            setup for errata list of the LaTeX manual
                             in latex/base
 
 Documentation driver
 --------------------
-  ams.drv                   generic doc driver for files from the
+  tex/ams.drv               generic doc driver for files from the
                             amslatex and babel bundle
-  babel.tex                 doc driver with patches for babel.drv
-  doc_lppl.tex              doc driver for base/lppl.tex
-  greek-usage.tex           doc driver with patches for babel/usage.tex
-  ltnews.tex                master file that merges all base/ltnews*.tex
-  ltxcheck.drv              doc driver with patches for ltxcheck.tex
-  psnfss2e.drv              doc driver with patches for psnfss2e.tex
-  tools-overview.cls        class for tools.tex
-  tools.tex                 master file for tools overview, generated
+  tex/babel.tex             doc driver with patches for babel.drv
+  tex/doc_lppl.tex          doc driver for base/lppl.tex
+  tex/greek-usage.tex       doc driver with patches for babel/usage.tex
+  tex/ltnews.tex            master file that merges all base/ltnews*.tex
+  tex/ltxcheck.drv          doc driver with patches for ltxcheck.tex
+  tex/psnfss2e.drv          doc driver with patches for psnfss2e.tex
+  tex/tools-overview.cls    class for tools.tex
+  tex/tools.tex             master file for tools overview, generated
                             by the build.pl script from tools/manifest.txt
 
 Patches
@@ -77,8 +165,136 @@ Patches
   patch/frenchb.dtx.diff    patch for babel/frenchb.dtx
   patch/greek.ins.diff      patch for babel/greek.ins
 
-D. DESIGN PRINCIPLES
+
+F. DESIGN PRINCIPLES
 ====================
+
 * Compliance with the latest TDS specification.
-  
-* 
+* Redundance removal.
+* Documentation PDF files in _high_ quality:
+  * bookmarks
+  * links
+  * small
+* Complete documentation. The documentation generation with
+  enhanced PDF files is the tricky part and should be saved
+  from the user.
+* Output format of generated documentation is PDF, see above.
+  Other formats such as DVI or PS are not generated and provided.
+* Documentation bundles are preferred to many partial documentation
+  files (e.g. source2e.pdf or ltnews.pdf).
+* If several expansion stages of a documentation are available,
+  then just the most complete expansion stage should be used.
+* Files that do not fit in a program sub tree of TDS stay below
+  TDS:source (e.g. latexbug.el from latex/base). Then they do not
+  get lost at least.
+* Page layout: a4paper with reduced vertical margins (exception: ltnews).
+  (This also decreases the page number usually.)
+* ...
+
+
+G. REMARKS
+==========
+
+Base
+----
+* source2e.pdf is used instead of many single lt*.pdf files.
+* ltnews.pdf is introduced to avoid cluttering the doc directory
+  with many single sheet ltnews*.pdf files.
+* ...
+
+Tools
+-----
+* Added: tools.pdf as overview/contents/index file with links
+  and short descriptions of the single packages. (It uses
+  the data from manifest.txt).
+* ...
+
+AmSLaTeX
+--------
+* The distribution from the AMS ftp site is used, because
+  the files are already sorted in TDS:
+    ftp://ftp.ams.org/pub/tex/amslatex.zip
+    ftp://ftp.ams.org/pub/tex/amsrefs.zip
+* ...
+
+Babel
+-----
+* TDS format: Currently I am following here some TeX distributions
+  (teTeX, TeXLive, VTeX) that use `generic' as TDS format, but I don't
+  understand the reason:
+  * I would rather put pure LaTeX files in TDS:tex/latex/babel
+    and the other files that also can be used with plain formats in
+    TDS:tex/generic/babel. It is the _purpose_ of TDS's format concept
+    to allow the format dependend programs an efficient lookup.
+  * The documentation and source would go in TDS:doc/latex/babel and
+    TDS:source/latex/babel, because babel is a project related to
+    the LaTeX project, e.g. the CTAN location is even in the _require_
+    part of the LaTeX subtree, CTAN:macros/latex/required/babel.
+* Babel already contains babel.pdf as documentation. It is a superset
+  of user.pdf. Thus I have dropped the latter one to avoid redundancy.
+  Also the name `babel.pdf' is much more useful (texdoc).
+* It is unclear, which hyphenation patterns are in the control of babel.
+  Comparing the version of duplicate hyphenation pattern files
+  in CTAN, I decided:
+  * iahyphen.tex -> TDS:tex/generic/hyphen
+  * icehyph.tex  -> TDS:tex/generic/hyphen
+  * lahyph.tex -> TDS:source/generic/babel
+  * The bulgarian patterns are removed, because they form a new CTAN
+    project: CTAN:language/hyphenation/bghyphen
+* It seems, nobody has generated the documentation since a long time.
+  Several patches are necessary for error free compiling.
+* ...
+
+
+H. BUILD HINTS
+==============
+
+The most important advice I can give: `forget it'!
+The purpose of the source files are rather to show, what was
+done in which way.
+The *-tds.zip files are the goal of the project, not the
+build process. Some remarks, if someone wants to build the
+modules himself:
+* TeX compiler: pdfTeX 1.40, below 1.30 some of the packages
+  will not work.
+* Uptodate LaTeX is recommended.
+* Additional packages can be necessary, e.g. I had to install
+  language/armenian, fonts/tipa, fonts/wsuipa, fonts/fc,
+  fonts/utopia, fonts/greek/cbfonts, ...
+  Probably TeXLive would be a good idea (I haven't tested).
+* Some packages of mine I haven't updated yet (hyperref, ...).
+* Some new packages of mine I will put on CTAN, but at time
+  of writing, they aren't available yet.
+* PDF postprocessing, I have used two steps:
+  1. a) I have written a tool that analyzes page stream contents and
+        optimizes them (removal of unnecessary color settings, minimize
+        translation operations, ...).
+        --> pdfbox-rewrite.jar
+     b) For reading and writing the PDF file I have used PDFBox
+        --> PDFBox-0.7.2.jar (http://www.pdfbox.org/)
+     c) To get better results I patched some of the classes
+        of PDFBox (double instead of float for numbers, write module).
+        --> pdfbox-rewrite.jar
+  2. The final conversion step was done by Mulitivalent, because
+     it makes a very good job in PDF compression:
+     --> Multivalent20060102.jar (http://multivalent.sourceforge.net/)
+  Multivalent and PDFBox are available, pdfbox-rewrite.jar, however,
+  is just a first prototype, not ripe for a release.
+  But you can give the build script the option --nopostprocess,
+  that will skip the postprocess steps. Or you modify the
+  function to use the Multivalent step only.
+* Unix, Perl background is expected.
+* No support or documentation.
+
+
+I. HISTORY
+==========
+
+2006/04/27
+  * Start of the project (without babel, amslatex, psnfss).
+2006/06/01
+  * Module amslatex added.
+2006/06/03
+  * Modules psnfss and babel added, now the all modules are covered.
+2006/06/??
+  * The project hits CTAN.
