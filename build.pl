@@ -230,13 +230,13 @@ section('Unpacking');
 section('Patches');
 {
     ; #
-    
+
     if ($modules{'psnfss'}) {
         chdir "$dir_build/psnfss";
         run("$prg_checksum psfonts.dtx");
         chdir $cwd;
     }
-    
+
     if ($modules{'babel'}) {
         map { patch("babel/$_"); } qw[
             greek.ins
@@ -335,7 +335,7 @@ section('TDS cleanup');
         sub cleanup_tds ($@) {
             my $dir_tds = "$dir_build/amslatex/texmf";
             my $sub_tree = shift;
-            
+
             my @list = map { glob("$dir_tds/$sub_tree/$_"); } @_;
             unlink grep { -f $_; } @list;
             map { rmdir; } grep { -d $_; } @list;
@@ -375,10 +375,10 @@ section('TDS cleanup');
         my $tds_dir  = "$dir_build/babel/texmf";
         my $from_dir = "$tds_dir/tex/generic/babel";
         my $dest_dir;
-  
+
         ### Correction for *.drv files
         run("$prg_mv $from_dir/*.drv $dir_build/babel");
-        
+
         ### Correction for *.ist files
         $dest_dir = "$tds_dir/makeindex/babel";
         ensure_directory($dest_dir);
@@ -444,7 +444,7 @@ section('Install tex doc');
         );
         chdir $cwd;
     }
-    
+
     if ($modules{'psnfss'}) {
         chdir "$dir_build/psnfss";
         install('texmf/doc/latex/psnfss',
@@ -461,7 +461,7 @@ section('Install tex doc');
         );
         chdir $cwd;
     }
-    
+
     if ($modules{'babel'}) {
         chdir "$dir_build/babel";
         install('texmf/doc/generic/babel', qw[
@@ -666,7 +666,7 @@ if ($modules{'tools'}) {
         run("$prg_pdflatex $entry.dtx"); # hydestopt
         install_pdf('tools', $entry);
     }
-    
+
     # Generate overview
     my $infile = 'manifest.txt';
     my $texfile = "$cwd/$dir_tex/tools.tex";
@@ -839,29 +839,29 @@ if ($modules{'psnfss'}) {
     section('Documentation: psnfss');
 
     chdir "$dir_build/psnfss";
-    
+
     run("$prg_pdflatex psfonts.dtx");
     run("$prg_pdflatex psfonts.dtx");
     install_pdf('psnfss', 'psfonts');
-    
+
     run("$prg_pdflatex psnfss2e.drv");
     run("$prg_pdflatex psnfss2e.drv");
     run("$prg_pdflatex psnfss2e.drv");
     install_pdf('psnfss', 'psnfss2e');
-    
+
     chdir $cwd;
 }
 
 ### Generate documentation for babel
 if ($modules{'babel'}) {
     section('Documentation: babel');
-    
+
     sub install_babel_pdf ($) {
         install_gen_pdf('generic', 'babel', shift);
     }
     sub simple_doc ($) {
         my $file = shift;
-        
+
         run("$prg_pdflatex $file");
         run("$prg_pdflatex $file");
         $file =~ s/\.\w{3}$//;
@@ -880,12 +880,12 @@ if ($modules{'babel'}) {
     }
 
     chdir "$dir_build/babel";
-    
+
     my $greek_fdd = 'greek-fdd.drv';
     open(OUT, ">$greek_fdd") or die "$error Cannot open `$greek_fdd'!\n";
     print OUT "\\input{greek.fdd}\n";
     close(OUT);
-    
+
     map { simple_doc($_); }
         $greek_fdd, qw[
         athnum.dtx
@@ -895,13 +895,13 @@ if ($modules{'babel'}) {
         bbcompat.dtx
         greek-usage.tex
     ];
-    
+
     map { generate_babel_doc($_); } qw[
         tb1202
         tb1401
         tb1604
     ];
-    
+
     run("$prg_pdflatex babel.tex");
     run_makeindex('babel.idx', 'bbind.ist');
     run_makeindex('babel.glo', 'bbglo.ist', 'babel.gls');
@@ -918,7 +918,7 @@ if ($modules{'babel'}) {
 ### Module src
 if ($modules{'src'}) {
     section('Module src');
-    
+
     my $dest_dir = "$dir_build/src/texmf/source/latex/latex-tds";
     install $dest_dir, qw[
         build.pl
@@ -980,7 +980,7 @@ section('Result');
             print "!!! Warning: Missing distribution for `$pkg'!\n";
         }
     }
-    
+
     # display time
     my $time_diff = time - $time_start;
     my $time_str = sprintf "%d:%02d:%02d\n",
@@ -988,7 +988,7 @@ section('Result');
                            ($time_diff % 3600) / 60,
                            ($time_diff % 3600) % 60;
     $time_str =~ s/^0:0?//;
-    print "* Elapsed time: $time_str\n";    
+    print "* Elapsed time: $time_str\n";
 }
 
 sub install ($@) {
@@ -1024,7 +1024,7 @@ sub install_gen_pdf ($$$) {
 sub install_pdf ($$) {
     my $pkg       = shift;
     my $file_base = shift;
-    
+
     install_gen_pdf('latex', $pkg, $file_base);
 }
 
