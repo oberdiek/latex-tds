@@ -930,6 +930,7 @@ if ($modules{'src'}) {
     install "$dest_dir/tex", glob("$dir_tex/*.*");
     install "$dest_dir/patch", glob("$dir_patch/*.*");
     install "$dest_dir/lib", "$dir_lib/ziptimetree.pl";
+    install $dir_distrib, 'readme.txt';
 }
 
 ### Module latex-tds
