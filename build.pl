@@ -61,28 +61,29 @@ my $jar_multivalent = "$cwd/$dir_lib/Multivalent20060102.jar";
 my $file_tmp = "$cwd/$dir_build/tmp.pdf";
 my $file_tmp_o = "$cwd/$dir_build/tmp-o.pdf";
 
-my $prg_checksum  = "adjust_checksum";
-my $prg_bibtex    = "bibtex";
-my $prg_chmod     = "chmod";
-my $prg_cp        = 'cp -p';
-my $prg_curl      = 'curl';
-my $prg_docstrip  = 'tex -shell-escape';
-my $prg_epstopdf  = 'epstopdf';
-my $prg_find      = 'find';
-my $prg_java      = 'java';
-my $prg_ls        = "ls";
-my $prg_makeindex = 'makeindex';
-my $prg_mkdir     = 'mkdir';
-my $prg_mv        = 'mv';
-my $prg_patch     = "patch";
-my $prg_pdflatex  = 'pdflatex';
-my $prg_rm        = "rm";
-my $prg_rsync     = "rsync";
-my $prg_sed       = "sed";
-my $prg_sort      = "sort";
-my $prg_unzip     = 'unzip';
-my $prg_wget      = 'wget';
-my $prg_zip       = 'zip';
+my $prg_checksum    = "adjust_checksum";
+my $prg_bibtex      = "bibtex";
+my $prg_chmod       = "chmod";
+my $prg_cp          = 'cp -p';
+my $prg_curl        = 'curl';
+my $prg_docstrip    = 'tex -shell-escape';
+my $prg_epstopdf    = 'epstopdf';
+my $prg_find        = 'find';
+my $prg_java        = 'java';
+my $prg_ls          = "ls";
+my $prg_makeindex   = 'makeindex';
+my $prg_mkdir       = 'mkdir';
+my $prg_mv          = 'mv';
+my $prg_patch       = "patch";
+my $prg_pdflatex    = 'pdflatex';
+my $prg_rm          = "rm";
+my $prg_rsync       = "rsync";
+my $prg_sed         = "sed";
+my $prg_sort        = "sort";
+my $prg_unzip       = 'unzip';
+my $prg_wget        = 'wget';
+my $prg_zip         = 'zip';
+my $prg_ziptimetree = 'lib/ziptimetree.pl';
 
 $ENV{'TEXINPUTS'}  = "$cwd/tex:.:texmf/tex//:";
 $ENV{'BSTINPUTS'}  = '.:texmf/bibtex//:';    # amslatex
@@ -928,6 +929,7 @@ if ($modules{'src'}) {
     ];
     install "$dest_dir/tex", glob("$dir_tex/*.*");
     install "$dest_dir/patch", glob("$dir_patch/*.*");
+    install "$dest_dir/lib", "$dir_lib/ziptimetree.pl";
 }
 
 ### Module latex-tds
@@ -1098,64 +1100,9 @@ sub run_makeindex ($;$$) {
 }
 
 sub run_zip ($$) {
-    my $zip_file  = shift; # with absolute path
+    my $zip_file = shift;
     my $dir_start = shift;
-    my $lst_file  = "$cwd/$dir_build/zip.lst";
-
-    chdir $dir_start;
-
-    # find and check entries and write sorted file list
-    open(OUT, ">$lst_file") or die "$error Cannot open `$lst_file'!\n";
-    traverse_dir('');
-    close(OUT);
-
-    # run zip
-    run("$prg_zip -9o $zip_file -\@<$lst_file");
-
-    chdir $cwd;
-}
-
-# Tasks of traverse_dir:
-# * Sorted file listing
-#   * Depth first
-#   * Inside a directory: sub directories first, files last
-# * Fix the date of the directory reflecting the latest entry
-# * Fix permissions
-sub traverse_dir ($);
-sub traverse_dir ($) {
-    my $dir = shift;
-    my $glob = (($dir) ? "$dir/" : '') . "*";
-
-    print OUT "$dir\n" if $dir;
-
-    my @sub_dirs  = sort grep { -d $_; } glob $glob;
-    my @sub_files = sort grep { -f $_; } glob $glob;
-
-    map { traverse_dir $_ } @sub_dirs;
-    map { print OUT "$_\n"; } @sub_files;
-
-    my $time_max = 0;
-    my $mode_dir   =  040755;
-    my $mode_file  = 0100644;
-    my $mode_xfile = 0100755;
-    for (@sub_dirs, @sub_files) {
-        my @stat  = stat $_;
-        my $mode  = $stat[2];
-        my $mtime = $stat[9];
-        $time_max = $mtime if $mtime > $time_max;
-        if (-d $_) {
-            chmod $mode_dir, $_ unless $mode == $mode_dir;
-        }
-        else {
-            if (-x $_) {
-                chmod $mode_xfile, $_ unless $mode == $mode_xfile;
-            }
-            else {
-                chmod $mode_file, $_ unless $mode == $mode_file;
-            }
-        }
-    }
-    utime $time_max, $time_max, $dir if $dir;
+    run("$prg_ziptimetree --noroot $zip_file $dir_start");
 }
 
 sub info ($) {
