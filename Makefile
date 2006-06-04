@@ -5,7 +5,7 @@ build:
 	./build.sh
 
 incoming:
-	./incoming.pl
+	./build.pl --download
 
 update:
 	./update.sh
