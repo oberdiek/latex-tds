@@ -10,8 +10,8 @@ incoming:
 update:
 	./update.sh
 
-ziptimetree: lib/ziptimetree
-lib/ziptimetree: $(HOME)/bin/ziptimetree
+ziptimetree: lib/ziptimetree.pl
+lib/ziptimetree.pl: $(HOME)/bin/ziptimetree
 	install -m 755 $< $@
 
 .PHONY: all build update incoming ziptimetree
