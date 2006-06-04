@@ -307,7 +307,7 @@ else {
 }
 
 my $opts = " -o$compression";
-$opts .= "v" if $log_level >= $log_verbose;
+$opts .= "v" if $log_level >= $log_debug;
 $opts .= "q" if $log_level <= $log_normal;
 my $pipe = "|$prg_zip$opts $zipfile -\@";
 debug 'zip call', $pipe;
