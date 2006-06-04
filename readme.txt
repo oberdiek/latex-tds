@@ -349,4 +349,3 @@ I. HISTORY
 2006/06/??
   * The project hits CTAN.
 
-End of readme.txt
