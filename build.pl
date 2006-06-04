@@ -978,6 +978,7 @@ section('Result');
         my $file = "$dir_distrib/$pkg-tds.zip";
         if (-f $file) {
             system("$prg_ls -l $file");
+            system("$prg_ls -l $dir_distrib/readme.txt")if $pkg eq 'src';
         }
         else {
             print "!!! Warning: Missing distribution for `$pkg'!\n";
