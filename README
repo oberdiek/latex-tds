@@ -331,6 +331,8 @@ modules himself:
   But you can give the build script the option --nopostprocess,
   that will skip the postprocess steps. Or you modify the
   function to use the Multivalent step only.
+    Install the jar files in the directory 'lib' where
+  they are expected by the build script.
 * Unix, Perl background is expected.
 * No support or documentation.
 
