@@ -12,7 +12,6 @@ G. Design Principles
 H. Remarks
 I. Build Hints
 J. History
-K. Future
 
 
 A. ABBREVIATIONS, GLOSSARY
@@ -348,16 +347,4 @@ I. HISTORY
 2006/06/??
   * The project hits CTAN.
 
-
-K. FUTURE
-=========
-
-Possible extensions
--------------------
-* graphics-add
-  Uptodate graphics drivers that are missing in the graphics bundle:
-  - pdftex.def
-  - ???
-* CTAN:macros/latex/contrib/hyperref/
-  CTAN:macros/latex/contrib/oberdiek/
-  The amount of integration work would be very small for me.
+End of readme.txt
