@@ -1102,7 +1102,7 @@ sub run_makeindex ($;$$) {
 sub run_zip ($$) {
     my $zip_file = shift;
     my $dir_start = shift;
-    run("$prg_ziptimetree --noroot $zip_file $dir_start");
+    run("$prg_ziptimetree --verbose --noroot $zip_file $dir_start");
 }
 
 sub info ($) {
