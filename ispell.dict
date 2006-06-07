@@ -1,7 +1,7 @@
 ac
 albanian
-AmSLaTeX
 amslatex
+AmSLaTeX
 amsrefs
 armenian
 athnum
@@ -49,6 +49,7 @@ inputenc
 lahyph
 latexbug
 ldf
+lgpl
 lppl
 lt
 ltnews
@@ -59,10 +60,10 @@ nopostprocess
 oberdiek
 org
 pdf
-PDFBox
 pdfbox
-pdfTeX
+PDFBox
 pdftex
+pdfTeX
 Perl
 pl
 PS
