@@ -50,6 +50,9 @@ my $dir_incoming_ctan = "$dir_incoming/ctan";
 my $dir_incoming_ams = "$dir_incoming/ams";
 my $dir_build = 'build';
 my $dir_lib = 'lib';
+my $dir_license = 'license';
+my $dir_license_latex_tds = "$dir_license/$prj";
+my $dir_license_ziptimetree = "$dir_license/ziptimetree";
 my $dir_tex = 'tex';
 my $dir_patch = 'patch';
 my $dir_distrib = 'distrib';
@@ -930,6 +933,8 @@ if ($modules{'src'}) {
     install "$dest_dir/tex", glob("$dir_tex/*.*");
     install "$dest_dir/patch", glob("$dir_patch/*.*");
     install "$dest_dir/lib", "$dir_lib/ziptimetree.pl";
+    install "$dest_dir/license/latex-tds", "$dir_license_latex_tds/lppl.txt";
+    install "$dest_dir/license/ziptimetree", "$dir_license_ziptimetree/lgpl.txt";
     install $dir_distrib, 'readme.txt';
 }
 

@@ -1,4 +1,4 @@
-readme.txt for project latex-tds, 2006/06/04
+readme.txt for project latex-tds, 2006/06/07
 
 TABLE OF CONTENTS
 =================
@@ -175,11 +175,17 @@ Documentation
 -------------
   readme.txt                this file
 
+Licenses
+--------
+  license/latex-tds/lppl.txt     LPPL (The LaTeX Project Public License)
+  license/ziptimetree/lgpl.txt   LGPL (GNU Lesser General Public License)
+
 Scripts
 -------
   build.pl                  main script for building the distribution
   lib/ziptimetree.pl        help script that generates a ZIP file from
                             a directory tree with sorted entries
+                            LGPL)
 
 Configuration
 -------------
@@ -365,7 +371,7 @@ I. HISTORY
 2006/06/01
   * Module amslatex added.
 2006/06/03
-  * Modules psnfss and babel added, now the all modules are covered.
-2006/06/??
+  * Modules psnfss and babel added, now all modules are covered.
+2006/06/07
   * The project hits CTAN.
 

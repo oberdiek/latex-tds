@@ -5,17 +5,38 @@ $^W=1; # turn warning on
 #
 # ziptimetree.pl
 #
+# Packs a directory tree into a ZIP file with sorted entries
+# and corrects file permissions and directory dates.
+#
 # Copyright 2006 Heiko Oberdiek.
+#
+# This library is free software; you can redistribute it and/or
+# modify it under the terms of the GNU Lesser General Public
+# License as published by the Free Software Foundation; either
+# version 2.1 of the License, or (at your option) any later version.
+#
+# This library is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# Lesser General Public License for more details.
+#
+# You should have received a copy of the GNU Lesser General Public
+# License along with this library; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+# MA  02110-1301  USA
+#
+# Address: oberdiek at uni-freiburg.de
 #
 my $file        = 'ziptimetree';
 my $program     = 'ZIP-TimeTree';
-my $version     = '1.0';
-my $date        = '2006/06/04';
+my $version     = '1.1';
+my $date        = '2006/06/07';
 my $author      = 'Heiko Oberdiek';
 my $copyright   = "Copyright (C) 2006 by $author.";
 #
 # History:
 #   2006/06/04 v1.0: First release.
+#   2006/06/07 v1.1: License LGPL.
 
 ### program identification
 my $title = "$program $version, $date - $copyright\n";
