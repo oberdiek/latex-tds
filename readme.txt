@@ -46,10 +46,10 @@ Goals of the project
 --------------------
 * From the sources a TDS compliant tree is constructed and populated.
   The zipped result is distributed.
-* All the documenation is generated from the sources. The PDF files
+* All the documentation is generated from the sources. The PDF files
   are user friendly and provide navigational support with bookmarks
   and links.
-* The PDF files are postprocessed to reduce the file size.
+* The PDF files are post-processed to reduce the file size.
 
 Scope
 -----
@@ -178,12 +178,14 @@ Documentation
 Scripts
 -------
   build.pl                  main script for building the distribution
+  lib/ziptimetree.pl        help script that generates a ZIP file from
+                            a directory tree with sorted entries
 
 Configuration
 -------------
   tex/docstrip.cfg          enables TDS feature and creates directories
   tex/errata.cfg            for errata lists of latex/base
-  tex/hyperref.cfg          hyperref config file
+  tex/hyperref.cfg          hyperref configuration file
   tex/ltnews.cfg            for LaTeX News of latex/base
   tex/ltxdoc.cfg            setup for class ltxdoc
   tex/ltxguide.cfg          setup for the guide manuals in latex/base
@@ -267,17 +269,35 @@ AmSLaTeX
 
 Babel
 -----
-* TDS format: Currently I am following here some TeX distributions
-  (teTeX, TeXLive, VTeX) that use `generic' as TDS format, but I don't
-  understand the reason:
-  * I would rather put pure LaTeX files in TDS:tex/latex/babel
-    and the other files that also can be used with plain formats in
-    TDS:tex/generic/babel. It is the _purpose_ of TDS's format concept
-    to allow the format dependend programs an efficient lookup.
-  * The documentation and source would go in TDS:doc/latex/babel and
-    TDS:source/latex/babel, because babel is a project related to
-    the LaTeX project, e.g. the CTAN location is even in the _require_
-    part of the LaTeX subtree, CTAN:macros/latex/required/babel.
+* Babel's TeX files consists of three groups of files:
+  1. Hyphenation pattern, see below
+  2. Generic files:
+     *.ldf (language definition files)
+     *.sty (from bbcompat.dtx, these are plain-TeX files,
+            LaTeX user have the package babel)
+     babel.def, switch.def
+     plain.def
+     b*plain.tex
+     esbst.tex
+  3. LaTeX files:
+     *.fd
+     *enc.def (for package fontenc)
+     cp*.def, 8859-8.def, si960.def (for package inputenc)
+     babel.sty
+     romanidx.tex
+     athnum.sty, grmath.sty, grsymb.sty (greek.ins)
+     heb*.sty
+  Full TDS compliance would use different format subtrees
+  for the generic and LaTeX files. However practice (TeX Live, teTeX,
+  VTeX, ...) put them in `generic', mainly because of maintenance issues.
+  Also babel's *.ins files specify \usedir{tex/generic/babel}.
+  There can be problems, if different TDS trees have different
+  babel versions installed and the same file can be found both
+  in generic and latex. The natural search strategy for TDS compliant
+  trees would be to look first in tex/latex across the trees, then
+  in tex/generic. Thus it can happen to use files from the same
+  package, but different versions.
+  --> Therefore latex-tds put theses files in the generic subtree.
 * Babel already contains babel.pdf as documentation. It is a superset
   of user.pdf. Thus I have dropped the latter one to avoid redundancy.
   Also the name `babel.pdf' is much more useful (texdoc).
@@ -287,7 +307,7 @@ Babel
   * iahyphen.tex -> TDS:tex/generic/hyphen
   * icehyph.tex  -> TDS:tex/generic/hyphen
   * lahyph.tex -> TDS:source/generic/babel
-  * The bulgarian patterns are removed, because they form a new CTAN
+  * The Bulgarian patterns are removed, because they form a new CTAN
     project: CTAN:language/hyphenation/bghyphen
 * It seems, nobody has generated the documentation since a long time.
   Several patches are necessary for error free compiling.
@@ -305,15 +325,15 @@ build process. Some remarks, if someone wants to build the
 modules himself:
 * TeX compiler: pdfTeX 1.40, below 1.30 some of the packages
   will not work.
-* Uptodate LaTeX is recommended.
+* An up-to-date LaTeX installation is recommended.
 * Additional packages can be necessary, e.g. I had to install
   language/armenian, fonts/tipa, fonts/wsuipa, fonts/fc,
   fonts/utopia, fonts/greek/cbfonts, ...
-  Probably TeXLive would be a good idea (I haven't tested).
+  Probably TeX Live would be a good idea (I haven't tested).
 * Some packages of mine I haven't updated yet (hyperref, ...).
 * Some new packages of mine I will put on CTAN, but at time
   of writing, they aren't available yet.
-* PDF postprocessing, I have used two steps:
+* PDF post-processing, I have used two steps:
   1. a) I have written a tool that analyzes page stream contents and
         optimizes them (removal of unnecessary color settings, minimize
         translation operations, ...).
@@ -321,9 +341,9 @@ modules himself:
      b) For reading and writing the PDF file I have used PDFBox
         --> PDFBox-0.7.2.jar (http://www.pdfbox.org/)
      c) To get better results I patched some of the classes
-        of PDFBox (double instead of float for numbers, write module).
+        of PDFBox (especially the write module).
         --> pdfbox-rewrite.jar
-  2. The final conversion step was done by Mulitivalent, because
+  2. The final conversion step was done by Multivalent, because
      it makes a very good job in PDF compression:
      --> Multivalent20060102.jar (http://multivalent.sourceforge.net/)
   Multivalent and PDFBox are available, pdfbox-rewrite.jar, however,
