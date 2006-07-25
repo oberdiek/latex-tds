@@ -1,0 +1,12 @@
+*** classes.dtx.org	2006-05-21 17:26:00.000000000 +0200
+--- classes.dtx	2006-07-25 09:28:43.000000000 +0200
+***************
+*** 135,140 ****
+--- 135,141 ----
+  %    We do want an index, using linenumbers
+  %    \begin{macrocode}
+  \EnableCrossrefs
++ \CodelineIndex
+  %    \end{macrocode}
+  %    We use so many \file{docstrip} modules that we set the
+  %    \texttt{StandardModuleDepth} counter to 1.
