@@ -373,5 +373,6 @@ I. HISTORY
 2006/06/03
   * Modules psnfss and babel added, now all modules are covered.
 2006/06/07
-  * The project hits CTAN.
-
+  * The project uploaded to CTAN.
+2006/07/25
+  * Index added to base/classes.dtx.
