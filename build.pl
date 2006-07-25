@@ -236,6 +236,10 @@ section('Unpacking');
 section('Patches');
 {
     ; #
+    
+    if ($modules{'base'}) {
+        patch("base/classes.dtx");
+    }
 
     if ($modules{'psnfss'}) {
         chdir "$dir_build/psnfss";
