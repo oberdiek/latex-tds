@@ -43,7 +43,7 @@ my @required_list = (
     'graphics',
     'tools'
 );
-my @pkg_list = ('base', @required_list, $prj, 'src');
+my @pkg_list = ('base', @required_list, $prj, 'source');
 
 my $dir_incoming = 'incoming';
 my $dir_incoming_ctan = "$dir_incoming/ctan";
@@ -186,7 +186,7 @@ section('Remove previous build');
 {
     foreach my $pkg (@list_modules) {
         run("$prg_rm -rf $dir_build/$pkg");
-        my $distribfile = "$dir_distrib/$pkg-tds.zip";
+        my $distribfile = "$dir_distrib/$pkg.zip";
         unlink $distribfile if -f $distribfile;
     }
 }
@@ -567,13 +567,13 @@ if ($modules{'base'}) {
     run("$prg_pdflatex source2e"); # hydestopt
     install_pdf('base', 'source2e');
     map { complex_dtx $_ } qw[
+        classes
         doc
         docstrip
         letter
     ];
     map { simple_gen 'dtx', $_ } qw[
         alltt
-        classes
         exscale
         fixltx2e
         graphpap
@@ -925,11 +925,11 @@ if ($modules{'babel'}) {
     chdir $cwd;
 }
 
-### Module src
-if ($modules{'src'}) {
-    section('Module src');
+### Module source
+if ($modules{'source'}) {
+    section('Module source');
 
-    my $dest_dir = "$dir_build/src/texmf/source/latex/latex-tds";
+    my $dest_dir = "$dir_build/source/texmf/source/latex/latex-tds";
     install $dest_dir, qw[
         build.pl
         readme.txt
@@ -970,7 +970,7 @@ section('Distrib');
     ensure_directory($dir_distrib);
     for my $pkg (@list_modules) {
         my $dir_tds = "$dir_build/$pkg/texmf";
-        my $file_distrib = "$cwd/$dir_distrib/$pkg-tds.zip";
+        my $file_distrib = "$cwd/$dir_distrib/$pkg.zip";
         if (-d $dir_tds) {
             run_zip($file_distrib, $dir_tds);
         }
@@ -984,10 +984,10 @@ section('Distrib');
 section('Result');
 {
     for my $pkg (@list_modules) {
-        my $file = "$dir_distrib/$pkg-tds.zip";
+        my $file = "$dir_distrib/$pkg.zip";
         if (-f $file) {
             system("$prg_ls -l $file");
-            system("$prg_ls -l $dir_distrib/readme.txt")if $pkg eq 'src';
+            system("$prg_ls -l $dir_distrib/readme.txt")if $pkg eq 'source';
         }
         else {
             print "!!! Warning: Missing distribution for `$pkg'!\n";
