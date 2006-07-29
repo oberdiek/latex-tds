@@ -29,14 +29,15 @@ $^W=1; # turn warning on
 #
 my $file        = 'ziptimetree';
 my $program     = 'ZIP-TimeTree';
-my $version     = '1.1';
-my $date        = '2006/06/07';
+my $version     = '1.2';
+my $date        = '2006/06/15';
 my $author      = 'Heiko Oberdiek';
 my $copyright   = "Copyright (C) 2006 by $author.";
 #
 # History:
 #   2006/06/04 v1.0: First release.
 #   2006/06/07 v1.1: License LGPL.
+#   2006/06/15 v1.2: Small correction in option code.
 
 ### program identification
 my $title = "$program $version, $date - $copyright\n";
@@ -145,8 +146,8 @@ GetOptions(
     '9'         => sub { $compression = 9 },
     'help!'     => sub { die $usage },
     'quiet'     => sub { $log_level = $log_quiet },
-    'verbose!'  => sub { $log_level = $log_verbose },
-    'debug!'    => sub { $log_level = $log_debug },
+    'verbose'   => sub { $log_level = $log_verbose },
+    'debug'     => sub { $log_level = $log_debug },
     'update!'   => \$update,
     'root!'     => \$root,
     'exclude=s' => \@exclude,
