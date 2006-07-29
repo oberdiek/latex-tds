@@ -61,6 +61,7 @@ chomp(my $cwd = `pwd`);
 my $jar_pdfbox_rewrite = "$cwd/$dir_lib/pdfbox-rewrite.jar";
 my $jar_multivalent = "$cwd/$dir_lib/Multivalent20060102.jar";
 
+my $file_zip_comment = "$cwd/zip-comment.txt";
 my $file_tmp = "$cwd/$dir_build/tmp.pdf";
 my $file_tmp_o = "$cwd/$dir_build/tmp-o.pdf";
 
@@ -1114,6 +1115,7 @@ sub run_zip ($$) {
     my $zip_file = shift;
     my $dir_start = shift;
     run("$prg_ziptimetree --verbose --noroot $zip_file $dir_start");
+    run("$prg_zip -z $zip_file <$file_zip_comment");
 }
 
 sub info ($) {

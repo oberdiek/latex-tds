@@ -384,4 +384,5 @@ I. HISTORY
 2006/07/29
   * Index added to base/classes.dtx.
   * ZIP files renamed: '*-tds.zip' -> '*.zip'
+  * Comment added to ZIP files.
   * Update of readme.txt.
