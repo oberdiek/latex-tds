@@ -1,4 +1,4 @@
-readme.txt for project latex-tds, 2006/06/07
+readme.txt for project latex-tds, 2006/07/29
 
 TABLE OF CONTENTS
 =================
@@ -87,15 +87,21 @@ From there the following files can be downloaded:
 * readme.txt (this file)
 * The module distribution files, see the module list above
   for the available modules, e.g:
-    base-tds.zip
-    tools-tds.zip
+    base.zip
+    tools.zip
     ...
 * The sources, mainly the build script, configuration and
   driver files, and patches:
-    src-tds.zip
+    source.zip
 * And the universe, the contents of all the other ZIP files,
   merged together:
-    latex-tds-tds.zip
+    latex-tds.zip
+
+It is possible that some or all ZIP archive files are also available
+in the install subtree:
+  CTAN:install/macros/latex/base.zip
+  CTAN:install/macros/latex/required/tools.zip
+  ...
 
 
 C. INSTALLATION HINTS
@@ -106,9 +112,9 @@ process. You get a TDS compliant tree just by unpacking.
 
 Example:
   cd /some/where/texmf
-  unzip latex-tds-tds
+  unzip latex-tds
 or unzip's option `-d':
-  unzip latex-tds-tds -d /some/where/texmf
+  unzip latex-tds -d /some/where/texmf
 
 Instead of the universe ZIP files single modules can be selected.
 
@@ -215,6 +221,7 @@ Documentation driver
 
 Patches
 -------
+  patch/classes.dtx.diff    patch for base/classes.dtx
   patch/albanian.dtx.diff   patch for babel/albanian.dtx
   patch/athnum.dtx.diff     patch for babel/athnum.dtx
   patch/bbcompat.dtx.diff   patch for babel/bbcompat.dtx
@@ -374,5 +381,7 @@ I. HISTORY
   * Modules psnfss and babel added, now all modules are covered.
 2006/06/07
   * The project uploaded to CTAN.
-2006/07/25
+2006/07/29
   * Index added to base/classes.dtx.
+  * ZIP files renamed: '*-tds.zip' -> '*.zip'
+  * Update of readme.txt.
