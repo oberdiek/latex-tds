@@ -237,7 +237,7 @@ section('Unpacking');
 section('Patches');
 {
     ; #
-    
+
     if ($modules{'base'}) {
         patch("base/classes.dtx");
     }
