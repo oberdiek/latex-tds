@@ -45,6 +45,13 @@ my @required_list = (
 );
 my @pkg_list = ('base', @required_list, $prj, 'source');
 
+my $zip_comment = <<'END_ZIP_COMMENT';
+**************************************************
+* This file is part of project 'latex-tds', see  *
+* CTAN:macros/latex/contrib/latex-tds/readme.txt *
+**************************************************
+END_ZIP_COMMENT
+
 my $dir_incoming = 'incoming';
 my $dir_incoming_ctan = "$dir_incoming/ctan";
 my $dir_incoming_ams = "$dir_incoming/ams";
@@ -61,7 +68,7 @@ chomp(my $cwd = `pwd`);
 my $jar_pdfbox_rewrite = "$cwd/$dir_lib/pdfbox-rewrite.jar";
 my $jar_multivalent = "$cwd/$dir_lib/Multivalent20060102.jar";
 
-my $file_zip_comment = "$cwd/zip-comment.txt";
+my $file_zip_comment = "$cwd/$dir_build/zip-comment.txt";
 my $file_tmp = "$cwd/$dir_build/tmp.pdf";
 my $file_tmp_o = "$cwd/$dir_build/tmp-o.pdf";
 
@@ -969,6 +976,13 @@ if ($modules{$prj}) {
 section('Distrib');
 {
     ensure_directory($dir_distrib);
+
+    # write zip comment file
+    open(OUT, '>', $file_zip_comment)
+            or die "$error Cannot write file `$file_zip_comment'!\n";
+    print OUT $zip_comment;
+    close OUT;
+
     for my $pkg (@list_modules) {
         my $dir_tds = "$dir_build/$pkg/texmf";
         my $file_distrib = "$cwd/$dir_distrib/$pkg.zip";

@@ -1,4 +1,0 @@
-**************************************************
-* This file is part of project 'latex-tds', see  *
-* CTAN:macros/latex/contrib/latex-tds/readme.txt *
-**************************************************
