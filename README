@@ -1,4 +1,4 @@
-readme.txt for project latex-tds, 2006/07/29
+readme.txt for project latex-tds, 2006/07/31
 
 TABLE OF CONTENTS
 =================
@@ -37,9 +37,9 @@ How it has started
 The project started as I wanted to install the new LaTeX release 2005/12/01
 that was announced at 2006/04/27. However the files aren't packed in
 TDS format, ready for unpacking in the destination directory. And
-the documentation files were not yes generated or the provided
-PDF files misses basic features such as bookmarks or link support.
-Thus this project has started, I thought I could finish it during
+the documentation files were not yet generated or the provided
+PDF files are lacking of basic features such as bookmarks or link support.
+Thus this project has started. I thought it could be finished during
 the afternoon at the day of the announcement ...
 
 Goals of the project
@@ -78,12 +78,12 @@ C. DOWNLOAD
 ===========
 
 --> At time of writing, the project is not yet available on CTAN.
---> Thus I am describing here a proposal only.
+--> Thus I am describing a proposal only.
 
 The home of the project is located at:
   CTAN:macros/latex/contrib/latex-tds/
 
-From there the following files can be downloaded:
+The following files can be downloaded:
 * readme.txt (this file)
 * The module distribution files, see the module list above
   for the available modules, e.g:
@@ -93,7 +93,9 @@ From there the following files can be downloaded:
 * The sources, mainly the build script, configuration and
   driver files, and patches:
     source.zip
-* And the universe, the contents of all the other ZIP files,
+  Some of the used tools are not provided, see section
+  `Building Hints'.
+* And the universe, the contents of all the ZIP files above,
   merged together:
     latex-tds.zip
 
@@ -381,7 +383,7 @@ I. HISTORY
   * Modules psnfss and babel added, now all modules are covered.
 2006/06/07
   * The project uploaded to CTAN.
-2006/07/29
+2006/07/31
   * Index added to base/classes.dtx.
   * ZIP files renamed: '*-tds.zip' -> '*.zip'
   * Comment added to ZIP files.
