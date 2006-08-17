@@ -514,7 +514,7 @@ section('Install tex doc');
             ChangeLog
             tds.html
         ]);
-        install('texmf/info', qw[
+        install('texmf/doc/info', qw[
             tds.info
         ]);
         chdir $cwd;
