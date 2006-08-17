@@ -1,4 +1,4 @@
-readme.txt for project latex-tds, 2006/07/31
+readme.txt for project latex-tds, 2006/08/17
 
 TABLE OF CONTENTS
 =================
@@ -68,6 +68,7 @@ Module list
             ftp://ftp.ams.org/pub/tex/amsrefs.zip
 * psnfss    CTAN:macros/latex/required/psnfss.zip
 * babel     CTAN:macros/latex/required/babel.zip
+* tds       CTAN:tds.zip
 
 Author
 ------
@@ -100,7 +101,7 @@ The following files can be downloaded:
     latex-tds.zip
 
 It is possible that some or all ZIP archive files are also available
-in the install subtree:
+in the install subtree, then a possible location could be:
   CTAN:install/macros/latex/base.zip
   CTAN:install/macros/latex/required/tools.zip
   ...
@@ -203,9 +204,10 @@ Configuration
   tex/ltnews.cfg            for LaTeX News of latex/base
   tex/ltxdoc.cfg            setup for class ltxdoc
   tex/ltxguide.cfg          setup for the guide manuals in latex/base
-                            and required/psnfss.
+                            and required/psnfss
   tex/manual.cfg            setup for errata list of the LaTeX manual
                             in latex/base
+  tex/tdsguide.cfg          setup for class tdsguide.cls
 
 Documentation driver
 --------------------
@@ -388,3 +390,5 @@ I. HISTORY
   * ZIP files renamed: '*-tds.zip' -> '*.zip'
   * Comment added to ZIP files.
   * Update of readme.txt.
+2006/08/17
+  * Module tds for CTAN:tds/ added.
