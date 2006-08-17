@@ -43,7 +43,7 @@ my @required_list = (
     'graphics',
     'tools'
 );
-my @pkg_list = ('base', @required_list, $prj, 'source');
+my @pkg_list = ('base', @required_list, $prj, 'source', 'tds');
 
 my $zip_comment = <<'END_ZIP_COMMENT';
 **************************************************
@@ -185,6 +185,7 @@ info("Build modules: @list_modules");
     download_ctan('babel',    'macros/latex/required');
     download_ctan('amslatex', 'macros/latex/required');
     download_ctan('psnfss',   'macros/latex/required');
+    download_ctan('tds',      '');
     download_ams('amslatex');
     download_ams('amsrefs');
 }
@@ -238,6 +239,7 @@ section('Unpacking');
     unpack_ams('amsrefs');
     unpack_psnfss('lw35nfss');
     unpack_psnfss('freenfss');
+    unpack_ctan('tds');
 }
 
 ### Patches
@@ -324,6 +326,14 @@ section('Install source');
         lahyph.tex
     ]);
     # *.tex
+    install_gen_source('', 'tds', qw[
+        Makefile
+        packages.zip
+        tds2texi.el
+        tdsguide.cls
+        tds.sed
+        tds.tex
+    ]);
 }
 
 ### Docstrip
@@ -493,6 +503,19 @@ section('Install tex doc');
         install('texmf/tex/generic/hyphen', qw[
             iahyphen.tex
             icehyph.tex
+        ]);
+        chdir $cwd;
+    }
+
+    if ($modules{'tds'}) {
+        chdir "$dir_build/tds";
+        install('texmf/doc/tds', qw[
+            README
+            ChangeLog
+            tds.html
+        ]);
+        install('texmf/info', qw[
+            tds.info
         ]);
         chdir $cwd;
     }
@@ -929,6 +952,42 @@ if ($modules{'babel'}) {
     run("$prg_pdflatex babel.tex");
     run("$prg_pdflatex babel.tex");
     install_babel_pdf('babel');
+
+    chdir $cwd;
+}
+
+### Generate documentation for tds
+if ($modules{'tds'}) {
+    section('Documentation: tds');
+
+    chdir "$dir_build/tds";
+
+    my $file_tds = 'tds.tex';
+    my $file_tds_new = 'tds.new';
+
+    # make nicer references and use CVS date instead of current date
+    open(IN, $file_tds) or die "$error Cannot open `$file_tds'!\n";
+    open(OUT, '>', $file_tds_new) or die "$error Cannot write `$file_tds_new'!\n";
+    while (<IN>) {
+        s/Appendix~\\ref/\\appref/g;
+        s/Section~\\ref/\\secref/g;
+        if (/^% \$Id:.* (\d\d\d\d)\/(\d\d)\/(\d\d) /) {
+            print OUT <<"END_TEXT";
+\\year=$1\\relax
+\\month=$2\\relax
+\\day=$3\\relax
+END_TEXT
+        }
+        print OUT;
+    }
+    close(OUT);
+    close(IN);
+
+    unlink('tds.aux');
+    run("$prg_pdflatex $file_tds_new");
+    run("$prg_pdflatex $file_tds_new");
+    run("$prg_pdflatex $file_tds_new");
+    install_gen_pdf('', 'tds', 'tds');
 
     chdir $cwd;
 }
