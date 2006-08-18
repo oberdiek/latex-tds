@@ -180,21 +180,26 @@ belonging to the project `latex-tds'.
 E. MANIFEST
 ===========
 
+Included are the projects `adjust_checksum' and `ziptimetree'.
+They are projects of their own.
+
 Documentation
 -------------
   readme.txt                this file
 
 Licenses
 --------
-  license/latex-tds/lppl.txt     LPPL (The LaTeX Project Public License)
-  license/ziptimetree/lgpl.txt   LGPL (GNU Lesser General Public License)
+  license/latex-tds/lppl.txt       LPPL (The LaTeX Project Public License)
+  license/adjust_checksum/lppl.txt LPPL (The LaTeX Project Public License)
+  license/ziptimetree/lgpl.txt     LGPL (GNU Lesser General Public License)
 
 Scripts
 -------
   build.pl                  main script for building the distribution
-  lib/ziptimetree.pl        help script that generates a ZIP file from
+  adjust_checksum.pl        Perl script that runs a DTX file through
+                            LaTeX and corrects its \Checksum if necessary
+  ziptimetree.pl            Perl script that generates a ZIP file from
                             a directory tree with sorted entries
-                            LGPL)
 
 Configuration
 -------------

@@ -52,14 +52,14 @@ my $zip_comment = <<'END_ZIP_COMMENT';
 **************************************************
 END_ZIP_COMMENT
 
+my $error = "!!! Error:";
+
 my $dir_incoming = 'incoming';
 my $dir_incoming_ctan = "$dir_incoming/ctan";
 my $dir_incoming_ams = "$dir_incoming/ams";
 my $dir_build = 'build';
 my $dir_lib = 'lib';
 my $dir_license = 'license';
-my $dir_license_latex_tds = "$dir_license/$prj";
-my $dir_license_ziptimetree = "$dir_license/ziptimetree";
 my $dir_tex = 'tex';
 my $dir_patch = 'patch';
 my $dir_distrib = 'distrib';
@@ -72,7 +72,10 @@ my $file_zip_comment = "$cwd/$dir_build/zip-comment.txt";
 my $file_tmp = "$cwd/$dir_build/tmp.pdf";
 my $file_tmp_o = "$cwd/$dir_build/tmp-o.pdf";
 
-my $prg_checksum    = "adjust_checksum";
+my $file_ziptimetree = get_perl_script('ziptimetree');
+my $file_adjust_checksum = get_perl_script('adjust_checksum');
+
+my $prg_checksum    = $file_adjust_checksum;
 my $prg_bibtex      = "bibtex";
 my $prg_chmod       = "chmod";
 my $prg_cp          = 'cp -p';
@@ -94,15 +97,13 @@ my $prg_sort        = "sort";
 my $prg_unzip       = 'unzip';
 my $prg_wget        = 'wget';
 my $prg_zip         = 'zip';
-my $prg_ziptimetree = 'lib/ziptimetree.pl';
+my $prg_ziptimetree = $file_ziptimetree;
 
 $ENV{'TEXINPUTS'}  = "$cwd/tex:.:texmf/tex//:";
 $ENV{'BSTINPUTS'}  = '.:texmf/bibtex//:';    # amslatex
 $ENV{'TFMFONTS'}   = 'texmf/fonts/tfm//:';   # psnfss
 $ENV{'VFFONTS'}    = 'texmf/fonts/vf//:';    # psnfss
 $ENV{'INDEXSTYLE'} = '.:texmf/makeindex//:'; # babel
-
-my $error = "!!! Error:";
 
 sub install ($@);
 
@@ -1002,16 +1003,20 @@ END_TEXT
 if ($modules{'source'}) {
     section('Module source');
 
-    my $dest_dir = "$dir_build/source/texmf/source/latex/latex-tds";
+    my $dir_dest = "$dir_build/source/texmf/source/latex/latex-tds";
+    my $dir_scripts = "$dir_build/scripts";
+    
     install $dest_dir, qw[
         build.pl
         readme.txt
     ];
-    install "$dest_dir/tex", glob("$dir_tex/*.*");
-    install "$dest_dir/patch", glob("$dir_patch/*.*");
-    install "$dest_dir/lib", "$dir_lib/ziptimetree.pl";
-    install "$dest_dir/license/latex-tds", "$dir_license_latex_tds/lppl.txt";
-    install "$dest_dir/license/ziptimetree", "$dir_license_ziptimetree/lgpl.txt";
+    install "$dir_dest/tex", glob("$dir_tex/*.*");
+    install "$dir_dest/patch", glob("$dir_patch/*.*");
+    install "$dir_scripts/ziptimetree", $file_ziptimetree;
+    install "$dir_scripts/adjust_checksum", $file_adjust_checksum;
+    install "$dir_dest/license/latex-tds", "$dir_license/latex-tds/lppl.txt";
+    install "$dir_dest/license/ziptimetree", "$dir_license/ziptimetree/lgpl.txt";
+    install "$dir_dest/license/adjust_checksum", "$dir_license/adjust_checksum/lppl.txt";
     install $dir_distrib, 'readme.txt';
 }
 
@@ -1215,6 +1220,23 @@ sub patch ($) {
     my $patch = $file;
     $patch =~ s/^.*\/([^\/]+)$/$1/;
     run("$prg_patch $dir_build/$file $dir_patch/$patch.diff");
+}
+
+sub get_perl_script ($) {
+    # Either the source of latex-tds is unpacked as TDS tree,
+    # then the perl script is below TDS:scripts/
+    # or it can be put into the lib directory $dir_lib that I am using.
+    my $script = shift;
+    if (-f "$dir_lib/$script.pl") {
+        $script = "$dir_lib/$script.pl";
+    }
+    else {
+        $script = "../../../scripts/$script/$script.pl";
+    }
+    die "$error Script $script.pl not found!\n" unless -f $script;
+    run("$prg_chmod +x $script") unless -x $script;
+    die "$error Script $script is not executable!\n" unless -x $script;
+    $script;
 }
 
 __END__
