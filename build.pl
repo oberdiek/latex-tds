@@ -409,15 +409,14 @@ section('TDS cleanup');
     if ($modules{'babel'}) {
         my $tds_dir  = "$dir_build/babel/texmf";
         my $from_dir = "$tds_dir/tex/generic/babel";
-        my $dest_dir;
 
         ### Correction for *.drv files
         run("$prg_mv $from_dir/*.drv $dir_build/babel");
 
         ### Correction for *.ist files
-        $dest_dir = "$tds_dir/makeindex/babel";
-        ensure_directory($dest_dir);
-        run("$prg_mv $from_dir/*.ist $dest_dir");
+        my $dir_dest = "$tds_dir/makeindex/babel";
+        ensure_directory($dir_dest);
+        run("$prg_mv $from_dir/*.ist $dir_dest");
     }
 }
 
@@ -1006,7 +1005,7 @@ if ($modules{'source'}) {
     my $dir_dest = "$dir_build/source/texmf/source/latex/latex-tds";
     my $dir_scripts = "$dir_build/scripts";
     
-    install $dest_dir, qw[
+    install $dir_dest, qw[
         build.pl
         readme.txt
     ];
