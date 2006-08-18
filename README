@@ -1,4 +1,4 @@
-readme.txt for project latex-tds, 2006/08/17
+readme.txt for project latex-tds, 2006/08/18
 
 TABLE OF CONTENTS
 =================
@@ -390,5 +390,5 @@ I. HISTORY
   * ZIP files renamed: '*-tds.zip' -> '*.zip'
   * Comment added to ZIP files.
   * Update of readme.txt.
-2006/08/17
+2006/08/18
   * Module tds for CTAN:tds/ added.
