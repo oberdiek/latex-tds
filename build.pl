@@ -335,7 +335,6 @@ section('Install source');
     # *.tex
     install_gen_source('', 'tds', qw[
         Makefile
-        packages.zip
         tds2texi.el
         tdsguide.cls
         tds.sed
