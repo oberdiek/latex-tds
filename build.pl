@@ -1013,9 +1013,8 @@ if ($modules{'source'}) {
     install "$dir_dest/patch", glob("$dir_patch/*.*");
     install "$dir_scripts/ziptimetree", $file_ziptimetree;
     install "$dir_scripts/adjust_checksum", $file_adjust_checksum;
-    install "$dir_dest/license/latex-tds", "$dir_license/latex-tds/lppl.txt";
+    install "$dir_dest/license", "$dir_license/lppl.txt";
     install "$dir_dest/license/ziptimetree", "$dir_license/ziptimetree/lgpl.txt";
-    install "$dir_dest/license/adjust_checksum", "$dir_license/adjust_checksum/lppl.txt";
     install $dir_distrib, 'readme.txt';
 }
 
