@@ -1003,7 +1003,7 @@ if ($modules{'source'}) {
     section('Module source');
 
     my $dir_dest = "$dir_build/source/texmf/source/latex/latex-tds";
-    my $dir_scripts = "$dir_build/scripts";
+    my $dir_scripts = "$dir_build/source/texmf/scripts";
     
     install $dir_dest, qw[
         build.pl
