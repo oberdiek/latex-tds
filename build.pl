@@ -1107,7 +1107,12 @@ sub install_gen_pdf ($$$) {
     ensure_directory($dir_dest);
     if ($opt_postprocess) {
         printsize($file_source, 0);
-        run("$prg_java -jar $jar_pdfbox_rewrite $file_source $file_tmp");
+        if (-f $jar_pdfbox_rewrite) {
+            run("$prg_java -jar $jar_pdfbox_rewrite $file_source $file_tmp");
+        }
+        else {
+            run("$prg_cp $file_source $file_tmp");
+        }
         run("$prg_java -cp $jar_multivalent tool.pdf.Compress -old $file_tmp");
         run("$prg_mv $file_tmp_o $file_dest");
         printsize($file_dest, 1);

@@ -78,9 +78,6 @@ Heiko Oberdiek <oberdiek at uni-freiburg.de>
 C. DOWNLOAD
 ===========
 
---> At time of writing, the project is not yet available on CTAN.
---> Thus I am describing a proposal only.
-
 The home of the project is located at:
   CTAN:macros/latex/contrib/latex-tds/
 
@@ -343,17 +340,16 @@ H. BUILD HINTS
 The most important advice I can give: `forget it'!
 The purpose of the source files are rather to show, what was
 done in which way.
-The *-tds.zip files are the goal of the project, not the
+The *.zip with TDS trees are the goal of the project, not the
 build process. Some remarks, if someone wants to build the
 modules himself:
-* TeX compiler: pdfTeX 1.40, below 1.30 some of the packages
+* TeX compiler: recent pdfTeX, below 1.30 some of the packages
   will not work.
 * An up-to-date LaTeX installation is recommended.
 * Additional packages can be necessary, e.g. I had to install
   language/armenian, fonts/tipa, fonts/wsuipa, fonts/fc,
   fonts/utopia, fonts/greek/cbfonts, ...
   Probably TeX Live would be a good idea (I haven't tested).
-* Some packages of mine I haven't updated yet (hyperref, ...).
 * Some new packages of mine I will put on CTAN, but at time
   of writing, they aren't available yet.
 * PDF post-processing, I have used two steps:
@@ -371,9 +367,12 @@ modules himself:
      --> Multivalent20060102.jar (http://multivalent.sourceforge.net/)
   Multivalent and PDFBox are available, pdfbox-rewrite.jar, however,
   is just a first prototype, not ripe for a release.
-  But you can give the build script the option --nopostprocess,
-  that will skip the postprocess steps. Or you modify the
-  function to use the Multivalent step only.
+  Therefore this step of post-processing is optional for the
+  project latex-tds. The build script looks for the library and
+  skips this steps automatically if necessary.
+    If you give the build script the option --nopostprocess,
+  then it will skip the postprocess steps (building is faster,
+  the pdf files a little larger).
     Install the jar files in the directory 'lib' where
   they are expected by the build script.
 * Unix, Perl background is expected.
@@ -398,3 +397,6 @@ I. HISTORY
   * Update of readme.txt.
 2006/08/18
   * Module tds for CTAN:tds/ added.
+  * Obsolete hyphenation patterns added to babel's source directory
+    to avoid violation of LPPL.
+  * Script adjust_checksum added and scripts are put below TDS:scripts.
