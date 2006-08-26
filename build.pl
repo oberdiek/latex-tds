@@ -1251,11 +1251,11 @@ sub get_perl_script ($) {
     # then the perl script is below TDS:scripts/
     # or it can be put into the lib directory $dir_lib that I am using.
     my $script = shift;
-    if (-f "$dir_lib/$script.pl") {
-        $script = "$dir_lib/$script.pl";
+    if (-f "$cwd/$dir_lib/$script.pl") {
+        $script = "$cwd/$dir_lib/$script.pl";
     }
     else {
-        $script = "../../../scripts/$script/$script.pl";
+        $script = "$cwd/../../../scripts/$script/$script.pl";
     }
     die "$error Script $script.pl not found!\n" unless -f $script;
     run("$prg_chmod +x $script") unless -x $script;
