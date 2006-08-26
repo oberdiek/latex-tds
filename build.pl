@@ -454,8 +454,6 @@ section('Install tex doc');
             manifest.txt
             patches.txt
             t*.txt
-            sample2e.tex
-            small2e.tex
         ];
         install 'texmf/tex/latex/base', qw[
             *.cls
@@ -466,6 +464,8 @@ section('Install tex doc');
             lppl.tex
             testpage.tex
             ltxcheck.tex
+            sample2e.tex
+            small2e.tex
         ];
         chdir $cwd;
     }

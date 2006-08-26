@@ -401,3 +401,5 @@ I. HISTORY
     to avoid violation of LPPL.
   * Script adjust_checksum added and scripts are put below TDS:scripts.
   * TDS:makeindex/base/ renamed to TDS:makeindex/latex/
+  * Exception for sample2e.tex and small2e.tex that now go into
+    TDS:tex/latex/base/.
