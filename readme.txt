@@ -1,4 +1,4 @@
-readme.txt for project latex-tds, 2006/08/18
+readme.txt for project latex-tds, 2006/08/26
 
 TABLE OF CONTENTS
 =================
@@ -54,7 +54,7 @@ Goals of the project
 Scope
 -----
 I don't have the time to assemble a TeX distribution with
-thousands of packages. Therefore I restricted me to the
+thousands of packages. Therefore I restricted myself to the
 LaTeX base distribution and the required bundles.
 In the following I will use the term `module' for a package bundle.
 
@@ -395,8 +395,9 @@ I. HISTORY
   * ZIP files renamed: '*-tds.zip' -> '*.zip'
   * Comment added to ZIP files.
   * Update of readme.txt.
-2006/08/18
+2006/08/26
   * Module tds for CTAN:tds/ added.
   * Obsolete hyphenation patterns added to babel's source directory
     to avoid violation of LPPL.
   * Script adjust_checksum added and scripts are put below TDS:scripts.
+  * TDS:makeindex/base/ renamed to TDS:makeindex/latex/

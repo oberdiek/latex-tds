@@ -343,6 +343,27 @@ section('Install source');
     ]);
 }
 
+### Patch source files after source install
+section('Paches after source install');
+{
+    if ($modules{'base'}) {
+        # base: TDS:makeindex/base -> TDS:makeindex/latex
+        chdir "$dir_build/base";
+        my $file_ins = 'docstrip.ins';
+        my $file_org = 'docstrip.ins.org';
+        rename $file_ins, $file_org;
+        open(IN, '<', $file_org) or die "$error Cannot open `$file_org'!\n";
+        open(OUT, '>', $file_ins) or die "$error Cannot write `$file_ins'!\n";
+        while (<IN>) {
+            s|makeindex/base|makeindex/latex|;
+            print OUT;
+        }
+        close(OUT);
+        close(IN);
+        chdir $cwd;
+    }
+}
+
 ### Docstrip
 section('Docstrip');
 {
@@ -1004,7 +1025,7 @@ if ($modules{'source'}) {
 
     my $dir_dest = "$dir_build/source/texmf/source/latex/latex-tds";
     my $dir_scripts = "$dir_build/source/texmf/scripts";
-    
+
     install $dir_dest, qw[
         build.pl
         readme.txt
