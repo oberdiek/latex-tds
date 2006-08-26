@@ -1,4 +1,4 @@
-Building latex-tds, 2006/08/26 v1.92, Copyright 2006 Heiko Oberdiek
+Building latex-tds, 2006/08/26 v1.93, Copyright 2006 Heiko Oberdiek
 ===================================================================
 * Build modules: base amslatex babel psnfss cyrillic graphics tools latex-tds source tds
 
@@ -1311,6 +1311,44 @@ Archive:  incoming/ctan/tds.zip
 === Patches ===
 * system: patch build/base/classes.dtx patch/classes.dtx.diff
 patching file build/base/classes.dtx
-* system: lib/adjust_checksum.pl psfonts.dtx
-Can't exec "lib/adjust_checksum.pl": Datei oder Verzeichnis nicht gefunden at ./build.pl line 1191.
-!!! Error: Failed to execute: Datei oder Verzeichnis nicht gefunden
+* system: /home/one/work/texprj/latex-tds/lib/adjust_checksum.pl psfonts.dtx
+ADJUST_CHECKSUM 1.1, 2006/02/12 - Copyright (c) 2002, 2006 by Heiko Oberdiek.
+*** Running LaTeX ...
+This is pdfTeX, Version 3.141592-1.40.0-beta-20060213 (Web2C 7.5.5)
+entering extended mode
+*** Looking for checksum statement ...
+==> Checksum not passed (1101<>1106).
+*** Fixing Checksum ...
+==> Checksum fixed:
+%\CheckSum{1106}
+*** Ready.
+* system: patch build/babel/greek.ins patch/greek.ins.diff
+patching file build/babel/greek.ins
+* system: patch build/babel/bbcompat.dtx patch/bbcompat.dtx.diff
+patching file build/babel/bbcompat.dtx
+* system: patch build/babel/athnum.dtx patch/athnum.dtx.diff
+patching file build/babel/athnum.dtx
+* system: patch build/babel/albanian.dtx patch/albanian.dtx.diff
+patching file build/babel/albanian.dtx
+* system: patch build/babel/finnish.dtx patch/finnish.dtx.diff
+patching file build/babel/finnish.dtx
+* system: patch build/babel/frenchb.dtx patch/frenchb.dtx.diff
+patching file build/babel/frenchb.dtx
+
+=== Install source ===
+* system: mkdir -p 'texmf/source/latex/base'
+* system: cp -p *.dtx *.fdd *.ins *guide.tex ltnews*.tex source2e.tex ltx3info.tex latexbug.el texmf/source/latex/base/
+* system: mkdir -p 'texmf/source/latex/tools'
+* system: cp -p *.dtx *.ins texmf/source/latex/tools/
+* system: mkdir -p 'texmf/source/latex/graphics'
+* system: cp -p *.dtx *.ins *.tex texmf/source/latex/graphics/
+* system: mkdir -p 'texmf/source/latex/cyrillic'
+* system: cp -p *.dtx *.fdd *.ins texmf/source/latex/cyrillic/
+* system: mkdir -p 'texmf/source/latex/psnfss'
+* system: cp -p psnfss2e.tex *.dtx *.ins texmf/source/latex/psnfss/
+* system: mkdir -p 'texmf/source/generic/babel'
+* system: cp -p *.ins *.dtx *.fdd *.dat usage.tex tb*.tex texmf/source/generic/babel/
+* system: cp -p bghyphen.tex bghyphsi.tex mik2t2.tex catmik.tex lahyph.tex texmf/source/generic/babel/
+cp: Aufruf von stat für »bghyphen.tex« nicht möglich: Datei oder Verzeichnis nicht gefunden
+cp: Aufruf von stat für »bghyphsi.tex« nicht möglich: Datei oder Verzeichnis nicht gefunden
+!!! Error: Child exited with value 1!

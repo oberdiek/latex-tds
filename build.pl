@@ -326,9 +326,8 @@ section('Install source');
         tb*.tex
     ]);
     # babel/manifest.txt: to be removed in a future release
+    # already removed: bghyphen.tex, bghyphsi.tex
     install_gen_source('generic', 'babel', qw[
-        bghyphen.tex
-        bghyphsi.tex
         mik2t2.tex
         catmik.tex
         lahyph.tex
