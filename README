@@ -98,7 +98,7 @@ The following files can be downloaded:
     latex-tds.zip
 
 It is possible that some or all ZIP archive files are also available
-in the install subtree, then a possible location could be:
+in the install subtree, then possible locations could be:
   CTAN:install/macros/latex/base.zip
   CTAN:install/macros/latex/required/tools.zip
   ...
