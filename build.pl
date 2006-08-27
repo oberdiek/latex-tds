@@ -487,7 +487,7 @@ section('Install tex doc');
             sample2e.tex
             small2e.tex
         ];
-        install 'texm/source/latex/base', qw[
+        install 'texm/tex/latex/base', qw[
             texsys.cfg
         ];
         chdir $cwd;
