@@ -1277,7 +1277,11 @@ sub get_perl_script ($) {
         $script = "$cwd/$dir_lib/$script.pl";
     }
     else {
-        $script = "$cwd/../../../scripts/$script/$script.pl";
+        if (-f "$cwd/../../../scripts/latex-tds/$script.pl") {
+            $script = "$cwd/../../../scripts/latex-tds/$script.pl";
+        else {
+            $script = "$cwd/../../../scripts/$script/$script.pl";
+        }
     }
     die "$error Script $script.pl not found!\n" unless -f $script;
     run("$prg_chmod +x $script") unless -x $script;
