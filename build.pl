@@ -346,19 +346,39 @@ section('Install source');
 section('Paches after source install');
 {
     if ($modules{'base'}) {
-        # base: TDS:makeindex/base -> TDS:makeindex/latex
         chdir "$dir_build/base";
-        my $file_ins = 'docstrip.ins';
-        my $file_org = 'docstrip.ins.org';
-        rename $file_ins, $file_org;
-        open(IN, '<', $file_org) or die "$error Cannot open `$file_org'!\n";
-        open(OUT, '>', $file_ins) or die "$error Cannot write `$file_ins'!\n";
-        while (<IN>) {
-            s|makeindex/base|makeindex/latex|;
-            print OUT;
+    
+        # ltdirchk.dtx must be patched to fool it in
+        # not having texsys.cfg
+        {
+            my $file_dtx = 'ltdirchk.dtx';
+            my $file_org = 'ltdirchk.dtx.org';
+            rename $file_dtx, $file_org;
+            open(IN, '<', $file_org) or die "$error Cannot open `$file_org'!\n";
+            open(OUT, '>', $file_dtx) or die "$error Cannot write `$file_dtx'!\n";
+            while (<IN>) {
+                s/openin15=texsys.cfg/openin15=texsys.cfg-not-found/;
+                print OUT;
+            }
+            close(OUT);
+            close(IN);
         }
-        close(OUT);
-        close(IN);
+    
+        # base: TDS:makeindex/base -> TDS:makeindex/latex
+        {
+            my $file_ins = 'docstrip.ins';
+            my $file_org = 'docstrip.ins.org';
+            rename $file_ins, $file_org;
+            open(IN, '<', $file_org) or die "$error Cannot open `$file_org'!\n";
+            open(OUT, '>', $file_ins) or die "$error Cannot write `$file_ins'!\n";
+            while (<IN>) {
+                s|makeindex/base|makeindex/latex|;
+                print OUT;
+            }
+            close(OUT);
+            close(IN);
+        }
+        
         chdir $cwd;
     }
 }
@@ -466,6 +486,9 @@ section('Install tex doc');
             ltxcheck.tex
             sample2e.tex
             small2e.tex
+        ];
+        install 'texm/source/latex/base', qw[
+            texsys.cfg
         ];
         chdir $cwd;
     }
