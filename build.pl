@@ -1279,6 +1279,7 @@ sub get_perl_script ($) {
     else {
         if (-f "$cwd/../../../scripts/latex-tds/$script.pl") {
             $script = "$cwd/../../../scripts/latex-tds/$script.pl";
+        }
         else {
             $script = "$cwd/../../../scripts/$script/$script.pl";
         }
