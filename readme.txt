@@ -1,4 +1,4 @@
-readme.txt for project latex-tds, 2006/08/27
+readme.txt for project latex-tds, 2006/08/28
 
 TABLE OF CONTENTS
 =================
@@ -409,5 +409,7 @@ I. HISTORY
   * TDS:makeindex/base/ renamed to TDS:makeindex/latex/
   * Exception for sample2e.tex and small2e.tex that now go into
     TDS:tex/latex/base/.
-2006/08/27
+2006/08/28
   * Default texsys.cfg is generated.
+  * adjust_checksum.pl and ziptimetree.pl now moved from the scripts
+    branch to TDS:source/latex/latex-tds/lib/.
