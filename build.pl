@@ -1054,8 +1054,8 @@ if ($modules{'source'}) {
     ];
     install "$dir_dest/tex", glob("$dir_tex/*.*");
     install "$dir_dest/patch", glob("$dir_patch/*.*");
-    install "$dir_dest/lib/ziptimetree", $file_ziptimetree;
-    install "$dir_dest/lib/adjust_checksum", $file_adjust_checksum;
+    install "$dir_dest/lib", $file_ziptimetree;
+    install "$dir_dest/lib", $file_adjust_checksum;
     install "$dir_dest/license", "$dir_license/lppl.txt";
     install "$dir_dest/license/ziptimetree", "$dir_license/ziptimetree/lgpl.txt";
     install $dir_distrib, 'readme.txt';
