@@ -137,6 +137,12 @@ Hints
   necessary, consult the module's own documentation.
 
 [base]
+  * The default texsys.cfg that LaTeX provides is put
+    into tex/latex/base. It must be removed, if you need
+    a specialized version. Consult your TeX distribution
+    and doc/latex/base/source2e.pdf (module ltdirchk).
+    Usually changes are not required for many TeX distributions
+    such as Unix (web2c), MikTeX, ...
   * Formats need rebuilding (e.g., fmtutil).
 [babel]
   * Most hyphenation patterns aren't provided here. Usually you can
