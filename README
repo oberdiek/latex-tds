@@ -200,9 +200,9 @@ Licenses
 Scripts
 -------
   build.pl                  main script for building the distribution
-  adjust_checksum.pl        Perl script that runs a DTX file through
+  lib/adjust_checksum.pl    Perl script that runs a DTX file through
                             LaTeX and corrects its \Checksum if necessary
-  ziptimetree.pl            Perl script that generates a ZIP file from
+  lib/ziptimetree.pl        Perl script that generates a ZIP file from
                             a directory tree with sorted entries (LGPL)
 
 Configuration
