@@ -1,4 +1,4 @@
-readme.txt for project latex-tds, 2006/08/28
+readme.txt for project latex-tds, 2006/12/27
 
 TABLE OF CONTENTS
 =================
@@ -413,3 +413,6 @@ I. HISTORY
   * Default texsys.cfg is generated.
   * adjust_checksum.pl and ziptimetree.pl now moved from the scripts
     branch to TDS:source/latex/latex-tds/lib/.
+2006/12/27
+  * Fix of ltxguide.cfg that had loaded doc.sty that disturbs the
+    verbatim stuff in fntguide.tex.
