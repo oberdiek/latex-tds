@@ -1,4 +1,4 @@
-readme.txt for project latex-tds, 2006/12/27
+readme.txt for project latex-tds, 2007/01/08
 
 TABLE OF CONTENTS
 =================
@@ -160,7 +160,7 @@ Hints
 D. COPYRIGHT, LICENSE
 =====================
 
-Copyright 2006 Heiko Oberdiek.
+Copyright 2006, 2007 Heiko Oberdiek.
 
 License is LPPL 1.3c:
 
@@ -416,3 +416,5 @@ I. HISTORY
 2006/12/27
   * Fix of ltxguide.cfg that had loaded doc.sty that disturbs the
     verbatim stuff in fntguide.tex.
+2006/01/08
+  * Fix for documentation of longtable.
