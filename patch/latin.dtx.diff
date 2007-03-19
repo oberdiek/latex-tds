@@ -1,5 +1,15 @@
-*** latin.dtx.org	2007-03-19 22:01:04.000000000 +0100
---- latin.dtx	2007-03-19 22:01:57.000000000 +0100
+*** latin.dtx.org	2006-08-27 20:22:43.000000000 +0200
+--- latin.dtx	2007-03-19 22:26:13.000000000 +0100
+***************
+*** 170,175 ****
+--- 170,176 ----
+  %    \texttt{@} sign, etc.
+  %    \begin{macrocode}
+  %<*code>
++ \immediate\write16{latin.ldf: Patch for babel/3922 applied.}%
+  \LdfInit{latin}{captionslatin}
+  %    \end{macrocode}
+  %
 ***************
 *** 532,538 ****
   %    \begin{macrocode}
@@ -9,7 +19,7 @@
   %    \end{macrocode}
   %  \end{macro}
   %  \end{macro}
---- 532,538 ----
+--- 533,539 ----
   %    \begin{macrocode}
   \addto\extraslatin{\def\LatinMarksOn{\shorthandon{^}\shorthandon{=}}}
   \addto\extraslatin{\def\LatinMarksOff{\shorthandoff{^}\shorthandoff{=}}}

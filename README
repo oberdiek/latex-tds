@@ -420,4 +420,4 @@ I. HISTORY
 2007/01/08
   * Fix for documentation of longtable.
 2007/03/19
-  * Patch for babel/latin.dtx added.
+  * Patch for babel/latin.dtx added (babel/3922).
