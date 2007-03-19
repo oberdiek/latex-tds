@@ -1,4 +1,4 @@
-readme.txt for project latex-tds, 2007/01/08
+readme.txt for project latex-tds, 2007/03/19
 
 TABLE OF CONTENTS
 =================
@@ -416,5 +416,7 @@ I. HISTORY
 2006/12/27
   * Fix of ltxguide.cfg that had loaded doc.sty that disturbs the
     verbatim stuff in fntguide.tex.
-2006/01/08
+2007/01/08
   * Fix for documentation of longtable.
+2007/03/19
+  * Patch for babel/latin.dtx added.
