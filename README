@@ -241,6 +241,7 @@ Patches
   patch/finnish.dtx.diff    patch for babel/finnish.dtx
   patch/frenchb.dtx.diff    patch for babel/frenchb.dtx
   patch/greek.ins.diff      patch for babel/greek.ins
+  patch/latin.dtx.diff      patch for babel/latin.dtx
 
 
 F. DESIGN PRINCIPLES
