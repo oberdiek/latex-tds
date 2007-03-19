@@ -266,6 +266,7 @@ section('Patches');
             albanian.dtx
             finnish.dtx
             frenchb.dtx
+            latin.dtx
         ];
     }
 }

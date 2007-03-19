@@ -1,0 +1,19 @@
+*** latin.dtx.org	2007-03-19 22:01:04.000000000 +0100
+--- latin.dtx	2007-03-19 22:01:57.000000000 +0100
+***************
+*** 532,538 ****
+  %    \begin{macrocode}
+  \addto\extraslatin{\def\LatinMarksOn{\shorthandon{^}\shorthandon{=}}}
+  \addto\extraslatin{\def\LatinMarksOff{\shorthandoff{^}\shorthandoff{=}}}
+! \addtoextraslatin{\LatinMarksOff}
+  %    \end{macrocode}
+  %  \end{macro}
+  %  \end{macro}
+--- 532,538 ----
+  %    \begin{macrocode}
+  \addto\extraslatin{\def\LatinMarksOn{\shorthandon{^}\shorthandon{=}}}
+  \addto\extraslatin{\def\LatinMarksOff{\shorthandoff{^}\shorthandoff{=}}}
+! \addto\extraslatin{\LatinMarksOff}
+  %    \end{macrocode}
+  %  \end{macro}
+  %  \end{macro}
