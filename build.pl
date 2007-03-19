@@ -83,7 +83,8 @@ my $prg_curl        = 'curl';
 my $prg_docstrip    = 'tex -shell-escape';
 my $prg_epstopdf    = 'epstopdf';
 my $prg_find        = 'find';
-my $prg_java        = 'java';
+my $prg_java        = '/work/java-1.5.0/bin/java';
+   # java 1.6 don't work with the used version of Multivalent
 my $prg_ls          = "ls";
 my $prg_makeindex   = 'makeindex';
 my $prg_mkdir       = 'mkdir';
