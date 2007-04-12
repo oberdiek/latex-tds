@@ -7,7 +7,7 @@ my $file    = 'build.pl';
 my $version = cvs('$Revision$');
 my $date    = cvs('$Date$');
 my $author  = 'Heiko Oberdiek';
-my $copyright = "Copyright 2006 $author";
+my $copyright = "Copyright 2006, 2007 $author";
 chomp(my $license = <<"END_LICENSE");
 % $copyright
 %
