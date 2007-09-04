@@ -332,7 +332,6 @@ section('Install source');
     install_gen_source('generic', 'babel', qw[
         mik2t2.tex
         catmik.tex
-        lahyph.tex
     ]);
     # *.tex
     install_gen_source('', 'tds', qw[
@@ -554,6 +553,7 @@ section('Install tex doc');
         install('texmf/tex/generic/hyphen', qw[
             iahyphen.tex
             icehyph.tex
+            lahyph.tex
         ]);
         chdir $cwd;
     }

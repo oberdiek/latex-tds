@@ -1,4 +1,4 @@
-readme.txt for project latex-tds, 2007/03/19
+readme.txt for project latex-tds, 2007/09/04
 
 TABLE OF CONTENTS
 =================
@@ -421,3 +421,8 @@ I. HISTORY
   * Fix for documentation of longtable.
 2007/03/19
   * Patch for babel/latin.dtx added (babel/3922).
+2007/09/04
+  * A minor update on CTAN regarding babel:
+   iahyphen.tex, icehyph.tex, and lahyph.tex are now symbolic links
+   to their location in CTAN:language. Therefore also lahyph.tex
+   is now installed in TDS:tex/generic/hyphen/.
