@@ -424,5 +424,5 @@ I. HISTORY
 2007/09/04
   * A minor update on CTAN regarding babel:
    iahyphen.tex, icehyph.tex, and lahyph.tex are now symbolic links
-   to their location in CTAN:language. Therefore also lahyph.tex
-   is now installed in TDS:tex/generic/hyphen/.
+   to their location in CTAN:language/hyphenation/. Therefore also
+   lahyph.tex is now installed in TDS:tex/generic/hyphen/.
