@@ -155,15 +155,18 @@ info("Build modules: @list_modules");
     sub download_ctan ($$) {
         my $file      = shift;
         my $ctan_path = shift;
+        $ctan_path .= '/' if $ctan_path ne '';
         ensure_directory($dir_incoming_ctan);
         download("$dir_incoming_ctan/$file.zip",
-                 "$url_ctan/$ctan_path/$file.zip");
+                 "$url_ctan/$ctan_path$file.zip");
     }
-    sub download_ams ($) {
-        my $file = shift;
+    sub download_ams ($$) {
+        my $file     = shift;
+        my $ams_path = shift;
+        $ams_path .= '/' if $ams_path ne '';
         ensure_directory($dir_incoming_ams);
         download("$dir_incoming_ams/$file.zip",
-                 "$url_ams/$file.zip");
+                 "$url_ams/$ams_path$file.zip");
     }
     sub download ($$) {
         my $file = shift;
@@ -186,10 +189,12 @@ info("Build modules: @list_modules");
     download_ctan('cyrillic', 'macros/latex/required');
     download_ctan('babel',    'macros/latex/required');
     download_ctan('amslatex', 'macros/latex/required');
+    download_ctan('amsrefs',  'macros/latex/contrib');
     download_ctan('psnfss',   'macros/latex/required');
     download_ctan('tds',      '');
-    download_ams('amslatex');
-    download_ams('amsrefs');
+    download_ams('amslatex',     '');
+    download_ams('amsrefs-tds',  'amslatex/amsrefs');
+    download_ams('amsrefs-ctan', 'amslatex/amsrefs');
 }
 
 ### Remove previous build
@@ -238,7 +243,13 @@ section('Unpacking');
     unpack_ctan('base');
     map { unpack_ctan($_); } @required_list;
     unpack_ams('amslatex');
-    unpack_ams('amsrefs');
+    unpack_ams('amsrefs-tds');
+    if ($modules{'amslatex'}) {
+        run("$prg_rm -rf $dir_build/amslatex/amsrefs");
+        unpacking('amslatex',
+                  "$dir_incoming_ams/amsrefs-ctan.zip",
+                  "$dir_build/amslatex");
+    }
     unpack_psnfss('lw35nfss');
     unpack_psnfss('freenfss');
     unpack_ctan('tds');
@@ -408,8 +419,8 @@ section('Docstrip');
 section('TDS cleanup');
 {
     if ($modules{'amslatex'}) {
+        my $dir_tds = "$dir_build/amslatex/texmf";
         sub cleanup_tds ($@) {
-            my $dir_tds = "$dir_build/amslatex/texmf";
             my $sub_tree = shift;
 
             my @list = map { glob("$dir_tds/$sub_tree/$_"); } @_;
@@ -417,10 +428,6 @@ section('TDS cleanup');
             map { rmdir; } grep { -d $_; } @list;
         }
 
-        cleanup_tds 'bibtex', qw[
-            bib/ams
-            bib
-        ];
         cleanup_tds 'source/latex/amscls', qw[
             *.bst
             *.template
@@ -430,17 +437,12 @@ section('TDS cleanup');
             diffs-m.txt
             amstex.sty
         ];
+        run("$prg_mv $dir_tds/source/latex/amsrefs/amsrefs.faq"
+            . " $dir_tds/doc/latex/amsrefs/");
         cleanup_tds 'source/latex/amsrefs', qw[
-            *.dvi
-            *.pdf
-            amsrefs.faq
             cite-x*.tex
             jr.bib
             gktest.ltb
-        ];
-        cleanup_tds 'doc/latex/amscls', qw[
-            amsrefs.dvi
-            textcmds.dvi
         ];
         # CTAN:macros/latex/required/amslatex/other/*
         run("$prg_cp $dir_build/amslatex/other/amsbooka.sty"
@@ -919,7 +921,7 @@ if ($modules{'amslatex'}) {
 
     chdir "$dir_build/amslatex/amsrefs";
     symlink '../texmf', 'texmf';
-    map { generate_doc 'amscls', $_; } qw[
+    map { generate_doc 'amsrefs', $_; } qw[
         cite-xa cite-xb cite-xh cite-xs
         amsrefs amsxport ifoption mathscinet pcatcode rkeyval textcmds
     ];
