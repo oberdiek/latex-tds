@@ -1,5 +1,5 @@
 % ams.drv
-% 2006/06/02 v1.0 Driver file for amslatex documentation files
+% 2007/10/17 v1.1 Driver file for amslatex documentation files
 % Copyright 2006 Heiko Oberdiek.
 %
 % This file is part of project `latex-tds'.
@@ -18,6 +18,9 @@
 %
 % See `readme.txt' for a list of all files belonging to the
 % project `latex-tds' and additional information.
+%
+% 2006/06/02 v1.0
+% 2007/10/17 v1.1: Fix for subeqn, amsmath before hyperref
 %
 \NeedsTeXFormat{LaTeX2e}
 \makeatletter
@@ -69,6 +72,14 @@
   % page layout
   \addtolength{\topmargin}{-10mm}%
   \addtolength{\textheight}{20mm}%
+  %
+  % load package amsmath before hyperref for subeqn
+  \def\@tempa{subeqn}%
+  \@onelevel@sanitize\@tempa
+  \edef\@tempb{\jobname}%
+  \ifx\@tempa\@tempb
+    \usepackage{amsmath}\relax
+  \fi
   %
   %%% Add hyperref support
   \PassOptionsToPackage{hyperref}{draft=false}%
