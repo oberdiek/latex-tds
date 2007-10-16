@@ -1,4 +1,4 @@
-readme.txt for project latex-tds, 2007/09/04
+readme.txt for project latex-tds, 2007/10/17
 
 TABLE OF CONTENTS
 =================
@@ -426,3 +426,5 @@ I. HISTORY
    iahyphen.tex, icehyph.tex, and lahyph.tex are now symbolic links
    to their location in CTAN:language/hyphenation/. Therefore also
    lahyph.tex is now installed in TDS:tex/generic/hyphen/.
+2007/10/17
+  * Update of module amslatex because of updated package amsrefs.
