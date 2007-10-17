@@ -1,23 +1,6 @@
 *** latin.dtx.org	2007-03-19 22:37:51.000000000 +0100
 --- latin.dtx	2007-03-19 22:38:38.000000000 +0100
 ***************
-*** 26,32 ****
-  % and covered by LPPL is defined by the unpacking scripts (with
-  % extension .ins) which are part of the distribution.
-  % \fi
-! % \CheckSum{449}
-  % \iffalse
-  %    Tell the \LaTeX\ system who we are and write an entry on the
-  %    transcript.
---- 26,32 ----
-  % and covered by LPPL is defined by the unpacking scripts (with
-  % extension .ins) which are part of the distribution.
-  % \fi
-! % \CheckSum{452}
-  % \iffalse
-  %    Tell the \LaTeX\ system who we are and write an entry on the
-  %    transcript.
-***************
 *** 170,175 ****
 --- 170,176 ----
   %    \texttt{@} sign, etc.
