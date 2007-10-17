@@ -463,6 +463,13 @@ section('TDS cleanup');
         # CTAN:macros/latex/required/amslatex/other/*
         run("$prg_cp $dir_build/amslatex/other/amsbooka.sty"
             . " $dir_build/amslatex/texmf/tex/latex/amscls/amsbooka.sty");
+        cleanup_tds 'source/latex/amsltx2', qw[
+            00readme.txt
+            install.txt
+        ];
+        cleanup_tds 'source/latex', qw[
+            amsltx2
+        ];
     }
 
     if ($modules{'babel'}) {
