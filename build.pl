@@ -210,6 +210,8 @@ section('Remove previous build');
 ### Unpack
 section('Unpacking');
 {
+    my $texmf_ams = "$dir_build/amslatex/texmf";
+    
     sub unpacking ($$$) {
         my $pkg     = shift;
         my $zipfile = shift;
@@ -226,9 +228,10 @@ section('Unpacking');
     sub unpack_ams ($) {
         my $name = shift;
         $modules{'amslatex'} or return 1;
+        ensure_directory($texmf_ams);
         unpacking('amslatex',
                   "$dir_incoming_ams/$name.zip",
-                  "$dir_build/amslatex/texmf");
+                  "$texmf_ams");
     }
     sub unpack_psnfss ($) {
         my $name = shift;
@@ -242,13 +245,15 @@ section('Unpacking');
     ensure_directory($dir_build);
     unpack_ctan('base');
     map { unpack_ctan($_); } @required_list;
-    unpack_ams('amslatex');
-    unpack_ams('amsrefs-tds');
     if ($modules{'amslatex'}) {
+        unpack_ams('amsrefs-tds');
+        run("$prg_mv $texmf_ams/tex/latex/amscls"
+            . " $texmf_ams/tex/latex/amsrefs");
         run("$prg_rm -rf $dir_build/amslatex/amsrefs");
         unpacking('amslatex',
                   "$dir_incoming_ams/amsrefs-ctan.zip",
                   "$dir_build/amslatex");
+        unpack_ams('amslatex');
     }
     unpack_psnfss('lw35nfss');
     unpack_psnfss('freenfss');
