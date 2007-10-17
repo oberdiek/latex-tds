@@ -428,3 +428,4 @@ I. HISTORY
    lahyph.tex is now installed in TDS:tex/generic/hyphen/.
 2007/10/17
   * Update of module amslatex because of updated package amsrefs.
+  * Fix in latin.dtx.diff.
