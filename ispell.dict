@@ -1,7 +1,7 @@
 ac
 albanian
-AmSLaTeX
 amslatex
+AmSLaTeX
 amsrefs
 armenian
 athnum
@@ -32,6 +32,7 @@ fc
 fd
 finnish
 fmtutil
+fntguide
 fontenc
 freiburg
 frenchb
@@ -48,8 +49,10 @@ icehyph
 inputenc
 lahyph
 latexbug
+latin
 ldf
 lgpl
+longtable
 lppl
 lt
 ltdirchk
@@ -63,10 +66,10 @@ nopostprocess
 oberdiek
 org
 pdf
-PDFBox
 pdfbox
-pdfTeX
+PDFBox
 pdftex
+pdfTeX
 Perl
 pl
 PS
