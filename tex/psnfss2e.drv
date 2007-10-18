@@ -1,6 +1,6 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesFile{psnfss2e.drv}%
-  [2006/08/17 v1.1 Driver file for psnfss2e.tex (HO)]
+  [2006/08/18 v1.2 Driver file for psnfss2e.tex (HO)]
 %
 % Copyright 2006 Heiko Oberdiek
 %
@@ -21,7 +21,7 @@
 % See `readme.txt' for a list of all files belonging to the
 % project `latex-tds' and additional information.
 %
-\RequirePackage[patch]{kvoptions}[2006/08/17]
+\RequirePackage{kvoptions-patch}[2007/10/18]
 \PassOptionsToPackage{colorlinks=false,pdfborder={0 0 0}}{hyperref}
 \AtBeginDocument{%
   \utopiatrue
