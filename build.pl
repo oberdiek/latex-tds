@@ -290,6 +290,7 @@ section('Patches');
         map { patch("babel/$_"); } qw[
             bbcompat.dtx
             frenchb.dtx
+            latin.dtx
         ];
     }
 }

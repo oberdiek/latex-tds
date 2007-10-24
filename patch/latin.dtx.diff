@@ -1,0 +1,30 @@
+*** latin.dtx.org	2007-10-20 00:32:00.000000000 +0200
+--- latin.dtx	2007-10-24 23:13:18.000000000 +0200
+***************
+*** 1,5 ****
+--- 1,8 ----
+  % \iffalse meta-comment
+  %
++ % Patched by Heiko Oberdiek for project latex-tds:
++ % * 2007/10/24: \CheckSum number fixed.
++ %
+  % Copyright 1989-2007 Johannes L. Braams and any individual authors
+  % listed elsewhere in this file.  All rights reserved.
+  % 
+***************
+*** 26,32 ****
+  % and covered by LPPL is defined by the unpacking scripts (with
+  % extension .ins) which are part of the distribution.
+  % \fi
+! % \CheckSum{449}
+  % \iffalse
+  %    Tell the \LaTeX\ system who we are and write an entry on the
+  %    transcript.
+--- 29,35 ----
+  % and covered by LPPL is defined by the unpacking scripts (with
+  % extension .ins) which are part of the distribution.
+  % \fi
+! % \CheckSum{450}
+  % \iffalse
+  %    Tell the \LaTeX\ system who we are and write an entry on the
+  %    transcript.
