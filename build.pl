@@ -288,11 +288,7 @@ section('Patches');
 
     if ($modules{'babel'}) {
         map { patch("babel/$_"); } qw[
-            greek.ins
             bbcompat.dtx
-            athnum.dtx
-            albanian.dtx
-            finnish.dtx
             frenchb.dtx
         ];
     }
