@@ -1,4 +1,4 @@
-readme.txt for project latex-tds, 2007/10/18
+readme.txt for project latex-tds, 2007/10/24
 
 TABLE OF CONTENTS
 =================
@@ -64,8 +64,10 @@ Module list
 * tools     CTAN:macros/latex/required/tools.zip
 * cyrillic  CTAN:macros/latex/required/cyrillic.zip
 * amslatex  CTAN:macros/latex/required/amslatex.zip
+            CTAN:macros/latex/contrib/amsrefs.zip
             ftp://ftp.ams.org/pub/tex/amslatex.zip
-            ftp://ftp.ams.org/pub/tex/amsrefs.zip
+            ftp://ftp.ams.org/pub/tex/amslatex/amsrefs-tds.zip
+            ftp://ftp.ams.org/pub/tex/amslatex/amsrefs-ctan.zip
 * psnfss    CTAN:macros/latex/required/psnfss.zip
 * babel     CTAN:macros/latex/required/babel.zip
 * tds       CTAN:tds.zip
@@ -210,6 +212,7 @@ Configuration
   tex/docstrip.cfg          enables TDS feature and creates directories
   tex/errata.cfg            for errata lists of latex/base
   tex/hyperref.cfg          hyperref configuration file
+  tex/latex-tds.ini         init file for format generation
   tex/ltnews.cfg            for LaTeX News of latex/base
   tex/ltxdoc.cfg            setup for class ltxdoc
   tex/ltxguide.cfg          setup for the guide manuals in latex/base
@@ -235,12 +238,8 @@ Documentation driver
 Patches
 -------
   patch/classes.dtx.diff    patch for base/classes.dtx
-  patch/albanian.dtx.diff   patch for babel/albanian.dtx
-  patch/athnum.dtx.diff     patch for babel/athnum.dtx
   patch/bbcompat.dtx.diff   patch for babel/bbcompat.dtx
-  patch/finnish.dtx.diff    patch for babel/finnish.dtx
   patch/frenchb.dtx.diff    patch for babel/frenchb.dtx
-  patch/greek.ins.diff      patch for babel/greek.ins
   patch/latin.dtx.diff      patch for babel/latin.dtx
 
 
@@ -429,3 +428,6 @@ I. HISTORY
 2007/10/18
   * Update of module amslatex because of updated package amsrefs.
   * Fix in latin.dtx.diff.
+2007/10/24
+  * Update of babel.
+  * Update of amsrefs (TDS:tex/latex/amscls -> TDS:tex/latex/amsrefs).

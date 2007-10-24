@@ -258,8 +258,6 @@ section('Unpacking');
     map { unpack_ctan($_); } @required_list;
     if ($modules{'amslatex'}) {
         unpack_ams('amsrefs-tds');
-        run("$prg_mv $texmf_ams/tex/latex/amscls"
-            . " $texmf_ams/tex/latex/amsrefs");
         run("$prg_rm -rf $dir_build/amslatex/amsrefs");
         unpacking('amslatex',
                   "$dir_incoming_ams/amsrefs-ctan.zip",
