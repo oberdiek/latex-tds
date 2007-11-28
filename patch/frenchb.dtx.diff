@@ -24,7 +24,7 @@
   %
   % \changes{frenchb-1.5g}{2001/09/09}{Let \cs{LdfInit} check for
   %     \cs{datefrench} instead of \cs{NoAutoSpaceBeforeFDP},
-! %     as the later is also defined by russianb.ldf}
+! %     as the latter is also defined by russianb.ldf}
   %
   %    \begin{macrocode}
   %<*code>
