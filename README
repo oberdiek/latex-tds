@@ -162,7 +162,7 @@ Hints
 D. COPYRIGHT, LICENSE
 =====================
 
-Copyright 2006, 2007 Heiko Oberdiek.
+Copyright 2006-2008 Heiko Oberdiek.
 
 License is LPPL 1.3c:
 
