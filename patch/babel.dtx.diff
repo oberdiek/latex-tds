@@ -1,0 +1,46 @@
+*** babel.dtx.org	2008-03-21 23:40:00.000000000 +0100
+--- babel.dtx	2008-04-01 21:13:26.000000000 +0200
+***************
+*** 26,32 ****
+  % and covered by LPPL is defined by the unpacking scripts (with
+  % extension .ins) which are part of the distribution.
+  % \fi
+! % \CheckSum{3843}
+  %%
+  % \def\filename{babel.dtx}
+  % \let\thisfilename\filename
+--- 26,32 ----
+  % and covered by LPPL is defined by the unpacking scripts (with
+  % extension .ins) which are part of the distribution.
+  % \fi
+! % \CheckSum{3858}
+  %%
+  % \def\filename{babel.dtx}
+  % \let\thisfilename\filename
+***************
+*** 294,300 ****
+  %      \begin{supertabular}{l p{8cm}}
+  %        Afrikaans  & afrikaans\\
+  %        Bahasa     & bahasa, indonesian, indon, bahasai,
+! %                     bahasam, malay, meyalu\
+  %        Basque     & basque\\
+  %        Breton     & breton\\
+  %        Bulgarian  & bulgarian\\
+--- 294,300 ----
+  %      \begin{supertabular}{l p{8cm}}
+  %        Afrikaans  & afrikaans\\
+  %        Bahasa     & bahasa, indonesian, indon, bahasai,
+! %                     bahasam, malay, meyalu\\
+  %        Basque     & basque\\
+  %        Breton     & breton\\
+  %        Bulgarian  & bulgarian\\
+***************
+*** 5297,5302 ****
+--- 5297,5303 ----
+  %</core|shorthands>
+  %    \end{macrocode}
+  %  \end{macro}
++ %  \end{macro}
+  %
+  %  \subsection{Encoding issues (part 2)}
+  %

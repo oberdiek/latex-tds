@@ -1,4 +1,4 @@
-readme.txt for project latex-tds, 2007/10/24
+readme.txt for project latex-tds, 2008/04/01
 
 TABLE OF CONTENTS
 =================
@@ -327,16 +327,6 @@ Babel
 * Babel already contains babel.pdf as documentation. It is a superset
   of user.pdf. Thus I have dropped the latter one to avoid redundancy.
   Also the name `babel.pdf' is much more useful (texdoc).
-* It is unclear, which hyphenation patterns are in the control of babel.
-  Comparing the version of duplicate hyphenation pattern files
-  in CTAN, I decided:
-  * iahyphen.tex -> TDS:tex/generic/hyphen
-  * icehyph.tex  -> TDS:tex/generic/hyphen
-  * lahyph.tex -> TDS:source/generic/babel
-  * The Bulgarian patterns are removed, because they form a new CTAN
-    project: CTAN:language/hyphenation/bghyphen
-* It seems, nobody has generated the documentation since a long time.
-  Several patches are necessary for error free compiling.
 * ...
 
 
@@ -431,3 +421,5 @@ I. HISTORY
 2007/10/24
   * Update of babel.
   * Update of amsrefs (TDS:tex/latex/amscls -> TDS:tex/latex/amsrefs).
+2008/04/01
+  * Update of babel (2007/03/17).

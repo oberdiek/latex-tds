@@ -1,0 +1,19 @@
+*** danish.dtx.org	2008-03-17 20:38:00.000000000 +0100
+--- danish.dtx	2008-04-01 21:04:14.000000000 +0200
+***************
+*** 286,292 ****
+  %
+  %  \begin{macro}{\-}
+  % \changes{danish-1.3q}{2008/03/17}{Added redefinition of \cs{-} from
+! %    \texttt{dutch.ldf}
+  %    All that is left now is the redefinition of |\-|. The new version
+  %    of |\-| should indicate an extra hyphenation position, while
+  %    allowing other hyphenation positions to be generated
+--- 286,292 ----
+  %
+  %  \begin{macro}{\-}
+  % \changes{danish-1.3q}{2008/03/17}{Added redefinition of \cs{-} from
+! %    \texttt{dutch.ldf}}
+  %    All that is left now is the redefinition of |\-|. The new version
+  %    of |\-| should indicate an extra hyphenation position, while
+  %    allowing other hyphenation positions to be generated

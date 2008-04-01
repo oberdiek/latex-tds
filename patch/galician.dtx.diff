@@ -1,0 +1,31 @@
+*** galician.dtx.org	2008-03-18 00:18:00.000000000 +0100
+--- galician.dtx	2008-04-01 21:02:16.000000000 +0200
+***************
+*** 1433,1445 ****
+  %
+  %    Now, lowercase small caps. First, we test if there are actual
+  %    small caps for the current font. If not, faked small caps are
+! %    used. \msc tries a slightly larger font.
+  %    Javier B. wrote: ``The \cs{selectfont} in \cs{gl@lsc} could
+  %    seem redundant, but it's not''. I cannot see how it can't be
+  %    redundant (it is the last thing executed by |\scshape|), but
+  %    I keep it.
+  %
+! %    \changes{galician~4.3}{07/00/26}{Added \cs{\msc}}
+  %    \begin{macrocode}
+  \ifes@LaTeXe   %<<<<<<
+    \addto\textgalician{%
+--- 1433,1445 ----
+  %
+  %    Now, lowercase small caps. First, we test if there are actual
+  %    small caps for the current font. If not, faked small caps are
+! %    used. \cs{msc} tries a slightly larger font.
+  %    Javier B. wrote: ``The \cs{selectfont} in \cs{gl@lsc} could
+  %    seem redundant, but it's not''. I cannot see how it can't be
+  %    redundant (it is the last thing executed by |\scshape|), but
+  %    I keep it.
+  %
+! %    \changes{galician~4.3}{07/00/26}{Added \cs{msc}}
+  %    \begin{macrocode}
+  \ifes@LaTeXe   %<<<<<<
+    \addto\textgalician{%

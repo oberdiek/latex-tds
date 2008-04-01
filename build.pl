@@ -283,11 +283,12 @@ section('Patches');
         run("$prg_checksum psfonts.dtx");
         chdir $cwd;
     }
-
+    
     if ($modules{'babel'}) {
         map { patch("babel/$_"); } qw[
-            bbcompat.dtx
-            frenchb.dtx
+            babel.dtx
+            galician.dtx
+            danish.dtx
             latin.dtx
         ];
     }
@@ -350,11 +351,6 @@ section('Install source');
     ]);
     # babel/manifest.txt: to be removed in a future release
     # already removed: bghyphen.tex, bghyphsi.tex
-    install_gen_source('generic', 'babel', qw[
-        mik2t2.tex
-        catmik.tex
-    ]);
-    # *.tex
     install_gen_source('', 'tds', qw[
         Makefile
         tds2texi.el
@@ -468,15 +464,10 @@ section('TDS cleanup');
 
     if ($modules{'babel'}) {
         my $tds_dir  = "$dir_build/babel/texmf";
-        my $from_dir = "$tds_dir/tex/generic/babel";
+        my $from_dir = "$tds_dir/source/generic/babel";
 
         ### Correction for *.drv files
         run("$prg_mv $from_dir/*.drv $dir_build/babel");
-
-        ### Correction for *.ist files
-        my $dir_dest = "$tds_dir/makeindex/babel";
-        ensure_directory($dir_dest);
-        run("$prg_mv $from_dir/*.ist $dir_dest");
     }
 }
 
@@ -568,11 +559,6 @@ section('Install tex doc');
             *.dat
             *.skeleton
             install.OzTeX*
-        ]);
-        install('texmf/tex/generic/hyphen', qw[
-            iahyphen.tex
-            icehyph.tex
-            lahyph.tex
         ]);
         chdir $cwd;
     }
