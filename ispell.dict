@@ -1,7 +1,8 @@
 ac
 albanian
-amslatex
+amscls
 AmSLaTeX
+amslatex
 amsrefs
 armenian
 athnum
@@ -46,6 +47,8 @@ http
 hyperref
 iahyphen
 icehyph
+ini
+init
 inputenc
 lahyph
 latexbug
@@ -66,10 +69,10 @@ nopostprocess
 oberdiek
 org
 pdf
-pdfbox
 PDFBox
-pdftex
+pdfbox
 pdfTeX
+pdftex
 Perl
 pl
 PS
