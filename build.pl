@@ -316,11 +316,12 @@ section('Install source');
         *.dtx
         *.fdd
         *.ins
+        *.err
         *guide.tex
         ltnews*.tex
-        source2e.tex
         ltx3info.tex
         latexbug.el
+        source2e.tex
     ];
     install_source 'tools', qw[
         *.dtx

@@ -1,4 +1,4 @@
-readme.txt for project latex-tds, 2008/04/01
+readme.txt for project latex-tds, 2008/04/02
 
 TABLE OF CONTENTS
 =================
@@ -423,3 +423,5 @@ I. HISTORY
   * Update of amsrefs (TDS:tex/latex/amscls -> TDS:tex/latex/amsrefs).
 2008/04/01
   * Update of babel (2007/03/17).
+2008/04/02
+  * Fix: latex/base/*.err added to TDS:source/latex/base/.
