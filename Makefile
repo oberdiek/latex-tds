@@ -1,8 +1,13 @@
 # dummy Makefile
+PRJ = latex-tds
 
 all: build
 build:
 	./build.sh
+distrib: build
+	-rm $(PRJ).zip
+	(cd distrib && zip -0 ../$(PRJ).zip *.*)
+	ls -l $(PRJ).zip
 
 incoming: license/ziptimetree/lgpl.txt license/latex-tds/lppl.txt
 	./build.pl --download
@@ -15,8 +20,8 @@ license/latex-tds/lppl.txt: license/latex-tds
 license/ziptimetree license/latex-tds:
 	mkdir -p $@
 
-update:
-	./update.sh
+# update:
+# 	./update.sh
 
 spell: readme.txt ispell.dict
 	ispell -p ispell.dict $<
@@ -27,4 +32,4 @@ ziptimetree: lib/ziptimetree.pl
 lib/ziptimetree.pl: $(HOME)/bin/ziptimetree
 	install -m 755 $< $@
 
-.PHONY: all build update incoming ziptimetree spell license
+.PHONY: all build distrib update incoming ziptimetree spell license
