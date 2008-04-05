@@ -1,4 +1,4 @@
-readme.txt for project latex-tds, 2008/04/02
+readme.txt for project latex-tds, 2008/04/05
 
 TABLE OF CONTENTS
 =================
@@ -87,17 +87,17 @@ The following files can be downloaded:
 * readme.txt (this file)
 * The module distribution files, see the module list above
   for the available modules, e.g:
-    base.zip
-    tools.zip
+    base.tds.zip
+    tools.tds.zip
     ...
 * The sources, mainly the build script, configuration and
   driver files, and patches:
-    source.zip
+    source.tds.zip
   Some of the used tools are not provided, see section
   `Building Hints'.
 * And the universe, the contents of all the ZIP files above,
   merged together:
-    latex-tds.zip
+    latex-tds.tds.zip
 
 It is possible that some or all ZIP archive files are also available
 in the install subtree, then possible locations could be:
@@ -425,3 +425,6 @@ I. HISTORY
   * Update of babel (2007/03/17).
 2008/04/02
   * Fix: latex/base/*.err added to TDS:source/latex/base/.
+2008/04/05
+  * Using .tds.zip instead of .zip to follow CTAN:install's naming
+    conventions.
