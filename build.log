@@ -1,4 +1,4 @@
-Building latex-tds, 2008/04/02 v1.117, Copyright 2006-2008 Heiko Oberdiek
+Building latex-tds, 2008/04/05 v1.118, Copyright 2006-2008 Heiko Oberdiek
 =========================================================================
 * Build modules: base amslatex babel psnfss cyrillic graphics tools latex-tds source tds
 
@@ -103,7 +103,7 @@ Applying patch file ltpatch.ltx
 (/home/one/texmf/tex/generic/oberdiek/bitset.sty)
 (/home/one/texmf/tex/latex/oberdiek/refcount.sty) )
 Beginning to dump on file latex-tds.fmt
- (format=latex-tds 2008.4.2)
+ (format=latex-tds 2008.4.5)
 5923 strings of total length 80516
 61561 memory locations dumped; current usage is 144&60470
 4038 multiletter control sequences
@@ -4646,13 +4646,13 @@ refcount.sty    2006/02/20 v3.0 Data extraction from references (HO)
      doc.sty    2006/02/02 v2.1d Standard LaTeX documentation package (FMi)
 multicol.sty    2006/05/18 v1.6g multicolumn formatting (FMi)
   hypdoc.sty    2007/11/12 v1.6 Hyper extensions for doc.sty (HO)
-hyperref.sty    2008/04/02 v6.77k Hypertext links for LaTeX
+hyperref.sty    2008/04/05 v6.77l Hypertext links for LaTeX
  hycolor.sty    2007/04/11 v1.1 Code for color options of hyperref/bookmark (HO
 )
-  pd1enc.def    2008/04/02 v6.77k Hyperref: PDFDocEncoding definition (HO)
+  pd1enc.def    2008/04/05 v6.77l Hyperref: PDFDocEncoding definition (HO)
 hyperref.cfg    2006/06/02 v1.0 latex-tds: hyperref.sty configuration (HO)
 hypdestopt.sty    2007/11/11 v2.1 Hyperref destination optimizer (HO)
- hpdftex.def    2008/04/02 v6.77k Hyperref driver for pdfTeX
+ hpdftex.def    2008/04/05 v6.77l Hyperref driver for pdfTeX
 textcomp.sty    2005/09/27 v1.99g Standard LaTeX package
   ts1enc.def    2001/06/05 v3.0e (jk/car/fm) Standard LaTeX file
   ts1cmr.fd    1999/05/25 v2.5h Standard LaTeX font definitions
@@ -5484,13 +5484,13 @@ refcount.sty    2006/02/20 v3.0 Data extraction from references (HO)
      doc.sty    2006/02/02 v2.1d Standard LaTeX documentation package (FMi)
 multicol.sty    2006/05/18 v1.6g multicolumn formatting (FMi)
   hypdoc.sty    2007/11/12 v1.6 Hyper extensions for doc.sty (HO)
-hyperref.sty    2008/04/02 v6.77k Hypertext links for LaTeX
+hyperref.sty    2008/04/05 v6.77l Hypertext links for LaTeX
  hycolor.sty    2007/04/11 v1.1 Code for color options of hyperref/bookmark (HO
 )
-  pd1enc.def    2008/04/02 v6.77k Hyperref: PDFDocEncoding definition (HO)
+  pd1enc.def    2008/04/05 v6.77l Hyperref: PDFDocEncoding definition (HO)
 hyperref.cfg    2006/06/02 v1.0 latex-tds: hyperref.sty configuration (HO)
 hypdestopt.sty    2007/11/11 v2.1 Hyperref destination optimizer (HO)
- hpdftex.def    2008/04/02 v6.77k Hyperref driver for pdfTeX
+ hpdftex.def    2008/04/05 v6.77l Hyperref driver for pdfTeX
 textcomp.sty    2005/09/27 v1.99g Standard LaTeX package
   ts1enc.def    2001/06/05 v3.0e (jk/car/fm) Standard LaTeX file
   ts1cmr.fd    1999/05/25 v2.5h Standard LaTeX font definitions
@@ -6322,13 +6322,13 @@ refcount.sty    2006/02/20 v3.0 Data extraction from references (HO)
      doc.sty    2006/02/02 v2.1d Standard LaTeX documentation package (FMi)
 multicol.sty    2006/05/18 v1.6g multicolumn formatting (FMi)
   hypdoc.sty    2007/11/12 v1.6 Hyper extensions for doc.sty (HO)
-hyperref.sty    2008/04/02 v6.77k Hypertext links for LaTeX
+hyperref.sty    2008/04/05 v6.77l Hypertext links for LaTeX
  hycolor.sty    2007/04/11 v1.1 Code for color options of hyperref/bookmark (HO
 )
-  pd1enc.def    2008/04/02 v6.77k Hyperref: PDFDocEncoding definition (HO)
+  pd1enc.def    2008/04/05 v6.77l Hyperref: PDFDocEncoding definition (HO)
 hyperref.cfg    2006/06/02 v1.0 latex-tds: hyperref.sty configuration (HO)
 hypdestopt.sty    2007/11/11 v2.1 Hyperref destination optimizer (HO)
- hpdftex.def    2008/04/02 v6.77k Hyperref driver for pdfTeX
+ hpdftex.def    2008/04/05 v6.77l Hyperref driver for pdfTeX
 textcomp.sty    2005/09/27 v1.99g Standard LaTeX package
   ts1enc.def    2001/06/05 v3.0e (jk/car/fm) Standard LaTeX file
   ts1cmr.fd    1999/05/25 v2.5h Standard LaTeX font definitions
@@ -7144,13 +7144,13 @@ refcount.sty    2006/02/20 v3.0 Data extraction from references (HO)
      doc.sty    2006/02/02 v2.1d Standard LaTeX documentation package (FMi)
 multicol.sty    2006/05/18 v1.6g multicolumn formatting (FMi)
   hypdoc.sty    2007/11/12 v1.6 Hyper extensions for doc.sty (HO)
-hyperref.sty    2008/04/02 v6.77k Hypertext links for LaTeX
+hyperref.sty    2008/04/05 v6.77l Hypertext links for LaTeX
  hycolor.sty    2007/04/11 v1.1 Code for color options of hyperref/bookmark (HO
 )
-  pd1enc.def    2008/04/02 v6.77k Hyperref: PDFDocEncoding definition (HO)
+  pd1enc.def    2008/04/05 v6.77l Hyperref: PDFDocEncoding definition (HO)
 hyperref.cfg    2006/06/02 v1.0 latex-tds: hyperref.sty configuration (HO)
 hypdestopt.sty    2007/11/11 v2.1 Hyperref destination optimizer (HO)
- hpdftex.def    2008/04/02 v6.77k Hyperref driver for pdfTeX
+ hpdftex.def    2008/04/05 v6.77l Hyperref driver for pdfTeX
 textcomp.sty    2005/09/27 v1.99g Standard LaTeX package
   ts1enc.def    2001/06/05 v3.0e (jk/car/fm) Standard LaTeX file
   ts1cmr.fd    1999/05/25 v2.5h Standard LaTeX font definitions
@@ -8618,9 +8618,9 @@ file:/home/one/work/texprj/latex-tds/build/tmp.pdf, 559070 bytes
 PDF 1.4, producer=pdfTeX-1.40.5, creator=LaTeX with hyperref package
 additional compression may be possible with:
 	 [omit -old] -compact
-=> new length = 525091, saved 6%, elapsed time = 0 sec
+=> new length = 525090, saved 6%, elapsed time = 0 sec
 * system: mv /home/one/work/texprj/latex-tds/build/tmp-o.pdf texmf/doc/latex/base/classes.pdf
-*   525.114  texmf/doc/latex/base/classes.pdf
+*   525.113  texmf/doc/latex/base/classes.pdf
 ******************************************************************************
 
 * system: pdflatex -fmt=/home/one/work/texprj/latex-tds/build/latex-tds -draftmode doc.dtx
@@ -10184,10 +10184,10 @@ fb></work/tetex/texmf-dist/fonts/type1/bluesky/cm/cmti9.pfb></work/tetex/texmf-
 dist/fonts/type1/bluesky/cm/cmtt10.pfb></work/tetex/texmf-dist/fonts/type1/blue
 sky/cm/cmtt12.pfb></work/tetex/texmf-dist/fonts/type1/bluesky/cm/cmtt8.pfb></wo
 rk/tetex/texmf-dist/fonts/type1/bluesky/cm/cmtt9.pfb>
-Output written on doc.pdf (54 pages, 698889 bytes).
+Output written on doc.pdf (54 pages, 699121 bytes).
 Transcript written on doc.log.
 ******************************************************************************
-*   698.889  doc.pdf
+*   699.121  doc.pdf
 * system: /work/java-1.5.0/bin/java -jar /home/one/work/texprj/latex-tds/lib/pdfbox-rewrite.jar doc.pdf /home/one/work/texprj/latex-tds/build/tmp.pdf
 Pages: 54
 Page 1: 590 ops -> 368 ops, 222 ops saved.
@@ -10246,13 +10246,13 @@ Page 53: 863 ops -> 753 ops, 110 ops saved.
 Page 54: 308 ops -> 262 ops, 46 ops saved.
 Total: 35140 ops -> 29774 ops, 5366 ops saved.
 * system: /work/java-1.5.0/bin/java -cp /home/one/work/texprj/latex-tds/lib/Multivalent20060102.jar tool.pdf.Compress -old /home/one/work/texprj/latex-tds/build/tmp.pdf
-file:/home/one/work/texprj/latex-tds/build/tmp.pdf, 644647 bytes
+file:/home/one/work/texprj/latex-tds/build/tmp.pdf, 644879 bytes
 PDF 1.4, producer=pdfTeX-1.40.5, creator=LaTeX with hyperref package
 additional compression may be possible with:
 	 [omit -old] -compact
-=> new length = 611455, saved 5%, elapsed time = 0 sec
+=> new length = 611687, saved 5%, elapsed time = 0 sec
 * system: mv /home/one/work/texprj/latex-tds/build/tmp-o.pdf texmf/doc/latex/base/doc.pdf
-*   611.478  texmf/doc/latex/base/doc.pdf
+*   611.710  texmf/doc/latex/base/doc.pdf
 ******************************************************************************
 
 * system: pdflatex -fmt=/home/one/work/texprj/latex-tds/build/latex-tds -draftmode docstrip.dtx
@@ -10749,10 +10749,10 @@ ts/type1/bluesky/cm/cmti10.pfb></work/tetex/texmf-dist/fonts/type1/bluesky/cm/c
 mti9.pfb></work/tetex/texmf-dist/fonts/type1/bluesky/cm/cmtt10.pfb></work/tetex
 /texmf-dist/fonts/type1/bluesky/cm/cmtt8.pfb></work/tetex/texmf-dist/fonts/type
 1/bluesky/cm/cmtt9.pfb>
-Output written on docstrip.pdf (50 pages, 383643 bytes).
+Output written on docstrip.pdf (50 pages, 383877 bytes).
 Transcript written on docstrip.log.
 ******************************************************************************
-*   383.643  docstrip.pdf
+*   383.877  docstrip.pdf
 * system: /work/java-1.5.0/bin/java -jar /home/one/work/texprj/latex-tds/lib/pdfbox-rewrite.jar docstrip.pdf /home/one/work/texprj/latex-tds/build/tmp.pdf
 Pages: 50
 Page 1: 270 ops -> 244 ops, 26 ops saved.
@@ -10807,13 +10807,13 @@ Page 49: 671 ops -> 559 ops, 112 ops saved.
 Page 50: 52 ops -> 40 ops, 12 ops saved.
 Total: 22193 ops -> 19539 ops, 2654 ops saved.
 * system: /work/java-1.5.0/bin/java -cp /home/one/work/texprj/latex-tds/lib/Multivalent20060102.jar tool.pdf.Compress -old /home/one/work/texprj/latex-tds/build/tmp.pdf
-file:/home/one/work/texprj/latex-tds/build/tmp.pdf, 373459 bytes
+file:/home/one/work/texprj/latex-tds/build/tmp.pdf, 373693 bytes
 PDF 1.4, producer=pdfTeX-1.40.5, creator=LaTeX with hyperref package
 additional compression may be possible with:
 	 [omit -old] -compact
-=> new length = 363437, saved 2%, elapsed time = 0 sec
+=> new length = 363669, saved 2%, elapsed time = 0 sec
 * system: mv /home/one/work/texprj/latex-tds/build/tmp-o.pdf texmf/doc/latex/base/docstrip.pdf
-*   363.460  texmf/doc/latex/base/docstrip.pdf
+*   363.692  texmf/doc/latex/base/docstrip.pdf
 ******************************************************************************
 
 * system: pdflatex -fmt=/home/one/work/texprj/latex-tds/build/latex-tds -draftmode letter.dtx
@@ -11117,10 +11117,10 @@ ype1/bluesky/cm/cmss10.pfb></work/tetex/texmf-dist/fonts/type1/bluesky/cm/cmss9
 mf-dist/fonts/type1/bluesky/cm/cmsy9.pfb></work/tetex/texmf-dist/fonts/type1/bl
 uesky/cm/cmti10.pfb></work/tetex/texmf-dist/fonts/type1/bluesky/cm/cmtt10.pfb><
 /work/tetex/texmf-dist/fonts/type1/bluesky/cm/cmtt9.pfb>
-Output written on letter.pdf (20 pages, 326527 bytes).
+Output written on letter.pdf (20 pages, 326755 bytes).
 Transcript written on letter.log.
 ******************************************************************************
-*   326.527  letter.pdf
+*   326.755  letter.pdf
 * system: /work/java-1.5.0/bin/java -jar /home/one/work/texprj/latex-tds/lib/pdfbox-rewrite.jar letter.pdf /home/one/work/texprj/latex-tds/build/tmp.pdf
 Pages: 20
 Page 1: 476 ops -> 256 ops, 220 ops saved.
@@ -11145,13 +11145,13 @@ Page 19: 3418 ops -> 2678 ops, 740 ops saved.
 Page 20: 2231 ops -> 1737 ops, 494 ops saved.
 Total: 13504 ops -> 10604 ops, 2900 ops saved.
 * system: /work/java-1.5.0/bin/java -cp /home/one/work/texprj/latex-tds/lib/Multivalent20060102.jar tool.pdf.Compress -old /home/one/work/texprj/latex-tds/build/tmp.pdf
-file:/home/one/work/texprj/latex-tds/build/tmp.pdf, 294359 bytes
+file:/home/one/work/texprj/latex-tds/build/tmp.pdf, 294587 bytes
 PDF 1.4, producer=pdfTeX-1.40.5, creator=LaTeX with hyperref package
 additional compression may be possible with:
 	 [omit -old] -compact
-=> new length = 278583, saved 5%, elapsed time = 0 sec
+=> new length = 278811, saved 5%, elapsed time = 0 sec
 * system: mv /home/one/work/texprj/latex-tds/build/tmp-o.pdf texmf/doc/latex/base/letter.pdf
-*   278.606  texmf/doc/latex/base/letter.pdf
+*   278.834  texmf/doc/latex/base/letter.pdf
 ******************************************************************************
 
 * system: pdflatex -fmt=/home/one/work/texprj/latex-tds/build/latex-tds -draftmode alltt.dtx
@@ -11308,9 +11308,9 @@ file:/home/one/work/texprj/latex-tds/build/tmp.pdf, 85179 bytes
 PDF 1.4, producer=pdfTeX-1.40.5, creator=LaTeX with hyperref package
 additional compression may be possible with:
 	 [omit -old] -compact
-=> new length = 85058, saved 0%, elapsed time = 0 sec
+=> new length = 85057, saved 0%, elapsed time = 0 sec
 * system: mv /home/one/work/texprj/latex-tds/build/tmp-o.pdf texmf/doc/latex/base/alltt.pdf
-*    85.080  texmf/doc/latex/base/alltt.pdf
+*    85.079  texmf/doc/latex/base/alltt.pdf
 ******************************************************************************
 
 * system: pdflatex -fmt=/home/one/work/texprj/latex-tds/build/latex-tds -draftmode exscale.dtx
@@ -12591,9 +12591,9 @@ file:/home/one/work/texprj/latex-tds/build/tmp.pdf, 121274 bytes
 PDF 1.4, producer=pdfTeX-1.40.5, creator=LaTeX with hyperref package
 additional compression may be possible with:
 	 [omit -old] -compact
-=> new length = 120035, saved 1%, elapsed time = 0 sec
+=> new length = 120034, saved 1%, elapsed time = 0 sec
 * system: mv /home/one/work/texprj/latex-tds/build/tmp-o.pdf texmf/doc/latex/base/latex209.pdf
-*   120.058  texmf/doc/latex/base/latex209.pdf
+*   120.057  texmf/doc/latex/base/latex209.pdf
 ******************************************************************************
 
 * system: pdflatex -fmt=/home/one/work/texprj/latex-tds/build/latex-tds -draftmode latexsym.dtx
@@ -12763,9 +12763,9 @@ file:/home/one/work/texprj/latex-tds/build/tmp.pdf, 89289 bytes
 PDF 1.4, producer=pdfTeX-1.40.5, creator=LaTeX with hyperref package
 additional compression may be possible with:
 	 [omit -old] -compact
-=> new length = 89185, saved 0%, elapsed time = 0 sec
+=> new length = 89186, saved 0%, elapsed time = 0 sec
 * system: mv /home/one/work/texprj/latex-tds/build/tmp-o.pdf texmf/doc/latex/base/latexsym.pdf
-*    89.207  texmf/doc/latex/base/latexsym.pdf
+*    89.208  texmf/doc/latex/base/latexsym.pdf
 ******************************************************************************
 
 * system: pdflatex -fmt=/home/one/work/texprj/latex-tds/build/latex-tds -draftmode ltxdoc.dtx
@@ -12943,9 +12943,9 @@ file:/home/one/work/texprj/latex-tds/build/tmp.pdf, 110856 bytes
 PDF 1.4, producer=pdfTeX-1.40.5, creator=LaTeX with hyperref package
 additional compression may be possible with:
 	 [omit -old] -compact
-=> new length = 110451, saved 0%, elapsed time = 0 sec
+=> new length = 110452, saved 0%, elapsed time = 0 sec
 * system: mv /home/one/work/texprj/latex-tds/build/tmp-o.pdf texmf/doc/latex/base/ltxdoc.pdf
-*   110.474  texmf/doc/latex/base/ltxdoc.pdf
+*   110.475  texmf/doc/latex/base/ltxdoc.pdf
 ******************************************************************************
 
 * system: pdflatex -fmt=/home/one/work/texprj/latex-tds/build/latex-tds -draftmode makeindx.dtx
@@ -13109,9 +13109,9 @@ file:/home/one/work/texprj/latex-tds/build/tmp.pdf, 83518 bytes
 PDF 1.4, producer=pdfTeX-1.40.5, creator=LaTeX with hyperref package
 additional compression may be possible with:
 	 [omit -old] -compact
-=> new length = 83233, saved 0%, elapsed time = 0 sec
+=> new length = 83234, saved 0%, elapsed time = 0 sec
 * system: mv /home/one/work/texprj/latex-tds/build/tmp-o.pdf texmf/doc/latex/base/makeindx.pdf
-*    83.255  texmf/doc/latex/base/makeindx.pdf
+*    83.256  texmf/doc/latex/base/makeindx.pdf
 ******************************************************************************
 
 * system: pdflatex -fmt=/home/one/work/texprj/latex-tds/build/latex-tds -draftmode newlfont.dtx
@@ -13261,23 +13261,23 @@ luesky/cm/cmsy6.pfb></work/tetex/texmf-dist/fonts/type1/bluesky/cm/cmsy9.pfb></
 work/tetex/texmf-dist/fonts/type1/bluesky/cm/cmti10.pfb></work/tetex/texmf-dist
 /fonts/type1/bluesky/cm/cmtt10.pfb></work/tetex/texmf-dist/fonts/type1/bluesky/
 cm/cmtt12.pfb></work/tetex/texmf-dist/fonts/type1/bluesky/cm/cmtt9.pfb>
-Output written on newlfont.pdf (2 pages, 81963 bytes).
+Output written on newlfont.pdf (2 pages, 82194 bytes).
 Transcript written on newlfont.log.
 ******************************************************************************
-*    81.963  newlfont.pdf
+*    82.194  newlfont.pdf
 * system: /work/java-1.5.0/bin/java -jar /home/one/work/texprj/latex-tds/lib/pdfbox-rewrite.jar newlfont.pdf /home/one/work/texprj/latex-tds/build/tmp.pdf
 Pages: 2
 Page 1: 318 ops -> 280 ops, 38 ops saved.
 Page 2: 261 ops -> 253 ops, 8 ops saved.
 Total: 579 ops -> 533 ops, 46 ops saved.
 * system: /work/java-1.5.0/bin/java -cp /home/one/work/texprj/latex-tds/lib/Multivalent20060102.jar tool.pdf.Compress -old /home/one/work/texprj/latex-tds/build/tmp.pdf
-file:/home/one/work/texprj/latex-tds/build/tmp.pdf, 80121 bytes
+file:/home/one/work/texprj/latex-tds/build/tmp.pdf, 80352 bytes
 PDF 1.4, producer=pdfTeX-1.40.5, creator=LaTeX with hyperref package
 additional compression may be possible with:
 	 [omit -old] -compact
-=> new length = 80014, saved 0%, elapsed time = 0 sec
+=> new length = 80244, saved 0%, elapsed time = 0 sec
 * system: mv /home/one/work/texprj/latex-tds/build/tmp-o.pdf texmf/doc/latex/base/newlfont.pdf
-*    80.036  texmf/doc/latex/base/newlfont.pdf
+*    80.266  texmf/doc/latex/base/newlfont.pdf
 ******************************************************************************
 
 * system: pdflatex -fmt=/home/one/work/texprj/latex-tds/build/latex-tds -draftmode oldlfont.dtx
@@ -13431,10 +13431,10 @@ bluesky/cm/cmsy10.pfb></work/tetex/texmf-dist/fonts/type1/bluesky/cm/cmsy6.pfb>
 t/fonts/type1/bluesky/cm/cmti10.pfb></work/tetex/texmf-dist/fonts/type1/bluesky
 /cm/cmtt10.pfb></work/tetex/texmf-dist/fonts/type1/bluesky/cm/cmtt12.pfb></work
 /tetex/texmf-dist/fonts/type1/bluesky/cm/cmtt9.pfb>
-Output written on oldlfont.pdf (3 pages, 93468 bytes).
+Output written on oldlfont.pdf (3 pages, 93699 bytes).
 Transcript written on oldlfont.log.
 ******************************************************************************
-*    93.468  oldlfont.pdf
+*    93.699  oldlfont.pdf
 * system: /work/java-1.5.0/bin/java -jar /home/one/work/texprj/latex-tds/lib/pdfbox-rewrite.jar oldlfont.pdf /home/one/work/texprj/latex-tds/build/tmp.pdf
 Pages: 3
 Page 1: 380 ops -> 338 ops, 42 ops saved.
@@ -13442,13 +13442,13 @@ Page 2: 414 ops -> 354 ops, 60 ops saved.
 Page 3: 59 ops -> 51 ops, 8 ops saved.
 Total: 853 ops -> 743 ops, 110 ops saved.
 * system: /work/java-1.5.0/bin/java -cp /home/one/work/texprj/latex-tds/lib/Multivalent20060102.jar tool.pdf.Compress -old /home/one/work/texprj/latex-tds/build/tmp.pdf
-file:/home/one/work/texprj/latex-tds/build/tmp.pdf, 91484 bytes
+file:/home/one/work/texprj/latex-tds/build/tmp.pdf, 91715 bytes
 PDF 1.4, producer=pdfTeX-1.40.5, creator=LaTeX with hyperref package
 additional compression may be possible with:
 	 [omit -old] -compact
-=> new length = 91332, saved 0%, elapsed time = 0 sec
+=> new length = 91562, saved 0%, elapsed time = 0 sec
 * system: mv /home/one/work/texprj/latex-tds/build/tmp-o.pdf texmf/doc/latex/base/oldlfont.pdf
-*    91.354  texmf/doc/latex/base/oldlfont.pdf
+*    91.584  texmf/doc/latex/base/oldlfont.pdf
 ******************************************************************************
 
 * system: pdflatex -fmt=/home/one/work/texprj/latex-tds/build/latex-tds -draftmode proc.dtx
@@ -13617,9 +13617,9 @@ file:/home/one/work/texprj/latex-tds/build/tmp.pdf, 109045 bytes
 PDF 1.4, producer=pdfTeX-1.40.5, creator=LaTeX with hyperref package
 additional compression may be possible with:
 	 [omit -old] -compact
-=> new length = 108681, saved 0%, elapsed time = 0 sec
+=> new length = 108683, saved 0%, elapsed time = 0 sec
 * system: mv /home/one/work/texprj/latex-tds/build/tmp-o.pdf texmf/doc/latex/base/proc.pdf
-*   108.704  texmf/doc/latex/base/proc.pdf
+*   108.706  texmf/doc/latex/base/proc.pdf
 ******************************************************************************
 
 * system: pdflatex -fmt=/home/one/work/texprj/latex-tds/build/latex-tds -draftmode slides.dtx
@@ -14024,10 +14024,10 @@ luesky/cm/cmsy10.pfb></work/tetex/texmf-dist/fonts/type1/bluesky/cm/cmsy6.pfb><
 /fonts/type1/bluesky/cm/cmti10.pfb></work/tetex/texmf-dist/fonts/type1/bluesky/
 cm/cmtt10.pfb></work/tetex/texmf-dist/fonts/type1/bluesky/cm/cmtt12.pfb></work/
 tetex/texmf-dist/fonts/type1/bluesky/cm/cmtt9.pfb>
-Output written on syntonly.pdf (3 pages, 89869 bytes).
+Output written on syntonly.pdf (3 pages, 90100 bytes).
 Transcript written on syntonly.log.
 ******************************************************************************
-*    89.869  syntonly.pdf
+*    90.100  syntonly.pdf
 * system: /work/java-1.5.0/bin/java -jar /home/one/work/texprj/latex-tds/lib/pdfbox-rewrite.jar syntonly.pdf /home/one/work/texprj/latex-tds/build/tmp.pdf
 Pages: 3
 Page 1: 409 ops -> 363 ops, 46 ops saved.
@@ -14035,13 +14035,13 @@ Page 2: 410 ops -> 370 ops, 40 ops saved.
 Page 3: 109 ops -> 49 ops, 60 ops saved.
 Total: 928 ops -> 782 ops, 146 ops saved.
 * system: /work/java-1.5.0/bin/java -cp /home/one/work/texprj/latex-tds/lib/Multivalent20060102.jar tool.pdf.Compress -old /home/one/work/texprj/latex-tds/build/tmp.pdf
-file:/home/one/work/texprj/latex-tds/build/tmp.pdf, 87913 bytes
+file:/home/one/work/texprj/latex-tds/build/tmp.pdf, 88144 bytes
 PDF 1.4, producer=pdfTeX-1.40.5, creator=LaTeX with hyperref package
 additional compression may be possible with:
 	 [omit -old] -compact
-=> new length = 87727, saved 0%, elapsed time = 0 sec
+=> new length = 87959, saved 0%, elapsed time = 0 sec
 * system: mv /home/one/work/texprj/latex-tds/build/tmp-o.pdf texmf/doc/latex/base/syntonly.pdf
-*    87.749  texmf/doc/latex/base/syntonly.pdf
+*    87.981  texmf/doc/latex/base/syntonly.pdf
 ******************************************************************************
 
 * system: pdflatex -fmt=/home/one/work/texprj/latex-tds/build/latex-tds -draftmode utf8ienc.dtx
@@ -14427,10 +14427,10 @@ ti7.pfb></work/tetex/texmf-dist/fonts/type1/bluesky/cm/cmtt10.pfb></work/tetex/
 texmf-dist/fonts/type1/bluesky/cm/cmtt12.pfb></work/tetex/texmf-dist/fonts/type
 1/bluesky/cm/cmtt9.pfb></work/tetex/texmf-dist/fonts/type1/bluesky/cm/cmu10.pfb
 >
-Output written on utf8ienc.pdf (18 pages, 186658 bytes).
+Output written on utf8ienc.pdf (18 pages, 186886 bytes).
 Transcript written on utf8ienc.log.
 ******************************************************************************
-*   186.658  utf8ienc.pdf
+*   186.886  utf8ienc.pdf
 * system: /work/java-1.5.0/bin/java -jar /home/one/work/texprj/latex-tds/lib/pdfbox-rewrite.jar utf8ienc.pdf /home/one/work/texprj/latex-tds/build/tmp.pdf
 Pages: 18
 Page 1: 291 ops -> 175 ops, 116 ops saved.
@@ -14453,13 +14453,13 @@ Page 17: 251 ops -> 235 ops, 16 ops saved.
 Page 18: 56 ops -> 48 ops, 8 ops saved.
 Total: 16371 ops -> 15889 ops, 482 ops saved.
 * system: /work/java-1.5.0/bin/java -cp /home/one/work/texprj/latex-tds/lib/Multivalent20060102.jar tool.pdf.Compress -old /home/one/work/texprj/latex-tds/build/tmp.pdf
-file:/home/one/work/texprj/latex-tds/build/tmp.pdf, 181681 bytes
+file:/home/one/work/texprj/latex-tds/build/tmp.pdf, 181909 bytes
 PDF 1.4, producer=pdfTeX-1.40.5, creator=LaTeX with hyperref package
 additional compression may be possible with:
 	 [omit -old] -compact
-=> new length = 179220, saved 1%, elapsed time = 0 sec
+=> new length = 179448, saved 1%, elapsed time = 0 sec
 * system: mv /home/one/work/texprj/latex-tds/build/tmp-o.pdf texmf/doc/latex/base/utf8ienc.pdf
-*   179.243  texmf/doc/latex/base/utf8ienc.pdf
+*   179.471  texmf/doc/latex/base/utf8ienc.pdf
 ******************************************************************************
 
 * system: pdflatex -fmt=/home/one/work/texprj/latex-tds/build/latex-tds -draftmode cmfonts.fdd
@@ -14664,9 +14664,9 @@ file:/home/one/work/texprj/latex-tds/build/tmp.pdf, 165226 bytes
 PDF 1.4, producer=pdfTeX-1.40.5, creator=LaTeX with hyperref package
 additional compression may be possible with:
 	 [omit -old] -compact
-=> new length = 163105, saved 1%, elapsed time = 0 sec
+=> new length = 163104, saved 1%, elapsed time = 0 sec
 * system: mv /home/one/work/texprj/latex-tds/build/tmp-o.pdf texmf/doc/latex/base/cmfonts.pdf
-*   163.128  texmf/doc/latex/base/cmfonts.pdf
+*   163.127  texmf/doc/latex/base/cmfonts.pdf
 ******************************************************************************
 
 * system: pdflatex -fmt=/home/one/work/texprj/latex-tds/build/latex-tds -draftmode slifonts.fdd
@@ -19156,9 +19156,9 @@ file:/home/one/work/texprj/latex-tds/build/tmp.pdf, 518647 bytes
 PDF 1.4, producer=pdfTeX-1.40.5, creator=LaTeX with hyperref package
 additional compression may be possible with:
 	 [omit -old] -compact
-=> new length = 510961, saved 1%, elapsed time = 0 sec
+=> new length = 510959, saved 1%, elapsed time = 0 sec
 * system: mv /home/one/work/texprj/latex-tds/build/tmp-o.pdf texmf/doc/latex/base/tlc2.pdf
-*   510.984  texmf/doc/latex/base/tlc2.pdf
+*   510.982  texmf/doc/latex/base/tlc2.pdf
 ******************************************************************************
 
 * system: pdflatex -fmt=/home/one/work/texprj/latex-tds/build/latex-tds -draftmode lb2.err
@@ -21575,9 +21575,9 @@ file:/home/one/work/texprj/latex-tds/build/tmp.pdf, 72194 bytes
 PDF 1.4, producer=pdfTeX-1.40.5, creator=LaTeX with hyperref package
 additional compression may be possible with:
 	 [omit -old] -compact
-=> new length = 72102, saved 0%, elapsed time = 0 sec
+=> new length = 72100, saved 0%, elapsed time = 0 sec
 * system: mv /home/one/work/texprj/latex-tds/build/tmp-o.pdf texmf/doc/latex/base/webcomp.pdf
-*    72.124  texmf/doc/latex/base/webcomp.pdf
+*    72.122  texmf/doc/latex/base/webcomp.pdf
 ******************************************************************************
 
 * system: pdflatex -fmt=/home/one/work/texprj/latex-tds/build/latex-tds -draftmode webcompg.err
@@ -22591,9 +22591,9 @@ file:/home/one/work/texprj/latex-tds/build/tmp.pdf, 140539 bytes
 PDF 1.4, producer=pdfTeX-1.40.5, creator=LaTeX with hyperref package
 additional compression may be possible with:
 	 [omit -old] -compact
-=> new length = 139504, saved 0%, elapsed time = 0 sec
+=> new length = 139505, saved 0%, elapsed time = 0 sec
 * system: mv /home/one/work/texprj/latex-tds/build/tmp-o.pdf texmf/doc/latex/base/cfgguide.pdf
-*   139.527  texmf/doc/latex/base/cfgguide.pdf
+*   139.528  texmf/doc/latex/base/cfgguide.pdf
 ******************************************************************************
 
 * system: pdflatex -fmt=/home/one/work/texprj/latex-tds/build/latex-tds -draftmode clsguide
@@ -23717,9 +23717,9 @@ file:/home/one/work/texprj/latex-tds/build/tmp.pdf, 1354028 bytes
 PDF 1.4, producer=pdfTeX-1.40.5, creator=LaTeX with hyperref package
 additional compression may be possible with:
 	 [omit -old] -compact
-=> new length = 1331027, saved 1%, elapsed time = 1 sec
+=> new length = 1331029, saved 1%, elapsed time = 1 sec
 * system: mv /home/one/work/texprj/latex-tds/build/tmp-o.pdf texmf/doc/latex/base/encguide.pdf
-* 1.331.051  texmf/doc/latex/base/encguide.pdf
+* 1.331.053  texmf/doc/latex/base/encguide.pdf
 ******************************************************************************
 
 * system: pdflatex -fmt=/home/one/work/texprj/latex-tds/build/latex-tds -draftmode fntguide
@@ -24382,9 +24382,9 @@ file:/home/one/work/texprj/latex-tds/build/tmp.pdf, 271377 bytes
 PDF 1.4, producer=pdfTeX-1.40.5, creator=LaTeX with hyperref package
 additional compression may be possible with:
 	 [omit -old] -compact
-=> new length = 268308, saved 1%, elapsed time = 0 sec
+=> new length = 268309, saved 1%, elapsed time = 0 sec
 * system: mv /home/one/work/texprj/latex-tds/build/tmp-o.pdf texmf/doc/latex/base/usrguide.pdf
-*   268.331  texmf/doc/latex/base/usrguide.pdf
+*   268.332  texmf/doc/latex/base/usrguide.pdf
 ******************************************************************************
 
 * system: pdflatex -fmt=/home/one/work/texprj/latex-tds/build/latex-tds -draftmode doc_lppl
@@ -24677,9 +24677,9 @@ file:/home/one/work/texprj/latex-tds/build/tmp.pdf, 83139 bytes
 PDF 1.4, producer=pdfTeX-1.40.5, creator=LaTeX with hyperref package
 additional compression may be possible with:
 	 [omit -old] -compact
-=> new length = 81353, saved 2%, elapsed time = 0 sec
+=> new length = 81351, saved 2%, elapsed time = 0 sec
 * system: mv /home/one/work/texprj/latex-tds/build/tmp-o.pdf texmf/doc/latex/base/ltxcheck.pdf
-*    81.375  texmf/doc/latex/base/ltxcheck.pdf
+*    81.373  texmf/doc/latex/base/ltxcheck.pdf
 ******************************************************************************
 
 * system: pdflatex -fmt=/home/one/work/texprj/latex-tds/build/latex-tds -draftmode '\let\SavedDocumentclass\documentclass\def\documentclass[#1]#2{\SavedDocumentclass[{#1}]{#2}\usepackage[colorlinks,pdfusetitle]{hyperref}}\input{ltx3info}'
@@ -25904,10 +25904,10 @@ cmti10.pfb></work/tetex/texmf-dist/fonts/type1/bluesky/cm/cmti9.pfb></work/tete
 x/texmf-dist/fonts/type1/bluesky/cm/cmtt10.pfb></work/tetex/texmf-dist/fonts/ty
 pe1/bluesky/cm/cmtt12.pfb></work/tetex/texmf-dist/fonts/type1/bluesky/cm/cmtt8.
 pfb></work/tetex/texmf-dist/fonts/type1/bluesky/cm/cmtt9.pfb>
-Output written on array.pdf (31 pages, 446653 bytes).
+Output written on array.pdf (31 pages, 446883 bytes).
 Transcript written on array.log.
 ******************************************************************************
-*   446.653  array.pdf
+*   446.883  array.pdf
 * system: /work/java-1.5.0/bin/java -jar /home/one/work/texprj/latex-tds/lib/pdfbox-rewrite.jar array.pdf /home/one/work/texprj/latex-tds/build/tmp.pdf
 Pages: 31
 Page 1: 410 ops -> 360 ops, 50 ops saved.
@@ -25943,13 +25943,13 @@ Page 30: 778 ops -> 668 ops, 110 ops saved.
 Page 31: 202 ops -> 164 ops, 38 ops saved.
 Total: 20193 ops -> 17129 ops, 3064 ops saved.
 * system: /work/java-1.5.0/bin/java -cp /home/one/work/texprj/latex-tds/lib/Multivalent20060102.jar tool.pdf.Compress -old /home/one/work/texprj/latex-tds/build/tmp.pdf
-file:/home/one/work/texprj/latex-tds/build/tmp.pdf, 415003 bytes
+file:/home/one/work/texprj/latex-tds/build/tmp.pdf, 415233 bytes
 PDF 1.4, producer=pdfTeX-1.40.5, creator=LaTeX with hyperref package
 additional compression may be possible with:
 	 [omit -old] -compact
-=> new length = 397873, saved 4%, elapsed time = 0 sec
+=> new length = 398103, saved 4%, elapsed time = 0 sec
 * system: mv /home/one/work/texprj/latex-tds/build/tmp-o.pdf texmf/doc/latex/tools/array.pdf
-*   397.896  texmf/doc/latex/tools/array.pdf
+*   398.126  texmf/doc/latex/tools/array.pdf
 ******************************************************************************
 
 * system: pdflatex -fmt=/home/one/work/texprj/latex-tds/build/latex-tds -draftmode bm.dtx
@@ -26170,9 +26170,9 @@ file:/home/one/work/texprj/latex-tds/build/tmp.pdf, 181749 bytes
 PDF 1.4, producer=pdfTeX-1.40.5, creator=LaTeX with hyperref package
 additional compression may be possible with:
 	 [omit -old] -compact
-=> new length = 180063, saved 0%, elapsed time = 0 sec
+=> new length = 180062, saved 0%, elapsed time = 0 sec
 * system: mv /home/one/work/texprj/latex-tds/build/tmp-o.pdf texmf/doc/latex/tools/bm.pdf
-*   180.086  texmf/doc/latex/tools/bm.pdf
+*   180.085  texmf/doc/latex/tools/bm.pdf
 ******************************************************************************
 
 * system: pdflatex -fmt=/home/one/work/texprj/latex-tds/build/latex-tds -draftmode calc.dtx
@@ -26706,9 +26706,9 @@ file:/home/one/work/texprj/latex-tds/build/tmp.pdf, 213533 bytes
 PDF 1.4, producer=pdfTeX-1.40.5, creator=LaTeX with hyperref package
 additional compression may be possible with:
 	 [omit -old] -compact
-=> new length = 211481, saved 0%, elapsed time = 0 sec
+=> new length = 211482, saved 0%, elapsed time = 0 sec
 * system: mv /home/one/work/texprj/latex-tds/build/tmp-o.pdf texmf/doc/latex/tools/calc.pdf
-*   211.504  texmf/doc/latex/tools/calc.pdf
+*   211.505  texmf/doc/latex/tools/calc.pdf
 ******************************************************************************
 
 * system: pdflatex -fmt=/home/one/work/texprj/latex-tds/build/latex-tds -draftmode dcolumn.dtx
@@ -26918,9 +26918,9 @@ file:/home/one/work/texprj/latex-tds/build/tmp.pdf, 103224 bytes
 PDF 1.4, producer=pdfTeX-1.40.5, creator=LaTeX with hyperref package
 additional compression may be possible with:
 	 [omit -old] -compact
-=> new length = 103026, saved 0%, elapsed time = 0 sec
+=> new length = 103028, saved 0%, elapsed time = 0 sec
 * system: mv /home/one/work/texprj/latex-tds/build/tmp-o.pdf texmf/doc/latex/tools/dcolumn.pdf
-*   103.049  texmf/doc/latex/tools/dcolumn.pdf
+*   103.051  texmf/doc/latex/tools/dcolumn.pdf
 ******************************************************************************
 
 * system: pdflatex -fmt=/home/one/work/texprj/latex-tds/build/latex-tds -draftmode delarray.dtx
@@ -27347,9 +27347,9 @@ file:/home/one/work/texprj/latex-tds/build/tmp.pdf, 96960 bytes
 PDF 1.4, producer=pdfTeX-1.40.5, creator=LaTeX with hyperref package
 additional compression may be possible with:
 	 [omit -old] -compact
-=> new length = 96740, saved 0%, elapsed time = 0 sec
+=> new length = 96741, saved 0%, elapsed time = 0 sec
 * system: mv /home/one/work/texprj/latex-tds/build/tmp-o.pdf texmf/doc/latex/tools/enumerate.pdf
-*    96.762  texmf/doc/latex/tools/enumerate.pdf
+*    96.763  texmf/doc/latex/tools/enumerate.pdf
 ******************************************************************************
 
 * system: pdflatex -fmt=/home/one/work/texprj/latex-tds/build/latex-tds -draftmode fileerr.dtx
@@ -27547,23 +27547,23 @@ ts/type1/bluesky/cm/cmsy9.pfb></work/tetex/texmf-dist/fonts/type1/bluesky/cm/cm
 ti10.pfb></work/tetex/texmf-dist/fonts/type1/bluesky/cm/cmtt10.pfb></work/tetex
 /texmf-dist/fonts/type1/bluesky/cm/cmtt12.pfb></work/tetex/texmf-dist/fonts/typ
 e1/bluesky/cm/cmtt9.pfb>
-Output written on fileerr.pdf (2 pages, 92146 bytes).
+Output written on fileerr.pdf (2 pages, 92377 bytes).
 Transcript written on fileerr.log.
 ******************************************************************************
-*    92.146  fileerr.pdf
+*    92.377  fileerr.pdf
 * system: /work/java-1.5.0/bin/java -jar /home/one/work/texprj/latex-tds/lib/pdfbox-rewrite.jar fileerr.pdf /home/one/work/texprj/latex-tds/build/tmp.pdf
 Pages: 2
 Page 1: 393 ops -> 373 ops, 20 ops saved.
 Page 2: 296 ops -> 288 ops, 8 ops saved.
 Total: 689 ops -> 661 ops, 28 ops saved.
 * system: /work/java-1.5.0/bin/java -cp /home/one/work/texprj/latex-tds/lib/Multivalent20060102.jar tool.pdf.Compress -old /home/one/work/texprj/latex-tds/build/tmp.pdf
-file:/home/one/work/texprj/latex-tds/build/tmp.pdf, 89598 bytes
+file:/home/one/work/texprj/latex-tds/build/tmp.pdf, 89829 bytes
 PDF 1.4, producer=pdfTeX-1.40.5, creator=LaTeX with hyperref package
 additional compression may be possible with:
 	 [omit -old] -compact
-=> new length = 89485, saved 0%, elapsed time = 0 sec
+=> new length = 89716, saved 0%, elapsed time = 0 sec
 * system: mv /home/one/work/texprj/latex-tds/build/tmp-o.pdf texmf/doc/latex/tools/fileerr.pdf
-*    89.507  texmf/doc/latex/tools/fileerr.pdf
+*    89.738  texmf/doc/latex/tools/fileerr.pdf
 ******************************************************************************
 
 * system: pdflatex -fmt=/home/one/work/texprj/latex-tds/build/latex-tds -draftmode fontsmpl.dtx
@@ -27777,9 +27777,9 @@ file:/home/one/work/texprj/latex-tds/build/tmp.pdf, 73803 bytes
 PDF 1.4, producer=pdfTeX-1.40.5, creator=LaTeX with hyperref package
 additional compression may be possible with:
 	 [omit -old] -compact
-=> new length = 73326, saved 0%, elapsed time = 0 sec
+=> new length = 73324, saved 0%, elapsed time = 0 sec
 * system: mv /home/one/work/texprj/latex-tds/build/tmp-o.pdf texmf/doc/latex/tools/fontsmpl.pdf
-*    73.348  texmf/doc/latex/tools/fontsmpl.pdf
+*    73.346  texmf/doc/latex/tools/fontsmpl.pdf
 ******************************************************************************
 
 * system: pdflatex -fmt=/home/one/work/texprj/latex-tds/build/latex-tds -draftmode ftnright.dtx
@@ -28030,10 +28030,10 @@ ype1/bluesky/cm/cmsy9.pfb></work/tetex/texmf-dist/fonts/type1/bluesky/cm/cmti7.
 pfb></work/tetex/texmf-dist/fonts/type1/bluesky/cm/cmti9.pfb></work/tetex/texmf
 -dist/fonts/type1/bluesky/cm/cmtt10.pfb></work/tetex/texmf-dist/fonts/type1/blu
 esky/cm/cmtt8.pfb></work/tetex/texmf-dist/fonts/type1/bluesky/cm/cmtt9.pfb>
-Output written on ftnright.pdf (10 pages, 208476 bytes).
+Output written on ftnright.pdf (10 pages, 208475 bytes).
 Transcript written on ftnright.log.
 ******************************************************************************
-*   208.476  ftnright.pdf
+*   208.475  ftnright.pdf
 * system: /work/java-1.5.0/bin/java -jar /home/one/work/texprj/latex-tds/lib/pdfbox-rewrite.jar ftnright.pdf /home/one/work/texprj/latex-tds/build/tmp.pdf
 Pages: 10
 Page 1: 280 ops -> 280 ops, 0 ops saved.
@@ -28257,9 +28257,9 @@ file:/home/one/work/texprj/latex-tds/build/tmp.pdf, 91418 bytes
 PDF 1.4, producer=pdfTeX-1.40.5, creator=LaTeX with hyperref package
 additional compression may be possible with:
 	 [omit -old] -compact
-=> new length = 91234, saved 0%, elapsed time = 0 sec
+=> new length = 91233, saved 0%, elapsed time = 0 sec
 * system: mv /home/one/work/texprj/latex-tds/build/tmp-o.pdf texmf/doc/latex/tools/hhline.pdf
-*    91.256  texmf/doc/latex/tools/hhline.pdf
+*    91.255  texmf/doc/latex/tools/hhline.pdf
 ******************************************************************************
 
 * system: pdflatex -fmt=/home/one/work/texprj/latex-tds/build/latex-tds -draftmode indentfirst.dtx
@@ -28688,9 +28688,9 @@ file:/home/one/work/texprj/latex-tds/build/tmp.pdf, 136261 bytes
 PDF 1.4, producer=pdfTeX-1.40.5, creator=LaTeX with hyperref package
 additional compression may be possible with:
 	 [omit -old] -compact
-=> new length = 134911, saved 0%, elapsed time = 0 sec
+=> new length = 134912, saved 0%, elapsed time = 0 sec
 * system: mv /home/one/work/texprj/latex-tds/build/tmp-o.pdf texmf/doc/latex/tools/layout.pdf
-*   134.934  texmf/doc/latex/tools/layout.pdf
+*   134.935  texmf/doc/latex/tools/layout.pdf
 ******************************************************************************
 
 * system: pdflatex -fmt=/home/one/work/texprj/latex-tds/build/latex-tds -draftmode longtable.dtx
@@ -30087,10 +30087,10 @@ cmti8.pfb></work/tetex/texmf-dist/fonts/type1/bluesky/cm/cmti9.pfb></work/tetex
 /texmf-dist/fonts/type1/bluesky/cm/cmtt10.pfb></work/tetex/texmf-dist/fonts/typ
 e1/bluesky/cm/cmtt12.pfb></work/tetex/texmf-dist/fonts/type1/bluesky/cm/cmtt8.p
 fb></work/tetex/texmf-dist/fonts/type1/bluesky/cm/cmtt9.pfb>
-Output written on multicol.pdf (28 pages, 365271 bytes).
+Output written on multicol.pdf (28 pages, 365508 bytes).
 Transcript written on multicol.log.
 ******************************************************************************
-*   365.271  multicol.pdf
+*   365.508  multicol.pdf
 * system: /work/java-1.5.0/bin/java -jar /home/one/work/texprj/latex-tds/lib/pdfbox-rewrite.jar multicol.pdf /home/one/work/texprj/latex-tds/build/tmp.pdf
 Pages: 28
 Page 1: 475 ops -> 411 ops, 64 ops saved.
@@ -30123,13 +30123,13 @@ Page 27: 1022 ops -> 880 ops, 142 ops saved.
 Page 28: 679 ops -> 583 ops, 96 ops saved.
 Total: 20322 ops -> 17984 ops, 2338 ops saved.
 * system: /work/java-1.5.0/bin/java -cp /home/one/work/texprj/latex-tds/lib/Multivalent20060102.jar tool.pdf.Compress -old /home/one/work/texprj/latex-tds/build/tmp.pdf
-file:/home/one/work/texprj/latex-tds/build/tmp.pdf, 356166 bytes
+file:/home/one/work/texprj/latex-tds/build/tmp.pdf, 356403 bytes
 PDF 1.4, producer=pdfTeX-1.40.5, creator=LaTeX with hyperref package
 additional compression may be possible with:
 	 [omit -old] -compact
-=> new length = 348182, saved 2%, elapsed time = 0 sec
+=> new length = 348418, saved 2%, elapsed time = 0 sec
 * system: mv /home/one/work/texprj/latex-tds/build/tmp-o.pdf texmf/doc/latex/tools/multicol.pdf
-*   348.205  texmf/doc/latex/tools/multicol.pdf
+*   348.441  texmf/doc/latex/tools/multicol.pdf
 ******************************************************************************
 
 * system: pdflatex -fmt=/home/one/work/texprj/latex-tds/build/latex-tds -draftmode rawfonts.dtx
@@ -30325,9 +30325,9 @@ file:/home/one/work/texprj/latex-tds/build/tmp.pdf, 63434 bytes
 PDF 1.4, producer=pdfTeX-1.40.5, creator=LaTeX with hyperref package
 additional compression may be possible with:
 	 [omit -old] -compact
-=> new length = 63202, saved 0%, elapsed time = 0 sec
+=> new length = 63203, saved 0%, elapsed time = 0 sec
 * system: mv /home/one/work/texprj/latex-tds/build/tmp-o.pdf texmf/doc/latex/tools/rawfonts.pdf
-*    63.224  texmf/doc/latex/tools/rawfonts.pdf
+*    63.225  texmf/doc/latex/tools/rawfonts.pdf
 ******************************************************************************
 
 * system: pdflatex -fmt=/home/one/work/texprj/latex-tds/build/latex-tds -draftmode showkeys.dtx
@@ -30571,9 +30571,9 @@ file:/home/one/work/texprj/latex-tds/build/tmp.pdf, 134814 bytes
 PDF 1.4, producer=pdfTeX-1.40.5, creator=LaTeX with hyperref package
 additional compression may be possible with:
 	 [omit -old] -compact
-=> new length = 133700, saved 0%, elapsed time = 0 sec
+=> new length = 133701, saved 0%, elapsed time = 0 sec
 * system: mv /home/one/work/texprj/latex-tds/build/tmp-o.pdf texmf/doc/latex/tools/showkeys.pdf
-*   133.723  texmf/doc/latex/tools/showkeys.pdf
+*   133.724  texmf/doc/latex/tools/showkeys.pdf
 ******************************************************************************
 
 * system: pdflatex -fmt=/home/one/work/texprj/latex-tds/build/latex-tds -draftmode somedefs.dtx
@@ -30790,9 +30790,9 @@ file:/home/one/work/texprj/latex-tds/build/tmp.pdf, 72898 bytes
 PDF 1.4, producer=pdfTeX-1.40.5, creator=LaTeX with hyperref package
 additional compression may be possible with:
 	 [omit -old] -compact
-=> new length = 72747, saved 0%, elapsed time = 0 sec
+=> new length = 72746, saved 0%, elapsed time = 0 sec
 * system: mv /home/one/work/texprj/latex-tds/build/tmp-o.pdf texmf/doc/latex/tools/somedefs.pdf
-*    72.769  texmf/doc/latex/tools/somedefs.pdf
+*    72.768  texmf/doc/latex/tools/somedefs.pdf
 ******************************************************************************
 
 * system: pdflatex -fmt=/home/one/work/texprj/latex-tds/build/latex-tds -draftmode tabularx.dtx
@@ -31069,9 +31069,9 @@ file:/home/one/work/texprj/latex-tds/build/tmp.pdf, 154019 bytes
 PDF 1.4, producer=pdfTeX-1.40.5, creator=LaTeX with hyperref package
 additional compression may be possible with:
 	 [omit -old] -compact
-=> new length = 153281, saved 0%, elapsed time = 0 sec
+=> new length = 153279, saved 0%, elapsed time = 0 sec
 * system: mv /home/one/work/texprj/latex-tds/build/tmp-o.pdf texmf/doc/latex/tools/tabularx.pdf
-*   153.304  texmf/doc/latex/tools/tabularx.pdf
+*   153.302  texmf/doc/latex/tools/tabularx.pdf
 ******************************************************************************
 
 * system: pdflatex -fmt=/home/one/work/texprj/latex-tds/build/latex-tds -draftmode theorem.dtx
@@ -31546,10 +31546,10 @@ ky/cm/cmsy6.pfb></work/tetex/texmf-dist/fonts/type1/bluesky/cm/cmsy9.pfb></work
 ts/type1/bluesky/cm/cmtt10.pfb></work/tetex/texmf-dist/fonts/type1/bluesky/cm/c
 mtt12.pfb></work/tetex/texmf-dist/fonts/type1/bluesky/cm/cmtt8.pfb></work/tetex
 /texmf-dist/fonts/type1/bluesky/cm/cmtt9.pfb>
-Output written on theorem.pdf (13 pages, 214047 bytes).
+Output written on theorem.pdf (13 pages, 214046 bytes).
 Transcript written on theorem.log.
 ******************************************************************************
-*   214.047  theorem.pdf
+*   214.046  theorem.pdf
 * system: /work/java-1.5.0/bin/java -jar /home/one/work/texprj/latex-tds/lib/pdfbox-rewrite.jar theorem.pdf /home/one/work/texprj/latex-tds/build/tmp.pdf
 Pages: 13
 Page 1: 229 ops -> 191 ops, 38 ops saved.
@@ -31567,13 +31567,13 @@ Page 12: 463 ops -> 389 ops, 74 ops saved.
 Page 13: 418 ops -> 346 ops, 72 ops saved.
 Total: 5508 ops -> 4784 ops, 724 ops saved.
 * system: /work/java-1.5.0/bin/java -cp /home/one/work/texprj/latex-tds/lib/Multivalent20060102.jar tool.pdf.Compress -old /home/one/work/texprj/latex-tds/build/tmp.pdf
-file:/home/one/work/texprj/latex-tds/build/tmp.pdf, 207957 bytes
+file:/home/one/work/texprj/latex-tds/build/tmp.pdf, 207956 bytes
 PDF 1.4, producer=pdfTeX-1.40.5, creator=LaTeX with hyperref package
 additional compression may be possible with:
 	 [omit -old] -compact
-=> new length = 205986, saved 0%, elapsed time = 0 sec
+=> new length = 205984, saved 0%, elapsed time = 0 sec
 * system: mv /home/one/work/texprj/latex-tds/build/tmp-o.pdf texmf/doc/latex/tools/theorem.pdf
-*   206.009  texmf/doc/latex/tools/theorem.pdf
+*   206.007  texmf/doc/latex/tools/theorem.pdf
 ******************************************************************************
 
 * system: pdflatex -fmt=/home/one/work/texprj/latex-tds/build/latex-tds -draftmode trace.dtx
@@ -33321,9 +33321,9 @@ file:/home/one/work/texprj/latex-tds/build/tmp.pdf, 77495 bytes
 PDF 1.4, producer=pdfTeX-1.40.5, creator=LaTeX with hyperref package
 additional compression may be possible with:
 	 [omit -old] -compact
-=> new length = 77389, saved 0%, elapsed time = 0 sec
+=> new length = 77388, saved 0%, elapsed time = 0 sec
 * system: mv /home/one/work/texprj/latex-tds/build/tmp-o.pdf texmf/doc/latex/tools/xr.pdf
-*    77.411  texmf/doc/latex/tools/xr.pdf
+*    77.410  texmf/doc/latex/tools/xr.pdf
 ******************************************************************************
 
 * system: pdflatex -fmt=/home/one/work/texprj/latex-tds/build/latex-tds -draftmode xspace.dtx
@@ -33616,9 +33616,9 @@ file:/home/one/work/texprj/latex-tds/build/tmp.pdf, 46026 bytes
 PDF 1.4, producer=pdfTeX-1.40.5, creator=Project `latex-tds'
 additional compression may be possible with:
 	 [omit -old] -compact
-=> new length = 45613, saved 0%, elapsed time = 0 sec
+=> new length = 45612, saved 0%, elapsed time = 0 sec
 * system: mv /home/one/work/texprj/latex-tds/build/tmp-o.pdf texmf/doc/latex/tools/tools.pdf
-*    45.635  texmf/doc/latex/tools/tools.pdf
+*    45.634  texmf/doc/latex/tools/tools.pdf
 ******************************************************************************
 
 
@@ -33985,9 +33985,9 @@ file:/home/one/work/texprj/latex-tds/build/tmp.pdf, 91152 bytes
 PDF 1.4, producer=pdfTeX-1.40.5, creator=LaTeX with hyperref package
 additional compression may be possible with:
 	 [omit -old] -compact
-=> new length = 90193, saved 1%, elapsed time = 0 sec
+=> new length = 90194, saved 1%, elapsed time = 0 sec
 * system: mv /home/one/work/texprj/latex-tds/build/tmp-o.pdf texmf/doc/latex/cyrillic/cyoutenc.pdf
-*    90.215  texmf/doc/latex/cyrillic/cyoutenc.pdf
+*    90.216  texmf/doc/latex/cyrillic/cyoutenc.pdf
 ******************************************************************************
 
 * system: pdflatex -fmt=/home/one/work/texprj/latex-tds/build/latex-tds -draftmode lcy.dtx
@@ -34604,9 +34604,9 @@ file:/home/one/work/texprj/latex-tds/build/tmp.pdf, 50865 bytes
 PDF 1.4, producer=pdfTeX-1.40.5, creator=LaTeX with hyperref package
 additional compression may be possible with:
 	 [omit -old] -compact
-=> new length = 50711, saved 0%, elapsed time = 0 sec
+=> new length = 50710, saved 0%, elapsed time = 0 sec
 * system: mv /home/one/work/texprj/latex-tds/build/tmp-o.pdf texmf/doc/latex/cyrillic/ot2cmams.pdf
-*    50.733  texmf/doc/latex/cyrillic/ot2cmams.pdf
+*    50.732  texmf/doc/latex/cyrillic/ot2cmams.pdf
 ******************************************************************************
 
 * system: pdflatex -fmt=/home/one/work/texprj/latex-tds/build/latex-tds -draftmode ot2cmlh.fdd
@@ -34779,9 +34779,9 @@ file:/home/one/work/texprj/latex-tds/build/tmp.pdf, 72760 bytes
 PDF 1.4, producer=pdfTeX-1.40.5, creator=LaTeX with hyperref package
 additional compression may be possible with:
 	 [omit -old] -compact
-=> new length = 72189, saved 0%, elapsed time = 0 sec
+=> new length = 72187, saved 0%, elapsed time = 0 sec
 * system: mv /home/one/work/texprj/latex-tds/build/tmp-o.pdf texmf/doc/latex/cyrillic/ot2cmlh.pdf
-*    72.211  texmf/doc/latex/cyrillic/ot2cmlh.pdf
+*    72.209  texmf/doc/latex/cyrillic/ot2cmlh.pdf
 ******************************************************************************
 
 * system: pdflatex -fmt=/home/one/work/texprj/latex-tds/build/latex-tds -draftmode t2lhfnt.fdd
@@ -35132,9 +35132,9 @@ file:/home/one/work/texprj/latex-tds/build/tmp.pdf, 87366 bytes
 PDF 1.4, producer=pdfTeX-1.40.5, creator=LaTeX with hyperref package
 additional compression may be possible with:
 	 [omit -old] -compact
-=> new length = 84615, saved 3%, elapsed time = 0 sec
+=> new length = 84616, saved 3%, elapsed time = 0 sec
 * system: mv /home/one/work/texprj/latex-tds/build/tmp-o.pdf texmf/doc/latex/cyrillic/t2lhfnt.pdf
-*    84.637  texmf/doc/latex/cyrillic/t2lhfnt.pdf
+*    84.638  texmf/doc/latex/cyrillic/t2lhfnt.pdf
 ******************************************************************************
 
 
@@ -35297,9 +35297,9 @@ file:/home/one/work/texprj/latex-tds/build/tmp.pdf, 115525 bytes
 PDF 1.4, producer=pdfTeX-1.40.5, creator=LaTeX with hyperref package
 additional compression may be possible with:
 	 [omit -old] -compact
-=> new length = 114735, saved 0%, elapsed time = 0 sec
+=> new length = 114733, saved 0%, elapsed time = 0 sec
 * system: mv /home/one/work/texprj/latex-tds/build/tmp-o.pdf texmf/doc/latex/graphics/color.pdf
-*   114.758  texmf/doc/latex/graphics/color.pdf
+*   114.756  texmf/doc/latex/graphics/color.pdf
 ******************************************************************************
 
 * system: pdflatex -fmt=/home/one/work/texprj/latex-tds/build/latex-tds -draftmode drivers.dtx
@@ -35512,9 +35512,9 @@ file:/home/one/work/texprj/latex-tds/build/tmp.pdf, 171935 bytes
 PDF 1.4, producer=pdfTeX-1.40.5, creator=LaTeX with hyperref package
 additional compression may be possible with:
 	 [omit -old] -compact
-=> new length = 169271, saved 1%, elapsed time = 0 sec
+=> new length = 169270, saved 1%, elapsed time = 0 sec
 * system: mv /home/one/work/texprj/latex-tds/build/tmp-o.pdf texmf/doc/latex/graphics/drivers.pdf
-*   169.294  texmf/doc/latex/graphics/drivers.pdf
+*   169.293  texmf/doc/latex/graphics/drivers.pdf
 ******************************************************************************
 
 * system: pdflatex -fmt=/home/one/work/texprj/latex-tds/build/latex-tds -draftmode epsfig.dtx
@@ -36029,9 +36029,9 @@ file:/home/one/work/texprj/latex-tds/build/tmp.pdf, 128003 bytes
 PDF 1.4, producer=pdfTeX-1.40.5, creator=LaTeX with hyperref package
 additional compression may be possible with:
 	 [omit -old] -compact
-=> new length = 127330, saved 0%, elapsed time = 0 sec
+=> new length = 127331, saved 0%, elapsed time = 0 sec
 * system: mv /home/one/work/texprj/latex-tds/build/tmp-o.pdf texmf/doc/latex/graphics/graphicx.pdf
-*   127.353  texmf/doc/latex/graphics/graphicx.pdf
+*   127.354  texmf/doc/latex/graphics/graphicx.pdf
 ******************************************************************************
 
 * system: pdflatex -fmt=/home/one/work/texprj/latex-tds/build/latex-tds -draftmode keyval.dtx
@@ -36191,9 +36191,9 @@ file:/home/one/work/texprj/latex-tds/build/tmp.pdf, 115262 bytes
 PDF 1.4, producer=pdfTeX-1.40.5, creator=LaTeX with hyperref package
 additional compression may be possible with:
 	 [omit -old] -compact
-=> new length = 115065, saved 0%, elapsed time = 0 sec
+=> new length = 115067, saved 0%, elapsed time = 0 sec
 * system: mv /home/one/work/texprj/latex-tds/build/tmp-o.pdf texmf/doc/latex/graphics/keyval.pdf
-*   115.088  texmf/doc/latex/graphics/keyval.pdf
+*   115.090  texmf/doc/latex/graphics/keyval.pdf
 ******************************************************************************
 
 * system: pdflatex -fmt=/home/one/work/texprj/latex-tds/build/latex-tds -draftmode lscape.dtx
@@ -37408,9 +37408,9 @@ file:/home/one/work/texprj/latex-tds/build/tmp.pdf, 55609 bytes
 PDF 1.4, producer=pdfTeX-1.40.5, creator=LaTeX with hyperref package
 additional compression may be possible with:
 	 [omit -old] -compact
-=> new length = 54986, saved 1%, elapsed time = 0 sec
+=> new length = 54985, saved 1%, elapsed time = 0 sec
 * system: mv /home/one/work/texprj/latex-tds/build/tmp-o.pdf texmf/doc/latex/amsmath/subeqn.pdf
-*    55.008  texmf/doc/latex/amsmath/subeqn.pdf
+*    55.007  texmf/doc/latex/amsmath/subeqn.pdf
 ******************************************************************************
 
 * system: pdflatex -fmt=/home/one/work/texprj/latex-tds/build/latex-tds -draftmode technote.drv
@@ -37579,9 +37579,9 @@ file:/home/one/work/texprj/latex-tds/build/tmp.pdf, 81679 bytes
 PDF 1.4, producer=pdfTeX-1.40.5, creator=LaTeX with hyperref package
 additional compression may be possible with:
 	 [omit -old] -compact
-=> new length = 81408, saved 0%, elapsed time = 0 sec
+=> new length = 81409, saved 0%, elapsed time = 0 sec
 * system: mv /home/one/work/texprj/latex-tds/build/tmp-o.pdf texmf/doc/latex/amsmath/technote.pdf
-*    81.430  texmf/doc/latex/amsmath/technote.pdf
+*    81.431  texmf/doc/latex/amsmath/technote.pdf
 ******************************************************************************
 
 * system: pdflatex -fmt=/home/one/work/texprj/latex-tds/build/latex-tds -draftmode testmath.drv
@@ -38436,9 +38436,9 @@ file:/home/one/work/texprj/latex-tds/build/tmp.pdf, 129671 bytes
 PDF 1.4, producer=pdfTeX-1.40.5, creator=LaTeX with hyperref package
 additional compression may be possible with:
 	 [omit -old] -compact
-=> new length = 126800, saved 2%, elapsed time = 0 sec
+=> new length = 126799, saved 2%, elapsed time = 0 sec
 * system: mv /home/one/work/texprj/latex-tds/build/tmp-o.pdf texmf/doc/latex/amsmath/amsbsy.pdf
-*   126.823  texmf/doc/latex/amsmath/amsbsy.pdf
+*   126.822  texmf/doc/latex/amsmath/amsbsy.pdf
 ******************************************************************************
 
 * system: pdflatex -fmt=/home/one/work/texprj/latex-tds/build/latex-tds -draftmode amscd.drv
@@ -38684,9 +38684,9 @@ file:/home/one/work/texprj/latex-tds/build/tmp.pdf, 171212 bytes
 PDF 1.4, producer=pdfTeX-1.40.5, creator=LaTeX with hyperref package
 additional compression may be possible with:
 	 [omit -old] -compact
-=> new length = 163638, saved 4%, elapsed time = 0 sec
+=> new length = 163637, saved 4%, elapsed time = 0 sec
 * system: mv /home/one/work/texprj/latex-tds/build/tmp-o.pdf texmf/doc/latex/amsmath/amscd.pdf
-*   163.661  texmf/doc/latex/amsmath/amscd.pdf
+*   163.660  texmf/doc/latex/amsmath/amscd.pdf
 ******************************************************************************
 
 * system: pdflatex -fmt=/home/one/work/texprj/latex-tds/build/latex-tds -draftmode amsgen.drv
@@ -43950,9 +43950,9 @@ file:/home/one/work/texprj/latex-tds/build/tmp.pdf, 157499 bytes
 PDF 1.4, producer=pdfTeX-1.40.5, creator=LaTeX with hyperref package
 additional compression may be possible with:
 	 [omit -old] -compact
-=> new length = 153830, saved 2%, elapsed time = 0 sec
+=> new length = 153831, saved 2%, elapsed time = 0 sec
 * system: mv /home/one/work/texprj/latex-tds/build/tmp-o.pdf texmf/doc/latex/amsmath/amstext.pdf
-*   153.853  texmf/doc/latex/amsmath/amstext.pdf
+*   153.854  texmf/doc/latex/amsmath/amstext.pdf
 ******************************************************************************
 
 * system: pdflatex -fmt=/home/one/work/texprj/latex-tds/build/latex-tds -draftmode amsxtra.drv
@@ -44337,9 +44337,9 @@ file:/home/one/work/texprj/latex-tds/build/tmp.pdf, 81218 bytes
 PDF 1.4, producer=pdfTeX-1.40.5, creator=LaTeX with hyperref package
 additional compression may be possible with:
 	 [omit -old] -compact
-=> new length = 80961, saved 0%, elapsed time = 0 sec
+=> new length = 80960, saved 0%, elapsed time = 0 sec
 * system: mv /home/one/work/texprj/latex-tds/build/tmp-o.pdf texmf/doc/latex/amscls/amsthdoc.pdf
-*    80.983  texmf/doc/latex/amscls/amsthdoc.pdf
+*    80.982  texmf/doc/latex/amscls/amsthdoc.pdf
 ******************************************************************************
 
 * system: pdflatex -fmt=/home/one/work/texprj/latex-tds/build/latex-tds -draftmode instr-l.drv
@@ -44704,9 +44704,9 @@ file:/home/one/work/texprj/latex-tds/build/tmp.pdf, 221690 bytes
 PDF 1.4, producer=pdfTeX-1.40.5, creator=LaTeX with hyperref package
 additional compression may be possible with:
 	 [omit -old] -compact
-=> new length = 218841, saved 1%, elapsed time = 0 sec
+=> new length = 218842, saved 1%, elapsed time = 0 sec
 * system: mv /home/one/work/texprj/latex-tds/build/tmp-o.pdf texmf/doc/latex/amscls/instr-l.pdf
-*   218.864  texmf/doc/latex/amscls/instr-l.pdf
+*   218.865  texmf/doc/latex/amscls/instr-l.pdf
 ******************************************************************************
 
 * system: pdflatex -fmt=/home/one/work/texprj/latex-tds/build/latex-tds -draftmode thmtest.drv
@@ -44926,23 +44926,23 @@ fb></work/tetex/texmf-dist/fonts/type1/bluesky/cm/cmr12.pfb></work/tetex/texmf-
 dist/fonts/type1/bluesky/cm/cmr17.pfb></work/tetex/texmf-dist/fonts/type1/blues
 ky/cm/cmr7.pfb></work/tetex/texmf-dist/fonts/type1/bluesky/cm/cmsy10.pfb></work
 /tetex/texmf-dist/fonts/type1/bluesky/cm/cmti10.pfb>
-Output written on thmtest.pdf (2 pages, 75880 bytes).
+Output written on thmtest.pdf (2 pages, 76110 bytes).
 Transcript written on thmtest.log.
 ******************************************************************************
-*    75.880  thmtest.pdf
+*    76.110  thmtest.pdf
 * system: /work/java-1.5.0/bin/java -jar /home/one/work/texprj/latex-tds/lib/pdfbox-rewrite.jar thmtest.pdf /home/one/work/texprj/latex-tds/build/tmp.pdf
 Pages: 2
 Page 1: 524 ops -> 464 ops, 60 ops saved.
 Page 2: 675 ops -> 589 ops, 86 ops saved.
 Total: 1199 ops -> 1053 ops, 146 ops saved.
 * system: /work/java-1.5.0/bin/java -cp /home/one/work/texprj/latex-tds/lib/Multivalent20060102.jar tool.pdf.Compress -old /home/one/work/texprj/latex-tds/build/tmp.pdf
-file:/home/one/work/texprj/latex-tds/build/tmp.pdf, 74004 bytes
+file:/home/one/work/texprj/latex-tds/build/tmp.pdf, 74234 bytes
 PDF 1.4, producer=pdfTeX-1.40.5, creator=LaTeX with hyperref package
 additional compression may be possible with:
 	 [omit -old] -compact
-=> new length = 73793, saved 0%, elapsed time = 0 sec
+=> new length = 74024, saved 0%, elapsed time = 0 sec
 * system: mv /home/one/work/texprj/latex-tds/build/tmp-o.pdf texmf/doc/latex/amscls/thmtest.pdf
-*    73.815  texmf/doc/latex/amscls/thmtest.pdf
+*    74.046  texmf/doc/latex/amscls/thmtest.pdf
 ******************************************************************************
 
 * system: pdflatex -fmt=/home/one/work/texprj/latex-tds/build/latex-tds -draftmode amsclass.drv
@@ -47080,9 +47080,9 @@ file:/home/one/work/texprj/latex-tds/build/tmp.pdf, 1053880 bytes
 PDF 1.4, producer=pdfTeX-1.40.5, creator=LaTeX with hyperref package
 additional compression may be possible with:
 	 [omit -old] -compact
-=> new length = 951184, saved 9%, elapsed time = 1 sec
+=> new length = 951183, saved 9%, elapsed time = 1 sec
 * system: mv /home/one/work/texprj/latex-tds/build/tmp-o.pdf texmf/doc/latex/amscls/amsclass.pdf
-*   951.207  texmf/doc/latex/amscls/amsclass.pdf
+*   951.206  texmf/doc/latex/amscls/amsclass.pdf
 ******************************************************************************
 
 * system: pdflatex -fmt=/home/one/work/texprj/latex-tds/build/latex-tds -draftmode amsdtx.drv
@@ -47340,9 +47340,9 @@ file:/home/one/work/texprj/latex-tds/build/tmp.pdf, 319414 bytes
 PDF 1.4, producer=pdfTeX-1.40.5, creator=LaTeX with hyperref package
 additional compression may be possible with:
 	 [omit -old] -compact
-=> new length = 296657, saved 7%, elapsed time = 0 sec
+=> new length = 296659, saved 7%, elapsed time = 0 sec
 * system: mv /home/one/work/texprj/latex-tds/build/tmp-o.pdf texmf/doc/latex/amscls/amsdtx.pdf
-*   296.680  texmf/doc/latex/amscls/amsdtx.pdf
+*   296.682  texmf/doc/latex/amscls/amsdtx.pdf
 ******************************************************************************
 
 * system: pdflatex -fmt=/home/one/work/texprj/latex-tds/build/latex-tds -draftmode amsmidx.drv
@@ -47596,9 +47596,9 @@ file:/home/one/work/texprj/latex-tds/build/tmp.pdf, 111299 bytes
 PDF 1.4, producer=pdfTeX-1.40.5, creator=LaTeX with hyperref package
 additional compression may be possible with:
 	 [omit -old] -compact
-=> new length = 108966, saved 2%, elapsed time = 0 sec
+=> new length = 108967, saved 2%, elapsed time = 0 sec
 * system: mv /home/one/work/texprj/latex-tds/build/tmp-o.pdf texmf/doc/latex/amscls/amsmidx.pdf
-*   108.989  texmf/doc/latex/amscls/amsmidx.pdf
+*   108.990  texmf/doc/latex/amscls/amsmidx.pdf
 ******************************************************************************
 
 * system: pdflatex -fmt=/home/one/work/texprj/latex-tds/build/latex-tds -draftmode upref.drv
@@ -47816,9 +47816,9 @@ file:/home/one/work/texprj/latex-tds/build/tmp.pdf, 85423 bytes
 PDF 1.4, producer=pdfTeX-1.40.5, creator=LaTeX with hyperref package
 additional compression may be possible with:
 	 [omit -old] -compact
-=> new length = 84225, saved 1%, elapsed time = 0 sec
+=> new length = 84224, saved 1%, elapsed time = 0 sec
 * system: mv /home/one/work/texprj/latex-tds/build/tmp-o.pdf texmf/doc/latex/amscls/upref.pdf
-*    84.247  texmf/doc/latex/amscls/upref.pdf
+*    84.246  texmf/doc/latex/amscls/upref.pdf
 ******************************************************************************
 
 * system: pdflatex -fmt=/home/one/work/texprj/latex-tds/build/latex-tds -draftmode cite-xa.drv
@@ -47969,23 +47969,23 @@ fonts/type1/bluesky/cm/cmr10.pfb></work/tetex/texmf-dist/fonts/type1/bluesky/cm
 x/texmf-dist/fonts/type1/bluesky/cm/cmr8.pfb></work/tetex/texmf-dist/fonts/type
 1/bluesky/cm/cmti10.pfb></work/tetex/texmf-dist/fonts/type1/bluesky/cm/cmti8.pf
 b>
-Output written on cite-xa.pdf (2 pages, 62784 bytes).
+Output written on cite-xa.pdf (2 pages, 63018 bytes).
 Transcript written on cite-xa.log.
 ******************************************************************************
-*    62.784  cite-xa.pdf
+*    63.018  cite-xa.pdf
 * system: /work/java-1.5.0/bin/java -jar /home/one/work/texprj/latex-tds/lib/pdfbox-rewrite.jar cite-xa.pdf /home/one/work/texprj/latex-tds/build/tmp.pdf
 Pages: 2
 Page 1: 233 ops -> 225 ops, 8 ops saved.
 Page 2: 74 ops -> 72 ops, 2 ops saved.
 Total: 307 ops -> 297 ops, 10 ops saved.
 * system: /work/java-1.5.0/bin/java -cp /home/one/work/texprj/latex-tds/lib/Multivalent20060102.jar tool.pdf.Compress -old /home/one/work/texprj/latex-tds/build/tmp.pdf
-file:/home/one/work/texprj/latex-tds/build/tmp.pdf, 61964 bytes
+file:/home/one/work/texprj/latex-tds/build/tmp.pdf, 62196 bytes
 PDF 1.4, producer=pdfTeX-1.40.5, creator=TeX
 additional compression may be possible with:
 	 [omit -old] -compact
-=> new length = 61889, saved 0%, elapsed time = 0 sec
+=> new length = 62120, saved 0%, elapsed time = 0 sec
 * system: mv /home/one/work/texprj/latex-tds/build/tmp-o.pdf texmf/doc/latex/amsrefs/cite-xa.pdf
-*    61.911  texmf/doc/latex/amsrefs/cite-xa.pdf
+*    62.142  texmf/doc/latex/amsrefs/cite-xa.pdf
 ******************************************************************************
 
 * system: pdflatex -fmt=/home/one/work/texprj/latex-tds/build/latex-tds -draftmode cite-xb.drv
@@ -48295,9 +48295,9 @@ file:/home/one/work/texprj/latex-tds/build/tmp.pdf, 75029 bytes
 PDF 1.4, producer=pdfTeX-1.40.5, creator=LaTeX with hyperref package
 additional compression may be possible with:
 	 [omit -old] -compact
-=> new length = 74332, saved 0%, elapsed time = 0 sec
+=> new length = 74331, saved 0%, elapsed time = 0 sec
 * system: mv /home/one/work/texprj/latex-tds/build/tmp-o.pdf texmf/doc/latex/amsrefs/cite-xb.pdf
-*    74.354  texmf/doc/latex/amsrefs/cite-xb.pdf
+*    74.353  texmf/doc/latex/amsrefs/cite-xb.pdf
 ******************************************************************************
 
 * system: pdflatex -fmt=/home/one/work/texprj/latex-tds/build/latex-tds -draftmode cite-xh.drv
@@ -48574,23 +48574,23 @@ dvips/psnfss/8r.enc}</work/tetex/texmf-dist/fonts/type1/bluesky/cm/cmmi10.pfb><
 cm/cmsy8.pfb></work/tetex/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></work/te
 tex/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></work/tetex/texmf-dist/fonts/t
 ype1/urw/times/utmri8a.pfb>
-Output written on cite-xh.pdf (2 pages, 71830 bytes).
+Output written on cite-xh.pdf (2 pages, 71831 bytes).
 Transcript written on cite-xh.log.
 ******************************************************************************
-*    71.830  cite-xh.pdf
+*    71.831  cite-xh.pdf
 * system: /work/java-1.5.0/bin/java -jar /home/one/work/texprj/latex-tds/lib/pdfbox-rewrite.jar cite-xh.pdf /home/one/work/texprj/latex-tds/build/tmp.pdf
 Pages: 2
 Page 1: 379 ops -> 311 ops, 68 ops saved.
 Page 2: 434 ops -> 344 ops, 90 ops saved.
 Total: 813 ops -> 655 ops, 158 ops saved.
 * system: /work/java-1.5.0/bin/java -cp /home/one/work/texprj/latex-tds/lib/Multivalent20060102.jar tool.pdf.Compress -old /home/one/work/texprj/latex-tds/build/tmp.pdf
-file:/home/one/work/texprj/latex-tds/build/tmp.pdf, 70192 bytes
+file:/home/one/work/texprj/latex-tds/build/tmp.pdf, 70193 bytes
 PDF 1.4, producer=pdfTeX-1.40.5, creator=LaTeX with hyperref package
 additional compression may be possible with:
 	 [omit -old] -compact
-=> new length = 69169, saved 1%, elapsed time = 0 sec
+=> new length = 69170, saved 1%, elapsed time = 0 sec
 * system: mv /home/one/work/texprj/latex-tds/build/tmp-o.pdf texmf/doc/latex/amsrefs/cite-xh.pdf
-*    69.191  texmf/doc/latex/amsrefs/cite-xh.pdf
+*    69.192  texmf/doc/latex/amsrefs/cite-xh.pdf
 ******************************************************************************
 
 * system: pdflatex -fmt=/home/one/work/texprj/latex-tds/build/latex-tds -draftmode cite-xs.drv
@@ -51385,9 +51385,9 @@ file:/home/one/work/texprj/latex-tds/build/tmp.pdf, 1039018 bytes
 PDF 1.4, producer=pdfTeX-1.40.5, creator=LaTeX with hyperref package
 additional compression may be possible with:
 	 [omit -old] -compact
-=> new length = 946537, saved 8%, elapsed time = 1 sec
+=> new length = 946536, saved 8%, elapsed time = 1 sec
 * system: mv /home/one/work/texprj/latex-tds/build/tmp-o.pdf texmf/doc/latex/amsrefs/amsrefs.pdf
-*   946.560  texmf/doc/latex/amsrefs/amsrefs.pdf
+*   946.559  texmf/doc/latex/amsrefs/amsrefs.pdf
 ******************************************************************************
 
 * system: pdflatex -fmt=/home/one/work/texprj/latex-tds/build/latex-tds -draftmode amsxport.drv
@@ -51729,9 +51729,9 @@ file:/home/one/work/texprj/latex-tds/build/tmp.pdf, 227529 bytes
 PDF 1.4, producer=pdfTeX-1.40.5, creator=LaTeX with hyperref package
 additional compression may be possible with:
 	 [omit -old] -compact
-=> new length = 220283, saved 3%, elapsed time = 0 sec
+=> new length = 220282, saved 3%, elapsed time = 0 sec
 * system: mv /home/one/work/texprj/latex-tds/build/tmp-o.pdf texmf/doc/latex/amsrefs/amsxport.pdf
-*   220.306  texmf/doc/latex/amsrefs/amsxport.pdf
+*   220.305  texmf/doc/latex/amsrefs/amsxport.pdf
 ******************************************************************************
 
 * system: pdflatex -fmt=/home/one/work/texprj/latex-tds/build/latex-tds -draftmode ifoption.drv
@@ -51950,9 +51950,9 @@ file:/home/one/work/texprj/latex-tds/build/tmp.pdf, 96650 bytes
 PDF 1.4, producer=pdfTeX-1.40.5, creator=LaTeX with hyperref package
 additional compression may be possible with:
 	 [omit -old] -compact
-=> new length = 94631, saved 2%, elapsed time = 0 sec
+=> new length = 94632, saved 2%, elapsed time = 0 sec
 * system: mv /home/one/work/texprj/latex-tds/build/tmp-o.pdf texmf/doc/latex/amsrefs/ifoption.pdf
-*    94.653  texmf/doc/latex/amsrefs/ifoption.pdf
+*    94.654  texmf/doc/latex/amsrefs/ifoption.pdf
 ******************************************************************************
 
 * system: pdflatex -fmt=/home/one/work/texprj/latex-tds/build/latex-tds -draftmode mathscinet.drv
@@ -52506,9 +52506,9 @@ file:/home/one/work/texprj/latex-tds/build/tmp.pdf, 161148 bytes
 PDF 1.4, producer=pdfTeX-1.40.5, creator=LaTeX with hyperref package
 additional compression may be possible with:
 	 [omit -old] -compact
-=> new length = 153401, saved 4%, elapsed time = 0 sec
+=> new length = 153400, saved 4%, elapsed time = 0 sec
 * system: mv /home/one/work/texprj/latex-tds/build/tmp-o.pdf texmf/doc/latex/amsrefs/pcatcode.pdf
-*   153.424  texmf/doc/latex/amsrefs/pcatcode.pdf
+*   153.423  texmf/doc/latex/amsrefs/pcatcode.pdf
 ******************************************************************************
 
 * system: pdflatex -fmt=/home/one/work/texprj/latex-tds/build/latex-tds -draftmode rkeyval.drv
@@ -53166,9 +53166,9 @@ file:/home/one/work/texprj/latex-tds/build/tmp.pdf, 127811 bytes
 PDF 1.4, producer=pdfTeX-1.40.5, creator=LaTeX with hyperref package
 additional compression may be possible with:
 	 [omit -old] -compact
-=> new length = 126451, saved 1%, elapsed time = 0 sec
+=> new length = 126452, saved 1%, elapsed time = 0 sec
 * system: mv /home/one/work/texprj/latex-tds/build/tmp-o.pdf texmf/doc/latex/psnfss/psfonts.pdf
-*   126.474  texmf/doc/latex/psnfss/psfonts.pdf
+*   126.475  texmf/doc/latex/psnfss/psfonts.pdf
 ******************************************************************************
 
 * system: pdflatex -fmt=/home/one/work/texprj/latex-tds/build/latex-tds -draftmode psnfss2e.drv
@@ -53498,9 +53498,9 @@ file:/home/one/work/texprj/latex-tds/build/tmp.pdf, 269125 bytes
 PDF 1.4, producer=pdfTeX-1.40.5, creator=LaTeX with hyperref package
 additional compression may be possible with:
 	 [omit -old] -compact
-=> new length = 267288, saved 0%, elapsed time = 0 sec
+=> new length = 267287, saved 0%, elapsed time = 0 sec
 * system: mv /home/one/work/texprj/latex-tds/build/tmp-o.pdf texmf/doc/latex/psnfss/psnfss2e.pdf
-*   267.311  texmf/doc/latex/psnfss/psnfss2e.pdf
+*   267.310  texmf/doc/latex/psnfss/psnfss2e.pdf
 ******************************************************************************
 
 
@@ -53622,9 +53622,9 @@ file:/home/one/work/texprj/latex-tds/build/tmp.pdf, 97097 bytes
 PDF 1.4, producer=pdfTeX-1.40.5, creator=LaTeX with hyperref package
 additional compression may be possible with:
 	 [omit -old] -compact
-=> new length = 96745, saved 0%, elapsed time = 0 sec
+=> new length = 96744, saved 0%, elapsed time = 0 sec
 * system: mv /home/one/work/texprj/latex-tds/build/tmp-o.pdf texmf/doc/generic/babel/greek-fdd.pdf
-*    96.767  texmf/doc/generic/babel/greek-fdd.pdf
+*    96.766  texmf/doc/generic/babel/greek-fdd.pdf
 ******************************************************************************
 
 * system: pdflatex -fmt=/home/one/work/texprj/latex-tds/build/latex-tds -draftmode athnum.dtx
@@ -53741,9 +53741,9 @@ file:/home/one/work/texprj/latex-tds/build/tmp.pdf, 97151 bytes
 PDF 1.4, producer=pdfTeX-1.40.5, creator=LaTeX with hyperref package
 additional compression may be possible with:
 	 [omit -old] -compact
-=> new length = 96966, saved 0%, elapsed time = 0 sec
+=> new length = 96967, saved 0%, elapsed time = 0 sec
 * system: mv /home/one/work/texprj/latex-tds/build/tmp-o.pdf texmf/doc/generic/babel/athnum.pdf
-*    96.988  texmf/doc/generic/babel/athnum.pdf
+*    96.989  texmf/doc/generic/babel/athnum.pdf
 ******************************************************************************
 
 * system: pdflatex -fmt=/home/one/work/texprj/latex-tds/build/latex-tds -draftmode grmath.dtx
@@ -53854,9 +53854,9 @@ file:/home/one/work/texprj/latex-tds/build/tmp.pdf, 68153 bytes
 PDF 1.4, producer=pdfTeX-1.40.5, creator=LaTeX with hyperref package
 additional compression may be possible with:
 	 [omit -old] -compact
-=> new length = 68038, saved 0%, elapsed time = 0 sec
+=> new length = 68037, saved 0%, elapsed time = 0 sec
 * system: mv /home/one/work/texprj/latex-tds/build/tmp-o.pdf texmf/doc/generic/babel/grmath.pdf
-*    68.060  texmf/doc/generic/babel/grmath.pdf
+*    68.059  texmf/doc/generic/babel/grmath.pdf
 ******************************************************************************
 
 * system: pdflatex -fmt=/home/one/work/texprj/latex-tds/build/latex-tds -draftmode grsymb.dtx
@@ -53967,9 +53967,9 @@ file:/home/one/work/texprj/latex-tds/build/tmp.pdf, 66288 bytes
 PDF 1.4, producer=pdfTeX-1.40.5, creator=LaTeX with hyperref package
 additional compression may be possible with:
 	 [omit -old] -compact
-=> new length = 66176, saved 0%, elapsed time = 0 sec
+=> new length = 66178, saved 0%, elapsed time = 0 sec
 * system: mv /home/one/work/texprj/latex-tds/build/tmp-o.pdf texmf/doc/generic/babel/grsymb.pdf
-*    66.198  texmf/doc/generic/babel/grsymb.pdf
+*    66.200  texmf/doc/generic/babel/grsymb.pdf
 ******************************************************************************
 
 * system: pdflatex -fmt=/home/one/work/texprj/latex-tds/build/latex-tds -draftmode bbidxglo.dtx
@@ -54737,9 +54737,9 @@ file:/home/one/work/texprj/latex-tds/build/tmp.pdf, 176186 bytes
 PDF 1.4, producer=pdfTeX-1.40.5, creator=LaTeX with hyperref package
 additional compression may be possible with:
 	 [omit -old] -compact
-=> new length = 174687, saved 0%, elapsed time = 0 sec
+=> new length = 174688, saved 0%, elapsed time = 0 sec
 * system: mv /home/one/work/texprj/latex-tds/build/tmp-o.pdf texmf/doc/generic/babel/tb1202.pdf
-*   174.710  texmf/doc/generic/babel/tb1202.pdf
+*   174.711  texmf/doc/generic/babel/tb1202.pdf
 ******************************************************************************
 
 * system: pdflatex -fmt=/home/one/work/texprj/latex-tds/build/latex-tds -draftmode tb1401.drv
@@ -55150,9 +55150,9 @@ file:/home/one/work/texprj/latex-tds/build/tmp.pdf, 123783 bytes
 PDF 1.4, producer=pdfTeX-1.40.5, creator=LaTeX with hyperref package
 additional compression may be possible with:
 	 [omit -old] -compact
-=> new length = 123351, saved 0%, elapsed time = 0 sec
+=> new length = 123354, saved 0%, elapsed time = 0 sec
 * system: mv /home/one/work/texprj/latex-tds/build/tmp-o.pdf texmf/doc/generic/babel/tb1604.pdf
-*   123.374  texmf/doc/generic/babel/tb1604.pdf
+*   123.377  texmf/doc/generic/babel/tb1604.pdf
 ******************************************************************************
 
 * system: pdflatex -fmt=/home/one/work/texprj/latex-tds/build/latex-tds -draftmode babel.tex
@@ -59943,10 +59943,10 @@ cal/fonts/type1/public/cm-super/sftt1000.pfb></work/tetex/texmf-local/fonts/typ
 e1/public/cm-super/sftt1200.pfb></work/tetex/texmf-local/fonts/type1/public/cm-
 super/sftt1440.pfb></work/tetex/texmf-local/fonts/type1/public/cm-super/sfxc100
 0.pfb></work/tetex/texmf-local/fonts/type1/public/cm-super/sfxc1440.pfb>
-Output written on babel.pdf (423 pages, 2581835 bytes).
+Output written on babel.pdf (423 pages, 2582074 bytes).
 Transcript written on babel.log.
 ******************************************************************************
-* 2.581.835  babel.pdf
+* 2.582.074  babel.pdf
 * system: /work/java-1.5.0/bin/java -jar /home/one/work/texprj/latex-tds/lib/pdfbox-rewrite.jar babel.pdf /home/one/work/texprj/latex-tds/build/tmp.pdf
 Pages: 423
 Page 1: 528 ops -> 366 ops, 162 ops saved.
@@ -60374,13 +60374,13 @@ Page 422: 653 ops -> 569 ops, 84 ops saved.
 Page 423: 177 ops -> 151 ops, 26 ops saved.
 Total: 192124 ops -> 169988 ops, 22136 ops saved.
 * system: /work/java-1.5.0/bin/java -cp /home/one/work/texprj/latex-tds/lib/Multivalent20060102.jar tool.pdf.Compress -old /home/one/work/texprj/latex-tds/build/tmp.pdf
-file:/home/one/work/texprj/latex-tds/build/tmp.pdf, 2479462 bytes
+file:/home/one/work/texprj/latex-tds/build/tmp.pdf, 2479701 bytes
 PDF 1.4, producer=pdfTeX-1.40.5, creator=LaTeX with hyperref package
 additional compression may be possible with:
 	 [omit -old] -compact
-=> new length = 2348513, saved 5%, elapsed time = 3 sec
+=> new length = 2348753, saved 5%, elapsed time = 3 sec
 * system: mv /home/one/work/texprj/latex-tds/build/tmp-o.pdf texmf/doc/generic/babel/babel.pdf
-* 2.348.537  texmf/doc/generic/babel/babel.pdf
+* 2.348.777  texmf/doc/generic/babel/babel.pdf
 ******************************************************************************
 
 
@@ -60935,9 +60935,9 @@ additional compression may be possible with:
 * system: rsync --recursive --times --perms --owner --group --hard-links --link-dest=/home/one/work/texprj/latex-tds/build/tds build/tds/texmf build/latex-tds
 
 === Distrib ===
-* system: /home/one/work/texprj/latex-tds/lib/ziptimetree.pl --verbose --noroot /home/one/work/texprj/latex-tds/distrib/base.zip build/base/texmf
+* system: /home/one/work/texprj/latex-tds/lib/ziptimetree.pl --verbose --noroot /home/one/work/texprj/latex-tds/distrib/base.tds.zip build/base/texmf
 ZIP-TimeTree 1.2, 2006/06/15 - Copyright (C) 2006 by Heiko Oberdiek.
-[zipfile] /home/one/work/texprj/latex-tds/distrib/base.zip
+[zipfile] /home/one/work/texprj/latex-tds/distrib/base.tds.zip
 [touch] doc/latex
 [touch] doc
 [chmod 100644] source/latex/base/ltbibl.dtx
@@ -60947,7 +60947,7 @@ ZIP-TimeTree 1.2, 2006/06/15 - Copyright (C) 2006 by Heiko Oberdiek.
 [touch] tex/latex/base
 [touch] tex/latex
 [touch] tex
-[create] /home/one/work/texprj/latex-tds/distrib/base.zip
+[create] /home/one/work/texprj/latex-tds/distrib/base.tds.zip
   adding: doc/ (stored 0%)
   adding: doc/latex/ (stored 0%)
   adding: doc/latex/base/ (stored 0%)
@@ -61288,12 +61288,12 @@ ZIP-TimeTree 1.2, 2006/06/15 - Copyright (C) 2006 by Heiko Oberdiek.
 [stats] 8 time updates
 [stats] 11 directories added
 [stats] 325 files added
---> /home/one/work/texprj/latex-tds/distrib/base.zip (10.162.156 bytes)
-* system: zip -z /home/one/work/texprj/latex-tds/distrib/base.zip </home/one/work/texprj/latex-tds/build/zip-comment.txt
+--> /home/one/work/texprj/latex-tds/distrib/base.tds.zip (10.163.640 bytes)
+* system: zip -z /home/one/work/texprj/latex-tds/distrib/base.tds.zip </home/one/work/texprj/latex-tds/build/zip-comment.txt
 enter new zip file comment (end with .):
-* system: /home/one/work/texprj/latex-tds/lib/ziptimetree.pl --verbose --noroot /home/one/work/texprj/latex-tds/distrib/amslatex.zip build/amslatex/texmf
+* system: /home/one/work/texprj/latex-tds/lib/ziptimetree.pl --verbose --noroot /home/one/work/texprj/latex-tds/distrib/amslatex.tds.zip build/amslatex/texmf
 ZIP-TimeTree 1.2, 2006/06/15 - Copyright (C) 2006 by Heiko Oberdiek.
-[zipfile] /home/one/work/texprj/latex-tds/distrib/amslatex.zip
+[zipfile] /home/one/work/texprj/latex-tds/distrib/amslatex.tds.zip
 [chmod 100644] bibtex/bib/ams/amsj.bib
 [touch] bibtex/bib/ams
 [chmod 40755] bibtex/bib/ams
@@ -61420,7 +61420,7 @@ ZIP-TimeTree 1.2, 2006/06/15 - Copyright (C) 2006 by Heiko Oberdiek.
 [chmod 40755] doc
 [chmod 40755] source
 [chmod 40755] tex
-[create] /home/one/work/texprj/latex-tds/distrib/amslatex.zip
+[create] /home/one/work/texprj/latex-tds/distrib/amslatex.tds.zip
   adding: bibtex/ (stored 0%)
   adding: bibtex/bib/ (stored 0%)
   adding: bibtex/bib/ams/ (stored 0%)
@@ -61566,12 +61566,12 @@ ZIP-TimeTree 1.2, 2006/06/15 - Copyright (C) 2006 by Heiko Oberdiek.
 [stats] 16 time updates
 [stats] 20 directories added
 [stats] 121 files added
---> /home/one/work/texprj/latex-tds/distrib/amslatex.zip (5.136.309 bytes)
-* system: zip -z /home/one/work/texprj/latex-tds/distrib/amslatex.zip </home/one/work/texprj/latex-tds/build/zip-comment.txt
+--> /home/one/work/texprj/latex-tds/distrib/amslatex.tds.zip (5.136.772 bytes)
+* system: zip -z /home/one/work/texprj/latex-tds/distrib/amslatex.tds.zip </home/one/work/texprj/latex-tds/build/zip-comment.txt
 enter new zip file comment (end with .):
-* system: /home/one/work/texprj/latex-tds/lib/ziptimetree.pl --verbose --noroot /home/one/work/texprj/latex-tds/distrib/babel.zip build/babel/texmf
+* system: /home/one/work/texprj/latex-tds/lib/ziptimetree.pl --verbose --noroot /home/one/work/texprj/latex-tds/distrib/babel.tds.zip build/babel/texmf
 ZIP-TimeTree 1.2, 2006/06/15 - Copyright (C) 2006 by Heiko Oberdiek.
-[zipfile] /home/one/work/texprj/latex-tds/distrib/babel.zip
+[zipfile] /home/one/work/texprj/latex-tds/distrib/babel.tds.zip
 [chmod 100644] doc/generic/babel/00readme.heb
 [chmod 100644] doc/generic/babel/00readme.txt
 [chmod 100644] doc/generic/babel/GreekFonts.txt
@@ -61696,7 +61696,7 @@ ZIP-TimeTree 1.2, 2006/06/15 - Copyright (C) 2006 by Heiko Oberdiek.
 [touch] source/generic/babel
 [touch] tex/generic
 [touch] tex
-[create] /home/one/work/texprj/latex-tds/distrib/babel.zip
+[create] /home/one/work/texprj/latex-tds/distrib/babel.tds.zip
   adding: doc/ (stored 0%)
   adding: doc/generic/ (stored 0%)
   adding: doc/generic/babel/ (stored 0%)
@@ -61993,12 +61993,12 @@ ZIP-TimeTree 1.2, 2006/06/15 - Copyright (C) 2006 by Heiko Oberdiek.
 [stats] 5 time updates
 [stats] 11 directories added
 [stats] 281 files added
---> /home/one/work/texprj/latex-tds/distrib/babel.zip (3.587.829 bytes)
-* system: zip -z /home/one/work/texprj/latex-tds/distrib/babel.zip </home/one/work/texprj/latex-tds/build/zip-comment.txt
+--> /home/one/work/texprj/latex-tds/distrib/babel.tds.zip (3.587.722 bytes)
+* system: zip -z /home/one/work/texprj/latex-tds/distrib/babel.tds.zip </home/one/work/texprj/latex-tds/build/zip-comment.txt
 enter new zip file comment (end with .):
-* system: /home/one/work/texprj/latex-tds/lib/ziptimetree.pl --verbose --noroot /home/one/work/texprj/latex-tds/distrib/psnfss.zip build/psnfss/texmf
+* system: /home/one/work/texprj/latex-tds/lib/ziptimetree.pl --verbose --noroot /home/one/work/texprj/latex-tds/distrib/psnfss.tds.zip build/psnfss/texmf
 ZIP-TimeTree 1.2, 2006/06/15 - Copyright (C) 2006 by Heiko Oberdiek.
-[zipfile] /home/one/work/texprj/latex-tds/distrib/psnfss.zip
+[zipfile] /home/one/work/texprj/latex-tds/distrib/psnfss.tds.zip
 [chmod 100644] doc/latex/psnfss/test/mathtest.tex
 [chmod 100644] doc/latex/psnfss/test/pitest.tex
 [chmod 100644] doc/latex/psnfss/test/test0.tex
@@ -62061,7 +62061,7 @@ ZIP-TimeTree 1.2, 2006/06/15 - Copyright (C) 2006 by Heiko Oberdiek.
 [chmod 100644] source/latex/psnfss/psnfss2e.tex
 [touch] tex/latex
 [touch] tex
-[create] /home/one/work/texprj/latex-tds/distrib/psnfss.zip
+[create] /home/one/work/texprj/latex-tds/distrib/psnfss.tds.zip
   adding: doc/ (stored 0%)
   adding: doc/latex/ (stored 0%)
   adding: doc/latex/psnfss/ (stored 0%)
@@ -62793,12 +62793,12 @@ ZIP-TimeTree 1.2, 2006/06/15 - Copyright (C) 2006 by Heiko Oberdiek.
 [stats] 44 time updates
 [stats] 49 directories added
 [stats] 678 files added
---> /home/one/work/texprj/latex-tds/distrib/psnfss.zip (1.345.665 bytes)
-* system: zip -z /home/one/work/texprj/latex-tds/distrib/psnfss.zip </home/one/work/texprj/latex-tds/build/zip-comment.txt
+--> /home/one/work/texprj/latex-tds/distrib/psnfss.tds.zip (1.345.663 bytes)
+* system: zip -z /home/one/work/texprj/latex-tds/distrib/psnfss.tds.zip </home/one/work/texprj/latex-tds/build/zip-comment.txt
 enter new zip file comment (end with .):
-* system: /home/one/work/texprj/latex-tds/lib/ziptimetree.pl --verbose --noroot /home/one/work/texprj/latex-tds/distrib/cyrillic.zip build/cyrillic/texmf
+* system: /home/one/work/texprj/latex-tds/lib/ziptimetree.pl --verbose --noroot /home/one/work/texprj/latex-tds/distrib/cyrillic.tds.zip build/cyrillic/texmf
 ZIP-TimeTree 1.2, 2006/06/15 - Copyright (C) 2006 by Heiko Oberdiek.
-[zipfile] /home/one/work/texprj/latex-tds/distrib/cyrillic.zip
+[zipfile] /home/one/work/texprj/latex-tds/distrib/cyrillic.tds.zip
 [chmod 100644] doc/latex/cyrillic/00readme.txt
 [chmod 100644] doc/latex/cyrillic/changes.txt
 [chmod 100644] doc/latex/cyrillic/manifest.txt
@@ -62816,9 +62816,7 @@ ZIP-TimeTree 1.2, 2006/06/15 - Copyright (C) 2006 by Heiko Oberdiek.
 [touch] source/latex/cyrillic
 [touch] source/latex
 [touch] source
-[touch] tex/latex
-[touch] tex
-[create] /home/one/work/texprj/latex-tds/distrib/cyrillic.zip
+[create] /home/one/work/texprj/latex-tds/distrib/cyrillic.tds.zip
   adding: doc/ (stored 0%)
   adding: doc/latex/ (stored 0%)
   adding: doc/latex/cyrillic/ (stored 0%)
@@ -62956,15 +62954,15 @@ ZIP-TimeTree 1.2, 2006/06/15 - Copyright (C) 2006 by Heiko Oberdiek.
   adding: tex/latex/cyrillic/x2lcmss.fd (deflated 66%)
   adding: tex/latex/cyrillic/x2lcmtt.fd (deflated 57%)
 [stats] 12 mode changes
-[stats] 7 time updates
+[stats] 5 time updates
 [stats] 9 directories added
 [stats] 127 files added
---> /home/one/work/texprj/latex-tds/distrib/cyrillic.zip (759.983 bytes)
-* system: zip -z /home/one/work/texprj/latex-tds/distrib/cyrillic.zip </home/one/work/texprj/latex-tds/build/zip-comment.txt
+--> /home/one/work/texprj/latex-tds/distrib/cyrillic.tds.zip (759.983 bytes)
+* system: zip -z /home/one/work/texprj/latex-tds/distrib/cyrillic.tds.zip </home/one/work/texprj/latex-tds/build/zip-comment.txt
 enter new zip file comment (end with .):
-* system: /home/one/work/texprj/latex-tds/lib/ziptimetree.pl --verbose --noroot /home/one/work/texprj/latex-tds/distrib/graphics.zip build/graphics/texmf
+* system: /home/one/work/texprj/latex-tds/lib/ziptimetree.pl --verbose --noroot /home/one/work/texprj/latex-tds/distrib/graphics.tds.zip build/graphics/texmf
 ZIP-TimeTree 1.2, 2006/06/15 - Copyright (C) 2006 by Heiko Oberdiek.
-[zipfile] /home/one/work/texprj/latex-tds/distrib/graphics.zip
+[zipfile] /home/one/work/texprj/latex-tds/distrib/graphics.tds.zip
 [chmod 100644] doc/latex/graphics/00readme.txt
 [chmod 100644] doc/latex/graphics/changes.txt
 [touch] doc/latex
@@ -62984,7 +62982,7 @@ ZIP-TimeTree 1.2, 2006/06/15 - Copyright (C) 2006 by Heiko Oberdiek.
 [touch] source/latex
 [touch] source
 [touch] tex/latex/graphics
-[create] /home/one/work/texprj/latex-tds/distrib/graphics.zip
+[create] /home/one/work/texprj/latex-tds/distrib/graphics.tds.zip
   adding: doc/ (stored 0%)
   adding: doc/latex/ (stored 0%)
   adding: doc/latex/graphics/ (stored 0%)
@@ -63039,16 +63037,15 @@ ZIP-TimeTree 1.2, 2006/06/15 - Copyright (C) 2006 by Heiko Oberdiek.
 [stats] 6 time updates
 [stats] 9 directories added
 [stats] 41 files added
---> /home/one/work/texprj/latex-tds/distrib/graphics.zip (1.076.412 bytes)
-* system: zip -z /home/one/work/texprj/latex-tds/distrib/graphics.zip </home/one/work/texprj/latex-tds/build/zip-comment.txt
+--> /home/one/work/texprj/latex-tds/distrib/graphics.tds.zip (1.076.411 bytes)
+* system: zip -z /home/one/work/texprj/latex-tds/distrib/graphics.tds.zip </home/one/work/texprj/latex-tds/build/zip-comment.txt
 enter new zip file comment (end with .):
-* system: /home/one/work/texprj/latex-tds/lib/ziptimetree.pl --verbose --noroot /home/one/work/texprj/latex-tds/distrib/tools.zip build/tools/texmf
+* system: /home/one/work/texprj/latex-tds/lib/ziptimetree.pl --verbose --noroot /home/one/work/texprj/latex-tds/distrib/tools.tds.zip build/tools/texmf
 ZIP-TimeTree 1.2, 2006/06/15 - Copyright (C) 2006 by Heiko Oberdiek.
-[zipfile] /home/one/work/texprj/latex-tds/distrib/tools.zip
+[zipfile] /home/one/work/texprj/latex-tds/distrib/tools.tds.zip
 [chmod 100644] doc/latex/tools/changes.txt
 [chmod 100644] doc/latex/tools/manifest.txt
 [chmod 100644] doc/latex/tools/readme.txt
-[touch] doc/latex/tools
 [touch] doc/latex
 [touch] doc
 [chmod 100644] source/latex/tools/afterpage.dtx
@@ -63080,7 +63077,9 @@ ZIP-TimeTree 1.2, 2006/06/15 - Copyright (C) 2006 by Heiko Oberdiek.
 [touch] source/latex/tools
 [touch] source/latex
 [touch] source
-[create] /home/one/work/texprj/latex-tds/distrib/tools.zip
+[touch] tex/latex
+[touch] tex
+[create] /home/one/work/texprj/latex-tds/distrib/tools.tds.zip
   adding: doc/ (stored 0%)
   adding: doc/latex/ (stored 0%)
   adding: doc/latex/tools/ (stored 0%)
@@ -63185,15 +63184,15 @@ ZIP-TimeTree 1.2, 2006/06/15 - Copyright (C) 2006 by Heiko Oberdiek.
   adding: tex/latex/tools/xr.sty (deflated 55%)
   adding: tex/latex/tools/xspace.sty (deflated 66%)
 [stats] 29 mode changes
-[stats] 6 time updates
+[stats] 7 time updates
 [stats] 9 directories added
 [stats] 94 files added
---> /home/one/work/texprj/latex-tds/distrib/tools.zip (3.617.230 bytes)
-* system: zip -z /home/one/work/texprj/latex-tds/distrib/tools.zip </home/one/work/texprj/latex-tds/build/zip-comment.txt
+--> /home/one/work/texprj/latex-tds/distrib/tools.tds.zip (3.617.907 bytes)
+* system: zip -z /home/one/work/texprj/latex-tds/distrib/tools.tds.zip </home/one/work/texprj/latex-tds/build/zip-comment.txt
 enter new zip file comment (end with .):
-* system: /home/one/work/texprj/latex-tds/lib/ziptimetree.pl --verbose --noroot /home/one/work/texprj/latex-tds/distrib/latex-tds.zip build/latex-tds/texmf
+* system: /home/one/work/texprj/latex-tds/lib/ziptimetree.pl --verbose --noroot /home/one/work/texprj/latex-tds/distrib/latex-tds.tds.zip build/latex-tds/texmf
 ZIP-TimeTree 1.2, 2006/06/15 - Copyright (C) 2006 by Heiko Oberdiek.
-[zipfile] /home/one/work/texprj/latex-tds/distrib/latex-tds.zip
+[zipfile] /home/one/work/texprj/latex-tds/distrib/latex-tds.tds.zip
 [touch] bibtex/bib/ams
 [chmod 40755] bibtex/bib/ams
 [touch] bibtex/bib
@@ -63206,7 +63205,6 @@ ZIP-TimeTree 1.2, 2006/06/15 - Copyright (C) 2006 by Heiko Oberdiek.
 [touch] doc/generic
 [touch] doc/info
 [touch] doc/latex/psnfss/test
-[touch] doc/latex/tools
 [chmod 40755] doc/latex/amscls
 [chmod 40755] doc/latex/amsmath
 [chmod 40755] doc/latex/amsrefs
@@ -63280,9 +63278,10 @@ ZIP-TimeTree 1.2, 2006/06/15 - Copyright (C) 2006 by Heiko Oberdiek.
 [chmod 40755] tex/latex/amscls
 [chmod 40755] tex/latex/amsmath
 [chmod 40755] tex/latex/amsrefs
+[touch] tex/latex
 [touch] tex
 [chmod 40755] bibtex
-[create] /home/one/work/texprj/latex-tds/distrib/latex-tds.zip
+[create] /home/one/work/texprj/latex-tds/distrib/latex-tds.tds.zip
   adding: bibtex/ (stored 0%)
   adding: bibtex/bib/ (stored 0%)
   adding: bibtex/bib/ams/ (stored 0%)
@@ -65086,12 +65085,12 @@ ZIP-TimeTree 1.2, 2006/06/15 - Copyright (C) 2006 by Heiko Oberdiek.
 [stats] 73 time updates
 [stats] 93 directories added
 [stats] 1706 files added
---> /home/one/work/texprj/latex-tds/distrib/latex-tds.zip (25.992.376 bytes)
-* system: zip -z /home/one/work/texprj/latex-tds/distrib/latex-tds.zip </home/one/work/texprj/latex-tds/build/zip-comment.txt
+--> /home/one/work/texprj/latex-tds/distrib/latex-tds.tds.zip (25.994.929 bytes)
+* system: zip -z /home/one/work/texprj/latex-tds/distrib/latex-tds.tds.zip </home/one/work/texprj/latex-tds/build/zip-comment.txt
 enter new zip file comment (end with .):
-* system: /home/one/work/texprj/latex-tds/lib/ziptimetree.pl --verbose --noroot /home/one/work/texprj/latex-tds/distrib/source.zip build/source/texmf
+* system: /home/one/work/texprj/latex-tds/lib/ziptimetree.pl --verbose --noroot /home/one/work/texprj/latex-tds/distrib/source.tds.zip build/source/texmf
 ZIP-TimeTree 1.2, 2006/06/15 - Copyright (C) 2006 by Heiko Oberdiek.
-[zipfile] /home/one/work/texprj/latex-tds/distrib/source.zip
+[zipfile] /home/one/work/texprj/latex-tds/distrib/source.tds.zip
 [touch] source/latex/latex-tds/lib
 [touch] source/latex/latex-tds/license/ziptimetree
 [touch] source/latex/latex-tds/license
@@ -65100,7 +65099,7 @@ ZIP-TimeTree 1.2, 2006/06/15 - Copyright (C) 2006 by Heiko Oberdiek.
 [touch] source/latex/latex-tds
 [touch] source/latex
 [touch] source
-[create] /home/one/work/texprj/latex-tds/distrib/source.zip
+[create] /home/one/work/texprj/latex-tds/distrib/source.tds.zip
   adding: source/ (stored 0%)
   adding: source/latex/ (stored 0%)
   adding: source/latex/latex-tds/ (stored 0%)
@@ -65141,17 +65140,17 @@ ZIP-TimeTree 1.2, 2006/06/15 - Copyright (C) 2006 by Heiko Oberdiek.
 [stats] 8 time updates
 [stats] 8 directories added
 [stats] 29 files added
---> /home/one/work/texprj/latex-tds/distrib/source.zip (59.365 bytes)
-* system: zip -z /home/one/work/texprj/latex-tds/distrib/source.zip </home/one/work/texprj/latex-tds/build/zip-comment.txt
+--> /home/one/work/texprj/latex-tds/distrib/source.tds.zip (59.405 bytes)
+* system: zip -z /home/one/work/texprj/latex-tds/distrib/source.tds.zip </home/one/work/texprj/latex-tds/build/zip-comment.txt
 enter new zip file comment (end with .):
-* system: /home/one/work/texprj/latex-tds/lib/ziptimetree.pl --verbose --noroot /home/one/work/texprj/latex-tds/distrib/tds.zip build/tds/texmf
+* system: /home/one/work/texprj/latex-tds/lib/ziptimetree.pl --verbose --noroot /home/one/work/texprj/latex-tds/distrib/tds.tds.zip build/tds/texmf
 ZIP-TimeTree 1.2, 2006/06/15 - Copyright (C) 2006 by Heiko Oberdiek.
-[zipfile] /home/one/work/texprj/latex-tds/distrib/tds.zip
+[zipfile] /home/one/work/texprj/latex-tds/distrib/tds.tds.zip
 [touch] doc/info
 [touch] doc
 [touch] source/tds
 [touch] source
-[create] /home/one/work/texprj/latex-tds/distrib/tds.zip
+[create] /home/one/work/texprj/latex-tds/distrib/tds.tds.zip
   adding: doc/ (stored 0%)
   adding: doc/info/ (stored 0%)
   adding: doc/info/tds.info (deflated 67%)
@@ -65170,21 +65169,21 @@ ZIP-TimeTree 1.2, 2006/06/15 - Copyright (C) 2006 by Heiko Oberdiek.
 [stats] 4 time updates
 [stats] 5 directories added
 [stats] 10 files added
---> /home/one/work/texprj/latex-tds/distrib/tds.zip (252.375 bytes)
-* system: zip -z /home/one/work/texprj/latex-tds/distrib/tds.zip </home/one/work/texprj/latex-tds/build/zip-comment.txt
+--> /home/one/work/texprj/latex-tds/distrib/tds.tds.zip (252.374 bytes)
+* system: zip -z /home/one/work/texprj/latex-tds/distrib/tds.tds.zip </home/one/work/texprj/latex-tds/build/zip-comment.txt
 enter new zip file comment (end with .):
 
 === Result ===
--rw-r--r--    1 one      users    10162362 2008-04-02 19:31 distrib/base.zip
--rw-r--r--    1 one      users     5136515 2008-04-02 19:31 distrib/amslatex.zip
--rw-r--r--    1 one      users     3588035 2008-04-02 19:31 distrib/babel.zip
--rw-r--r--    1 one      users     1345871 2008-04-02 19:31 distrib/psnfss.zip
--rw-r--r--    1 one      users      760189 2008-04-02 19:31 distrib/cyrillic.zip
--rw-r--r--    1 one      users     1076618 2008-04-02 19:31 distrib/graphics.zip
--rw-r--r--    1 one      users     3617436 2008-04-02 19:31 distrib/tools.zip
--rw-r--r--    1 one      users    25992582 2008-04-02 19:31 distrib/latex-tds.zip
--rw-r--r--    1 one      users       59571 2008-04-02 19:31 distrib/source.zip
--rw-r--r--    1 one      users       15111 2008-04-02 19:21 distrib/readme.txt
--rw-r--r--    1 one      users      252581 2008-04-02 19:31 distrib/tds.zip
-* Elapsed time: 9:24
+-rw-r--r--    1 one      users    10163846 2008-04-05 15:06 distrib/base.tds.zip
+-rw-r--r--    1 one      users     5136978 2008-04-05 15:06 distrib/amslatex.tds.zip
+-rw-r--r--    1 one      users     3587928 2008-04-05 15:06 distrib/babel.tds.zip
+-rw-r--r--    1 one      users     1345869 2008-04-05 15:06 distrib/psnfss.tds.zip
+-rw-r--r--    1 one      users      760189 2008-04-05 15:06 distrib/cyrillic.tds.zip
+-rw-r--r--    1 one      users     1076617 2008-04-05 15:06 distrib/graphics.tds.zip
+-rw-r--r--    1 one      users     3618113 2008-04-05 15:06 distrib/tools.tds.zip
+-rw-r--r--    1 one      users    25995135 2008-04-05 15:06 distrib/latex-tds.tds.zip
+-rw-r--r--    1 one      users       59611 2008-04-05 15:06 distrib/source.tds.zip
+-rw-r--r--    1 one      users       15222 2008-04-05 14:53 distrib/readme.txt
+-rw-r--r--    1 one      users      252580 2008-04-05 15:06 distrib/tds.tds.zip
+* Elapsed time: 9:27
 
