@@ -1104,7 +1104,7 @@ section('Distrib');
 
     for my $pkg (@list_modules) {
         my $dir_tds = "$dir_build/$pkg/texmf";
-        my $file_distrib = "$cwd/$dir_distrib/$pkg.zip";
+        my $file_distrib = "$cwd/$dir_distrib/$pkg.tds.zip";
         if (-d $dir_tds) {
             run_zip($file_distrib, $dir_tds);
         }
@@ -1118,7 +1118,7 @@ section('Distrib');
 section('Result');
 {
     for my $pkg (@list_modules) {
-        my $file = "$dir_distrib/$pkg.zip";
+        my $file = "$dir_distrib/$pkg.tds.zip";
         if (-f $file) {
             system("$prg_ls -l $file");
             system("$prg_ls -l $dir_distrib/readme.txt")if $pkg eq 'source';
