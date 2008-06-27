@@ -428,3 +428,5 @@ I. HISTORY
 2008/04/05
   * Using .tds.zip instead of .zip to follow CTAN:install's naming
     conventions.
+2008/06/28
+  * Babel documentation: table of contents reformatted.

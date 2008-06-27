@@ -35,6 +35,30 @@
 \AtBeginDocument{%
   \let\Saved@TheBibliography\thebibliography
   \let\thebibliography\New@TheBibliography
+  \renewcommand*{\l@subsection}{%
+    % \@dottedtocline{2}{1.5em}{2.3em}% article.cls, 10pt
+    \@dottedtocline{2}{1.5em}{2.8em}%
+  }%
+  \renewcommand*{\l@subsubsection}{%
+    \renewcommand*{\l@subsubsection}{%
+      % \@dottedtocline{3}{3.8em}{3.2em}% article.cls, 10pt
+      \@dottedtocline{3}{4.3em}{3.7em}%
+    }%
+  }%
+  \renewcommand*{\@pnumwidth}{2.05em}% 1.55em, article.cls, 10pt
+  \addtocontents{toc}{\protect\sloppy}%
+  \let\saved@multicols\multicols
+  \def\multicols#1{%
+    \ifnum#1=2 %
+      \let\endmulticols\relax
+      \expandafter\@gobble
+    \else
+      \expandafter\@firstofone
+    \fi
+    {%
+      \saved@multicols{#1}%
+    }%
+  }%
 }
 \def\New@TheBibliography{%
   \if@FirstBib
