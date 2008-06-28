@@ -99,12 +99,6 @@ The following files can be downloaded:
   merged together:
     latex-tds.tds.zip
 
-It is possible that some or all ZIP archive files are also available
-in the install subtree, then possible locations could be:
-  CTAN:install/macros/latex/base.zip
-  CTAN:install/macros/latex/required/tools.zip
-  ...
-
 
 C. INSTALLATION HINTS
 =====================
@@ -240,7 +234,9 @@ Patches
   patch/classes.dtx.diff    patch for base/classes.dtx
   patch/bbcompat.dtx.diff   patch for babel/bbcompat.dtx
   patch/frenchb.dtx.diff    patch for babel/frenchb.dtx
+  patch/galician.dtx.diff   patch for babel/galician.dtx
   patch/latin.dtx.diff      patch for babel/latin.dtx
+  patch/spanish.dtx.diff    patch for babel/spanish.dtx
 
 
 F. DESIGN PRINCIPLES
@@ -422,11 +418,12 @@ I. HISTORY
   * Update of babel.
   * Update of amsrefs (TDS:tex/latex/amscls -> TDS:tex/latex/amsrefs).
 2008/04/01
-  * Update of babel (2007/03/17).
+  * Update of babel (2008/03/17).
 2008/04/02
   * Fix: latex/base/*.err added to TDS:source/latex/base/.
 2008/04/05
   * Using .tds.zip instead of .zip to follow CTAN:install's naming
     conventions.
 2008/06/28
+  * Update of babel (2008/06/01).
   * Babel documentation: table of contents reformatted.

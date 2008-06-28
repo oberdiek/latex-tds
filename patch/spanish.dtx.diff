@@ -1,0 +1,37 @@
+*** spanish.dtx.org	2008-06-01 16:13:00.000000000 +0200
+--- spanish.dtx	2008-06-28 12:12:00.000000000 +0200
+***************
+*** 26,32 ****
+  % and covered by LPPL is defined by the unpacking scripts (with
+  % extension .ins) which are part of the distribution.
+  % \fi
+! % \CheckSum{2143}
+  % \ProvidesFile{spanish.dtx}
+  %       [2008/05/24 v5.0d Spanish support from the babel system] 
+  %\iffalse
+--- 26,32 ----
+  % and covered by LPPL is defined by the unpacking scripts (with
+  % extension .ins) which are part of the distribution.
+  % \fi
+! % \CheckSum{2059}
+  % \ProvidesFile{spanish.dtx}
+  %       [2008/05/24 v5.0d Spanish support from the babel system] 
+  %\iffalse
+***************
+*** 1642,1649 ****
+  % parts rewritten from scratch. Added the es- mechanism and the mexico
+  % option. Many bug fixes.}
+  % \changes{spanish~5.0d}{2008-05-25}{Fixed two bugs: misplaced 
+! % subscripts with lim and the like; problem with \roman and hyperref.} 
+! % misp}
+  %
+  %    This file provides definition for both \LaTeXe{} and non
+  %    \LaTeXe{} formats.
+--- 1642,1648 ----
+  % parts rewritten from scratch. Added the es- mechanism and the mexico
+  % option. Many bug fixes.}
+  % \changes{spanish~5.0d}{2008-05-25}{Fixed two bugs: misplaced 
+! % subscripts with lim and the like; problem with \cs{roman} and hyperref.} 
+  %
+  %    This file provides definition for both \LaTeXe{} and non
+  %    \LaTeXe{} formats.
