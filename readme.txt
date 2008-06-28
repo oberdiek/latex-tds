@@ -1,4 +1,4 @@
-readme.txt for project latex-tds, 2008/04/05
+readme.txt for project latex-tds, 2008/06/28
 
 TABLE OF CONTENTS
 =================
