@@ -284,10 +284,9 @@ section('Patches');
         chdir $cwd;
     }
     
-    if ($modules{'babel'}) {
-        map { patch("babel/$_"); } qw[
-            latin.dtx
-        ];
+#    if ($modules{'babel'}) {
+#        map { patch("babel/$_"); } qw[
+#        ];
     }
 }
 
