@@ -232,11 +232,6 @@ Documentation driver
 Patches
 -------
   patch/classes.dtx.diff    patch for base/classes.dtx
-  patch/bbcompat.dtx.diff   patch for babel/bbcompat.dtx
-  patch/frenchb.dtx.diff    patch for babel/frenchb.dtx
-  patch/galician.dtx.diff   patch for babel/galician.dtx
-  patch/latin.dtx.diff      patch for babel/latin.dtx
-  patch/spanish.dtx.diff    patch for babel/spanish.dtx
 
 
 F. DESIGN PRINCIPLES
