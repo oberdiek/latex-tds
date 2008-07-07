@@ -287,7 +287,7 @@ section('Patches');
 #    if ($modules{'babel'}) {
 #        map { patch("babel/$_"); } qw[
 #        ];
-    }
+#    }
 }
 
 ### Install TDS/source
