@@ -1,4 +1,4 @@
-readme.txt for project latex-tds, 2008/06/28
+readme.txt for project latex-tds, 2008/07/07
 
 TABLE OF CONTENTS
 =================
@@ -427,3 +427,5 @@ I. HISTORY
 2008/06/28
   * Update of babel (2008/06/01).
   * Babel documentation: table of contents reformatted.
+2008/07/07
+  * Update of babel (2008/07/06).

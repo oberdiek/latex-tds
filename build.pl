@@ -286,11 +286,7 @@ section('Patches');
     
     if ($modules{'babel'}) {
         map { patch("babel/$_"); } qw[
-            babel.dtx
-            danish.dtx
-            galician.dtx
             latin.dtx
-            spanish.dtx
         ];
     }
 }
