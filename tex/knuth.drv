@@ -71,6 +71,33 @@
   \seclistnum=\numexpr\modno+1\relax
   \pdfdest num\seclistnum fitbh\relax
   \pdfoutline goto num\seclistnum{Names of the sections}\relax
+  \def\entry##1##2{%
+    %% \edef\x{\detokenize{##2}}%
+    %% \edef\y{\jobname}%
+    %% \ifx\x\y
+    %% \else
+      \pdfoutline
+        attr{/C[0 0 1]}
+        user{%
+          <<%
+            /S/GoToR%
+            /F(../##1/##2.pdf)%
+            /D[0/FitBH 576]% 8in
+          >>%
+        }%
+        {[##1/##2]}\relax
+    %% \fi
+  }%
+  \entry{texware}{pooltype}%
+  \entry{texware}{tftopl}%
+  \entry{texware}{pltotf}%
+  \entry{texware}{dvitype}%
+  \entry{mfware}{gftype}%
+  \entry{mfware}{gftopk}%
+  \entry{mfware}{gftodvi}%
+  \entry{mfware}{mft}%
+  \entry{etc}{vftovp}%
+  \entry{etc}{vptovf}%
 }
 \def\con{%
   \par\vfill\eject % finish the section names
