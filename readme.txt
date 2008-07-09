@@ -71,6 +71,9 @@ Module list
 * psnfss    CTAN:macros/latex/required/psnfss.zip
 * babel     CTAN:macros/latex/required/babel.zip
 * tds       CTAN:tds.zip
+* knuthware CTAN:systems/knuth/dist/etc.zip
+            CTAN:systems/knuth/dist/mfware.zip
+            CTAN:systems/knuth/dist/texware.zip
 
 Author
 ------
@@ -222,6 +225,7 @@ Documentation driver
   tex/babel.tex             doc driver with patches for babel.drv
   tex/doc_lppl.tex          doc driver for base/lppl.tex
   tex/greek-usage.tex       doc driver with patches for babel/usage.tex
+  tex/knuthware.drv         doc driver for knuth/{texware,mfware,etc}/*.web
   tex/ltnews.tex            master file that merges all base/ltnews*.tex
   tex/ltxcheck.drv          doc driver with patches for ltxcheck.tex
   tex/psnfss2e.drv          doc driver with patches for psnfss2e.tex
@@ -424,3 +428,5 @@ I. HISTORY
   * Babel documentation: table of contents reformatted.
 2008/07/07
   * Update of babel (2008/07/06).
+2008/07/10
+  * Module knuthware added.

@@ -1,0 +1,160 @@
+% knuthware.drv
+% 2008/07/10 v1.0 Driver file for knuth/{texware,mfware,etc}/*.web
+% Copyright 2008 Heiko Oberdiek.
+%
+% This file is part of project `latex-tds'.
+%
+% It may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License, either version 1.3
+% of this license or (at your option) any later version.
+% The latest version of this license is in
+%   http://www.latex-project.org/lppl.txt
+% and version 1.3c or later is part of all distributions of LaTeX
+% version 2005/12/01 or later.
+%
+% This work has the LPPL maintenance status `maintained'.
+%
+% The Current Maintainer of this work is Heiko Oberdiek.
+%
+% See `readme.txt' for a list of all files belonging to the
+% project `latex-tds' and additional information.
+%
+% 2008/07/10 v1.0
+%
+\errorcontextlines=\maxdimen
+\input ifpdf.sty\relax
+\ifpdf
+\else
+  \input infwarerr.sty\relax
+  \catcode`\@=11 %
+  \@PackageError{knuthware.drv}{You need pdfTeX in PDF mode}\@ehd
+  \expandafter\end
+\fi
+\input pdfwebmac.tex\relax % Han The Thanh's enriched version of webmac.tex
+
+% Original paper size is probably letter (default of plain format).
+% But decrease margins for better online viewing.
+\pdfpagewidth=7.5in\relax % 8.5in - 2*0.5in
+\pdfhorigin=0.5in\relax
+\pdfpageheight=10in\relax % 11in - 2*0.5in
+\pdfvorigin=0.5in\relax
+
+% Definition of color macros
+\def\pdfsetrgbcolor#1{%
+  \pdfliteral{#1 rg}%
+}
+\def\pdfsetgraycolor#1{%
+  \pdfliteral{#1 g}%
+}
+\def\Black{%
+  \pdfsetgraycolor{0}%
+}
+\def\LinkColor{%
+  \pdfsetrgbcolor{1 0 0}%
+}
+
+% Redefinition of pdfwebmac macros
+\def\n#1{%
+  \leavevmode
+  \ifnum#1>0 % test for valid section numbers that start with 1
+    \pdfstartlink attr{/Border[0 0 0]} goto num #1\relax
+    \hbox{\LinkColor #1\Black}%
+    \pdfendlink
+  \else
+    #1%
+  \fi
+}
+\newcount\seclistnum
+\let\ORGfin\fin
+\def\fin{%
+  \ORGfin
+  \seclistnum=\numexpr\modno+1\relax
+  \pdfdest num\seclistnum fitbh\relax
+  \pdfoutline goto num\seclistnum{Names of the sections}\relax
+}
+\def\con{%
+  \par\vfill\eject % finish the section names
+  \rightskip 0pt %
+  \hyphenpenalty 50 %
+  \tolerance 200 %
+  \setpage
+  \output{\normaloutput\page\lheader\rheader}%
+  \titletrue % prepare to output the table of contents
+  \pageno=\contentspagenumber
+  \def\rhead{TABLE OF CONTENTS}%
+  \message{Table of contents:}%
+  \topofcontents
+  \line{\hfil Section\hbox to3em{\hss Page}}%
+  \def\Z##1##2##3{%
+    \line{%
+      \pdfstartlink attr{/Border [0 0 0]} goto num ##2\relax
+      \LinkColor
+      \ignorespaces##1 %
+      \leaders\hbox to .5em{.\hfil}\hfil\ ##2
+      \Black
+      \pdfendlink
+      \hbox to3em{\hss##3}%
+    }%
+  }%
+  \readcontents\relax % read the contents info
+  \botofcontents % print the contents page(s) and terminate
+  \makeoutlines
+  \eject % \titletrue is necessary during output and
+         % \con is maybe called in a group, therefore
+         % the output is forced here.
+  \makepagelabels
+  \end
+}
+
+% Adding PDF page labels
+\def\makepagelabels{%
+  \pdfcatalog{%
+    /PageLabels<<%
+      /Nums[0<</S/D/St \contentspagenumber>>]%
+    >>%
+  }%
+}
+
+% Move contents page to the front
+\def\contentsfile{\jobname.toc}
+\def\readcontents{\input\contentsfile\relax}
+\def\makeoutlines{%
+  \def\?##1]{}%
+  \def\Z##1##2##3{%
+    \pdfoutline goto num ##2{##2. ##1}\relax
+  }%
+  \readcontents
+}%
+\newread\testread
+\openin\testread=\contentsfile\relax
+\ifeof\testread
+\else
+  \let\ORGcon\con
+  \def\con{%
+    \begingroup
+      \let\end\relax
+      \ORGcon
+    \endgroup
+    \let\con\end
+  }%
+  \expandafter\let\csname ORGN\expandafter\endcsname
+                  \csname N\endcsname
+  \expandafter\outer\expandafter\def\csname N\endcsname{%
+    \con
+    \advance\pageno by -1\relax
+    \expandafter\let\csname N\expandafter\endcsname
+                    \csname ORGN\endcsname
+    \csname N\endcsname
+  }%
+\fi
+
+% Patch \input to disable `\input webmac'
+\let\ORGinput\input
+\def\input #1\relax{%
+  \def\input webmac {%
+    \let\input\ORGinput
+  }%
+  \ORGinput #1 %
+}
+\input \jobname.tex\relax
+\endinput

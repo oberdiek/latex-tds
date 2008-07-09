@@ -43,7 +43,14 @@ my @required_list = (
     'graphics',
     'tools'
 );
-my @pkg_list = ('base', @required_list, $prj, 'source', 'tds');
+my @pkg_list = (
+    'base',
+    @required_list,
+    $prj,
+    'source',
+    'tds',
+    'knuthware'
+);
 
 my $zip_comment = <<'END_ZIP_COMMENT';
 **************************************************
@@ -92,11 +99,13 @@ my $prg_mv          = 'mv';
 my $prg_patch       = "patch";
 my $prg_pdflatex    = 'pdflatex';
 my $prg_pdflatextds = "pdflatex -fmt=$cwd/$dir_build/latex-tds";
+my $prg_pdftex      = "pdftex";
 my $prg_rm          = "rm";
 my $prg_rsync       = "rsync";
 my $prg_sed         = "sed";
 my $prg_sort        = "sort";
 my $prg_unzip       = 'unzip';
+my $prg_weave       = 'weave';
 my $prg_wget        = 'wget';
 my $prg_zip         = 'zip';
 my $prg_ziptimetree = $file_ziptimetree;
@@ -203,6 +212,9 @@ if (@list_modules > 0) {
     download_ctan('amsrefs',  'macros/latex/contrib');
     download_ctan('psnfss',   'macros/latex/required');
     download_ctan('tds',      '');
+    download_ctan('texware',  'systems/knuth/dist');
+    download_ctan('mfware',   'systems/knuth/dist');
+    download_ctan('etc',      'systems/knuth/dist');
     download_ams('amslatex',     '');
     download_ams('amsrefs-tds',  'amslatex/amsrefs');
     download_ams('amsrefs-ctan', 'amslatex/amsrefs');
@@ -252,6 +264,13 @@ section('Unpacking');
                   "$dir/$name.zip",
                   "$dir/texmf");
     }
+    sub unpack_knuthware ($) {
+        my $pkg = 'knuthware';
+        my $dir = "$dir_build/$pkg";
+        my $zipfile = "$dir_incoming_ctan/$_[0].zip";
+        $modules{'knuthware'} or return 1;
+        run("$prg_unzip -j $zipfile -d$dir");
+    }
 
     ensure_directory($dir_build);
     unpack_ctan('base');
@@ -267,6 +286,9 @@ section('Unpacking');
     unpack_psnfss('lw35nfss');
     unpack_psnfss('freenfss');
     unpack_ctan('tds');
+    unpack_knuthware('texware');
+    unpack_knuthware('mfware');
+    unpack_knuthware('etc');
 }
 
 ### Patches
@@ -282,6 +304,10 @@ section('Patches');
         chdir "$dir_build/psnfss";
         run("$prg_checksum psfonts.dtx");
         chdir $cwd;
+    }
+    
+    if ($modules{'knuthware'}) {
+        run("$prg_chmod -x $dir_build/knuthware/gftopk.web");
     }
     
 #    if ($modules{'babel'}) {
@@ -300,6 +326,15 @@ section('Install source');
         $modules{$pkg} or return 1;
         chdir "$dir_build/$pkg";
         install "texmf/source/$fmt/$pkg", @list;
+        chdir $cwd;
+    }
+    sub install_generic_source ($$@) {
+        my $pkg = shift;
+        my $dir = shift;
+        my @list = @_;
+        $modules{$pkg} or return 1;
+        chdir "$dir_build/$pkg";
+        install "texmf/source/$dir", @list;
         chdir $cwd;
     }
     sub install_source ($@) {
@@ -354,6 +389,22 @@ section('Install source');
         tdsguide.cls
         tds.sed
         tds.tex
+    ]);
+    install_generic_source('knuthware', 'knuth/texware', qw[
+        dvitype.web
+        pltotf.web
+        pooltype.web
+        tftopl.web
+    ]);
+    install_generic_source('knuthware', 'knuth/mfware', qw[
+        gftodvi.web
+        gftype.web
+        gftopk.web
+        mft.web
+    ]);
+    install_generic_source('knuthware', 'knuth/etc', qw[
+        vptovf.web
+        vftovp.web
     ]);
 }
 
@@ -1042,6 +1093,47 @@ END_TEXT
     run("$prg_pdflatextds $file_tds_new");
     install_gen_pdf('', 'tds', 'tds');
 
+    chdir $cwd;
+}
+
+### Generate documentation for knuthware
+if ($modules{'knuthware'}) {
+    section('Documentation: knuthware');
+    
+    chdir "$dir_build/knuthware";
+    
+    my $knuthware_drv = "$cwd/$dir_tex/knuthware.drv";
+    
+    sub generate_web_doc ($@) {
+        my $dir = shift;
+        my @list = @_;
+        
+        foreach my $entry (@list) {
+            symlink $knuthware_drv, "$entry.drv";
+            run("$prg_weave $entry.web");
+            run("$prg_pdftex -draftmode $entry.drv");
+            run("$prg_pdftex $entry.drv");
+            install_gen_pdf('knuth', $dir, $entry);
+        }
+    }
+
+    generate_web_doc('texware', qw[
+        dvitype
+        pltotf
+        pooltype
+        tftopl
+    ]);
+    generate_web_doc('mfware', qw[
+        gftodvi
+        gftype
+        gftopk
+        mft
+    ]);
+    generate_web_doc('etc', qw[
+        vptovf
+        vftovp
+    ]);
+    
     chdir $cwd;
 }
 

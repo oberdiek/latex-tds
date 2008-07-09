@@ -1,8 +1,8 @@
 ac
 albanian
 amscls
-AmSLaTeX
 amslatex
+AmSLaTeX
 amsrefs
 armenian
 athnum
@@ -50,6 +50,9 @@ icehyph
 ini
 init
 inputenc
+install's
+knuth
+knuthware
 lahyph
 latexbug
 latin
@@ -64,15 +67,16 @@ ltxcheck
 ltxdoc
 ltxguide
 makeindex
+mfware
 MikTeX
 nopostprocess
 oberdiek
 org
 pdf
-PDFBox
 pdfbox
-pdfTeX
+PDFBox
 pdftex
+pdfTeX
 Perl
 pl
 PS
@@ -89,6 +93,7 @@ texdoc
 texfaq
 texmf
 texsys
+texware
 tipa
 txt
 uk
