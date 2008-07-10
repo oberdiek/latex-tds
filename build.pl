@@ -316,6 +316,26 @@ section('Patches');
         run("$prg_checksum psfonts.dtx");
         chdir $cwd;
     }
+    
+    if ($modules{'knuth'}) {
+        chdir "$dir_build/knuth";
+        my @files = qw[
+            trip.fot
+            tripin.log
+            trip.log
+            trip.typ
+        ];
+        run("$prg_chmod -x @files");
+        @files = qw[
+            trap.fot
+            trapin.log
+            trap.log
+            trap.pl
+            trap.typ
+        ];
+        run("$prg_chmod -x @files");
+        chdir $cwd;
+    }
 
 #    if ($modules{'babel'}) {
 #        map { patch("babel/$_"); } qw[
@@ -419,10 +439,25 @@ section('Install source');
         webman.tex
     ]);
     install_generic_source('knuth', 'knuth/tex', qw[
+        glue.web
         tex.web
+        trip.fot
+        tripin.log
+        trip.log
+        tripman.tex
+        tripos.tex
+        trip.pl
+        trip.tex
+        trip.typ
     ]);
     install_generic_source('knuth', 'knuth/mf', qw[
         mf.web
+        trap.fot
+        trapin.log
+        trap.log
+        trap.mf
+        trap.pl
+        trap.typ
     ]);
 }
 
@@ -464,6 +499,18 @@ section('Paches after source install');
         }
 
         chdir $cwd;
+    }
+    
+    if ($modules{'knuth'}) {
+        
+        foreach my $file (qw[
+            webman.tex
+            tripman.tex
+            trapman.tex
+        ]) {
+            run("$prg_patch $dir_build/knuth/$file <$dir_patch/$file.diff");
+        }
+        
     }
 }
 
@@ -638,6 +685,17 @@ section('Install tex doc');
         ]);
         install('texmf/doc/info', qw[
             tds.info
+        ]);
+        chdir $cwd;
+    }
+    
+    if ($modules{'knuth'}) {
+        chdir "$dir_build/knuth";
+        install('texmf/doc/knuth/tex', qw[
+            texbook.tex
+        ]);
+        install('texmf/doc/knuth/mf', qw[
+            mfbook.tex
         ]);
         chdir $cwd;
     }
@@ -1128,13 +1186,17 @@ if ($modules{'knuth'}) {
 
         foreach my $entry (@list) {
             symlink $knuth_drv, "$entry.drv";
-            run("$prg_weave $entry.web") unless $entry eq 'webman';
+            run("$prg_weave $entry.web")
+                    unless $entry eq 'webman'
+                        or $entry eq 'tripman'
+                        or $entry eq 'trapman';
             run("$prg_pdftex -draftmode $entry.drv");
             run("$prg_pdftex $entry.drv");
             install_gen_pdf('knuth', $dir, $entry);
         }
     }
 
+if (0) {
     generate_web_doc('texware', qw[
         dvitype
         pltotf
@@ -1157,11 +1219,19 @@ if ($modules{'knuth'}) {
         webman
     ]);
     generate_web_doc('tex', qw[
+        glue
         tex
     ]);
     generate_web_doc('mf', qw[
         mf
     ]);
+
+    run("$prg_pdftex tripman");
+    install_gen_pdf('knuth', 'tex', 'tripman');
+}
+
+    run("$prg_pdftex trapman");
+    install_gen_pdf('knuth', 'mf', 'trapman');
 
     chdir $cwd;
 }
