@@ -198,9 +198,18 @@
     \csname N\endcsname
   }%
   \begingroup
+    \def\num{0}%
     \edef\x{\jobname}%
     \edef\y{\detokenize{tex}}%
-  \expandafter\endgroup\ifx\x\y
+    \ifx\x\y
+      \def\num{1}%
+    \else
+      \edef\y{\detokenize{mf}}%
+        \ifx\x\y
+          \def\num{1}%
+        \fi
+    \fi
+  \expandafter\endgroup\ifnum\num=1 %
     \def\contentspagenumber{2}%
     \let\ORGpageno\pageno
     \def\pageno{%
@@ -209,6 +218,7 @@
                       \csname N\endcsname
       \expandafter\outer\expandafter\def\csname N\endcsname{%
         \con
+        \advance\pageno by -1\relax
         \expandafter\let\csname N\expandafter\endcsname
                         \csname ORGN\endcsname
         \csname N\endcsname
