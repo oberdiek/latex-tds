@@ -72,21 +72,16 @@
   \pdfdest num\seclistnum fitbh\relax
   \pdfoutline goto num\seclistnum{Names of the sections}\relax
   \def\entry##1##2{%
-    %% \edef\x{\detokenize{##2}}%
-    %% \edef\y{\jobname}%
-    %% \ifx\x\y
-    %% \else
-      \pdfoutline
-        attr{/C[0 0 1]}
-        user{%
-          <<%
-            /S/GoToR%
-            /F(../##1/##2.pdf)%
-            /D[0/FitBH 576]% 8in
-          >>%
-        }%
-        {[##1/##2]}\relax
-    %% \fi
+    \pdfoutline
+      attr{/C[0 0 1]}
+      user{%
+        <<%
+          /S/GoToR%
+          /F(../##1/##2.pdf)%
+          /D[0/FitBH 576]% 8in
+        >>%
+      }%
+      {[##1/##2]}\relax
   }%
   \entry{texware}{pooltype}%
   \entry{texware}{tftopl}%
@@ -98,8 +93,31 @@
   \entry{mfware}{mft}%
   \entry{etc}{vftovp}%
   \entry{etc}{vptovf}%
+  \entry{web}{weave}%
+  \entry{web}{tangle}%
 }
 \def\con{%
+  \begingroup
+    \def\lowercase##1{##1}%
+    \def\,{}%
+    \def\TeX{TeX}%
+    \def\eightlogo{}%
+    \xdef\infotitle{\title}%
+    \def\firstofone##1{##1}%
+    \xdef\infotitle{\expandafter\firstofone\infotitle}%
+    \def\filter##1$##2\END{%
+      ##1%
+      \ifx\eject##2\eject
+      \else
+        \filter##2\END
+      \fi
+    }%
+    \xdef\infotitle{\expandafter\filter\infotitle$\END}%
+  \endgroup
+  \pdfinfo{%
+    /Title(\infotitle)%
+    /Author(Donald E. Knuth)%
+  }%
   \par\vfill\eject % finish the section names
   \rightskip 0pt %
   \hyphenpenalty 50 %
@@ -136,11 +154,14 @@
 
 % Adding PDF page labels
 \def\makepagelabels{%
-  \pdfcatalog{%
-    /PageLabels<<%
-      /Nums[0<</S/D/St \contentspagenumber>>]%
-    >>%
-  }%
+  \ifnum\contentspagenumber=1 %
+  \else
+    \pdfcatalog{%
+      /PageLabels<<%
+        /Nums[0<</S/D/St \contentspagenumber>>]%
+      >>%
+    }%
+  \fi
 }
 
 % Move contents page to the front
@@ -174,6 +195,25 @@
                     \csname ORGN\endcsname
     \csname N\endcsname
   }%
+  \begingroup
+    \edef\x{\jobname}%
+    \edef\y{\detokenize{tex}}%
+  \expandafter\endgroup\ifx\x\y
+    \def\contentspagenumber{2}%
+    \let\ORGpageno\pageno
+    \def\pageno{%
+      \let\pageno\ORGpageno
+      \expandafter\let\csname ORGN\expandafter\endcsname
+                      \csname N\endcsname
+      \expandafter\outer\expandafter\def\csname N\endcsname{%
+        \con
+        \expandafter\let\csname N\expandafter\endcsname
+                        \csname ORGN\endcsname
+        \csname N\endcsname
+      }%
+      \pageno
+    }%
+  \fi
 \fi
 
 % Patch \input to disable `\input webmac'
