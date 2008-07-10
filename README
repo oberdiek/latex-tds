@@ -430,3 +430,4 @@ I. HISTORY
   * Update of babel (2008/07/06).
 2008/07/10
   * Module knuthware added.
+  * Update of babel (2008/07/07).
