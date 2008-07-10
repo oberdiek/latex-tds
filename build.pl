@@ -306,10 +306,6 @@ section('Patches');
         chdir $cwd;
     }
     
-    if ($modules{'knuthware'}) {
-        run("$prg_chmod -x $dir_build/knuthware/gftopk.web");
-    }
-    
 #    if ($modules{'babel'}) {
 #        map { patch("babel/$_"); } qw[
 #        ];
