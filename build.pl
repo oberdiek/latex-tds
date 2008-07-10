@@ -1135,7 +1135,6 @@ if ($modules{'knuth'}) {
         }
     }
 
-if (0) {
     generate_web_doc('texware', qw[
         dvitype
         pltotf
@@ -1157,7 +1156,6 @@ if (0) {
         weave
         webman
     ]);
-}
     generate_web_doc('tex', qw[
         tex
     ]);
