@@ -58,7 +58,7 @@
   \leavevmode
   \ifnum#1>0 % test for valid section numbers that start with 1
     \pdfstartlink attr{/Border[0 0 0]} goto num #1\relax
-    \hbox{\LinkColor #1\Black}%
+    \LinkColor #1\Black
     \pdfendlink
   \else
     #1%
