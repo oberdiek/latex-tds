@@ -64,11 +64,40 @@
   \pdfsetrgbcolor{1 0 0}%
 }
 
+\newif\ifusename
+\usenamefalse
+\begingroup
+  \edef\x{\jobname}%
+  \edef\y{\detokenize{tex}}%
+  \ifx\x\y
+    \global\usenametrue
+  \fi
+\endgroup
+\def\numname#1{%
+  \ifusename
+    name{\number#1}%
+  \else
+    num #1 %
+  \fi
+}
+
 % Redefinition of pdfwebmac macros
+\def\startsection{%
+  \Q
+  {%
+    \let\*=\empty
+    \pdfdest \numname{\modstar}xyz%
+  }%
+  \noindent
+  {%
+    \let\*=\lapstar
+    \bf\modstar.\quad
+  }%
+}
 \def\n#1{%
   \leavevmode
   \ifnum#1>0 % test for valid section numbers that start with 1
-    \pdfstartlink attr{/Border[0 0 0]} goto num #1\relax
+    \pdfstartlink attr{/Border[0 0 0]} goto \numname{#1}\relax
     \LinkColor #1\Black
     \pdfendlink
   \else
@@ -80,8 +109,8 @@
 \def\fin{%
   \ORGfin
   \seclistnum=\numexpr\modno+1\relax
-  \pdfdest num\seclistnum fitbh\relax
-  \pdfoutline goto num\seclistnum{Names of the sections}\relax
+  \pdfdest \numname{\seclistnum}fitbh\relax
+  \pdfoutline goto \numname{\seclistnum}{Names of the sections}\relax
   \iftrue
     \def\entry##1##2{%
       \pdfoutline
@@ -151,7 +180,7 @@
   \line{\hfil Section\hbox to3em{\hss Page}}%
   \def\Z##1##2##3{%
     \line{%
-      \pdfstartlink attr{/Border [0 0 0]} goto num ##2\relax
+      \pdfstartlink attr{/Border [0 0 0]} goto \numname{##2}\relax
       \LinkColor
       \ignorespaces##1 %
       \leaders\hbox to .5em{.\hfil}\hfil\ ##2
@@ -197,7 +226,7 @@
 \def\makeoutlines{%
   \def\?##1]{}%
   \def\Z##1##2##3{%
-    \pdfoutline goto num ##2{##2. ##1}\relax
+    \pdfoutline goto \numname{##2}{##2. ##1}\relax
   }%
   \readcontents
 }%

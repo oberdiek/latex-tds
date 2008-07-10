@@ -223,6 +223,7 @@ if (@list_modules > 0) {
     download_ctan('web',      'systems/knuth/dist');
     download_ctan('tex',      'systems/knuth/dist');
     download_ctan('mf',       'systems/knuth/dist');
+    download_ctan('errata',   'systems/knuth/dist');
     download_ams('amslatex',     '');
     download_ams('amsrefs-tds',  'amslatex/amsrefs');
     download_ams('amsrefs-ctan', 'amslatex/amsrefs');
@@ -300,6 +301,7 @@ section('Unpacking');
     unpack_knuth('web');
     unpack_knuth('tex');
     unpack_knuth('mf');
+    unpack_knuth('errata');
 }
 
 ### Patches
@@ -458,6 +460,22 @@ section('Install source');
         trap.mf
         trap.pl
         trap.typ
+        trapman.tex
+    ]);
+    install_generic_source('knuth', 'knuth/errata', qw[
+        errata.one
+        errata.two
+        errata.three
+        errata.four
+        errata.five
+        errata.six
+        errata.seven
+        errata.eight
+        errata.nine
+        errata.ten
+        errata.eleven
+        errorlog.tex
+        logmac.tex
     ]);
 }
 
@@ -507,6 +525,7 @@ section('Paches after source install');
             webman.tex
             tripman.tex
             trapman.tex
+            logmac.tex
         ]) {
             run("$prg_patch $dir_build/knuth/$file <$dir_patch/$file.diff");
         }
@@ -696,6 +715,11 @@ section('Install tex doc');
         ]);
         install('texmf/doc/knuth/mf', qw[
             mfbook.tex
+        ]);
+        install('texmf/doc/knuth/errata', qw[
+            cm85.bug
+            mf84.bug
+            tex82.bug
         ]);
         chdir $cwd;
     }
@@ -1230,6 +1254,10 @@ if ($modules{'knuth'}) {
 
     run("$prg_pdftex trapman");
     install_gen_pdf('knuth', 'mf', 'trapman');
+
+    symlink "$cwd/$dir_tex/errorlog.drv", 'errorlog.drv';
+    run("$prg_pdftex errorlog.drv");
+    install_gen_pdf('knuth', 'errata', 'errorlog');
 
     chdir $cwd;
 }
