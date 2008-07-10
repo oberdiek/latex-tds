@@ -1196,7 +1196,6 @@ if ($modules{'knuth'}) {
         }
     }
 
-if (0) {
     generate_web_doc('texware', qw[
         dvitype
         pltotf
@@ -1228,7 +1227,6 @@ if (0) {
 
     run("$prg_pdftex tripman");
     install_gen_pdf('knuth', 'tex', 'tripman');
-}
 
     run("$prg_pdftex trapman");
     install_gen_pdf('knuth', 'mf', 'trapman');

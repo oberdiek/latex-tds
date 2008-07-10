@@ -84,11 +84,14 @@
       {[##1/##2]}\relax
   }%
   \entry{tex}{tex}%
+  \entry{tex}{tripman}%
+  \entry{tex}{glue}%
   \entry{texware}{pooltype}%
   \entry{texware}{tftopl}%
   \entry{texware}{pltotf}%
   \entry{texware}{dvitype}%
   \entry{mf}{mf}%
+  \entry{mf}{trapman}%
   \entry{mfware}{gftype}%
   \entry{mfware}{gftopk}%
   \entry{mfware}{gftodvi}%
@@ -97,6 +100,7 @@
   \entry{etc}{vptovf}%
   \entry{web}{weave}%
   \entry{web}{tangle}%
+  \entry{web}{webman}%
 }
 \def\con{%
   \begingroup
@@ -127,7 +131,7 @@
   \setpage
   \output{\normaloutput\page\lheader\rheader}%
   \titletrue % prepare to output the table of contents
-  \pageno=\contentspagenumber
+  \global\pageno=\contentspagenumber
   \def\rhead{TABLE OF CONTENTS}%
   \message{Table of contents:}%
   \topofcontents
@@ -158,11 +162,19 @@
 \def\makepagelabels{%
   \ifnum\contentspagenumber=1 %
   \else
-    \pdfcatalog{%
-      /PageLabels<<%
-        /Nums[0<</S/D/St \contentspagenumber>>]%
-      >>%
-    }%
+    \ifnum\contentspagenumber=0 %
+      \pdfcatalog{%
+        /PageLabels<<%
+          /Nums[0<</P(0)>>1<</S/D/St 1>>]%
+        >>%
+      }%
+    \else
+      \pdfcatalog{%
+        /PageLabels<<%
+          /Nums[0<</S/D/St \contentspagenumber>>]%
+        >>%
+      }%
+    \fi
   \fi
 }
 
@@ -205,9 +217,9 @@
       \def\num{1}%
     \else
       \edef\y{\detokenize{mf}}%
-        \ifx\x\y
-          \def\num{1}%
-        \fi
+      \ifx\x\y
+        \def\num{1}%
+      \fi
     \fi
   \expandafter\endgroup\ifnum\num=1 %
     \def\contentspagenumber{2}%

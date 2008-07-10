@@ -75,8 +75,8 @@ Module list
             CTAN:systems/knuth/dist/mfware.zip
             CTAN:systems/knuth/dist/texware.zip
             CTAN:systems/knuth/dist/web.zip
-            CTAN:systems/knuth/dist/tex/tex.web
-            CTAN:systems/knuth/dist/mf/mf.web
+            CTAN:systems/knuth/dist/tex.zip
+            CTAN:systems/knuth/dist/mf.zip
 
 Author
 ------
@@ -239,6 +239,9 @@ Documentation driver
 Patches
 -------
   patch/classes.dtx.diff    patch for base/classes.dtx
+  patch/tripman.tex.diff    patch for knuth/tex/tripman.tex
+  patch/trapman.tex.diff    patch for knuth/mf/trapman.tex
+  patch/webman.tex.diff     patch for knuth/web/webman.tex
 
 
 F. DESIGN PRINCIPLES
@@ -326,6 +329,18 @@ Babel
   of user.pdf. Thus I have dropped the latter one to avoid redundancy.
   Also the name `babel.pdf' is much more useful (texdoc).
 * ...
+
+Knuth
+-----
+* Current used CTAN -> TDS mapping:
+  CTAN:systems/knuth/dist --> TDS:<toplevel>/knuth
+* Unsure where to put trip/trap files. Currently they are
+  put in TDS:source, because the documentation files
+  (tripman.pdf, trapman.pdf) are in TDS:doc. They lists the
+  trip/trap files already.
+* Currently not covered:
+  CTAN:systems/knuth/dist/errata
+  CTAN:systems/knuth/dist/lib
 
 
 H. BUILD HINTS
