@@ -130,6 +130,7 @@
          % \con is maybe called in a group, therefore
          % the output is forced here.
   \makepagelabels
+  \global\advance\pageno by 1 %
   \end
 }
 
