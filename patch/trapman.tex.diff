@@ -1,8 +1,8 @@
 *** trapman.tex.org	1993-09-21 23:41:30.000000000 +0200
---- trapman.tex	2008-07-10 17:45:47.000000000 +0200
+--- trapman.tex	2008-07-10 22:45:58.000000000 +0200
 ***************
 *** 24,29 ****
---- 24,40 ----
+--- 24,44 ----
   % if you're unlucky it will appear on a page by itself!
   {\obeyspaces\global\let =\ }
   
@@ -16,6 +16,10 @@
 +   >>%
 +   /PageMode/UseOutlines
 + }
++ \pdfpagewidth=7.5in\relax % 8.5in - 2*.5in
++ \pdfhorigin=.5in\relax
++ \pdfpageheight=10in\relax % 11in - 2*.5in
++ \pdfvorigin=.5in\relax
 + 
   \output{\shipout\box255\global\advance\pageno by 1} % for the title page only
   \null
@@ -30,7 +34,7 @@
   
   \section Introduction.
   People often think that their programs are ``debugged'' when large applications
---- 73,117 ----
+--- 77,121 ----
       \box255}
     \global\advance\pageno by 1}
   \let\runninghead=\mark
@@ -112,7 +116,7 @@
   appears on the user's terminal during the run that produces \.{TRAP.LOG},
   \.{TRAP.72270GF}, and \.{TRAP.TFM}.
   
---- 223,256 ----
+--- 227,260 ----
   The remainder of this report consists of appendices, whose contents ought
   to be described briefly here:
   
@@ -156,7 +160,7 @@
   \runninghead{APPENDIX E: \.{TRAP.TYP} (CONTINUED)}
   
   {\let\tt=\eighttt\leftskip 1in\baselineskip 9pt plus .1pt minus .1pt
---- 417,423 ----
+--- 421,427 ----
   \section Appendix E: The \.{TRAP.TYP} file.
   Here is another major component of the test. It shows the output of \.{GFtype}
   applied to the file \.{TRAP.72270GF} that is created at the same time
@@ -173,7 +177,7 @@
   \runninghead{APPENDIX F: \.{TRAP.PL} (CONTINUED)}
   
   {\let\tt=\eighttt\leftskip 1in\baselineskip 9pt plus .1pt minus .1pt
---- 429,435 ----
+--- 433,439 ----
   \section Appendix F: The \.{TRAP.PL} file.
   In this case we have the output of \.{TFtoPL}
   applied to the file \.{TRAP.TFM} that is created at the same time
@@ -190,7 +194,7 @@
   \runninghead{APPENDIX G: \.{TRAP.FOT} (CONTINUED)}
   
   \vskip8pt
---- 439,445 ----
+--- 443,449 ----
   \vfill\eject
   
   \section Appendix G: The \.{TRAP.FOT} file.
