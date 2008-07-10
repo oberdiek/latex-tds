@@ -90,7 +90,7 @@
           <<%
             /S/GoToR%
             /F(../##1/##2.pdf)%
-            /D[0/FitBH \the\numexpr 612+\voffsetbp\relax]% 8in/8.5in
+            /D[0/FitBH \the\numexpr 720+\voffsetbp\relax]% 10in/9.5in
           >>%
         }%
         {[##1/##2]}\relax
