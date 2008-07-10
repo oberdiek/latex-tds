@@ -1,4 +1,4 @@
-% knuthware.drv
+% knuth.drv
 % 2008/07/10 v1.0 Driver file for knuth/{texware,mfware,etc}/*.web
 % Copyright 2008 Heiko Oberdiek.
 %
@@ -27,7 +27,7 @@
 \else
   \input infwarerr.sty\relax
   \catcode`\@=11 %
-  \@PackageError{knuthware.drv}{You need pdfTeX in PDF mode}\@ehd
+  \@PackageError{knuth.drv}{You need pdfTeX in PDF mode}\@ehd
   \expandafter\end
 \fi
 \input pdfwebmac.tex\relax % Han The Thanh's enriched version of webmac.tex
@@ -83,10 +83,12 @@
       }%
       {[##1/##2]}\relax
   }%
+  \entry{tex}{tex}%
   \entry{texware}{pooltype}%
   \entry{texware}{tftopl}%
   \entry{texware}{pltotf}%
   \entry{texware}{dvitype}%
+  \entry{mf}{mf}%
   \entry{mfware}{gftype}%
   \entry{mfware}{gftopk}%
   \entry{mfware}{gftodvi}%

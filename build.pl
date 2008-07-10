@@ -49,7 +49,7 @@ my @pkg_list = (
     $prj,
     'source',
     'tds',
-    'knuthware'
+    'knuth'
 );
 
 my $zip_comment = <<'END_ZIP_COMMENT';
@@ -161,7 +161,7 @@ info("Build modules: @list_modules");
 ### Format generation
 if (@list_modules > 0) {
     section('Format generation');
-    
+
     ensure_directory($dir_build);
     chdir $dir_build;
     run("$prg_pdflatex -ini -etex ../tex/latex-tds.ini");
@@ -172,13 +172,18 @@ if (@list_modules > 0) {
 {
     section('Download');
 
-    sub download_ctan ($$) {
+    sub download_ctan_file ($$) {
         my $file      = shift;
         my $ctan_path = shift;
         $ctan_path .= '/' if $ctan_path ne '';
         ensure_directory($dir_incoming_ctan);
-        download("$dir_incoming_ctan/$file.zip",
-                 "$url_ctan/$ctan_path$file.zip");
+        download("$dir_incoming_ctan/$file",
+                 "$url_ctan/$ctan_path$file");
+    }
+    sub download_ctan ($$) {
+        my $file      = shift;
+        my $ctan_path = shift;
+        download_ctan_file("$file.zip", $ctan_path);
     }
     sub download_ams ($$) {
         my $file     = shift;
@@ -215,6 +220,9 @@ if (@list_modules > 0) {
     download_ctan('texware',  'systems/knuth/dist');
     download_ctan('mfware',   'systems/knuth/dist');
     download_ctan('etc',      'systems/knuth/dist');
+    download_ctan('web',      'systems/knuth/dist');
+    download_ctan('tex',      'systems/knuth/dist');
+    download_ctan('mf',       'systems/knuth/dist');
     download_ams('amslatex',     '');
     download_ams('amsrefs-tds',  'amslatex/amsrefs');
     download_ams('amsrefs-ctan', 'amslatex/amsrefs');
@@ -234,7 +242,7 @@ section('Remove previous build');
 section('Unpacking');
 {
     my $texmf_ams = "$dir_build/amslatex/texmf";
-    
+
     sub unpacking ($$$) {
         my $pkg     = shift;
         my $zipfile = shift;
@@ -261,14 +269,14 @@ section('Unpacking');
         my $dir = "$dir_build/psnfss";
         $modules{'psnfss'} or return 1;
         unpacking('psnfss',
-                  "$dir/$name.zip",
+                "$dir/$name.zip",
                   "$dir/texmf");
     }
-    sub unpack_knuthware ($) {
-        my $pkg = 'knuthware';
+    sub unpack_knuth ($) {
+        my $pkg = 'knuth';
         my $dir = "$dir_build/$pkg";
         my $zipfile = "$dir_incoming_ctan/$_[0].zip";
-        $modules{'knuthware'} or return 1;
+        $modules{'knuth'} or return 1;
         run("$prg_unzip -j $zipfile -d$dir");
     }
 
@@ -286,9 +294,12 @@ section('Unpacking');
     unpack_psnfss('lw35nfss');
     unpack_psnfss('freenfss');
     unpack_ctan('tds');
-    unpack_knuthware('texware');
-    unpack_knuthware('mfware');
-    unpack_knuthware('etc');
+    unpack_knuth('texware');
+    unpack_knuth('mfware');
+    unpack_knuth('etc');
+    unpack_knuth('web');
+    unpack_knuth('tex');
+    unpack_knuth('mf');
 }
 
 ### Patches
@@ -305,7 +316,7 @@ section('Patches');
         run("$prg_checksum psfonts.dtx");
         chdir $cwd;
     }
-    
+
 #    if ($modules{'babel'}) {
 #        map { patch("babel/$_"); } qw[
 #        ];
@@ -386,21 +397,32 @@ section('Install source');
         tds.sed
         tds.tex
     ]);
-    install_generic_source('knuthware', 'knuth/texware', qw[
+    install_generic_source('knuth', 'knuth/texware', qw[
         dvitype.web
         pltotf.web
         pooltype.web
         tftopl.web
     ]);
-    install_generic_source('knuthware', 'knuth/mfware', qw[
+    install_generic_source('knuth', 'knuth/mfware', qw[
         gftodvi.web
         gftype.web
         gftopk.web
         mft.web
     ]);
-    install_generic_source('knuthware', 'knuth/etc', qw[
+    install_generic_source('knuth', 'knuth/etc', qw[
         vptovf.web
         vftovp.web
+    ]);
+    install_generic_source('knuth', 'knuth/web', qw[
+        tangle.web
+        weave.web
+        webman.tex
+    ]);
+    install_generic_source('knuth', 'knuth/tex', qw[
+        tex.web
+    ]);
+    install_generic_source('knuth', 'knuth/mf', qw[
+        mf.web
     ]);
 }
 
@@ -409,7 +431,7 @@ section('Paches after source install');
 {
     if ($modules{'base'}) {
         chdir "$dir_build/base";
-    
+
         # ltdirchk.dtx must be patched to fool it in
         # not having texsys.cfg
         {
@@ -425,7 +447,7 @@ section('Paches after source install');
             close(OUT);
             close(IN);
         }
-    
+
         # base: TDS:makeindex/base -> TDS:makeindex/latex
         {
             my $file_ins = 'docstrip.ins';
@@ -440,7 +462,7 @@ section('Paches after source install');
             close(OUT);
             close(IN);
         }
-        
+
         chdir $cwd;
     }
 }
@@ -1092,27 +1114,28 @@ END_TEXT
     chdir $cwd;
 }
 
-### Generate documentation for knuthware
-if ($modules{'knuthware'}) {
-    section('Documentation: knuthware');
-    
-    chdir "$dir_build/knuthware";
-    
-    my $knuthware_drv = "$cwd/$dir_tex/knuthware.drv";
-    
+### Generate documentation for knuth
+if ($modules{'knuth'}) {
+    section('Documentation: knuth');
+
+    chdir "$dir_build/knuth";
+
+    my $knuth_drv = "$cwd/$dir_tex/knuth.drv";
+
     sub generate_web_doc ($@) {
         my $dir = shift;
         my @list = @_;
-        
+
         foreach my $entry (@list) {
-            symlink $knuthware_drv, "$entry.drv";
-            run("$prg_weave $entry.web");
+            symlink $knuth_drv, "$entry.drv";
+            run("$prg_weave $entry.web") unless $entry eq 'webman';
             run("$prg_pdftex -draftmode $entry.drv");
             run("$prg_pdftex $entry.drv");
             install_gen_pdf('knuth', $dir, $entry);
         }
     }
 
+if (0) {
     generate_web_doc('texware', qw[
         dvitype
         pltotf
@@ -1129,7 +1152,19 @@ if ($modules{'knuthware'}) {
         vptovf
         vftovp
     ]);
-    
+    generate_web_doc('web', qw[
+        tangle
+        weave
+        webman
+    ]);
+}
+    generate_web_doc('tex', qw[
+        tex
+    ]);
+    generate_web_doc('mf', qw[
+        mf
+    ]);
+
     chdir $cwd;
 }
 
