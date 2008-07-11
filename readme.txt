@@ -343,8 +343,39 @@ Knuth
   put in TDS:source, because the documentation files
   (tripman.pdf, trapman.pdf) are in TDS:doc. They lists the
   trip/trap files already.
-* Currently not covered:
-  CTAN:systems/knuth/dist/lib
+* Not covered is
+  CTAN:systems/knuth/dist/lib/
+  In TL 2007/2008 the files are installed at different
+  locations:
+    texmf-dist/fonts/source/public/mflogo/logo10.mf
+    texmf-dist/fonts/source/public/mflogo/logo8.mf
+    texmf-dist/fonts/source/public/mflogo/logo9.mf
+    texmf-dist/fonts/source/public/mflogo/logobf10.mf
+    texmf-dist/fonts/source/public/mflogo/logo.mf
+    texmf-dist/fonts/source/public/mflogo/logosl10.mf
+    texmf-dist/fonts/source/public/misc/grayf.mf
+    texmf-dist/fonts/source/public/misc/manfnt.mf
+    texmf-dist/fonts/source/public/misc/slant.mf
+    texmf-dist/metafont/base/expr.mf
+    texmf-dist/metafont/base/io.mf
+    texmf-dist/metafont/base/null.mf
+    texmf-dist/metafont/base/plain.mf
+    texmf-dist/metafont/misc/3test.mf
+    texmf-dist/metafont/misc/6test.mf
+    texmf-dist/metafont/misc/rtest.mf
+    texmf-dist/metafont/misc/test.mf
+    texmf-dist/metafont/misc/waits.mf
+    texmf-dist/metafont/misc/ztest.mf
+    texmf-dist/mft/base/cmbase.mft
+    texmf-dist/mft/base/plain.mft
+    texmf-dist/tex/generic/misc/null.tex
+    texmf-dist/tex/plain/base/manmac.tex
+    texmf-dist/tex/plain/base/mftmac.tex
+    texmf-dist/tex/plain/base/plain.tex
+    texmf-dist/tex/plain/base/story.tex
+    texmf-dist/tex/plain/base/testfont.tex
+    texmf-dist/tex/plain/base/webmac.tex
+    texmf/tex/generic/hyphen/hyphen.tex
 
 
 H. BUILD HINTS
