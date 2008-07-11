@@ -1,4 +1,4 @@
-readme.txt for project latex-tds, 2008/07/10
+readme.txt for project latex-tds, 2008/07/11
 
 TABLE OF CONTENTS
 =================
@@ -71,7 +71,8 @@ Module list
 * psnfss    CTAN:macros/latex/required/psnfss.zip
 * babel     CTAN:macros/latex/required/babel.zip
 * tds       CTAN:tds.zip
-* knuth     CTAN:systems/knuth/dist/etc.zip
+* knuth     CTAN:systems/knuth/dist/errata.zip
+            CTAN:systems/knuth/dist/etc.zip
             CTAN:systems/knuth/dist/mfware.zip
             CTAN:systems/knuth/dist/texware.zip
             CTAN:systems/knuth/dist/web.zip
@@ -227,6 +228,9 @@ Documentation driver
                             amslatex and babel bundle
   tex/babel.tex             doc driver with patches for babel.drv
   tex/doc_lppl.tex          doc driver for base/lppl.tex
+  tex/errata.drv            doc driver for knuth/errata/errata_*.pdf
+  tex/errata.all            doc driver for knuth/errata/errata.pdf
+  tex/errorlog.drv          doc driver for knuth/errata/errorlog.tex
   tex/greek-usage.tex       doc driver with patches for babel/usage.tex
   tex/knuth.drv             doc driver for knuth/{texware,mfware,etc}/*.web
   tex/ltnews.tex            master file that merges all base/ltnews*.tex
@@ -239,6 +243,7 @@ Documentation driver
 Patches
 -------
   patch/classes.dtx.diff    patch for base/classes.dtx
+  patch/logmac.tex.diff     patch for knuth/errata/logmac.tex
   patch/tripman.tex.diff    patch for knuth/tex/tripman.tex
   patch/trapman.tex.diff    patch for knuth/mf/trapman.tex
   patch/webman.tex.diff     patch for knuth/web/webman.tex
@@ -339,7 +344,6 @@ Knuth
   (tripman.pdf, trapman.pdf) are in TDS:doc. They lists the
   trip/trap files already.
 * Currently not covered:
-  CTAN:systems/knuth/dist/errata
   CTAN:systems/knuth/dist/lib
 
 
@@ -449,3 +453,5 @@ I. HISTORY
 2008/07/10
   * Module knuth added.
   * Update of babel (2008/07/07).
+2008/07/11
+  * Fixes and additions for module knuth.

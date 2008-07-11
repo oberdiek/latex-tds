@@ -318,7 +318,7 @@ section('Patches');
         run("$prg_checksum psfonts.dtx");
         chdir $cwd;
     }
-    
+
     if ($modules{'knuth'}) {
         chdir "$dir_build/knuth";
         my @files = qw[
@@ -474,6 +474,7 @@ section('Install source');
         errata.nine
         errata.ten
         errata.eleven
+        errata.tex
         errorlog.tex
         logmac.tex
     ]);
@@ -518,9 +519,9 @@ section('Paches after source install');
 
         chdir $cwd;
     }
-    
+
     if ($modules{'knuth'}) {
-        
+
         foreach my $file (qw[
             webman.tex
             tripman.tex
@@ -529,7 +530,7 @@ section('Paches after source install');
         ]) {
             run("$prg_patch $dir_build/knuth/$file <$dir_patch/$file.diff");
         }
-        
+
     }
 }
 
@@ -707,7 +708,7 @@ section('Install tex doc');
         ]);
         chdir $cwd;
     }
-    
+
     if ($modules{'knuth'}) {
         chdir "$dir_build/knuth";
         install('texmf/doc/knuth/tex', qw[
@@ -1258,6 +1259,62 @@ if ($modules{'knuth'}) {
     symlink "$cwd/$dir_tex/errorlog.drv", 'errorlog.drv';
     run("$prg_pdftex errorlog.drv");
     install_gen_pdf('knuth', 'errata', 'errorlog');
+
+    # last bug date is used for errata.tex's today
+    {
+        open(IN, '<', 'errata.tex') or die "$error Cannot open `errata.tex'!\n";
+        my @lines = <IN>;
+        close(IN);
+
+        my ($day, $month, $year) = (0, 0, 0);
+        sub xdays {
+            my $y = shift;
+            my $m = shift;
+            $m -= 1;
+            my $d = shift;
+            return $y*12*31 + $m*31 +$d;
+        }
+        foreach $_ (@lines) {
+            next unless /^\\bugonpage/;
+            next unless m|\((\d\d)/(\d\d)/(\d\d)\)\s*$|;
+            my ($d, $m, $y) = ($2, $1, $3);
+            $y += 1900;
+            $y += 100 if $y < 1970;
+            if (xdays($y, $m, $d) > xdays($year, $month, $day)) {
+                $year = $y;
+                $month = $m;
+                $day = $d;
+            }
+        }
+
+        open(OUT, '>', 'errata.new') or die "$error Cannot open `errata.new'!\n";
+        print OUT "\\year=$year\n";
+        print OUT "\\month=$month\n";
+        print OUT "\\day=$day\n";
+        print OUT "\\input errata.tex\n";
+        print OUT "\\endinput\n";
+        close(OUT);
+    }
+    foreach my $entry (qw[
+        one
+        two
+        three
+        four
+        five
+        six
+        seven
+        eight
+        nine
+        ten
+        eleven
+        new
+    ]) {
+        symlink "$cwd/$dir_tex/errata.drv", "errata_$entry.tex";
+        run("$prg_pdftex errata_$entry.tex");
+    }
+    symlink "$cwd/$dir_tex/errata.all", 'errata.all';
+    run("$prg_pdftex errata.all");
+    install_gen_pdf('knuth', 'errata', 'errata');
 
     chdir $cwd;
 }

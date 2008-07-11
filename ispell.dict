@@ -1,8 +1,8 @@
 ac
 albanian
 amscls
-amslatex
 AmSLaTeX
+amslatex
 amsrefs
 armenian
 athnum
@@ -28,6 +28,7 @@ drv
 dtx
 DVI
 enc
+errorlog
 esbst
 fc
 fd
@@ -57,6 +58,7 @@ latexbug
 latin
 ldf
 lgpl
+logmac
 longtable
 lppl
 lt
@@ -73,10 +75,10 @@ nopostprocess
 oberdiek
 org
 pdf
-pdfbox
 PDFBox
-pdftex
+pdfbox
 pdfTeX
+pdftex
 Perl
 pl
 PS
