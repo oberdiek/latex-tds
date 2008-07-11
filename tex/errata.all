@@ -86,6 +86,7 @@
   \newread\r
   \openin\r=errata.new\relax
   \read\r to \test
+  \closein\r
   \test
   \xdef\latest{\the\year}%
 \endgroup
