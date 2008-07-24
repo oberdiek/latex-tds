@@ -486,3 +486,7 @@ I. HISTORY
   * Update of babel (2008/07/07).
 2008/07/11
   * Fixes and additions for module knuth.
+2008/07/24
+  * amslatex: instr-l.tex vanished from CTAN (but not at AMS side).
+  * Some unwanted spaces in generated PDF files fixed.
+    (Caused by a wrong package file that was found on my system first.)
