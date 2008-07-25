@@ -238,7 +238,7 @@ section('Remove previous build');
         my $distribfile = "$dir_distrib/$pkg.zip";
         unlink $distribfile if -f $distribfile;
     }
-    if ($::opt_all) {
+    if ($opt_all) {
         unlink $file_ctan_distrib if -f $file_ctan_distrib;
     }
 }
@@ -1391,7 +1391,7 @@ section('Distrib');
         }
     }
 
-    if ($::opt_all) {
+    if ($opt_all) {
         chdir $dir_distrib;
         my $cmd = "$prg_zip -0 $file_ctan_distrib readme.txt";
         for my $pkg (sort @pkg_list) {
@@ -1415,7 +1415,7 @@ section('Result');
             print "!!! Warning: Missing distribution for `$pkg'!\n";
         }
     }
-    if ($::opt_all) {
+    if ($opt_all) {
         system("$prg_ls -l $file_ctan_distrib");
     }
 
