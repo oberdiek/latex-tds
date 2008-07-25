@@ -1,4 +1,4 @@
-readme.txt for project latex-tds, 2008/07/24
+readme.txt for project latex-tds, 2008/07/25
 
 TABLE OF CONTENTS
 =================
@@ -486,7 +486,7 @@ I. HISTORY
   * Update of babel (2008/07/07).
 2008/07/11
   * Fixes and additions for module knuth.
-2008/07/24
+2008/07/25
   * amslatex: instr-l.tex vanished from CTAN (but not at AMS side).
   * Some unwanted spaces in generated PDF files fixed.
     (Caused by a wrong package file that was found on my system first.)
