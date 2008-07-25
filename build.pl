@@ -78,6 +78,7 @@ my $jar_multivalent = "$cwd/$dir_lib/Multivalent20060102.jar";
 my $file_zip_comment = "$cwd/$dir_build/zip-comment.txt";
 my $file_tmp = "$cwd/$dir_build/tmp.pdf";
 my $file_tmp_o = "$cwd/$dir_build/tmp-o.pdf";
+my $file_ctan_distrib = "$cwd/$prj.zip";
 
 my $file_ziptimetree = get_perl_script('ziptimetree');
 my $file_adjust_checksum = get_perl_script('adjust_checksum');
@@ -139,6 +140,7 @@ map { $usage .= "  --(no)$_\n"; } @pkg_list;
 my $opt_download    = 0;
 my $opt_postprocess = 1;
 my $opt_all         = 0;
+my $opt_distrib     = 0;
 my %modules;
 my @list_modules;
 
@@ -151,7 +153,8 @@ GetOptions(
             map { $modules{$_} = 1; } @pkg_list;
         },
     'download!'    => \$opt_download,
-    'postprocess!' => \$opt_postprocess
+    'postprocess!' => \$opt_postprocess,
+    'distrib!'
 ) or die $usage;
 @ARGV == 0 or die $usage;
 @list_modules = grep { $modules{$_}; } @pkg_list;
@@ -1386,6 +1389,17 @@ section('Distrib');
             print "!!! Warning: Missing TDS tree for `$pkg'!\n";
         }
     }
+
+    if ($::opt_all) {
+        chdir $dir_distrib;
+        unlink $file_ctan_distrib if $file_ctan_distrib;
+        my $cmd = "$prg_zip -0 $file_ctan_distrib readme.txt";
+        for my $pkg (sort @pkg_list) {
+            $cmd .= " $pkg.tds.zip";
+        }
+        run($cmd);
+        chdir $cwd;
+    }
 }
 
 ### Display result
@@ -1400,6 +1414,9 @@ section('Result');
         else {
             print "!!! Warning: Missing distribution for `$pkg'!\n";
         }
+    }
+    if ($::opt_all) {
+        system("$prg_ls -l $file_ctan_distrib");
     }
 
     # display time
