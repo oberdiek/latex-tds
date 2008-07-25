@@ -345,7 +345,7 @@ Knuth
   trip/trap files already.
 * Not covered is
   CTAN:systems/knuth/dist/lib/
-  In TL 2007/2008 the files are installed at different
+  In TeX Live 2007/2008 the files are installed at different
   locations:
     texmf-dist/fonts/source/public/mflogo/logo10.mf
     texmf-dist/fonts/source/public/mflogo/logo8.mf
