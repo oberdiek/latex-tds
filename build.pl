@@ -140,7 +140,6 @@ map { $usage .= "  --(no)$_\n"; } @pkg_list;
 my $opt_download    = 0;
 my $opt_postprocess = 1;
 my $opt_all         = 0;
-my $opt_distrib     = 0;
 my %modules;
 my @list_modules;
 
@@ -153,8 +152,7 @@ GetOptions(
             map { $modules{$_} = 1; } @pkg_list;
         },
     'download!'    => \$opt_download,
-    'postprocess!' => \$opt_postprocess,
-    'distrib!'
+    'postprocess!' => \$opt_postprocess
 ) or die $usage;
 @ARGV == 0 or die $usage;
 @list_modules = grep { $modules{$_}; } @pkg_list;
@@ -239,6 +237,9 @@ section('Remove previous build');
         run("$prg_rm -rf $dir_build/$pkg");
         my $distribfile = "$dir_distrib/$pkg.zip";
         unlink $distribfile if -f $distribfile;
+    }
+    if ($::opt_all) {
+        unlink $file_ctan_distrib if -f $file_ctan_distrib;
     }
 }
 
@@ -1392,7 +1393,6 @@ section('Distrib');
 
     if ($::opt_all) {
         chdir $dir_distrib;
-        unlink $file_ctan_distrib if $file_ctan_distrib;
         my $cmd = "$prg_zip -0 $file_ctan_distrib readme.txt";
         for my $pkg (sort @pkg_list) {
             $cmd .= " $pkg.tds.zip";
