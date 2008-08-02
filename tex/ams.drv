@@ -1,6 +1,6 @@
 % ams.drv
-% 2007/10/17 v1.1 Driver file for amslatex documentation files
-% Copyright 2006, 2007 Heiko Oberdiek.
+% 2008/08/02 v1.2 Driver file for amslatex documentation files
+% Copyright 2006-2008 Heiko Oberdiek.
 %
 % This file is part of project `latex-tds'.
 %
@@ -20,7 +20,8 @@
 % project `latex-tds' and additional information.
 %
 % 2006/06/02 v1.0
-% 2007/10/17 v1.1: Fix for subeqn, amsmath before hyperref
+% 2007/10/17 v1.1: Fix for subeqn, amsmath before hyperref.
+% 2008/08/02 v1.2: Destination of bookmark "Index" fixed for amsldoc.
 %
 \NeedsTeXFormat{LaTeX2e}
 \makeatletter
