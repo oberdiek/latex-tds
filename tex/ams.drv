@@ -139,6 +139,8 @@
      \let\endtheindex\relax
      \end{theindex}%
      \let\theindex\PATCH@ORG@theindex
+     \clearpage
+     \phantomsection
      \InputIfFileExists{\jobname.ind}{}{}%
      \end{document}%
   }%
