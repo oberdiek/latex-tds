@@ -295,11 +295,11 @@ section('Unpacking');
                   "$dir_incoming_ams/amsrefs-ctan.zip",
                   "$dir_build/amslatex");
         unpack_ams('amslatex');
+        -f "$dir_build/amslatex/classes/instr-l.tex" or
+                run("$prg_unzip -j $dir_incoming_ams/amslatex.zip"
+                    . " source/latex/amscls/instr-l.tex"
+                    . " -d $dir_build/amslatex/classes/");
     }
-    -f "$dir_build/amslatex/classes/instr-l.tex" or
-            run("$prg_unzip -j $dir_incoming_ams/amslatex.zip"
-                . " source/latex/amscls/instr-l.tex"
-                . " -d $dir_build/amslatex/classes/");
     unpack_psnfss('lw35nfss');
     unpack_psnfss('freenfss');
     unpack_ctan('tds');
