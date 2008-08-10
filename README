@@ -507,3 +507,4 @@ I. HISTORY
   * Module latex3 added.
   * Module base: CTAN hyperlinks fixed.
   * Module amslatex: Outdated url fixed in amsldoc.tex.
+  * Module babel: Problem with already defined \meta in tb1604.tex fixed.
