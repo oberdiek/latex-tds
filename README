@@ -220,6 +220,7 @@ Configuration
   tex/ltxdoc.cfg            setup for class ltxdoc
   tex/ltxguide.cfg          setup for the guide manuals in latex/base
                             and required/psnfss
+  tex/ltugboat.cls          setup for class ltugboat
   tex/manual.cfg            setup for errata list of the LaTeX manual
                             in latex/base
   tex/tdsguide.cfg          setup for class tdsguide.cls
