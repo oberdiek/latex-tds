@@ -499,8 +499,9 @@ I. HISTORY
 2008/07/11
   * Fixes and additions for module knuth.
 2008/07/25
-  * amslatex: instr-l.tex vanished from CTAN (but not at AMS side).
+  * Module amslatex: instr-l.tex vanished from CTAN (but not at AMS side).
   * Some unwanted spaces in generated PDF files fixed.
     (Caused by a wrong package file that was found on my system first.)
 2008/08/10
   * Module latex3 added.
+  * Module amslatex: Outdated url fixed in amsldoc.tex.

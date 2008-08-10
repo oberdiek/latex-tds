@@ -362,6 +362,10 @@ section('Patches');
         run("$prg_chmod -x @files");
         chdir $cwd;
     }
+    
+    if ($modules{'amslatex'}) {
+        patch("amslatex/math/amsldoc.tex");
+    }
 
 #    if ($modules{'babel'}) {
 #        map { patch("babel/$_"); } qw[
