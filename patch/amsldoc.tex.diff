@@ -13,7 +13,7 @@
   
   \section{Of possible interest}\label{a:possible-interest}
   Information about obtaining AMSFonts or other \tex/-related
-! software from the AMS Internet archive \fn{www.ams.org}
+! software from the AMS Internet archive \href{http://www.ams.org/}{\fn{www.ams.org}}
   can be obtained by sending a request through electronic mail to:
   \mail{webmaster@ams.org}.
   
