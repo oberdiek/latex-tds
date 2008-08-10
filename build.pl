@@ -49,7 +49,8 @@ my @pkg_list = (
     $prj,
     'source',
     'tds',
-    'knuth'
+    'knuth',
+    'latex3'
 );
 
 my $zip_comment = <<'END_ZIP_COMMENT';
@@ -209,25 +210,27 @@ if (@list_modules > 0) {
         -f $file or die "$error Download failed ($url)!\n";
     }
 
-    download_ctan('base',     'macros/latex');
-    download_ctan('tools',    'macros/latex/required');
-    download_ctan('graphics', 'macros/latex/required');
-    download_ctan('cyrillic', 'macros/latex/required');
-    download_ctan('babel',    'macros/latex/required');
-    download_ctan('amslatex', 'macros/latex/required');
-    download_ctan('amsrefs',  'macros/latex/contrib');
-    download_ctan('psnfss',   'macros/latex/required');
-    download_ctan('tds',      '');
-    download_ctan('texware',  'systems/knuth/dist');
-    download_ctan('mfware',   'systems/knuth/dist');
-    download_ctan('etc',      'systems/knuth/dist');
-    download_ctan('web',      'systems/knuth/dist');
-    download_ctan('tex',      'systems/knuth/dist');
-    download_ctan('mf',       'systems/knuth/dist');
-    download_ctan('errata',   'systems/knuth/dist');
-    download_ams('amslatex',     '');
-    download_ams('amsrefs-tds',  'amslatex/amsrefs');
-    download_ams('amsrefs-ctan', 'amslatex/amsrefs');
+    download_ctan('base',          'macros/latex');
+    download_ctan('tools',         'macros/latex/required');
+    download_ctan('graphics',      'macros/latex/required');
+    download_ctan('cyrillic',      'macros/latex/required');
+    download_ctan('babel',         'macros/latex/required');
+    download_ctan('amslatex',      'macros/latex/required');
+    download_ctan('amsrefs',       'macros/latex/contrib');
+    download_ctan('psnfss',        'macros/latex/required');
+    download_ctan('tds',           '');
+    download_ctan('texware',       'systems/knuth/dist');
+    download_ctan('mfware',        'systems/knuth/dist');
+    download_ctan('etc',           'systems/knuth/dist');
+    download_ctan('web',           'systems/knuth/dist');
+    download_ctan('tex',           'systems/knuth/dist');
+    download_ctan('mf',            'systems/knuth/dist');
+    download_ctan('errata',        'systems/knuth/dist');
+    download_ctan('expl3.tds',     'install/macros/latex/contrib');
+    download_ctan('xpackages.tds', 'install/macros/latex/contrib');
+    download_ams('amslatex',       '');
+    download_ams('amsrefs-tds',    'amslatex/amsrefs');
+    download_ams('amsrefs-ctan',   'amslatex/amsrefs');
 }
 
 ### Remove previous build
@@ -281,8 +284,19 @@ section('Unpacking');
         my $pkg = 'knuth';
         my $dir = "$dir_build/$pkg";
         my $zipfile = "$dir_incoming_ctan/$_[0].zip";
-        $modules{'knuth'} or return 1;
+        $modules{$pkg} or return 1;
         run("$prg_unzip -j $zipfile -d$dir");
+    }
+    sub unpack_latex3 ($) {
+        my $pkg = 'latex3';
+        my $file = shift;
+        my $dir = "$dir_build/$pkg";
+        my $dir_tds = "$dir/texmf";
+        my $zipfile = "$dir_incoming_ctan/$file.tds.zip";
+        $modules{$pkg} or return 1;
+        ensure_directory($dir_tds);
+        run("$prg_unzip $zipfile -d$dir_tds");
+        run("$prg_unzip -j $zipfile source/* -d$dir");
     }
 
     ensure_directory($dir_build);
@@ -310,6 +324,8 @@ section('Unpacking');
     unpack_knuth('tex');
     unpack_knuth('mf');
     unpack_knuth('errata');
+    unpack_latex3('expl3');
+    unpack_latex3('xpackages');
 }
 
 ### Patches
@@ -783,7 +799,7 @@ if ($modules{'base'}) {
         run_makeindex("$base.idx", 'gind.ist');
         run_makeindex("$base.glo", 'gglo.ist', "$base.gls");
         run("$prg_pdflatextds -draftmode $dtx");
-        run("$prg_pdflatextds $dtx"); # hydestopt
+        run("$prg_pdflatextds $dtx"); # hypdestopt
         install_pdf('base', "$base");
         1;
     }
@@ -796,7 +812,7 @@ if ($modules{'base'}) {
                . "' $base.cfg");
         run("$prg_pdflatextds -draftmode $err");
         run("$prg_pdflatextds -draftmode $err");
-        run("$prg_pdflatextds $err"); # hydestopt
+        run("$prg_pdflatextds $err"); # hypdestopt
         install_pdf('base', "$base");
         1;
     }
@@ -808,7 +824,7 @@ if ($modules{'base'}) {
     run_makeindex('source2e.idx', 'gind.ist');
     run_makeindex('source2e.glo', 'gglo.ist', 'source2e.gls');
     run("$prg_pdflatextds -draftmode source2e");
-    run("$prg_pdflatextds source2e"); # hydestopt
+    run("$prg_pdflatextds source2e"); # hypdestopt
     install_pdf('base', 'source2e');
     map { complex_dtx $_ } qw[
         classes
@@ -851,7 +867,7 @@ if ($modules{'base'}) {
            . "' manual.err");
     run("$prg_pdflatextds -draftmode manual.err");
     run("$prg_pdflatextds -draftmode manual.err");
-    run("$prg_pdflatextds manual.err"); # hydestopt
+    run("$prg_pdflatextds manual.err"); # hypdestopt
     install_pdf('base', 'manual');
     base_guide('cfg');
     base_guide('cls');
@@ -862,7 +878,7 @@ if ($modules{'base'}) {
     base_guide('usr');
     run("$prg_pdflatextds -draftmode doc_lppl");
     run("$prg_pdflatextds -draftmode doc_lppl");
-    run("$prg_pdflatextds doc_lppl"); # hydestopt
+    run("$prg_pdflatextds doc_lppl"); # hypdestopt
     run("$prg_mv doc_lppl.pdf lppl.pdf");
     install_pdf('base', 'lppl');
     run("$prg_pdflatextds -draftmode ltxcheck.drv");
@@ -879,7 +895,7 @@ END_CODE
     $code =~ s/\s//g;
     run("$prg_pdflatextds -draftmode '$code'");
     run("$prg_pdflatextds -draftmode '$code'");
-    run("$prg_pdflatex '$code'"); # hydestopt
+    run("$prg_pdflatextds '$code'"); # hypdestopt
     install_pdf('base', 'ltx3info');
 #    for (my $i = 1; $i <= 17; $i++) {
 #        my $ltnews = 'ltnews';
@@ -917,7 +933,7 @@ if ($modules{'tools'}) {
         run_makeindex("$entry.idx", 'gind.ist');
         run_makeindex("$entry.glo", 'gglo.ist', "$entry.gls");
         run("$prg_pdflatextds -draftmode $entry.dtx");
-        run("$prg_pdflatextds $entry.dtx"); # hydestopt
+        run("$prg_pdflatextds $entry.dtx"); # hypdestopt
         install_pdf('tools', $entry);
     }
 
@@ -991,7 +1007,7 @@ if ($modules{'cyrillic'}) {
     foreach my $entry (@list) {
         run("$prg_pdflatextds -draftmode $entry");
         run("$prg_pdflatextds -draftmode $entry");
-        run("$prg_pdflatextds $entry"); # hydestopt
+        run("$prg_pdflatextds $entry"); # hypdestopt
         $entry =~ s/\.(dtx|fdd)$//;
         install_pdf('cyrillic', $entry);
     }
@@ -1008,7 +1024,7 @@ if ($modules{'graphics'}) {
     foreach my $entry (@list) {
         run("$prg_pdflatextds -draftmode $entry.dtx");
         run("$prg_pdflatextds -draftmode $entry.dtx");
-        run("$prg_pdflatextds $entry.dtx"); # hydestopt
+        run("$prg_pdflatextds $entry.dtx"); # hypdestopt
         install_pdf('graphics', $entry);
     }
     my $code = <<'END_CODE';
@@ -1323,6 +1339,52 @@ if ($modules{'knuth'}) {
     symlink "$cwd/$dir_tex/errata.all", 'errata.all';
     run("$prg_pdftex errata.all");
     install_gen_pdf('knuth', 'errata', 'errata');
+
+    chdir $cwd;
+}
+
+### Generate documentation for latex3
+if ($modules{'latex3'}) {
+    section('Documentation: latex3');
+
+    chdir "$dir_build/latex3";
+
+    # tex/<name>.drv for <name>.tex
+    # install as TDS:doc/latex/<pkg>/<name>.pdf
+    sub simple3_doc ($$$) {
+        my $pkg = shift;
+        my $name = shift;
+        my $ext = shift;
+        $ext = ".$ext" if $ext;
+        my $file = "$name$ext";
+        run("$prg_pdflatextds -draftmode $file");
+        run("$prg_pdflatextds -draftmode $file");
+        run("$prg_pdflatextds $file");
+        install_pdf($pkg, $name);
+    }
+    sub source3_doc($$) {
+        my $pkg = shift;
+        my $name = shift;
+        my $drv = "$cwd/$dir_tex/$name.drv";
+        run("$prg_pdflatextds -draftmode $name.drv");
+        run_makeindex("$name.idx", "$name.ist");
+        run_makeindex("$name.glo", 'gglo.ist', "$name.gls");
+        run("$prg_pdflatextds -draftmode $name.drv");
+        run_makeindex("$name.idx", "$name.ist");
+        run_makeindex("$name.glo", 'gglo.ist', "$name.gls");
+        run("$prg_pdflatextds -draftmode $name.drv");
+        run("$prg_pdflatextds $name.drv"); # hypdestopt
+        install_pdf($pkg, $name);
+    }
+
+    simple3_doc('expl3', 'expl3',    'drv');
+    simple3_doc('expl3', 'l32eproc', 'drv');
+    source3_doc('expl3', 'source3');
+
+    simple3_doc('xpackages', 'ldcsetup', 'dtx');
+    simple3_doc('xpackages', 'template', 'dtx');
+    simple3_doc('xpackages', 'xparse',   'dtx');
+    simple3_doc('xpackages', 'xtheorem', 'dtx');
 
     chdir $cwd;
 }

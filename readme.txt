@@ -1,4 +1,4 @@
-readme.txt for project latex-tds, 2008/07/25
+readme.txt for project latex-tds, 2008/08/10
 
 TABLE OF CONTENTS
 =================
@@ -78,6 +78,8 @@ Module list
             CTAN:systems/knuth/dist/web.zip
             CTAN:systems/knuth/dist/tex.zip
             CTAN:systems/knuth/dist/mf.zip
+* latex3    CTAN:install/macros/latex/contrib/expl3.tds.zip
+            CTAN:install/macros/latex/contrib/xpackages.tds.zip
 
 Author
 ------
@@ -228,14 +230,17 @@ Documentation driver
                             amslatex and babel bundle
   tex/babel.tex             doc driver with patches for babel.drv
   tex/doc_lppl.tex          doc driver for base/lppl.tex
-  tex/errata.drv            doc driver for knuth/errata/errata_*.pdf
   tex/errata.all            doc driver for knuth/errata/errata.pdf
+  tex/errata.drv            doc driver for knuth/errata/errata_*.pdf
   tex/errorlog.drv          doc driver for knuth/errata/errorlog.tex
+  tex/expl3.drv             doc driver for latex3/expl3/expl3.tex
   tex/greek-usage.tex       doc driver with patches for babel/usage.tex
   tex/knuth.drv             doc driver for knuth/{texware,mfware,etc}/*.web
+  tex/l32eproc.drv          doc driver for latex3/expl3/l32eproc.tex
   tex/ltnews.tex            master file that merges all base/ltnews*.tex
   tex/ltxcheck.drv          doc driver with patches for ltxcheck.tex
   tex/psnfss2e.drv          doc driver with patches for psnfss2e.tex
+  tex/source3.drv           doc driver for latex3/expl/source3.tex
   tex/tools-overview.cls    class for tools.tex
   tex/tools.tex             master file for tools overview, generated
                             by the build.pl script from tools/manifest.txt
@@ -377,6 +382,13 @@ Knuth
     texmf-dist/tex/plain/base/webmac.tex
     texmf/tex/generic/hyphen/hyphen.tex
 
+LaTeX3
+------
+* This module tries to cover the stabler stuff that reached CTAN
+  from `LaTeX3 project'.
+* Sorting into the TDS tree is already done by the `LaTeX3 project'.
+* Documentation is regenerated to add bookmarks, ...
+
 
 H. BUILD HINTS
 ==============
@@ -490,3 +502,5 @@ I. HISTORY
   * amslatex: instr-l.tex vanished from CTAN (but not at AMS side).
   * Some unwanted spaces in generated PDF files fixed.
     (Caused by a wrong package file that was found on my system first.)
+2008/08/10
+  * Module latex3 added.
