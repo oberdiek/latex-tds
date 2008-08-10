@@ -546,6 +546,8 @@ section('Paches after source install');
         }
 
         chdir $cwd;
+        
+        patch('base/encguide.tex');
     }
 
     if ($modules{'knuth'}) {
@@ -556,7 +558,7 @@ section('Paches after source install');
             trapman.tex
             logmac.tex
         ]) {
-            run("$prg_patch $dir_build/knuth/$file <$dir_patch/$file.diff");
+            patch("knuth/$file");
         }
 
     }

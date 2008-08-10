@@ -248,6 +248,7 @@ Documentation driver
 Patches
 -------
   patch/classes.dtx.diff    patch for base/classes.dtx
+  patch/encguide.tex.diff   patch for base/encguide.tex
   patch/logmac.tex.diff     patch for knuth/errata/logmac.tex
   patch/tripman.tex.diff    patch for knuth/tex/tripman.tex
   patch/trapman.tex.diff    patch for knuth/mf/trapman.tex
@@ -504,4 +505,5 @@ I. HISTORY
     (Caused by a wrong package file that was found on my system first.)
 2008/08/10
   * Module latex3 added.
+  * Module base: CTAN hyperlinks fixed.
   * Module amslatex: Outdated url fixed in amsldoc.tex.
