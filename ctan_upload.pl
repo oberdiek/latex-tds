@@ -98,6 +98,9 @@ foreach (@args) {
     print "$_\n";
 }
 
+print "\n*** Press <return> to continue *** ";
+$_ = <STDIN>;
+
 sub run (@) {
     my @args = @_;
     my $ret = system @args;
@@ -116,7 +119,7 @@ sub run (@) {
         }
     }
 }
-# run @args;
+run @args;
 -f $file_response or die "!!! Error: Missing response!\n";
 
 run $prg_lynx, '-dump', $file_response;
