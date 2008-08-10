@@ -1,8 +1,9 @@
 ac
 albanian
 amscls
-AmSLaTeX
 amslatex
+AmSLaTeX
+amsldoc
 amsrefs
 armenian
 athnum
@@ -29,6 +30,7 @@ drv
 dtx
 DVI
 enc
+encguide
 eproc
 errorlog
 esbst
@@ -73,6 +75,7 @@ lppl
 lt
 ltdirchk
 ltnews
+ltugboat
 ltxcheck
 ltxdoc
 ltxguide
@@ -90,10 +93,10 @@ nopostprocess
 oberdiek
 org
 pdf
-PDFBox
 pdfbox
-pdfTeX
+PDFBox
 pdftex
+pdfTeX
 Perl
 pl
 PS
@@ -103,6 +106,7 @@ romanidx
 rtest
 sourceforge
 src
+tb
 tds
 tdsguide
 testfont
