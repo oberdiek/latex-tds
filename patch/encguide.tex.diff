@@ -13,7 +13,7 @@
   \newblock {\em {TUG}boat}, 11(4):514--516, 1990.
   
   \bibitem{fontinst} \emph{The \Pkg{fontinst} package}:
-!   \href{ftp://ftp.ctan.org/tex-archivefonts/utilities/fontinst}{%
+!   \href{ftp://ftp.ctan.org/tex-archive/fonts/utilities/fontinst}{%
 !     \textlangle CTAN\textrangle\nolinkurl{/fonts/utilities/fontinst}%
 !   }.
   
