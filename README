@@ -1,4 +1,4 @@
-readme.txt for project latex-tds, 2008/08/10
+readme.txt for project latex-tds, 2008/09/06
 
 TABLE OF CONTENTS
 =================
@@ -509,3 +509,5 @@ I. HISTORY
   * Module base: CTAN hyperlinks fixed.
   * Module amslatex: Outdated URL fixed in amsldoc.tex.
   * Module babel: Problem with already defined \meta in tb1604.tex fixed.
+2008/09/06
+  * Module base: tlc2.pdf fixed (wrong printing number in title).
