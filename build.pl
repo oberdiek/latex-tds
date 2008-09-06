@@ -336,6 +336,10 @@ section('Patches');
     if ($modules{'base'}) {
         patch("base/classes.dtx");
     }
+    
+    if ($modules{'tools'}) {
+        patch("tools/array.dtx");
+    }
 
     if ($modules{'psnfss'}) {
         chdir "$dir_build/psnfss";

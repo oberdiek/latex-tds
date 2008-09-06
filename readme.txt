@@ -248,6 +248,7 @@ Documentation driver
 
 Patches
 -------
+  patch/array.dtx.diff      patch for tools/array.dtx
   patch/classes.dtx.diff    patch for base/classes.dtx
   patch/encguide.tex.diff   patch for base/encguide.tex
   patch/logmac.tex.diff     patch for knuth/errata/logmac.tex
@@ -511,3 +512,4 @@ I. HISTORY
   * Module babel: Problem with already defined \meta in tb1604.tex fixed.
 2008/09/06
   * Module base: tlc2.pdf fixed (wrong printing number in title).
+  * Module tools/array.dtx: documentation fixed (tools/4044).
