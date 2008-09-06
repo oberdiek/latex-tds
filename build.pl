@@ -34,6 +34,7 @@ my $time_start = time;
 
 my $url_ctan = 'ftp://dante.ctan.org/tex-archive';
 my $url_ams = 'ftp://ftp.ams.org/pub/tex';
+my $url_ltxprj = 'http://www.latex-project.org/';
 
 my @required_list = (
     'amslatex',
@@ -65,6 +66,7 @@ my $error = "!!! Error:";
 my $dir_incoming = 'incoming';
 my $dir_incoming_ctan = "$dir_incoming/ctan";
 my $dir_incoming_ams = "$dir_incoming/ams";
+my $dir_incoming_ltxprj = "$dir_incoming/ltxprj";
 my $dir_build = 'build';
 my $dir_lib = 'lib';
 my $dir_license = 'license';
@@ -195,6 +197,12 @@ if (@list_modules > 0) {
         download("$dir_incoming_ams/$file.zip",
                  "$url_ams/$ams_path$file.zip");
     }
+    sub download_err ($) {
+        my $name = shift;
+        ensure_directory($dir_incoming_ltxprj);
+        download("$dir_incoming_ltxprj/$name.err",
+                 "$url_ltxprj/guides/$name.err");
+    }
     sub download ($$) {
         my $file = shift;
         my $url  = shift;
@@ -209,7 +217,7 @@ if (@list_modules > 0) {
         run($cmd);
         -f $file or die "$error Download failed ($url)!\n";
     }
-
+    
     download_ctan('base',          'macros/latex');
     download_ctan('tools',         'macros/latex/required');
     download_ctan('graphics',      'macros/latex/required');
@@ -231,6 +239,10 @@ if (@list_modules > 0) {
     download_ams('amslatex',       '');
     download_ams('amsrefs-tds',    'amslatex/amsrefs');
     download_ams('amsrefs-ctan',   'amslatex/amsrefs');
+    download_err('manual');
+    download_err('lb2');
+    download_err('lgc2');
+    download_err('tlc2');
 }
 
 ### Remove previous build
@@ -301,6 +313,17 @@ section('Unpacking');
 
     ensure_directory($dir_build);
     unpack_ctan('base');
+    # replace .err files
+    foreach my $name (qw[
+        lb2
+        lgc2
+        manual
+        tlc2
+    ]) {
+        my $file = "$dir_incoming_ltxprj/$name.err";
+        my $dest = "$dir_build/base/$name.err";
+        run("$prg_cp $file $dest");
+    }
     map { unpack_ctan($_); } @required_list;
     if ($modules{'amslatex'}) {
         unpack_ams('amsrefs-tds');
@@ -513,7 +536,7 @@ section('Install source');
 }
 
 ### Patch source files after source install
-section('Paches after source install');
+section('Patches after source install');
 {
     if ($modules{'base'}) {
         chdir "$dir_build/base";
@@ -867,6 +890,7 @@ if ($modules{'base'}) {
     map { book_err $_ } qw[
         tlc2
         lb2
+        lgc2
         grphcomp
         webcomp
         webcompg

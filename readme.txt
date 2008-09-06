@@ -61,6 +61,10 @@ In the following I will use the term `module' for a package bundle.
 Module list
 -----------
 * base      CTAN:macros/latex/base.zip
+            http://www.latex-project.org/guides/lb2.err
+            http://www.latex-project.org/guides/lgc2.err
+            http://www.latex-project.org/guides/manual.err
+            http://www.latex-project.org/guides/tlc2.err
 * tools     CTAN:macros/latex/required/tools.zip
 * cyrillic  CTAN:macros/latex/required/cyrillic.zip
 * amslatex  CTAN:macros/latex/required/amslatex.zip
@@ -511,5 +515,8 @@ I. HISTORY
   * Module amslatex: Outdated URL fixed in amsldoc.tex.
   * Module babel: Problem with already defined \meta in tb1604.tex fixed.
 2008/09/06
-  * Module base: tlc2.pdf fixed (wrong printing number in title).
+  * Module base:
+    * Using uptodate versions from LaTeX project page for errata lists.
+    * lgc2.err added (LaTeX Graphics Companiong, 2. ed.).
+    * Various fixes in errata lists.
   * Module tools/array.dtx: documentation fixed (tools/4044).
