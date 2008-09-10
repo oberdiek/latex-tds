@@ -575,6 +575,7 @@ section('Patches after source install');
         chdir $cwd;
         
         patch('base/encguide.tex');
+        patch('base/utf8ienc.dtx');
     }
 
     if ($modules{'knuth'}) {

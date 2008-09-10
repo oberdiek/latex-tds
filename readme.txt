@@ -1,4 +1,4 @@
-readme.txt for project latex-tds, 2008/09/06
+readme.txt for project latex-tds, 2008/09/10
 
 TABLE OF CONTENTS
 =================
@@ -258,6 +258,7 @@ Patches
   patch/logmac.tex.diff     patch for knuth/errata/logmac.tex
   patch/tripman.tex.diff    patch for knuth/tex/tripman.tex
   patch/trapman.tex.diff    patch for knuth/mf/trapman.tex
+  patch/utf8ienc.dtx.diff   patch for base/utf8ienc.dtx
   patch/webman.tex.diff     patch for knuth/web/webman.tex
 
 
@@ -520,3 +521,5 @@ I. HISTORY
     * lgc2.err added (LaTeX Graphics Companiong, 2. ed.).
     * Various fixes in errata lists.
   * Module tools/array.dtx: documentation fixed (tools/4044).
+2008/09/10
+  * Module base: Missing title date for utf8ienc.pdf fixed.
