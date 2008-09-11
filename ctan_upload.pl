@@ -49,8 +49,23 @@ my %args = (
     'file'          => "\@$file;type=$filetype;filename=$filename",
 );
 
+my $usage = <<"END_OF_USAGE";
+$0\n
+Syntax: $0 [options]
+Options:
+  --noannounce   "Announcement is not needed"
+  --help         help screen
+END_OF_USAGE
+
+use Getopt::Long;
+my $DoNotAnnounce = 'No';
+GetOptions(
+  'noannounce' => sub { $DoNotAnnounce = 'Yes' },
+  'help' => sub { print $usage; exit(0); },
+) or die $usage;
+
 if ($DoNotAnnounce) {
-    $args{'DoNotAnnounce'} = 'No';
+    $args{'DoNotAnnounce'} = $DoNotAnnounce;
 }
 
 my $date = '';
@@ -94,8 +109,19 @@ push @args, $ctan_upload_url;
 
 unshift @args, $prg_curl, '--output', $file_response;
 
-foreach (@args) {
-    print "$_\n";
+my $formflag = 0;
+foreach my $arg (@args) {
+    if ($formflag) {
+        $arg =~ /^(.*)=((.|\n)*)$/;
+        my $key = $1;
+        my $value = $2;
+        print '       ', chr(27), '[31m', $key, chr(27), '[0m',
+              '=', chr(27), '[34m', $value, chr(27), '[0m', "\n";
+    }
+    else {
+        print "$arg\n";
+    }
+    $formflag = ($arg =~ /--form/) ? 1 : 0;
 }
 
 print "\n*** Press <return> to continue *** ";
