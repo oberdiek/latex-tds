@@ -1429,7 +1429,7 @@ if ($modules{'latex3'}) {
     simple3_doc('xpackages', 'xparse',   'dtx');
     # simple3_doc('xpackages', 'xtheorem', 'dtx');
 
-    run("$prg_rm -rf texmf/{doc,source,tex}/latex/expl3");
+    run("$prg_rm -rf texmf/{doc,source,tex}/latex/expl3 texmf/makeindex");
 
     chdir $cwd;
 }
