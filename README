@@ -524,7 +524,7 @@ I. HISTORY
 2008/09/06
   * Module base:
     * Using uptodate versions from LaTeX project page for errata lists.
-    * lgc2.err added (LaTeX Graphics Companiong, 2. ed.).
+    * lgc2.err added (LaTeX Graphics Companion, 2. ed.).
     * Various fixes in errata lists.
   * Module tools/array.dtx: documentation fixed (tools/4044).
 2008/09/10
