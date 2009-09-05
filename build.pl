@@ -7,7 +7,7 @@ my $file    = 'build.pl';
 my $version = cvs('$Revision$');
 my $date    = cvs('$Date$');
 my $author  = 'Heiko Oberdiek';
-my $copyright = "Copyright 2006-2008 $author";
+my $copyright = "Copyright 2006-2009 $author";
 chomp(my $license = <<"END_LICENSE");
 % $copyright
 %
@@ -393,6 +393,10 @@ section('Patches');
     if ($modules{'amslatex'}) {
         patch("amslatex/math/amsldoc.tex");
     }
+    
+    if ($modules{'latex3'}) {
+        patch("latex3/xparse.dtx");
+    }
 
 #    if ($modules{'babel'}) {
 #        map { patch("babel/$_"); } qw[
@@ -589,6 +593,10 @@ section('Patches after source install');
             patch("knuth/$file");
         }
 
+    }
+    
+    if ($modules{'amslatex'}) {
+        patch("amslatex/classes/amsclass.dtx");
     }
 }
 
@@ -1412,14 +1420,14 @@ if ($modules{'latex3'}) {
         install_pdf($pkg, $name);
     }
 
-    simple3_doc('expl3', 'expl3',    'drv');
-    simple3_doc('expl3', 'l32eproc', 'drv');
-    source3_doc('expl3', 'source3');
+    # simple3_doc('expl3', 'expl3',    'drv');
+    # simple3_doc('expl3', 'l32eproc', 'drv');
+    # source3_doc('expl3', 'source3');
 
     simple3_doc('xpackages', 'ldcsetup', 'dtx');
     simple3_doc('xpackages', 'template', 'dtx');
     simple3_doc('xpackages', 'xparse',   'dtx');
-    simple3_doc('xpackages', 'xtheorem', 'dtx');
+    # simple3_doc('xpackages', 'xtheorem', 'dtx');
 
     chdir $cwd;
 }

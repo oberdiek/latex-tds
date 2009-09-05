@@ -1,4 +1,4 @@
-readme.txt for project latex-tds, 2008/09/10
+readme.txt for project latex-tds, 2009/09/05
 
 TABLE OF CONTENTS
 =================
@@ -164,12 +164,18 @@ Hints
 [graphics]
   * Module graphics doesn't provide all driver files, because some are
     developed independently (pdftex.def, ...).
+[latex3]
+  * The changes of latex-tds are merged into the official sources
+    of expl3. Also expl3 is provided as TDS package:
+    CTAN:install/macros/latex/contrib/expl3.tds.zip
+    There is nothing left for latex-tds to do. Therefore
+    expl3 is removed from module latex3.
 
 
 D. COPYRIGHT, LICENSE
 =====================
 
-Copyright 2006-2008 Heiko Oberdiek.
+Copyright 2006-2009 Heiko Oberdiek.
 
 License is LPPL 1.3c:
 
@@ -523,3 +529,7 @@ I. HISTORY
   * Module tools/array.dtx: documentation fixed (tools/4044).
 2008/09/10
   * Module base: Missing title date for utf8ienc.pdf fixed.
+2009/09/05
+  * Module amslatex: updated.
+  * Module latex3: xpackages updated.
+  * Module latex3: expl3 removed, because nothing to do.
