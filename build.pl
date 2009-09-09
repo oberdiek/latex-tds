@@ -394,10 +394,6 @@ section('Patches');
         patch("amslatex/math/amsldoc.tex");
     }
     
-    if ($modules{'latex3'}) {
-        patch("latex3/xparse.dtx");
-    }
-
 #    if ($modules{'babel'}) {
 #        map { patch("babel/$_"); } qw[
 #        ];
@@ -1405,6 +1401,20 @@ if ($modules{'latex3'}) {
         run("$prg_pdflatextds $file");
         install_pdf($pkg, $name);
     }
+    sub latex3_doc ($$$$) {
+        my $pkg = shift;
+        my $name = shift;
+        my $ext = shift;
+        my $style = shift;
+        $ext = ".$ext" if $ext;
+        my $file = "$name$ext";
+        run("$prg_pdflatextds -draftmode $file");
+        run("$prg_makeindex -s $style -o $name.ind $name.idx");
+        run("$prg_pdflatextds -draftmode $file");
+        run("$prg_makeindex -s $style -o $name.ind $name.idx");
+        run("$prg_pdflatextds $file");
+        install_pdf($pkg, $name);
+    }
     sub source3_doc($$) {
         my $pkg = shift;
         my $name = shift;
@@ -1423,10 +1433,24 @@ if ($modules{'latex3'}) {
     # simple3_doc('expl3', 'expl3',    'drv');
     # simple3_doc('expl3', 'l32eproc', 'drv');
     # source3_doc('expl3', 'source3');
+    
+    my $file_style_l3doc = 'texmf/makeindex/expl3/l3doc.ist';
+    open(IN, '<', $file_style_l3doc)
+            or die "$error Cannot open `$file_style_l3doc'!\n";
+    open(OUT, '>', 'xparse.ist')
+            or die "$error Cannot write `xparse.ist'!\n";
+    print OUT "level '#'\n";
+    while (<IN>) {
+        next if /^level/;
+        print OUT;
+    }
+    close(IN);
+    close(OUT);
 
-    simple3_doc('xpackages', 'ldcsetup', 'dtx');
-    simple3_doc('xpackages', 'template', 'dtx');
-    simple3_doc('xpackages', 'xparse',   'dtx');
+    simple3_doc('xpackages/xbase', 'ldcsetup', 'dtx');
+    simple3_doc('xpackages/xbase', 'template', 'dtx');
+    latex3_doc('xpackages/xbase',  'xparse',   'drv', 'xparse.ist');
+    latex3_doc('xpackages/xtras',  'l3keys2e', 'dtx', 'l3doc.ist');
     # simple3_doc('xpackages', 'xtheorem', 'dtx');
 
     run("$prg_rm -rf texmf/{doc,source,tex}/latex/expl3 texmf/makeindex");

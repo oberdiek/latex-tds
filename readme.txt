@@ -255,9 +255,12 @@ Documentation driver
   tex/tools-overview.cls    class for tools.tex
   tex/tools.tex             master file for tools overview, generated
                             by the build.pl script from tools/manifest.txt
+  tex/xparse.drv            doc driver for latex3/xpackages/xbase/xparse.dtx
 
 Patches
 -------
+  patch/amsclass.dtx.diff   patch for amslatex/amsclass.dtx
+  patch/amsldoc.tex.diff    patch for amslatex/amsldoc.tex
   patch/array.dtx.diff      patch for tools/array.dtx
   patch/classes.dtx.diff    patch for base/classes.dtx
   patch/encguide.tex.diff   patch for base/encguide.tex
