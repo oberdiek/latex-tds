@@ -132,7 +132,7 @@
         \def\y{|lmodern,url}%
         \ifx\x\y
         \else
-          \@latex@error{\string\usepackage[#1]{#2} found}%
+          \@latex@error{\string\usepackage[#1]{#2} found}\@ehc
         \fi
       \fi
     \endgroup
@@ -159,6 +159,14 @@
     \stepcounter{issue}%
     \input{ltnews\theissue}%
   \repeat
+  \stepcounter{issue}%
+  \makeatletter
+  \IfFileExists{ltnews\theissue}{%
+    \latex@error{\jobname.tex is out of date,\MessageBreak
+      there is `ltnews\theissue.tex'%
+    }\@ehc
+  }{}%
+  \makeatother
 \endgroup
 
 \end{document}
