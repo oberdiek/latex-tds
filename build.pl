@@ -218,7 +218,7 @@ if (@list_modules > 0) {
         run($cmd);
         -f $file or die "$error Download failed ($url)!\n";
     }
-    
+
     download_ctan('base',          'macros/latex');
     download_ctan('doc',           'macros/latex');
     download_ctan('tools',         'macros/latex/required');
@@ -364,7 +364,7 @@ section('Unpacking');
 section('Patches');
 {
     ; #
-    
+
     if ($modules{'psnfss'}) {
         chdir "$dir_build/psnfss";
         run("$prg_checksum psfonts.dtx");
@@ -390,11 +390,11 @@ section('Patches');
         run("$prg_chmod -x @files");
         chdir $cwd;
     }
-    
+
     if ($modules{'amslatex'}) {
         patch("amslatex/math/amsldoc.tex");
     }
-    
+
 #    if ($modules{'babel'}) {
 #        map { patch("babel/$_"); } qw[
 #        ];
@@ -574,7 +574,7 @@ section('Patches after source install');
         }
 
         chdir $cwd;
-        
+
         patch('base/encguide.tex');
         patch('base/utf8ienc.dtx');
     }
@@ -591,7 +591,7 @@ section('Patches after source install');
         }
 
     }
-    
+
     if ($modules{'amslatex'}) {
         patch("amslatex/classes/amsclass.dtx");
     }
@@ -1432,7 +1432,7 @@ if ($modules{'latex3'}) {
     # simple3_doc('expl3', 'expl3',    'drv');
     # simple3_doc('expl3', 'l32eproc', 'drv');
     # source3_doc('expl3', 'source3');
-    
+
     my $file_style_l3doc = 'texmf/makeindex/expl3/l3doc.ist';
     open(IN, '<', $file_style_l3doc)
             or die "$error Cannot open `$file_style_l3doc'!\n";
