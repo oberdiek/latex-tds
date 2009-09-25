@@ -1,8 +1,8 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesFile{ltnews.tex}%
-  [2006/06/02 v1.0 Master file for ltnews*.tex (HO)]
+  [2009/09/25 v1.1 Master file for ltnews*.tex (HO)]
 %
-% Copyright 2006 Heiko Oberdiek
+% Copyright 2006, 2009 Heiko Oberdiek
 %
 % This file is part of project `latex-tds'.
 %
@@ -21,7 +21,10 @@
 % See `readme.txt' for a list of all files belonging to the
 % project `latex-tds' and additional information.
 %
-\providecommand*{\lastissue}{17}
+% 2006/06/02 v1.0: First version.
+% 2009/09/25 v1.1: \usepackage disabled.
+%
+\providecommand*{\lastissue}{19}
 
 \RequirePackage{ifpdf}
 \ifpdf
@@ -45,6 +48,9 @@
   }%
 \fi
 
+\RequirePackage[T1]{fontenc}
+\RequirePackage{lmodern}
+
 \documentclass{ltnews}
 
 \RequirePackage{hyperref}
@@ -58,7 +64,17 @@
   \number\value{issue}%
 }
 
+\newcommand*{\MonthJanuary}{01}
+\newcommand*{\MonthFebruary}{02}
+\newcommand*{\MonthMarch}{03}
+\newcommand*{\MonthApril}{04}
+\newcommand*{\MonthMay}{05}
 \newcommand*{\MonthJune}{06}
+\newcommand*{\MonthJuly}{07}
+\newcommand*{\MonthAugust}{08}
+\newcommand*{\MonthSeptember}{09}
+\newcommand*{\MonthOctober}{10}
+\newcommand*{\MonthNovember}{11}
 \newcommand*{\MonthDecember}{12}
 \newcommand*{\printissue}{%
   Issue %
@@ -106,6 +122,22 @@
 %%% Issues
 
 \begingroup
+  \makeatletter
+  \renewcommand*{\usepackage}[2][]{%
+    \begingroup
+      \def\x{#1|#2}%
+      \def\y{T1|fontenc}%
+      \ifx\x\y
+      \else
+        \def\y{|lmodern,url}%
+        \ifx\x\y
+        \else
+          \@latex@error{\string\usepackage[#1]{#2} found}%
+        \fi
+      \fi
+    \endgroup
+  }%
+  \makeatother
   \renewcommand*{\documentclass}[2][]{%
     \setcounter{footnote}{0}%
     \gobbleopt

@@ -61,6 +61,7 @@ In the following I will use the term `module' for a package bundle.
 Module list
 -----------
 * base      CTAN:macros/latex/base.zip
+            CTAN:macros/latex/doc.zip
             http://www.latex-project.org/guides/lb2.err
             http://www.latex-project.org/guides/lgc2.err
             http://www.latex-project.org/guides/manual.err
@@ -260,8 +261,6 @@ Patches
 -------
   patch/amsclass.dtx.diff   patch for amslatex/amsclass.dtx
   patch/amsldoc.tex.diff    patch for amslatex/amsldoc.tex
-  patch/array.dtx.diff      patch for tools/array.dtx
-  patch/classes.dtx.diff    patch for base/classes.dtx
   patch/encguide.tex.diff   patch for base/encguide.tex
   patch/logmac.tex.diff     patch for knuth/errata/logmac.tex
   patch/tripman.tex.diff    patch for knuth/tex/tripman.tex
@@ -538,3 +537,4 @@ I. HISTORY
 2009/09/25
   * Module amslatex: updated.
   * Module babel: updated.
+  * Update of LaTeX, release 2009/09/24.

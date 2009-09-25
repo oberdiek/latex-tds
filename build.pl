@@ -220,6 +220,7 @@ if (@list_modules > 0) {
     }
     
     download_ctan('base',          'macros/latex');
+    download_ctan('doc',           'macros/latex');
     download_ctan('tools',         'macros/latex/required');
     download_ctan('graphics',      'macros/latex/required');
     download_ctan('cyrillic',      'macros/latex/required');
@@ -325,6 +326,13 @@ section('Unpacking');
         my $dest = "$dir_build/base/$name.err";
         run("$prg_cp $file $dest");
     }
+    if ($modules{'base'}) {
+        run("$prg_rm -rf $dir_build/base/doc");
+        unpacking('base',
+                  "$dir_incoming_ctan/doc.zip",
+                  "$dir_build/base");
+        run("$prg_cp -p $dir_build/base/doc/*.tex $dir_build/base/");
+    }
     map { unpack_ctan($_); } @required_list;
     if ($modules{'amslatex'}) {
         unpack_ams('amsrefs-tds');
@@ -356,13 +364,9 @@ section('Unpacking');
 section('Patches');
 {
     ; #
-
-    if ($modules{'base'}) {
-        patch("base/classes.dtx");
-    }
     
-    if ($modules{'tools'}) {
-        patch("tools/array.dtx");
+    if ($modules{'base'}) {
+        patch("base/exscale.dtx");
     }
 
     if ($modules{'psnfss'}) {
@@ -897,9 +901,7 @@ if ($modules{'base'}) {
         tlc2
         lb2
         lgc2
-        grphcomp
         webcomp
-        webcompg
     ];
     run("$prg_sed -i -e '"
            . 's/\\\\documentclass{article}/'
