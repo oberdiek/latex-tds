@@ -365,10 +365,6 @@ section('Patches');
 {
     ; #
     
-    if ($modules{'base'}) {
-        patch("base/exscale.dtx");
-    }
-
     if ($modules{'psnfss'}) {
         chdir "$dir_build/psnfss";
         run("$prg_checksum psfonts.dtx");
