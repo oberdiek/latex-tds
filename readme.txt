@@ -1,4 +1,4 @@
-readme.txt for project latex-tds, 2009/09/05
+readme.txt for project latex-tds, 2009/09/25
 
 TABLE OF CONTENTS
 =================
@@ -82,8 +82,7 @@ Module list
             CTAN:systems/knuth/dist/web.zip
             CTAN:systems/knuth/dist/tex.zip
             CTAN:systems/knuth/dist/mf.zip
-* latex3    CTAN:install/macros/latex/contrib/expl3.tds.zip
-            CTAN:install/macros/latex/contrib/xpackages.tds.zip
+* latex3    CTAN:install/macros/latex/contrib/xpackages.tds.zip
 
 Author
 ------
@@ -536,3 +535,6 @@ I. HISTORY
   * Module amslatex: updated.
   * Module latex3: xpackages updated.
   * Module latex3: expl3 removed, because nothing to do.
+2009/09/25
+  * Module amslatex: updated.
+  * Module babel: updated.

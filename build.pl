@@ -209,6 +209,7 @@ if (@list_modules > 0) {
         return 1 if -f $file and !$opt_download;
         info("download $url\n           --> $file");
         my $cmd = $prg_curl;
+        $cmd .= " -4";
         $cmd .= " --disable-epsv";                # for ftp.ams.org
         $cmd .= " --time-cond $file" if -f $file; # download only if newer
         $cmd .= " --remote-time";                 # set file date

@@ -73,6 +73,7 @@ open(IN, '<', $file_readme) or die "!!! Error: Cannot open `$file_readme'!\n";
 $_ = <IN>;
 if (/\s(\d{4}\/\d{2}\/\d{2})$/) {
     $date = $1;
+    $args{'version'} = $date;
 }
 else {
     die "!!! Error: Cannot find release date in `$file_readme'!\n";

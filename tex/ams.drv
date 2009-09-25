@@ -112,6 +112,28 @@
   }%
 }
 
+%%% Patch for instr-l.tex
+\begingroup
+  \edef\x{\jobname}%
+  \def\y{instr-l}%
+  \@onelevel@sanitize\y
+\expandafter\endgroup
+\ifx\x\y
+  \PassOptionsToPackage{%
+    pdfusetitle,%
+    pdftex,breaklinks=true,colorlinks,%
+    citecolor=ForestGreen,plainpages=false,%
+    pdfpagelabels,bookmarksopen,bookmarksnumbered,%
+  }{hyperref}%
+  \AtBeginDocument{%
+    \hypersetup{%
+      pdfauthor={American Mathematical Society},%
+      pdfkeywords={latex, AMS, amslatex, ams-latex, author instructions},%
+      pdftitle={Instructions for Preparation of Papers and Monographs}%
+    }%
+  }%
+\fi
+
 %%% Patch for cite-xh.tex
 \begingroup
   \edef\x{\jobname}%
