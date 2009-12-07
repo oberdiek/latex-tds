@@ -1,4 +1,4 @@
-readme.txt for project latex-tds, 2009/09/25
+readme.txt for project latex-tds, 2009/12/07
 
 TABLE OF CONTENTS
 =================
@@ -72,7 +72,8 @@ Module list
             CTAN:macros/latex/contrib/amsrefs.zip
             ftp://ftp.ams.org/pub/tex/amslatex.zip
             ftp://ftp.ams.org/pub/tex/amslatex/amsrefs-tds.zip
-            ftp://ftp.ams.org/pub/tex/amslatex/amsrefs-ctan.zip
+            ftp://ftp.ams.org/pub/tex/amscls.zip
+            ftp://ftp.ams.org/pub/tex/amsmath.zip
 * psnfss    CTAN:macros/latex/required/psnfss.zip
 * babel     CTAN:macros/latex/required/babel.zip
 * tds       CTAN:tds.zip
@@ -83,7 +84,6 @@ Module list
             CTAN:systems/knuth/dist/web.zip
             CTAN:systems/knuth/dist/tex.zip
             CTAN:systems/knuth/dist/mf.zip
-* latex3    CTAN:install/macros/latex/contrib/xpackages.tds.zip
 
 Author
 ------
@@ -170,6 +170,7 @@ Hints
     CTAN:install/macros/latex/contrib/expl3.tds.zip
     There is nothing left for latex-tds to do. Therefore
     expl3 is removed from module latex3.
+  * The same happend to xpackages, thus the whole module is removed.
 
 
 D. COPYRIGHT, LICENSE
@@ -244,18 +245,14 @@ Documentation driver
   tex/errata.all            doc driver for knuth/errata/errata.pdf
   tex/errata.drv            doc driver for knuth/errata/errata_*.pdf
   tex/errorlog.drv          doc driver for knuth/errata/errorlog.tex
-  tex/expl3.drv             doc driver for latex3/expl3/expl3.tex
   tex/greek-usage.tex       doc driver with patches for babel/usage.tex
   tex/knuth.drv             doc driver for knuth/{texware,mfware,etc}/*.web
-  tex/l32eproc.drv          doc driver for latex3/expl3/l32eproc.tex
   tex/ltnews.tex            master file that merges all base/ltnews*.tex
   tex/ltxcheck.drv          doc driver with patches for ltxcheck.tex
   tex/psnfss2e.drv          doc driver with patches for psnfss2e.tex
-  tex/source3.drv           doc driver for latex3/expl/source3.tex
   tex/tools-overview.cls    class for tools.tex
   tex/tools.tex             master file for tools overview, generated
                             by the build.pl script from tools/manifest.txt
-  tex/xparse.drv            doc driver for latex3/xpackages/xbase/xparse.dtx
 
 Patches
 -------
@@ -538,3 +535,9 @@ I. HISTORY
   * Module amslatex: updated.
   * Module babel: updated.
   * Update of LaTeX, release 2009/09/24.
+2009/12/07
+  * Module amslatex: Unhappily the .zip files are quite a mess,
+    because they contain a mixup of old and new versions.
+    Tried to sort this out and fix the last update.
+  * Module latex3: xpackages removed, because nothing to do.
+  * Module latex3 removed, nothing left to do.

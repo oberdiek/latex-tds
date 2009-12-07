@@ -50,8 +50,7 @@ my @pkg_list = (
     $prj,
     'source',
     'tds',
-    'knuth',
-    'latex3'
+    'knuth'
 );
 
 my $zip_comment = <<'END_ZIP_COMMENT';
@@ -96,6 +95,7 @@ my $prg_epstopdf    = 'epstopdf';
 my $prg_find        = 'find';
 my $prg_java        = '/work/java-1.5.0/bin/java';
    # java 1.6 don't work with the used version of Multivalent
+my $prg_kpsewhich   = 'kpsewhich';
 my $prg_ls          = "ls";
 my $prg_makeindex   = 'makeindex';
 my $prg_mkdir       = 'mkdir';
@@ -236,8 +236,9 @@ if (@list_modules > 0) {
     download_ctan('tex',           'systems/knuth/dist');
     download_ctan('mf',            'systems/knuth/dist');
     download_ctan('errata',        'systems/knuth/dist');
-    download_ctan('expl3.tds',     'install/macros/latex/contrib');
-    download_ctan('xpackages.tds', 'install/macros/latex/contrib');
+    download_ams('amscls',         '');
+    download_ams('amsmath',        '');
+    # download_ams('amsrefs',        '');
     download_ams('amslatex',       '');
     download_ams('amsrefs-tds',    'amslatex/amsrefs');
     download_ams('amsrefs-ctan',   'amslatex/amsrefs');
@@ -301,17 +302,6 @@ section('Unpacking');
         $modules{$pkg} or return 1;
         run("$prg_unzip -j $zipfile -d$dir");
     }
-    sub unpack_latex3 ($) {
-        my $pkg = 'latex3';
-        my $file = shift;
-        my $dir = "$dir_build/$pkg";
-        my $dir_tds = "$dir/texmf";
-        my $zipfile = "$dir_incoming_ctan/$file.tds.zip";
-        $modules{$pkg} or return 1;
-        ensure_directory($dir_tds);
-        run("$prg_unzip $zipfile -d$dir_tds");
-        run("$prg_unzip -j $zipfile source/* -d$dir");
-    }
 
     ensure_directory($dir_build);
     unpack_ctan('base');
@@ -345,6 +335,13 @@ section('Unpacking');
                 run("$prg_unzip -j $dir_incoming_ams/amslatex.zip"
                     . " source/latex/amscls/instr-l.tex"
                     . " -d $dir_build/amslatex/classes/");
+        run("$prg_rm -rf $texmf_ams/{doc,source,tex}/latex/amscls");
+        run("$prg_rm -rf $texmf_ams/bibtex/bst/ams");
+        unpack_ams('amscls');
+        run("$prg_cp $dir_build/amslatex/classes/amsmidx.{dtx,ins}"
+            . " $texmf_ams/source/latex/amscls/");
+        run("$prg_cp $dir_build/amslatex/classes/amsmidx.sty"
+            . " $texmf_ams/tex/latex/amscls/");
     }
     unpack_psnfss('lw35nfss');
     unpack_psnfss('freenfss');
@@ -356,8 +353,6 @@ section('Unpacking');
     unpack_knuth('tex');
     unpack_knuth('mf');
     unpack_knuth('errata');
-    unpack_latex3('expl3');
-    unpack_latex3('xpackages');
 }
 
 ### Patches
@@ -1377,82 +1372,6 @@ if ($modules{'knuth'}) {
     symlink "$cwd/$dir_tex/errata.all", 'errata.all';
     run("$prg_pdftex errata.all");
     install_gen_pdf('knuth', 'errata', 'errata');
-
-    chdir $cwd;
-}
-
-### Generate documentation for latex3
-if ($modules{'latex3'}) {
-    section('Documentation: latex3');
-
-    chdir "$dir_build/latex3";
-
-    # tex/<name>.drv for <name>.tex
-    # install as TDS:doc/latex/<pkg>/<name>.pdf
-    sub simple3_doc ($$$) {
-        my $pkg = shift;
-        my $name = shift;
-        my $ext = shift;
-        $ext = ".$ext" if $ext;
-        my $file = "$name$ext";
-        run("$prg_pdflatextds -draftmode $file");
-        run("$prg_pdflatextds -draftmode $file");
-        run("$prg_pdflatextds $file");
-        install_pdf($pkg, $name);
-    }
-    sub latex3_doc ($$$$) {
-        my $pkg = shift;
-        my $name = shift;
-        my $ext = shift;
-        my $style = shift;
-        $ext = ".$ext" if $ext;
-        my $file = "$name$ext";
-        run("$prg_pdflatextds -draftmode $file");
-        run("$prg_makeindex -s $style -o $name.ind $name.idx");
-        run("$prg_pdflatextds -draftmode $file");
-        run("$prg_makeindex -s $style -o $name.ind $name.idx");
-        run("$prg_pdflatextds $file");
-        install_pdf($pkg, $name);
-    }
-    sub source3_doc($$) {
-        my $pkg = shift;
-        my $name = shift;
-        my $drv = "$cwd/$dir_tex/$name.drv";
-        run("$prg_pdflatextds -draftmode $name.drv");
-        run_makeindex("$name.idx", "$name.ist");
-        run_makeindex("$name.glo", 'gglo.ist', "$name.gls");
-        run("$prg_pdflatextds -draftmode $name.drv");
-        run_makeindex("$name.idx", "$name.ist");
-        run_makeindex("$name.glo", 'gglo.ist', "$name.gls");
-        run("$prg_pdflatextds -draftmode $name.drv");
-        run("$prg_pdflatextds $name.drv"); # hypdestopt
-        install_pdf($pkg, $name);
-    }
-
-    # simple3_doc('expl3', 'expl3',    'drv');
-    # simple3_doc('expl3', 'l32eproc', 'drv');
-    # source3_doc('expl3', 'source3');
-
-    my $file_style_l3doc = 'texmf/makeindex/expl3/l3doc.ist';
-    open(IN, '<', $file_style_l3doc)
-            or die "$error Cannot open `$file_style_l3doc'!\n";
-    open(OUT, '>', 'xparse.ist')
-            or die "$error Cannot write `xparse.ist'!\n";
-    print OUT "level '#'\n";
-    while (<IN>) {
-        next if /^level/;
-        print OUT;
-    }
-    close(IN);
-    close(OUT);
-
-    simple3_doc('xpackages/xbase', 'ldcsetup', 'dtx');
-    simple3_doc('xpackages/xbase', 'template', 'dtx');
-    latex3_doc('xpackages/xbase',  'xparse',   'drv', 'xparse.ist');
-    latex3_doc('xpackages/xtras',  'l3keys2e', 'dtx', 'l3doc.ist');
-    # simple3_doc('xpackages', 'xtheorem', 'dtx');
-
-    run("$prg_rm -rf texmf/{doc,source,tex}/latex/expl3 texmf/makeindex");
 
     chdir $cwd;
 }
