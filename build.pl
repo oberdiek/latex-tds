@@ -7,7 +7,7 @@ my $file    = 'build.pl';
 my $version = cvs('$Revision$');
 my $date    = cvs('$Date$');
 my $author  = 'Heiko Oberdiek';
-my $copyright = "Copyright 2006-2009 $author";
+my $copyright = "Copyright 2006-2010 $author";
 chomp(my $license = <<"END_LICENSE");
 % $copyright
 %
@@ -305,18 +305,18 @@ section('Unpacking');
 
     ensure_directory($dir_build);
     unpack_ctan('base');
-    # replace .err files
-    foreach my $name (qw[
-        lb2
-        lgc2
-        manual
-        tlc2
-    ]) {
-        my $file = "$dir_incoming_ltxprj/$name.err";
-        my $dest = "$dir_build/base/$name.err";
-        run("$prg_cp $file $dest");
-    }
     if ($modules{'base'}) {
+        # replace .err files
+        foreach my $name (qw[
+            lb2
+            lgc2
+            manual
+            tlc2
+        ]) {
+            my $file = "$dir_incoming_ltxprj/$name.err";
+            my $dest = "$dir_build/base/$name.err";
+            run("$prg_cp $file $dest");
+        }
         run("$prg_rm -rf $dir_build/base/doc");
         unpacking('base',
                   "$dir_incoming_ctan/doc.zip",
