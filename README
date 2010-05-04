@@ -1,4 +1,4 @@
-readme.txt for project latex-tds, 2009/12/07
+readme.txt for project latex-tds, 2010/05/04
 
 TABLE OF CONTENTS
 =================
@@ -260,6 +260,7 @@ Patches
   patch/amsldoc.tex.diff    patch for amslatex/amsldoc.tex
   patch/encguide.tex.diff   patch for base/encguide.tex
   patch/logmac.tex.diff     patch for knuth/errata/logmac.tex
+  patch/source2e.tex.diff   patch for base/source2e.tex
   patch/tripman.tex.diff    patch for knuth/tex/tripman.tex
   patch/trapman.tex.diff    patch for knuth/mf/trapman.tex
   patch/utf8ienc.dtx.diff   patch for base/utf8ienc.dtx
@@ -541,3 +542,5 @@ I. HISTORY
     Tried to sort this out and fix the last update.
   * Module latex3: xpackages removed, because nothing to do.
   * Module latex3 removed, nothing left to do.
+2010/05/04
+  * Module base: page layout for source2e fixed (changes, index).

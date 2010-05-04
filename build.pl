@@ -571,6 +571,7 @@ section('Patches after source install');
         chdir $cwd;
 
         patch('base/encguide.tex');
+        patch('base/source2e.tex');
         patch('base/utf8ienc.dtx');
     }
 
