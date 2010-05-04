@@ -544,3 +544,4 @@ I. HISTORY
   * Module latex3 removed, nothing left to do.
 2010/05/04
   * Module base: page layout for source2e fixed (changes, index).
+  * Module base: update of .err files.
