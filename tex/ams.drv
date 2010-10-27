@@ -25,6 +25,7 @@
 % 2010/10/27 v1.3
 %   * Update/fix for instr-l.tex.
 %   * Adding missing macro definitions for amsrefs.dtx.
+%   * Fix for changes.tex.
 %
 \NeedsTeXFormat{LaTeX2e}
 \makeatletter
@@ -48,6 +49,15 @@
 {%
   \input{\jobname.tex}%
   \endinput
+}
+
+%%% Patch for amsrefs/changes.tex
+\AtBeginDocument{%
+  \@ifundefined{pdfstringdefDisableCommands}{}{%
+    \pdfstringdefDisableCommands{%
+      \def\cs#1{\textbackslash#1}%
+    }%
+  }%
 }
 
 %%% Patch \documentclass
