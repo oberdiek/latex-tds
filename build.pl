@@ -1402,7 +1402,7 @@ if ($modules{'etex'}) {
     run("$prg_pdflatextds -draftmode $entry.drv");
     run("$prg_pdflatextds -draftmode $entry.drv");
     run("$prg_pdflatextds $entry.drv");
-    install_gen_pdf('etex', 'etex/base', $entry);
+    install_gen_pdf('etex', 'base', $entry);
 
     chdir $cwd;
 }
