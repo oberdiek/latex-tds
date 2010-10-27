@@ -173,7 +173,7 @@ Hints
     CTAN:install/macros/latex/contrib/expl3.tds.zip
     There is nothing left for latex-tds to do. Therefore
     expl3 is removed from module latex3.
-  * The same happend to xpackages, thus the whole module is removed.
+  * The same happened to xpackages, thus the whole module is removed.
 
 
 D. COPYRIGHT, LICENSE
