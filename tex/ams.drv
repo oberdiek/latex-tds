@@ -1,6 +1,6 @@
 % ams.drv
-% 2008/08/02 v1.2 Driver file for amslatex documentation files
-% Copyright 2006-2008 Heiko Oberdiek.
+% 2010/10/27 v1.3 Driver file for amslatex documentation files
+% Copyright 2006-2010 Heiko Oberdiek.
 %
 % This file is part of project `latex-tds'.
 %
@@ -22,6 +22,7 @@
 % 2006/06/02 v1.0
 % 2007/10/17 v1.1: Fix for subeqn, amsmath before hyperref.
 % 2008/08/02 v1.2: Destination of bookmark "Index" fixed for amsldoc.
+% 2010/10/27 v1.3: Update/fix for instr-l.tex.
 %
 \NeedsTeXFormat{LaTeX2e}
 \makeatletter
@@ -119,6 +120,7 @@
   \@onelevel@sanitize\y
 \expandafter\endgroup
 \ifx\x\y
+  \PassOptionsToPackage{dvipsnames,usenames}{color}%
   \PassOptionsToPackage{%
     pdfusetitle,%
     pdftex,breaklinks=true,colorlinks,%
@@ -131,6 +133,13 @@
       pdfkeywords={latex, AMS, amslatex, ams-latex, author instructions},%
       pdftitle={Instructions for Preparation of Papers and Monographs}%
     }%
+    \let\ORG@title\title
+    \let\ORG@thepage\thepage
+    \def\title{%
+      \let\thepage\ORG@thepage
+      \ORG@title
+    }%
+    \renewcommand*{\thepage}{\roman{page}}%
   }%
 \fi
 
