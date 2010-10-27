@@ -1,4 +1,4 @@
-readme.txt for project latex-tds, 2010/05/04
+readme.txt for project latex-tds, 2010/10/27
 
 TABLE OF CONTENTS
 =================
@@ -68,7 +68,9 @@ Module list
             http://www.latex-project.org/guides/tlc2.err
 * tools     CTAN:macros/latex/required/tools.zip
 * cyrillic  CTAN:macros/latex/required/cyrillic.zip
-* amslatex  CTAN:macros/latex/required/amslatex.zip
+* amslatex  CTAN:install/macros/latex/required/amscls.tds.zip
+            CTAN:install/macros/latex/contrib/amsrefs.tds.zip
+            CTAN:macros/latex/required/amslatex.zip
             CTAN:macros/latex/contrib/amsrefs.zip
             ftp://ftp.ams.org/pub/tex/amslatex.zip
             ftp://ftp.ams.org/pub/tex/amslatex/amsrefs-tds.zip
@@ -84,10 +86,11 @@ Module list
             CTAN:systems/knuth/dist/web.zip
             CTAN:systems/knuth/dist/tex.zip
             CTAN:systems/knuth/dist/mf.zip
+* 
 
 Author
 ------
-Heiko Oberdiek <oberdiek at uni-freiburg.de>
+Heiko Oberdiek <heiko.oberdiek at googlemail.com>
 
 
 C. DOWNLOAD
@@ -245,6 +248,7 @@ Documentation driver
   tex/errata.all            doc driver for knuth/errata/errata.pdf
   tex/errata.drv            doc driver for knuth/errata/errata_*.pdf
   tex/errorlog.drv          doc driver for knuth/errata/errorlog.tex
+  tex/etex_man.drv          doc driver for etex/etex_man.tex
   tex/greek-usage.tex       doc driver with patches for babel/usage.tex
   tex/knuth.drv             doc driver for knuth/{texware,mfware,etc}/*.web
   tex/ltnews.tex            master file that merges all base/ltnews*.tex
@@ -395,12 +399,9 @@ Knuth
     texmf-dist/tex/plain/base/webmac.tex
     texmf/tex/generic/hyphen/hyphen.tex
 
-LaTeX3
-------
-* This module tries to cover the stabler stuff that reached CTAN
-  from `LaTeX3 project'.
-* Sorting into the TDS tree is already done by the `LaTeX3 project'.
-* Documentation is regenerated to add bookmarks, ...
+e-TeX
+-----
+* Only the manual `etex_man' is covered by this module.
 
 
 H. BUILD HINTS
@@ -545,3 +546,7 @@ I. HISTORY
 2010/05/04
   * Module base: page layout for source2e fixed (changes, index).
   * Module base: update of .err files.
+2010/10/27
+  * Module amslatex: amscls and amsrefs updated.
+  * Module etex added (only for etex_man).
+  * Erratas updated.

@@ -50,7 +50,8 @@ my @pkg_list = (
     $prj,
     'source',
     'tds',
-    'knuth'
+    'knuth',
+    'etex',
 );
 
 my $zip_comment = <<'END_ZIP_COMMENT';
@@ -93,8 +94,9 @@ my $prg_curl        = 'curl';
 my $prg_docstrip    = 'tex -shell-escape';
 my $prg_epstopdf    = 'epstopdf';
 my $prg_find        = 'find';
-my $prg_java        = '/work/java-1.5.0/bin/java';
-   # java 1.6 don't work with the used version of Multivalent
+# my $prg_java        = '/work/java-1.5.0/bin/java';
+# java 1.6 don't work with the used version of Multivalent
+my $prg_java        = 'java';
 my $prg_kpsewhich   = 'kpsewhich';
 my $prg_ls          = "ls";
 my $prg_makeindex   = 'makeindex';
@@ -121,6 +123,8 @@ $ENV{'VFFONTS'}    = 'texmf/fonts/vf//:';    # psnfss
 $ENV{'INDEXSTYLE'} = '.:texmf/makeindex//:'; # babel
 
 sub install ($@);
+sub final_begin ();
+sub final_end ();
 
 ### Print title
 {
@@ -227,6 +231,8 @@ if (@list_modules > 0) {
     download_ctan('babel',         'macros/latex/required');
     download_ctan('amslatex',      'macros/latex/required');
     download_ctan('amsrefs',       'macros/latex/contrib');
+    download_ctan('amsrefs.tds',   'install/macros/latex/contrib');
+    download_ctan('amscls.tds',    'install/macros/latex/required/amslatex');
     download_ctan('psnfss',        'macros/latex/required');
     download_ctan('tds',           '');
     download_ctan('texware',       'systems/knuth/dist');
@@ -236,12 +242,13 @@ if (@list_modules > 0) {
     download_ctan('tex',           'systems/knuth/dist');
     download_ctan('mf',            'systems/knuth/dist');
     download_ctan('errata',        'systems/knuth/dist');
+    download_ctan('etex_doc',      'systems/e-tex/v2.1');
     download_ams('amscls',         '');
     download_ams('amsmath',        '');
     # download_ams('amsrefs',        '');
     download_ams('amslatex',       '');
     download_ams('amsrefs-tds',    'amslatex/amsrefs');
-    download_ams('amsrefs-ctan',   'amslatex/amsrefs');
+    # download_ams('amsrefs-ctan',   'amslatex/amsrefs');
     download_err('manual');
     download_err('lb2');
     download_err('lgc2');
@@ -268,9 +275,17 @@ section('Unpacking');
 
     sub unpacking ($$$) {
         my $pkg     = shift;
+        $modules{$pkg} or return 1;
         my $zipfile = shift;
         my $dir     = shift;
         run("$prg_unzip $zipfile -d$dir");
+    }
+    sub unpacking_flat ($$$) {
+        my $pkg     = shift;
+        $modules{$pkg} or return 1;
+        my $zipfile = shift;
+        my $dir     = shift;
+        run("$prg_unzip -j $zipfile -d$dir");
     }
     sub unpack_ctan ($) {
         my $pkg = shift;
@@ -279,13 +294,14 @@ section('Unpacking');
                   "$dir_incoming_ctan/$pkg.zip",
                   $dir_build);
     }
-    sub unpack_ams ($) {
+    sub unpack_ams ($$) {
         my $name = shift;
+        my $zip = shift;
         $modules{'amslatex'} or return 1;
-        ensure_directory($texmf_ams);
-        unpacking('amslatex',
-                  "$dir_incoming_ams/$name.zip",
-                  "$texmf_ams");
+        unpacking('amslatex', $zip, "$texmf_ams");
+        my $src = "$dir_build/amslatex/$name";
+        ensure_directory($src);
+        run("$prg_cp $texmf_ams/source/latex/$name/* $src/");
     }
     sub unpack_psnfss ($) {
         my $name = shift;
@@ -325,23 +341,9 @@ section('Unpacking');
     }
     map { unpack_ctan($_); } @required_list;
     if ($modules{'amslatex'}) {
-        unpack_ams('amsrefs-tds');
-        run("$prg_rm -rf $dir_build/amslatex/amsrefs");
-        unpacking('amslatex',
-                  "$dir_incoming_ams/amsrefs-ctan.zip",
-                  "$dir_build/amslatex");
-        unpack_ams('amslatex');
-        -f "$dir_build/amslatex/classes/instr-l.tex" or
-                run("$prg_unzip -j $dir_incoming_ams/amslatex.zip"
-                    . " source/latex/amscls/instr-l.tex"
-                    . " -d $dir_build/amslatex/classes/");
-        run("$prg_rm -rf $texmf_ams/{doc,source,tex}/latex/amscls");
-        run("$prg_rm -rf $texmf_ams/bibtex/bst/ams");
-        unpack_ams('amscls');
-        run("$prg_cp $dir_build/amslatex/classes/amsmidx.{dtx,ins}"
-            . " $texmf_ams/source/latex/amscls/");
-        run("$prg_cp $dir_build/amslatex/classes/amsmidx.sty"
-            . " $texmf_ams/tex/latex/amscls/");
+        unpack_ams('amscls', "$dir_incoming_ctan/amscls.tds.zip");
+        unpack_ams('amsrefs', "$dir_incoming_ctan/amsrefs.tds.zip");
+        unpack_ams('amsmath', "$dir_incoming_ams/amsmath.zip");
     }
     unpack_psnfss('lw35nfss');
     unpack_psnfss('freenfss');
@@ -353,6 +355,9 @@ section('Unpacking');
     unpack_knuth('tex');
     unpack_knuth('mf');
     unpack_knuth('errata');
+    unpacking_flat('etex',
+                   "$dir_incoming/ctan/etex_doc.zip",
+                   "$dir_build/etex");
 }
 
 ### Patches
@@ -387,7 +392,7 @@ section('Patches');
     }
 
     if ($modules{'amslatex'}) {
-        patch("amslatex/math/amsldoc.tex");
+        patch("amslatex/amsmath/amsldoc.tex");
     }
 
 #    if ($modules{'babel'}) {
@@ -589,7 +594,7 @@ section('Patches after source install');
     }
 
     if ($modules{'amslatex'}) {
-        patch("amslatex/classes/amsclass.dtx");
+        patch("amslatex/amscls/amsclass.dtx");
     }
 }
 
@@ -645,13 +650,6 @@ section('TDS cleanup');
         # CTAN:macros/latex/required/amslatex/other/*
         run("$prg_cp $dir_build/amslatex/other/amsbooka.sty"
             . " $dir_build/amslatex/texmf/tex/latex/amscls/amsbooka.sty");
-        cleanup_tds 'source/latex/amsltx2', qw[
-            00readme.txt
-            install.txt
-        ];
-        cleanup_tds 'source/latex', qw[
-            amsltx2
-        ];
     }
 
     if ($modules{'babel'}) {
@@ -780,6 +778,18 @@ section('Install tex doc');
             cm85.bug
             mf84.bug
             tex82.bug
+        ]);
+        chdir $cwd;
+    }
+
+    if ($modules{'etex'}) {
+        chdir "$dir_build/etex";
+        my $doc_dir = 'texmf/doc/etex/base';
+        my $src_dir = 'texmf/source/etex/base';
+        ensure_directory($doc_dir);
+        ensure_directory($src_dir);
+        install($src_dir, qw[
+            etex_man.tex etex_man.sty
         ]);
         chdir $cwd;
     }
@@ -1109,11 +1119,13 @@ if ($modules{'amslatex'}) {
         run("$prg_pdflatextds -draftmode $doc.drv");
         makeindex($doc);
         run("$prg_pdflatextds -draftmode $doc.drv") if $doc eq 'amsrefs';
+        final_begin;
         run("$prg_pdflatextds $doc.drv");
+        final_end;
         install_pdf($amspkg, $doc);
     }
 
-    chdir "$dir_build/amslatex/math";
+    chdir "$dir_build/amslatex/amsmath";
     symlink '../texmf', 'texmf';
     map { generate_doc 'amsmath', $_; } qw[
         amsldoc subeqn technote testmath
@@ -1121,7 +1133,7 @@ if ($modules{'amslatex'}) {
     ];
     chdir $cwd;
 
-    chdir "$dir_build/amslatex/classes";
+    chdir "$dir_build/amslatex/amscls";
     symlink '../texmf', 'texmf';
     map { generate_doc 'amscls', $_; } qw[
         amsthdoc instr-l thmtest
@@ -1133,6 +1145,7 @@ if ($modules{'amslatex'}) {
     symlink '../texmf', 'texmf';
     map { generate_doc 'amsrefs', $_; } qw[
         cite-xa cite-xb cite-xh cite-xs
+        amsrdoc changes
         amsrefs amsxport ifoption mathscinet pcatcode rkeyval textcmds
     ];
     chdir $cwd;
@@ -1377,6 +1390,23 @@ if ($modules{'knuth'}) {
     chdir $cwd;
 }
 
+### Generate documentation for etex
+if ($modules{'etex'}) {
+    section('Documentation: etex');
+
+    chdir "$dir_build/etex";
+
+    my $entry = 'etex_man';
+    my $etex_man_drv = "$cwd/$dir_tex/$entry.drv";
+    symlink $etex_man_drv, "$entry.drv";
+    run("$prg_pdflatextds -draftmode $entry.drv");
+    run("$prg_pdflatextds -draftmode $entry.drv");
+    run("$prg_pdflatextds $entry.drv");
+    install_gen_pdf('etex', 'etex/base', $entry);
+
+    chdir $cwd;
+}
+
 ### Module source
 if ($modules{'source'}) {
     section('Module source');
@@ -1553,6 +1583,13 @@ sub section ($) {
 
     print "\n=== $title ===\n";
     1;
+}
+
+sub final_begin () {
+    print "\n--- FINAL BEGIN ---\n";
+}
+sub final_end () {
+    print "--- FINAL END ---\n\n";
 }
 
 sub run ($) {
