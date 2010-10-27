@@ -1,13 +1,14 @@
 #!/usr/bin/env perl
 #
 # 2008/07/31 First version.
+# 2010/10/27 Email address updated.
 #
 use strict;
 $^W = 1;
 
 my $prj = 'latex-tds';
 my $name = 'Heiko Oberdiek';
-my $email = 'oberdiek@uni-freiburg.de';
+my $email = 'heiko.oberdiek@googlemail.com';
 my $ctan_dir = 'macros/latex/contrib/latex-tds';
 my $license = 'free';
 my $freeversion = 'lppl';
