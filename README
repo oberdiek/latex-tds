@@ -1,4 +1,4 @@
-readme.txt for project latex-tds, 2010/10/27
+readme.txt for project latex-tds, 2011/03/10
 
 TABLE OF CONTENTS
 =================
@@ -179,7 +179,7 @@ Hints
 D. COPYRIGHT, LICENSE
 =====================
 
-Copyright 2006-2009 Heiko Oberdiek.
+Copyright 2006-2011 Heiko Oberdiek.
 
 License is LPPL 1.3c:
 
@@ -264,6 +264,7 @@ Patches
   patch/amsldoc.tex.diff    patch for amslatex/amsldoc.tex
   patch/encguide.tex.diff   patch for base/encguide.tex
   patch/logmac.tex.diff     patch for knuth/errata/logmac.tex
+  patch/lppl.tex.diff       patch for base/lppl.tex
   patch/source2e.tex.diff   patch for base/source2e.tex
   patch/tripman.tex.diff    patch for knuth/tex/tripman.tex
   patch/trapman.tex.diff    patch for knuth/mf/trapman.tex
@@ -304,6 +305,8 @@ Base
 * source2e.pdf is used instead of many single lt*.pdf files.
 * ltnews.pdf is introduced to avoid cluttering the doc directory
   with many single sheet ltnews*.pdf files.
+* The patch for lppl.tex only replaces the explicite references
+  "6b" and "6d" by \label and \ref.
 * ...
 
 Tools
@@ -550,3 +553,5 @@ I. HISTORY
   * Module amslatex: amscls and amsrefs updated.
   * Module etex added (only for etex_man).
   * Erratas updated.
+2011/03/10
+  * Module base: patch for latex/4148 (Missing \label and \ref in lppl.tex'')

@@ -7,7 +7,7 @@ my $file    = 'build.pl';
 my $version = cvs('$Revision$');
 my $date    = cvs('$Date$');
 my $author  = 'Heiko Oberdiek';
-my $copyright = "Copyright 2006-2010 $author";
+my $copyright = "Copyright 2006-2011 $author";
 chomp(my $license = <<"END_LICENSE");
 % $copyright
 %
@@ -578,6 +578,7 @@ section('Patches after source install');
         patch('base/encguide.tex');
         patch('base/source2e.tex');
         patch('base/utf8ienc.dtx');
+        patch('base/lppl.tex');
     }
 
     if ($modules{'knuth'}) {
