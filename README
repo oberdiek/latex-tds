@@ -559,3 +559,5 @@ I. HISTORY
   * Module amslatex: There is an outdated version of amsthm.sty in
     CTAN:install/macros/latex/required/amslatex/amscls.tds.zip.
     The package amsthm.sty is now generated from the source.
+  * Using TDS tree for missing packages that are not part of TeX Live.
+    Module base: CTAN:language/armenian/armtex.zip

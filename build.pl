@@ -73,6 +73,7 @@ my $dir_license = 'license';
 my $dir_tex = 'tex';
 my $dir_patch = 'patch';
 my $dir_distrib = 'distrib';
+my $dir_texmf = "texmf";
 chomp(my $cwd = `pwd`);
 
 my $jar_pdfbox_rewrite = "$cwd/$dir_lib/pdfbox-rewrite.jar";
@@ -110,6 +111,7 @@ my $prg_rm          = "rm";
 my $prg_rsync       = "rsync";
 my $prg_sed         = "sed";
 my $prg_sort        = "sort";
+my $prg_texhash     = "texhash";
 my $prg_unzip       = 'unzip';
 my $prg_weave       = 'weave';
 my $prg_wget        = 'wget';
@@ -121,6 +123,12 @@ $ENV{'BSTINPUTS'}  = '.:texmf/bibtex//:';    # amslatex
 $ENV{'TFMFONTS'}   = 'texmf/fonts/tfm//:';   # psnfss
 $ENV{'VFFONTS'}    = 'texmf/fonts/vf//:';    # psnfss
 $ENV{'INDEXSTYLE'} = '.:texmf/makeindex//:'; # babel
+if ($ENV{'TEXMFHOME'}) {
+    $ENV{'TEXMFHOME'} = "$cwd/$dir_texmf:${'TEXMFHOME'}";
+}
+else {
+    $ENV{'TEXMFHOME'} = "$cwd/$dir_texmf:";
+}
 
 sub install ($@);
 sub final_begin ();
@@ -253,6 +261,7 @@ if (@list_modules > 0) {
     download_err('lb2');
     download_err('lgc2');
     download_err('tlc2');
+    download_ctan_file('armtex.zip', 'language/armenian');
 }
 
 ### Remove previous build
@@ -338,6 +347,9 @@ section('Unpacking');
                   "$dir_incoming_ctan/doc.zip",
                   "$dir_build/base");
         run("$prg_cp -p $dir_build/base/doc/*.tex $dir_build/base/");
+        unpacking('base',
+                  "$dir_incoming_ctan/armtex.zip",
+                  "$dir_build/base");
     }
     map { unpack_ctan($_); } @required_list;
     if ($modules{'amslatex'}) {
@@ -827,6 +839,21 @@ my $dummy = <<'END_DUMMY';
         chdir $cwd;
     }
 END_DUMMY
+}
+
+### Preparation for documentation
+if ($modules{'base'}) {
+    my $dir_src = "$dir_build/base/armtex";
+    my $tds_mf = "$dir_texmf/fonts/source/public/armtex";
+    my $tds_tfm = "$dir_texmf/fonts/tfm/public/armtex";
+    my $tds_latex = "$dir_texmf/tex/latex/armtex";
+    my @tds_mf = map {chomp;$_} glob "$dir_src/mf/*.mf";
+    my @tds_tfm = map {chomp;$_} glob "$dir_src/tfm/*.tfm";
+    my @tds_latex = map {chomp;$_} glob "$dir_src/latex/*.*";
+    install($tds_mf, @tds_mf);
+    install($tds_tfm, @tds_tfm);
+    install($tds_latex, @tds_latex);
+    run("$prg_texhash $dir_texmf");
 }
 
 ### Generate documentation for base
