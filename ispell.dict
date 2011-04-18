@@ -2,11 +2,12 @@ ac
 albanian
 amsclass
 amscls
-AmSLaTeX
 amslatex
+AmSLaTeX
 amsldoc
 amsmath
 amsrefs
+amsthm
 armenian
 athnum
 babel
@@ -99,10 +100,10 @@ nopostprocess
 oberdiek
 org
 pdf
-PDFBox
 pdfbox
-pdfTeX
+PDFBox
 pdftex
+pdfTeX
 Perl
 pl
 PS

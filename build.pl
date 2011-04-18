@@ -618,6 +618,13 @@ section('Docstrip');
     docstrip('graphics', 'graphics-drivers');
     docstrip('tools',    'tools');
     docstrip('babel',    'babel');
+    
+    # patch for amsthm.sty, part 1/2
+    if ($modules{'amslatex'}) {
+        chdir "$dir_build/amslatex/amscls";
+        run("$prg_docstrip ams-c1.ins");
+        chdir $cwd;
+    }
 }
 
 section('TDS cleanup');
@@ -792,6 +799,15 @@ section('Install tex doc');
         install($src_dir, qw[
             etex_man.tex etex_man.sty
         ]);
+        chdir $cwd;
+    }
+    
+    # patch for amsthm.sty, part 2/2
+    if ($modules{'amslatex'}) {
+        chdir "$dir_build/amslatex/amscls";
+        my $dest_dir = '../texmf/tex/latex/amscls';
+        ensure_directory($dest_dir);
+        install($dest_dir, 'amsthm.sty');
         chdir $cwd;
     }
 

@@ -1,4 +1,4 @@
-readme.txt for project latex-tds, 2011/03/10
+readme.txt for project latex-tds, 2011/04/18
 
 TABLE OF CONTENTS
 =================
@@ -555,3 +555,7 @@ I. HISTORY
   * Erratas updated.
 2011/03/10
   * Module base: patch for latex/4148 (Missing \label and \ref in lppl.tex'')
+2011/04/18
+  * Module amslatex: There is an outdated version of amsthm.sty in
+    CTAN:install/macros/latex/required/amslatex/amscls.tds.zip.
+    The package amsthm.sty is now generated from the source.
