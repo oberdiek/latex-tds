@@ -254,8 +254,8 @@ if (@list_modules > 0) {
     download_ams('amscls',         '');
     download_ams('amsmath',        '');
     # download_ams('amsrefs',        '');
-    download_ams('amslatex',       '');
-    download_ams('amsrefs-tds',    'amslatex/amsrefs');
+    # download_ams('amslatex',       '');
+    # download_ams('amsrefs-tds',    'amslatex/amsrefs');
     # download_ams('amsrefs-ctan',   'amslatex/amsrefs');
     download_err('manual');
     download_err('lb2');

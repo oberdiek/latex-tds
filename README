@@ -561,3 +561,6 @@ I. HISTORY
     The package amsthm.sty is now generated from the source.
   * Using TDS tree for missing packages that are not part of TeX Live.
     Module base: CTAN:language/armenian/armtex.zip
+2011/06/21
+  * Module amslatex: Two downloads from AMS server removed, because
+    the files are not longer available (and they are on CTAN).
