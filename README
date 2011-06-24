@@ -1,4 +1,4 @@
-readme.txt for project latex-tds, 2011/04/18
+readme.txt for project latex-tds, 2011/06/24
 
 TABLE OF CONTENTS
 =================
@@ -561,6 +561,10 @@ I. HISTORY
     The package amsthm.sty is now generated from the source.
   * Using TDS tree for missing packages that are not part of TeX Live.
     Module base: CTAN:language/armenian/armtex.zip
-2011/06/21
+2011/06/24
   * Module amslatex: Two downloads from AMS server removed, because
     the files are not longer available (and they are on CTAN).
+  * Module amslatex: 00readme.txt and amsrefs.dtx taken from
+    CTAN:macros/latex/contrib/amsrefs.zip instead of
+    CTAN:install/macros/latex/contrib/amsrefs.tds.zip because
+    the later archive file is out of sync.

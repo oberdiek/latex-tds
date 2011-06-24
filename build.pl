@@ -253,6 +253,7 @@ if (@list_modules > 0) {
     download_ctan('etex_doc',      'systems/e-tex/v2.1');
     download_ams('amscls',         '');
     download_ams('amsmath',        '');
+    # download_ams('amsrefs',    'amslatex/amsrefs');
     # download_ams('amsrefs',        '');
     # download_ams('amslatex',       '');
     # download_ams('amsrefs-tds',    'amslatex/amsrefs');
@@ -356,6 +357,14 @@ section('Unpacking');
         unpack_ams('amscls', "$dir_incoming_ctan/amscls.tds.zip");
         unpack_ams('amsrefs', "$dir_incoming_ctan/amsrefs.tds.zip");
         unpack_ams('amsmath', "$dir_incoming_ams/amsmath.zip");
+        # because of 00readme.txt and amsrefs.dtx
+        unpacking('amslatex',
+                  "$dir_incoming_ctan/amsrefs.zip",
+                  "$dir_build/amslatex/ctan");
+        run("$prg_cp $dir_build/amslatex/ctan/amsrefs/00readme.txt "
+                . "$dir_build/amslatex/texmf/source/latex/amsrefs/00readme.txt");
+        run("$prg_cp $dir_build/amslatex/ctan/amsrefs/amsrefs.dtx "
+                . "$dir_build/amslatex/texmf/source/latex/amsrefs/amsrefs.dtx");
     }
     unpack_psnfss('lw35nfss');
     unpack_psnfss('freenfss');
