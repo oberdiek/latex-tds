@@ -1,4 +1,4 @@
-readme.txt for project latex-tds, 2011/06/24
+readme.txt for project latex-tds, 2011/06/30
 
 TABLE OF CONTENTS
 =================
@@ -264,7 +264,8 @@ Patches
   patch/amsldoc.tex.diff    patch for amslatex/amsldoc.tex
   patch/encguide.tex.diff   patch for base/encguide.tex
   patch/logmac.tex.diff     patch for knuth/errata/logmac.tex
-  patch/lppl.tex.diff       patch for base/lppl.tex
+  patch/ltfssdcl.dtx.diff   patch for base/ltfssdcl.dtx
+  patch/ltpatch.ltx.diff    patch for base/ltpatch.ltx
   patch/source2e.tex.diff   patch for base/source2e.tex
   patch/tripman.tex.diff    patch for knuth/tex/tripman.tex
   patch/trapman.tex.diff    patch for knuth/mf/trapman.tex
@@ -305,8 +306,7 @@ Base
 * source2e.pdf is used instead of many single lt*.pdf files.
 * ltnews.pdf is introduced to avoid cluttering the doc directory
   with many single sheet ltnews*.pdf files.
-* The patch for lppl.tex only replaces the explicite references
-  "6b" and "6d" by \label and \ref.
+* Patch for ltfssdcl.dtx: Checksum fixed.
 * ...
 
 Tools
@@ -568,3 +568,11 @@ I. HISTORY
     CTAN:macros/latex/contrib/amsrefs.zip instead of
     CTAN:install/macros/latex/contrib/amsrefs.tds.zip because
     the later archive file is out of sync.
+2011/06/30
+  * Module base:
+    * Release 2011/06.
+    * Patch ltpatch.ltx to match the kernel version.
+    * Patch lppl.tex.diff removed (no longer needed).
+    * Patch ltfssdcl.dtx.diff added (checksum fixed).
+  * Module tools: Release 2011/06.
+  * Module babel: Release 2011/06.

@@ -415,6 +415,10 @@ section('Patches');
     if ($modules{'amslatex'}) {
         patch("amslatex/amsmath/amsldoc.tex");
     }
+    
+    if ($modules{'base'}) {
+        patch("base/ltpatch.ltx");
+    }
 
 #    if ($modules{'babel'}) {
 #        map { patch("babel/$_"); } qw[
@@ -597,9 +601,9 @@ section('Patches after source install');
         chdir $cwd;
 
         patch('base/encguide.tex');
+        patch('base/ltfssdcl.dtx');
         patch('base/source2e.tex');
         patch('base/utf8ienc.dtx');
-        patch('base/lppl.tex');
     }
 
     if ($modules{'knuth'}) {
