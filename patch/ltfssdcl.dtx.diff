@@ -1,0 +1,19 @@
+*** ltfssdcl.dtx.org	2011-05-12 11:46:42.000000000 +0200
+--- ltfssdcl.dtx	2011-06-29 23:25:02.000000000 +0200
+***************
+*** 52,58 ****
+  %<+checkmem>\CHECKMEM
+  % \fi
+  %
+! % \CheckSum{1879}
+  %
+  %
+  % \GetFileInfo{ltfssdcl.dtx}
+--- 52,58 ----
+  %<+checkmem>\CHECKMEM
+  % \fi
+  %
+! % \CheckSum{1886}
+  %
+  %
+  % \GetFileInfo{ltfssdcl.dtx}
