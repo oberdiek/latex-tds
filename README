@@ -570,7 +570,7 @@ I. HISTORY
     the later archive file is out of sync.
 2011/06/30
   * Module base:
-    * Release 2011/06.
+    * Update of LaTeX, release 2011/06/27.
     * Patch ltpatch.ltx to match the kernel version.
     * Patch lppl.tex.diff removed (no longer needed).
     * Patch ltfssdcl.dtx.diff added (checksum fixed).
