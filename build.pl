@@ -421,7 +421,7 @@ section('Patches');
     if ($modules{'amslatex'}) {
         patch("amslatex/amsmath/amsldoc.tex");
     }
-    
+
 #    if ($modules{'babel'}) {
 #        map { patch("babel/$_"); } qw[
 #        ];
@@ -628,10 +628,6 @@ section('Patches after source install');
         patch("amslatex/amsrefs/changes.tex");
         run("$prg_recode latin1..utf8 $dir_build/amslatex/amsrefs/changes.tex");
     }
-    
-    if ($modules{'tools'}) {
-        patch("tools/verbatim.dtx");
-    }
 }
 
 ### Docstrip
@@ -653,7 +649,7 @@ section('Docstrip');
     docstrip('graphics', 'graphics-drivers');
     docstrip('tools',    'tools');
     docstrip('babel',    'babel');
-    
+
     # patch for amsthm.sty, part 1/2
     if ($modules{'amslatex'}) {
         chdir "$dir_build/amslatex/amscls";
@@ -836,7 +832,7 @@ section('Install tex doc');
         ]);
         chdir $cwd;
     }
-    
+
     # patch for amsthm.sty, part 2/2
     if ($modules{'amslatex'}) {
         chdir "$dir_build/amslatex/amscls";
@@ -931,7 +927,7 @@ if ($modules{'base'}) {
         1;
     }
     chdir "$dir_build/base";
-    
+
     ## source2e
     run("$prg_lualatextds -draftmode source2e");
     run_makeindex('source2e.idx', 'gind.ist');
@@ -942,7 +938,7 @@ if ($modules{'base'}) {
     run("$prg_lualatextds -draftmode source2e");
     run("$prg_lualatextds source2e"); # hypdestopt
     install_pdf('base', 'source2e');
-    
+
     ## standard cases
     map { complex_dtx $_ } qw[
         classes
@@ -978,7 +974,7 @@ if ($modules{'base'}) {
         lgc2
         webcomp
     ];
-    
+
     ## manual.err
     run("$prg_sed -i -e '"
            . 's/\\\\documentclass{article}/'
@@ -988,7 +984,7 @@ if ($modules{'base'}) {
     run("$prg_lualatextds -draftmode manual.err");
     run("$prg_lualatextds manual.err"); # hypdestopt
     install_pdf('base', 'manual');
-    
+
     ## guides
     base_guide('cfg');
     base_guide('cls');
@@ -997,19 +993,19 @@ if ($modules{'base'}) {
     base_guide('fnt');
     base_guide('mod');
     base_guide('usr');
-    
+
     ## lppl
     run("$prg_lualatextds -draftmode doc_lppl");
     run("$prg_lualatextds -draftmode doc_lppl");
     run("$prg_lualatextds doc_lppl"); # hypdestopt
     run("$prg_mv doc_lppl.pdf lppl.pdf");
     install_pdf('base', 'lppl');
-    
+
     ## ltxcheck
     run("$prg_lualatextds -draftmode ltxcheck.drv");
     run("$prg_lualatextds ltxcheck.drv");
     install_pdf('base', 'ltxcheck');
-    
+
     ## ltx3info
     my $code = <<'END_CODE';
 \let\SavedDocumentclass\documentclass
@@ -1024,11 +1020,11 @@ END_CODE
     run("$prg_lualatextds -draftmode '$code'");
     run("$prg_lualatextds '$code'"); # hypdestopt
     install_pdf('base', 'ltx3info');
-    
+
     ## ltnews
     my $ltnewsMode_Single = 0;
     my $ltnewsMode_AllInOne = 1;
-    
+
     my $ltnews = 'ltnews';
     my $lastissue = 0;
     map { $lastissue = $1 if /ltnews(\d+)\.tex/ and $lastissue < $1; }
@@ -1228,7 +1224,7 @@ if ($modules{'amslatex'}) {
         final_end;
         install_pdf($amspkg, $doc);
     }
- 
+
     chdir "$dir_build/amslatex/amsmath";
     symlink '../texmf', 'texmf';
     map { generate_doc 'amsmath', $_; } qw[
