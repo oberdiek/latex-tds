@@ -1,5 +1,22 @@
-*** encguide.tex.org	2006-05-21 17:26:00.000000000 +0200
---- encguide.tex	2008-08-10 21:09:57.000000000 +0200
+*** encguide.tex.org	2009-09-24 17:00:50.000000000 +0200
+--- encguide.tex	2011-07-01 22:00:17.000000000 +0200
+***************
+*** 34,40 ****
+   
+  \documentclass{ltxguide}[1994/11/20]
+   
+! \usepackage[T1]{fontenc}
+  \IfFileExists{lmodern.sty}{\usepackage{lmodern}}{}
+  \usepackage{textcomp}
+  \usepackage{url}
+--- 34,40 ----
+   
+  \documentclass{ltxguide}[1994/11/20]
+   
+! \usepackage{fontspec}% \usepackage[T1]{fontenc}
+  \IfFileExists{lmodern.sty}{\usepackage{lmodern}}{}
+  \usepackage{textcomp}
+  \usepackage{url}
 ***************
 *** 1226,1232 ****
   \newblock {\em {TUG}boat}, 11(4):514--516, 1990.

@@ -262,9 +262,12 @@ Patches
 -------
   patch/amsclass.dtx.diff   patch for amslatex/amsclass.dtx
   patch/amsldoc.tex.diff    patch for amslatex/amsldoc.tex
+  patch/changes.tex.diff    patch for amslatex/amsrefs/changes.tex
   patch/encguide.tex.diff   patch for base/encguide.tex
+  patch/lb2.err.diff        patch for base/lb2.err
   patch/logmac.tex.diff     patch for knuth/errata/logmac.tex
   patch/source2e.tex.diff   patch for base/source2e.tex
+  patch/tlc2.err.diff       patch for base/tlc2.err
   patch/tripman.tex.diff    patch for knuth/tex/tripman.tex
   patch/trapman.tex.diff    patch for knuth/mf/trapman.tex
   patch/utf8ienc.dtx.diff   patch for base/utf8ienc.dtx
@@ -423,7 +426,13 @@ modules himself:
   Probably TeX Live would be a good idea (I haven't tested).
 * Some new packages of mine I will put on CTAN, but at time
   of writing, they aren't available yet.
-* PDF post-processing, I have used two steps:
+* Most of the PDF files are generated using lualatex and package
+  `fontspec' that uses the Latin Modern fonts as default. They
+  are available as OpenType fonts. LuaTeX generates with OpenType
+  fonts considerably smaller PDF files. Also PDF object stream
+  compression is used (PDF 1.5). Therefore the further
+  post-processing of PDF files are currently dropped.
+* (Outdated since 2011-07-01) PDF post-processing, I have used two steps:
   1. a) I have written a tool that analyzes page stream contents and
         optimizes them (removal of unnecessary color settings, minimize
         translation operations, ...).
@@ -575,7 +584,14 @@ I. HISTORY
   * Module tools: Release 2011/06.
   * Module babel: Release 2011/06.
 2011/07/01
+  * PDF generation:
+    * Use of LuaTeX instead of pdfTeX for most of the files.
+    * Use of package `fontspec' with Latin Modern fonts as
+      default in OpenType format (smaller PDF file sizes).
+      The post-processing of PDF files is skipped.
+    * Various patches and fixes for LuaLaTeX and package `fontspec'.
   * Module base:
     * Update of LaTeX.
     * Patches ltpatch.ltx.diff and ltfssdcl.dtx.diff removed
       (no longer needed).
+  * Module tools: Update.

@@ -1,0 +1,19 @@
+*** lb2.err.org	2009-12-15 07:10:29.000000000 +0100
+--- lb2.err	2011-07-01 21:30:02.000000000 +0200
+***************
+*** 306,312 ****
+  \usepackage{url}
+  
+  \usepackage[ngerman]{babel}
+! \usepackage[latin1]{inputenc}
+  
+  \begin{document}
+  
+--- 306,312 ----
+  \usepackage{url}
+  
+  \usepackage[ngerman]{babel}
+! % \usepackage[latin1]{inputenc}
+  
+  \begin{document}
+  
