@@ -29,7 +29,7 @@ along with the information that you provided:
 </p>
 <dl>
   <dt>Date/Time of submission</dt>
-  <dd>2011-06-30 02:24:35 UTC</dd>
+  <dd>2011-07-02 11:00:19 UTC</dd>
   <dt>Submitted to host</dt>
   <dd>dante.ctan.org</dd>
   <dt>Your name and email</dt>
@@ -37,11 +37,11 @@ along with the information that you provided:
   <dt>Filename</dt>
   <dd>latex-tds.zip</dd>
   <dt>Version number</dt>
-  <dd>2011/06/30</dd>
+  <dd>2011/07/01</dd>
   <dt>Location on CTAN</dt>
   <dd>/macros/latex/contrib/latex-tds</dd>
   <dt>Summary description</dt>
-  <dd>latex-tds 2011/06/30</dd>
+  <dd>latex-tds 2011/07/01</dd>
   <dt>License type</dt>
   <dd>lppl</dd>
   <dt>Announcement text</dt>
@@ -61,14 +61,18 @@ CTAN&#39;s package description:
 
 Latest changes (see readme.txt):
 
-  2011/06/30
+  2011/07/01
+    * PDF generation:
+      * Use of LuaTeX instead of pdfTeX for most of the files.
+      * Use of package `fontspec&#39; with Latin Modern fonts as
+        default in OpenType format (smaller PDF file sizes).
+        The post-processing of PDF files is skipped.
+      * Various patches and fixes for LuaLaTeX and package `fontspec&#39;.
     * Module base:
-      * Update of LaTeX, release 2011/06/27.
-      * Patch ltpatch.ltx to match the kernel version.
-      * Patch lppl.tex.diff removed (no longer needed).
-      * Patch ltfssdcl.dtx.diff added (checksum fixed).
-    * Module tools: Release 2011/06.
-    * Module babel: Release 2011/06.
+      * Update of LaTeX.
+      * Patches ltpatch.ltx.diff and ltfssdcl.dtx.diff removed
+        (no longer needed).
+    * Module tools: Update.
   </dd>
   <dt>Notes to maintainers</dt>
   <dd class='block'>
