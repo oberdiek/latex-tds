@@ -1313,6 +1313,8 @@ if ($modules{'amslatex'}) {
                 or $doc eq 'thmtest'
                 or $doc eq 'cite-xs'
                 or $doc eq 'mathscinet';
+        $latextds = $prg_pdflatex
+                if $doc eq 'thmtest';
 
         symlink $ams_drv, "$doc.drv";
         cache 'amslatex', $doc, sub {
