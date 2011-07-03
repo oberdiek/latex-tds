@@ -1,4 +1,4 @@
-readme.txt for project latex-tds, 2011/07/01
+readme.txt for project latex-tds, 2011/07/03
 
 TABLE OF CONTENTS
 =================
@@ -595,3 +595,8 @@ I. HISTORY
     * Patches ltpatch.ltx.diff and ltfssdcl.dtx.diff removed
       (no longer needed).
   * Module tools: Update.
+2011/07/03
+  * build.pl:
+    * Caching for PDF generation added.
+    * `FINAL' markers in the output of build.pl
+      for final (Lua|pdf)TeX runs.

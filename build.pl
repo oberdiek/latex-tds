@@ -73,8 +73,9 @@ my $dir_license = 'license';
 my $dir_tex = 'tex';
 my $dir_patch = 'patch';
 my $dir_distrib = 'distrib';
-my $dir_texmf = "texmf";
+my $dir_texmf = 'texmf';
 chomp(my $cwd = `pwd`);
+my $dir_cache = "$cwd/cache";
 
 my $jar_pdfbox_rewrite = "$cwd/$dir_lib/pdfbox-rewrite.jar";
 my $jar_multivalent = "$cwd/$dir_lib/Multivalent20060102.jar";
@@ -138,6 +139,7 @@ else {
 sub install ($@);
 sub final_begin ();
 sub final_end ();
+sub final_ok ();
 
 ### Print title
 {
@@ -152,6 +154,7 @@ Usage: build.pl [options]
 General options:
   --(no)download      (check for newer files, disabled by default)
   --(no)postprocess   (pdf files are postprocessed, enabled by default)
+  --(no)cache         (use cached pdf files, enabled by default)
 Module options:
   --all               (select all modules)
 END_OF_USAGE
@@ -159,6 +162,7 @@ map { $usage .= "  --(no)$_\n"; } @pkg_list;
 
 my $opt_download    = 0;
 my $opt_postprocess = 0;
+my $opt_cache       = 1;
 my $opt_all         = 0;
 my %modules;
 my @list_modules;
@@ -875,15 +879,53 @@ if ($modules{'base'}) {
     run("$prg_texhash $dir_texmf");
 }
 
+### PDF caching
+my $count_cache = 0;
+my $count_generate = 0;
+sub cache ($$$) {
+    my $dir = shift;
+    my $name = shift;
+    my $sub_generate = shift;
+    ensure_directory("$dir_cache/$dir");
+    my $file_cache_pdf = "$dir_cache/$dir/$name.pdf";
+    my $file_cache_log = "$dir_cache/$dir/$name.log";
+    my $file_here_pdf = "$name.pdf";
+    my $file_here_log = "$name.log";
+    my $generate = 1;
+    $generate = 0
+            if $opt_cache
+            and -f $file_cache_pdf
+            and -f $file_cache_log;
+    if ($generate) {
+        &$sub_generate;
+        run("$prg_cp $file_here_pdf $file_cache_pdf");
+        run("$prg_cp $file_here_log $file_cache_log");
+        $count_generate++;
+    }
+    else {
+        final_begin;
+        run("$prg_cp $file_cache_pdf $file_here_pdf");
+        run("$prg_cp $file_cache_log $file_here_log");
+        final_end;
+        $count_cache++;
+    }
+    final_ok;
+    print "--- FINAL LOG: $file_cache_log ---\n\n";
+}
+
 ### Generate documentation for base
 if ($modules{'base'}) {
     section('Documenation: base');
 
     sub base_guide ($) {
         my $guide = "$_[0]guide";
-        run("$prg_lualatextds -draftmode $guide");
-        run("$prg_lualatextds -draftmode $guide");
-        run("$prg_lualatextds $guide");
+        cache 'base', $guide, sub {
+            run("$prg_lualatextds -draftmode $guide");
+            run("$prg_lualatextds -draftmode $guide");
+            final_begin;
+            run("$prg_lualatextds $guide");
+            final_end;
+        };
         install_pdf('base', $guide);
         1;
     }
@@ -893,50 +935,66 @@ if ($modules{'base'}) {
         my $file = "$base.$ext";
         my $latextds = $prg_lualatextds;
         $latextds = $prg_pdflatextds if $base eq 'utf8ienc';
-        run("$latextds -draftmode $file");
-        run("$latextds -draftmode $file");
-        run("$latextds $file");
+        cache 'base', $base, sub {
+            run("$latextds -draftmode $file");
+            run("$latextds -draftmode $file");
+            final_begin;
+            run("$latextds $file");
+            final_end;
+        };
         install_pdf('base', $base);
         1;
     }
     sub complex_dtx ($) {
         my $base = shift;
         my $dtx = "$base.dtx";
-        run("$prg_lualatextds -draftmode $dtx");
-        run_makeindex("$base.idx", 'gind.ist');
-        run_makeindex("$base.glo", 'gglo.ist', "$base.gls");
-        run("$prg_lualatextds -draftmode $dtx");
-        run_makeindex("$base.idx", 'gind.ist');
-        run_makeindex("$base.glo", 'gglo.ist', "$base.gls");
-        run("$prg_lualatextds -draftmode $dtx");
-        run("$prg_lualatextds $dtx"); # hypdestopt
+        cache 'base', $base, sub {
+            run("$prg_lualatextds -draftmode $dtx");
+            run_makeindex("$base.idx", 'gind.ist');
+            run_makeindex("$base.glo", 'gglo.ist', "$base.gls");
+            run("$prg_lualatextds -draftmode $dtx");
+            run_makeindex("$base.idx", 'gind.ist');
+            run_makeindex("$base.glo", 'gglo.ist', "$base.gls");
+            run("$prg_lualatextds -draftmode $dtx");
+            final_begin;
+            run("$prg_lualatextds $dtx"); # hypdestopt
+            final_end;
+        };
         install_pdf('base', "$base");
         1;
     }
     sub book_err ($) {
         my $base = shift;
         my $err = "$base.err";
-        run("$prg_lualatextds -draftmode $err");
-        run("$prg_sed -i -e '"
-               . 's/\\\\endinput/\\\\input{errata.cfg}\\n\\\\endinput/'
-               . "' $base.cfg");
-        run("$prg_lualatextds -draftmode $err");
-        run("$prg_lualatextds -draftmode $err");
-        run("$prg_lualatextds $err"); # hypdestopt
+        cache 'base', $base, sub {
+            run("$prg_lualatextds -draftmode $err");
+            run("$prg_sed -i -e '"
+                   . 's/\\\\endinput/\\\\input{errata.cfg}\\n\\\\endinput/'
+                   . "' $base.cfg");
+            run("$prg_lualatextds -draftmode $err");
+            run("$prg_lualatextds -draftmode $err");
+            final_begin;
+            run("$prg_lualatextds $err"); # hypdestopt
+            final_end;
+        };
         install_pdf('base', "$base");
         1;
     }
     chdir "$dir_build/base";
 
     ## source2e
-    run("$prg_lualatextds -draftmode source2e");
-    run_makeindex('source2e.idx', 'gind.ist');
-    run_makeindex('source2e.glo', 'gglo.ist', 'source2e.gls');
-    run("$prg_lualatextds -draftmode source2e");
-    run_makeindex('source2e.idx', 'gind.ist');
-    run_makeindex('source2e.glo', 'gglo.ist', 'source2e.gls');
-    run("$prg_lualatextds -draftmode source2e");
-    run("$prg_lualatextds source2e"); # hypdestopt
+    cache 'base', 'source2e', sub {
+        run("$prg_lualatextds -draftmode source2e");
+        run_makeindex('source2e.idx', 'gind.ist');
+        run_makeindex('source2e.glo', 'gglo.ist', 'source2e.gls');
+        run("$prg_lualatextds -draftmode source2e");
+        run_makeindex('source2e.idx', 'gind.ist');
+        run_makeindex('source2e.glo', 'gglo.ist', 'source2e.gls');
+        run("$prg_lualatextds -draftmode source2e");
+        final_begin;
+        run("$prg_lualatextds source2e"); # hypdestopt
+        final_end;
+    };
     install_pdf('base', 'source2e');
 
     ## standard cases
@@ -980,9 +1038,13 @@ if ($modules{'base'}) {
            . 's/\\\\documentclass{article}/'
            . '\\\\documentclass{article}\\n\\\\input{manual.cfg}/'
            . "' manual.err");
-    run("$prg_lualatextds -draftmode manual.err");
-    run("$prg_lualatextds -draftmode manual.err");
-    run("$prg_lualatextds manual.err"); # hypdestopt
+    cache 'base', 'manual', sub {
+        run("$prg_lualatextds -draftmode manual.err");
+        run("$prg_lualatextds -draftmode manual.err");
+        final_begin;
+        run("$prg_lualatextds manual.err"); # hypdestopt
+        final_end;
+    };
     install_pdf('base', 'manual');
 
     ## guides
@@ -995,19 +1057,29 @@ if ($modules{'base'}) {
     base_guide('usr');
 
     ## lppl
-    run("$prg_lualatextds -draftmode doc_lppl");
-    run("$prg_lualatextds -draftmode doc_lppl");
-    run("$prg_lualatextds doc_lppl"); # hypdestopt
-    run("$prg_mv doc_lppl.pdf lppl.pdf");
+    cache 'base', 'lppl', sub {
+        run("$prg_lualatextds -draftmode doc_lppl");
+        run("$prg_lualatextds -draftmode doc_lppl");
+        final_begin;
+        run("$prg_lualatextds doc_lppl"); # hypdestopt
+        run("$prg_mv doc_lppl.pdf lppl.pdf");
+        run("$prg_mv doc_lppl.log lppl.log");
+        final_end;
+    };
     install_pdf('base', 'lppl');
 
     ## ltxcheck
-    run("$prg_lualatextds -draftmode ltxcheck.drv");
-    run("$prg_lualatextds ltxcheck.drv");
+    cache 'base', 'ltxcheck', sub {
+        run("$prg_lualatextds -draftmode ltxcheck.drv");
+        final_begin;
+        run("$prg_lualatextds ltxcheck.drv");
+        final_end;
+    };
     install_pdf('base', 'ltxcheck');
 
     ## ltx3info
-    my $code = <<'END_CODE';
+    cache 'base', 'ltx3info', sub {
+        my $code = <<'END_CODE';
 \let\SavedDocumentclass\documentclass
 \def\documentclass[#1]#2{
   \SavedDocumentclass[{#1}]{#2}
@@ -1015,10 +1087,13 @@ if ($modules{'base'}) {
 }
 \input{ltx3info}
 END_CODE
-    $code =~ s/\s//g;
-    run("$prg_lualatextds -draftmode '$code'");
-    run("$prg_lualatextds -draftmode '$code'");
-    run("$prg_lualatextds '$code'"); # hypdestopt
+        $code =~ s/\s//g;
+        run("$prg_lualatextds -draftmode '$code'");
+        run("$prg_lualatextds -draftmode '$code'");
+        final_begin;
+        run("$prg_lualatextds '$code'"); # hypdestopt
+        final_end;
+    };
     install_pdf('base', 'ltx3info');
 
     ## ltnews
@@ -1034,10 +1109,14 @@ END_CODE
         open(LT, '>', $file_lastissue) or die "!!! Error: Cannot write `$file_lastissue'!\n";
         print LT "\\def\\lastissue{$lastissue}\n\\endinput\n";
         close(LT);
-        my $cmd_ltnews = "$prg_lualatextds $ltnews";
-        run($cmd_ltnews);
-        run($cmd_ltnews);
-        run($cmd_ltnews);
+        cache 'base', $ltnews, sub {
+            my $cmd_ltnews = "$prg_lualatextds $ltnews";
+            run($cmd_ltnews);
+            run($cmd_ltnews);
+            final_begin;
+            run($cmd_ltnews);
+            final_end;
+        };
         install_pdf('base', $ltnews);
     }
     if ($ltnewsMode_Single) {
@@ -1045,8 +1124,12 @@ END_CODE
             my $ltnews = 'ltnews';
             $ltnews .= '0' if $i < 10;
             $ltnews .= $i;
-            run("$prg_pdflatextds $ltnews");
-            run("$prg_pdflatextds $ltnews");
+            cache 'base', $ltnews, sub {
+                run("$prg_pdflatextds $ltnews");
+                final_begin;
+                run("$prg_pdflatextds $ltnews");
+                final_end;
+            };
             install_pdf('base', $ltnews);
         }
     }
@@ -1064,14 +1147,18 @@ if ($modules{'tools'}) {
     foreach my $entry (@list) {
         my $latextds = $prg_lualatextds;
         $latextds = $prg_pdflatextds if $entry eq 'bm';
-        run("$latextds -draftmode $entry.dtx");
-        run_makeindex("$entry.idx", 'gind.ist');
-        run_makeindex("$entry.glo", 'gglo.ist', "$entry.gls");
-        run("$latextds -draftmode $entry.dtx");
-        run_makeindex("$entry.idx", 'gind.ist');
-        run_makeindex("$entry.glo", 'gglo.ist', "$entry.gls");
-        run("$latextds -draftmode $entry.dtx");
-        run("$latextds $entry.dtx"); # hypdestopt
+        cache 'tools', $entry, sub {
+            run("$latextds -draftmode $entry.dtx");
+            run_makeindex("$entry.idx", 'gind.ist');
+            run_makeindex("$entry.glo", 'gglo.ist', "$entry.gls");
+            run("$latextds -draftmode $entry.dtx");
+            run_makeindex("$entry.idx", 'gind.ist');
+            run_makeindex("$entry.glo", 'gglo.ist', "$entry.gls");
+            run("$latextds -draftmode $entry.dtx");
+            final_begin;
+            run("$latextds $entry.dtx"); # hypdestopt
+            final_end;
+        };
         install_pdf('tools', $entry);
     }
 
@@ -1131,7 +1218,11 @@ END_ENTRY
 \end{document}
 END_TRAILER
     close(OUT);
-    run("$prg_pdflatextds tools.tex");
+    cache 'tools', 'tools', sub {
+        final_begin;
+        run("$prg_pdflatextds tools.tex");
+        final_end;
+    };
     install_pdf('tools', 'tools');
     chdir $cwd;
 }
@@ -1143,10 +1234,15 @@ if ($modules{'cyrillic'}) {
     chdir "$dir_build/cyrillic";
     my @list = (glob("*.dtx"), glob("*.fdd"));
     foreach my $entry (@list) {
-        run("$prg_lualatextds -draftmode $entry");
-        run("$prg_lualatextds -draftmode $entry");
-        run("$prg_lualatextds $entry"); # hypdestopt
-        $entry =~ s/\.(dtx|fdd)$//;
+        my $base = $entry;
+        $base =~ s/\.(dtx|fdd)$//;
+        cache 'cyrillic', $base, sub {
+            run("$prg_lualatextds -draftmode $entry");
+            run("$prg_lualatextds -draftmode $entry");
+            final_begin;
+            run("$prg_lualatextds $entry"); # hypdestopt
+            final_end;
+        };
         install_pdf('cyrillic', $entry);
     }
     chdir $cwd;
@@ -1160,9 +1256,13 @@ if ($modules{'graphics'}) {
     my @list = glob("*.dtx");
     map { s/\.dtx$//; } @list;
     foreach my $entry (@list) {
-        run("$prg_lualatextds -draftmode $entry.dtx");
-        run("$prg_lualatextds -draftmode $entry.dtx");
-        run("$prg_lualatextds $entry.dtx"); # hypdestopt
+        cache 'graphics', $entry, sub {
+            run("$prg_lualatextds -draftmode $entry.dtx");
+            run("$prg_lualatextds -draftmode $entry.dtx");
+            final_begin;
+            run("$prg_lualatextds $entry.dtx"); # hypdestopt
+            final_end;
+        };
         install_pdf('graphics', $entry);
     }
     my $code = <<'END_CODE';
@@ -1173,9 +1273,13 @@ END_CODE
     $code =~ s/\s//g;
     run("$prg_lualatextds -draftmode '$code'");
     run("$prg_epstopdf a.ps");
-    run("$prg_lualatextds -draftmode grfguide");
-    run("$prg_lualatextds -draftmode grfguide");
-    run("$prg_lualatextds grfguide");
+    cache 'graphics', 'grfguide', sub {
+        run("$prg_lualatextds -draftmode grfguide");
+        run("$prg_lualatextds -draftmode grfguide");
+        final_begin;
+        run("$prg_lualatextds grfguide");
+        final_end;
+    };
     install_pdf('graphics', 'grfguide');
     chdir $cwd;
 }
@@ -1211,17 +1315,19 @@ if ($modules{'amslatex'}) {
                 or $doc eq 'mathscinet';
 
         symlink $ams_drv, "$doc.drv";
-        run("$latextds -draftmode $doc.drv");
-        makeindex($doc);
-        bibtex($doc);
-        run("$latextds -draftmode $doc.drv");
-        makeindex($doc);
-        run("$latextds -draftmode $doc.drv");
-        makeindex($doc);
-        run("$latextds -draftmode $doc.drv") if $doc eq 'amsrefs';
-        final_begin;
-        run("$latextds $doc.drv");
-        final_end;
+        cache 'amslatex', $doc, sub {
+            run("$latextds -draftmode $doc.drv");
+            makeindex($doc);
+            bibtex($doc);
+            run("$latextds -draftmode $doc.drv");
+            makeindex($doc);
+            run("$latextds -draftmode $doc.drv");
+            makeindex($doc);
+            run("$latextds -draftmode $doc.drv") if $doc eq 'amsrefs';
+            final_begin;
+            run("$latextds $doc.drv");
+            final_end;
+        };
         install_pdf($amspkg, $doc);
     }
 
@@ -1257,13 +1363,21 @@ if ($modules{'psnfss'}) {
 
     chdir "$dir_build/psnfss";
 
-    run("$prg_pdflatextds -draftmode psfonts.dtx");
-    run("$prg_pdflatextds psfonts.dtx");
+    cache 'psnfss', 'psfonts', sub {
+        run("$prg_pdflatextds -draftmode psfonts.dtx");
+        final_begin;
+        run("$prg_pdflatextds psfonts.dtx");
+        final_end;
+    };
     install_pdf('psnfss', 'psfonts');
 
-    run("$prg_pdflatextds -draftmode psnfss2e.drv");
-    run("$prg_pdflatextds -draftmode psnfss2e.drv");
-    run("$prg_pdflatextds psnfss2e.drv");
+    cache 'psnfss', 'psnfss2e', sub {
+        run("$prg_pdflatextds -draftmode psnfss2e.drv");
+        run("$prg_pdflatextds -draftmode psnfss2e.drv");
+        final_begin;
+        run("$prg_pdflatextds psnfss2e.drv");
+        final_end;
+    };
     install_pdf('psnfss', 'psnfss2e');
 
     chdir $cwd;
@@ -1278,21 +1392,30 @@ if ($modules{'babel'}) {
     }
     sub simple_doc ($) {
         my $file = shift;
+        my $file_base = $file;
+        $file_base =~ s/\.\w{3}$//;
 
-        run("$prg_lualatextds -draftmode $file");
-        run("$prg_lualatextds $file");
-        $file =~ s/\.\w{3}$//;
-        install_babel_pdf($file);
+        cache 'babel', $file_base, sub {
+            run("$prg_lualatextds -draftmode $file");
+            final_begin;
+            run("$prg_lualatextds $file");
+            final_end;
+        };
+        install_babel_pdf($file_base);
     }
     sub generate_babel_doc ($) {
         my $doc  = shift;
         my $drv  = "$cwd/$dir_tex/ams.drv";
 
         symlink $drv, "$doc.drv";
-        run("$prg_lualatextds -draftmode $doc.drv");
-        run("$prg_lualatextds -draftmode $doc.drv");
-        run("$prg_lualatextds -draftmode $doc.drv");
-        run("$prg_lualatextds $doc.drv");
+        cache 'babel', $doc, sub {
+            run("$prg_lualatextds -draftmode $doc.drv");
+            run("$prg_lualatextds -draftmode $doc.drv");
+            run("$prg_lualatextds -draftmode $doc.drv");
+            final_begin;
+            run("$prg_lualatextds $doc.drv");
+            final_end;
+        };
         install_babel_pdf($doc);
     }
 
@@ -1319,14 +1442,18 @@ if ($modules{'babel'}) {
         tb1604
     ];
 
-    run("$prg_pdflatextds -draftmode babel.tex");
-    run_makeindex('babel.idx', 'bbind.ist');
-    run_makeindex('babel.glo', 'bbglo.ist', 'babel.gls');
-    run("$prg_pdflatextds -draftmode babel.tex");
-    run_makeindex('babel.idx', 'bbind.ist');
-    run_makeindex('babel.glo', 'bbglo.ist', 'babel.gls');
-    run("$prg_pdflatextds -draftmode babel.tex");
-    run("$prg_pdflatextds babel.tex");
+    cache 'babel', 'babel', sub {
+        run("$prg_pdflatextds -draftmode babel.tex");
+        run_makeindex('babel.idx', 'bbind.ist');
+        run_makeindex('babel.glo', 'bbglo.ist', 'babel.gls');
+        run("$prg_pdflatextds -draftmode babel.tex");
+        run_makeindex('babel.idx', 'bbind.ist');
+        run_makeindex('babel.glo', 'bbglo.ist', 'babel.gls');
+        run("$prg_pdflatextds -draftmode babel.tex");
+        final_begin;
+        run("$prg_pdflatextds babel.tex");
+        final_end;
+    };
     install_babel_pdf('babel');
 
     chdir $cwd;
@@ -1359,10 +1486,14 @@ END_TEXT
     close(OUT);
     close(IN);
 
-    unlink('tds.aux');
-    run("$prg_lualatextds -draftmode $file_tds_new");
-    run("$prg_lualatextds -draftmode $file_tds_new");
-    run("$prg_lualatextds $file_tds_new");
+    cache 'tds', 'tds', sub {
+        unlink('tds.aux');
+        run("$prg_lualatextds -draftmode $file_tds_new");
+        run("$prg_lualatextds -draftmode $file_tds_new");
+        final_begin;
+        run("$prg_lualatextds $file_tds_new");
+        final_end;
+    };
     install_gen_pdf('', 'tds', 'tds');
 
     chdir $cwd;
@@ -1382,12 +1513,16 @@ if ($modules{'knuth'}) {
 
         foreach my $entry (@list) {
             symlink $knuth_drv, "$entry.drv";
-            run("$prg_weave $entry.web")
-                    unless $entry eq 'webman'
-                        or $entry eq 'tripman'
-                        or $entry eq 'trapman';
-            run("$prg_pdftex -draftmode $entry.drv");
-            run("$prg_pdftex $entry.drv");
+            cache 'knuth', $entry, sub {
+                run("$prg_weave $entry.web")
+                        unless $entry eq 'webman'
+                            or $entry eq 'tripman'
+                            or $entry eq 'trapman';
+                run("$prg_pdftex -draftmode $entry.drv");
+                final_begin;
+                run("$prg_pdftex $entry.drv");
+                final_end;
+            };
             install_gen_pdf('knuth', $dir, $entry);
         }
     }
@@ -1421,14 +1556,26 @@ if ($modules{'knuth'}) {
         mf
     ]);
 
-    run("$prg_pdftex tripman");
+    cache 'knuth', 'tripman', sub {
+        final_begin;
+        run("$prg_pdftex tripman");
+        final_end;
+    };
     install_gen_pdf('knuth', 'tex', 'tripman');
 
-    run("$prg_pdftex trapman");
+    cache 'knuth', 'trapman', sub {
+        final_begin;
+        run("$prg_pdftex trapman");
+        final_end;
+    };
     install_gen_pdf('knuth', 'mf', 'trapman');
 
     symlink "$cwd/$dir_tex/errorlog.drv", 'errorlog.drv';
-    run("$prg_pdftex errorlog.drv");
+    cache 'knuth', 'errorlog', sub {
+        final_begin;
+        run("$prg_pdftex errorlog.drv");
+        final_end;
+    };
     install_gen_pdf('knuth', 'errata', 'errorlog');
 
     # last bug date is used for errata.tex's today
@@ -1481,10 +1628,18 @@ if ($modules{'knuth'}) {
         new
     ]) {
         symlink "$cwd/$dir_tex/errata.drv", "errata_$entry.tex";
-        run("$prg_pdftex errata_$entry.tex");
+        cache 'knuth', "errata_$entry", sub {
+            final_begin;
+            run("$prg_pdftex errata_$entry.tex");
+            final_end;
+        }
     }
     symlink "$cwd/$dir_tex/errata.all", 'errata.all';
-    run("$prg_pdftex errata.all");
+    cache 'knuth', 'errata', sub {
+        final_begin;
+        run("$prg_pdftex errata.all");
+        final_end;
+    };
     install_gen_pdf('knuth', 'errata', 'errata');
 
     chdir $cwd;
@@ -1499,9 +1654,13 @@ if ($modules{'etex'}) {
     my $entry = 'etex_man';
     my $etex_man_drv = "$cwd/$dir_tex/$entry.drv";
     symlink $etex_man_drv, "$entry.drv";
-    run("$prg_lualatextds -draftmode $entry.drv");
-    run("$prg_lualatextds -draftmode $entry.drv");
-    run("$prg_lualatextds $entry.drv");
+    cache 'etex', $entry, sub {
+        run("$prg_lualatextds -draftmode $entry.drv");
+        run("$prg_lualatextds -draftmode $entry.drv");
+        final_begin;
+        run("$prg_lualatextds $entry.drv");
+        final_end;
+    };
     install_gen_pdf('etex', 'base', $entry);
 
     chdir $cwd;
@@ -1585,6 +1744,12 @@ section('Distrib');
 ### Display result
 section('Result');
 {
+    print <<"END_CACHE";
+
+* PDF cached/generated: $count_cache/$count_generate
+
+END_CACHE
+
     for my $pkg (@list_modules) {
         my $file = "$dir_distrib/$pkg.tds.zip";
         if (-f $file) {
@@ -1685,11 +1850,25 @@ sub section ($) {
     1;
 }
 
+my $final = 0;
+sub final_check ($) {
+    my $expected = shift;
+    $final == $expected
+            or die "!!! Error: Wrong final state `$final', expected `$expected'!\n";
+}
 sub final_begin () {
+    final_check(0);
     print "\n--- FINAL BEGIN ---\n";
+    $final = 1;
 }
 sub final_end () {
+    final_check(1);
     print "--- FINAL END ---\n\n";
+    $final = 2;
+}
+sub final_ok () {
+    final_check(2);
+    $final = 0;
 }
 
 sub run ($) {
