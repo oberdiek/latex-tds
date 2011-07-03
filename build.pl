@@ -1243,7 +1243,7 @@ if ($modules{'cyrillic'}) {
             run("$prg_lualatextds $entry"); # hypdestopt
             final_end;
         };
-        install_pdf('cyrillic', $entry);
+        install_pdf('cyrillic', $base);
     }
     chdir $cwd;
 }
