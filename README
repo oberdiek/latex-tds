@@ -1,4 +1,4 @@
-readme.txt for project latex-tds, 2011/07/03
+readme.txt for project latex-tds, 2011/07/26
 
 TABLE OF CONTENTS
 =================
@@ -229,14 +229,16 @@ Configuration
   tex/docstrip.cfg          enables TDS feature and creates directories
   tex/errata.cfg            for errata lists of latex/base
   tex/hyperref.cfg          hyperref configuration file
-  tex/latex-tds.ini         init file for format generation
   tex/ltnews.cfg            for LaTeX News of latex/base
   tex/ltxdoc.cfg            setup for class ltxdoc
   tex/ltxguide.cfg          setup for the guide manuals in latex/base
                             and required/psnfss
   tex/ltugboat.cls          setup for class ltugboat
+  tex/lualatex-tds.ini      init file for format generation for LuaTeX
+  tex/lualatex-tds2.ini     init file for LuaTeX format without LM Math
   tex/manual.cfg            setup for errata list of the LaTeX manual
                             in latex/base
+  tex/pdflatex-tds.ini      init file for format generation for pdfTeX
   tex/tdsguide.cfg          setup for class tdsguide.cls
 
 Documentation driver
@@ -600,3 +602,6 @@ I. HISTORY
     * Caching for PDF generation added.
     * `FINAL' markers in the output of build.pl
       for final (Lua|pdf)TeX runs.
+2011/07/26
+  * PDF generation: Use of package unicode-math with Latin Modern Math
+    where possible.

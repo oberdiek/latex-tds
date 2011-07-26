@@ -88,39 +88,40 @@ my $file_ctan_distrib = "$cwd/$prj.zip";
 my $file_ziptimetree = get_perl_script('ziptimetree');
 my $file_adjust_checksum = get_perl_script('adjust_checksum');
 
-my $prg_checksum    = $file_adjust_checksum;
-my $prg_bibtex      = "bibtex";
-my $prg_chmod       = "chmod";
-my $prg_cp          = 'cp -p';
-my $prg_curl        = 'curl';
-my $prg_docstrip    = 'tex -shell-escape';
-my $prg_epstopdf    = 'epstopdf';
-my $prg_find        = 'find';
+my $prg_checksum     = $file_adjust_checksum;
+my $prg_bibtex       = "bibtex";
+my $prg_chmod        = "chmod";
+my $prg_cp           = 'cp -p';
+my $prg_curl         = 'curl';
+my $prg_docstrip     = 'tex -shell-escape';
+my $prg_epstopdf     = 'epstopdf';
+my $prg_find         = 'find';
 # my $prg_java        = '/work/java-1.5.0/bin/java';
 # java 1.6 don't work with the used version of Multivalent
-my $prg_java        = 'java';
-my $prg_kpsewhich   = 'kpsewhich';
-my $prg_ls          = "ls";
-my $prg_makeindex   = 'makeindex';
-my $prg_mkdir       = 'mkdir';
-my $prg_mv          = 'mv';
-my $prg_patch       = "patch";
-my $prg_lualatex    = 'lualatex';
-my $prg_lualatextds = "lualatex -fmt=$cwd/$dir_build/lualatex-tds";
-my $prg_pdflatex    = 'pdflatex';
-my $prg_pdflatextds = "pdflatex -fmt=$cwd/$dir_build/pdflatex-tds";
-my $prg_pdftex      = "pdftex";
-my $prg_recode      = "recode";
-my $prg_rm          = "rm";
-my $prg_rsync       = "rsync";
-my $prg_sed         = "sed";
-my $prg_sort        = "sort";
-my $prg_texhash     = "texhash";
-my $prg_unzip       = 'unzip';
-my $prg_weave       = 'weave';
-my $prg_wget        = 'wget';
-my $prg_zip         = 'zip';
-my $prg_ziptimetree = $file_ziptimetree;
+my $prg_java         = 'java';
+my $prg_kpsewhich    = 'kpsewhich';
+my $prg_ls           = "ls";
+my $prg_makeindex    = 'makeindex';
+my $prg_mkdir        = 'mkdir';
+my $prg_mv           = 'mv';
+my $prg_patch        = "patch";
+my $prg_lualatex     = 'lualatex';
+my $prg_lualatextds  = "lualatex -fmt=$cwd/$dir_build/lualatex-tds";
+my $prg_lualatextds2 = "lualatex -fmt=$cwd/$dir_build/lualatex-tds2";
+my $prg_pdflatex     = 'pdflatex';
+my $prg_pdflatextds  = "pdflatex -fmt=$cwd/$dir_build/pdflatex-tds";
+my $prg_pdftex       = "pdftex";
+my $prg_recode       = "recode";
+my $prg_rm           = "rm";
+my $prg_rsync        = "rsync";
+my $prg_sed          = "sed";
+my $prg_sort         = "sort";
+my $prg_texhash      = "texhash";
+my $prg_unzip        = 'unzip';
+my $prg_weave        = 'weave';
+my $prg_wget         = 'wget';
+my $prg_zip          = 'zip';
+my $prg_ziptimetree  = $file_ziptimetree;
 
 my $prg_latextds = $prg_lualatextds; ### temporarily
 
@@ -137,6 +138,7 @@ else {
 }
 
 sub install ($@);
+my $final = 0;
 sub final_begin ();
 sub final_end ();
 sub final_ok ();
@@ -176,7 +178,8 @@ GetOptions(
             map { $modules{$_} = 1; } @pkg_list;
         },
     'download!'    => \$opt_download,
-    'postprocess!' => \$opt_postprocess
+    'postprocess!' => \$opt_postprocess,
+    'cache!'       => \$opt_cache,
 ) or die $usage;
 @ARGV == 0 or die $usage;
 @list_modules = grep { $modules{$_}; } @pkg_list;
@@ -191,6 +194,7 @@ if (@list_modules > 0) {
     chdir $dir_build;
     run("$prg_pdflatex -ini -etex ../tex/pdflatex-tds.ini");
     run("$prg_lualatex -ini -etex ../tex/lualatex-tds.ini");
+    run("$prg_lualatex -ini -etex ../tex/lualatex-tds2.ini");
     chdir $cwd;
 }
 
@@ -920,10 +924,12 @@ if ($modules{'base'}) {
     sub base_guide ($) {
         my $guide = "$_[0]guide";
         cache 'base', $guide, sub {
-            run("$prg_lualatextds -draftmode $guide");
-            run("$prg_lualatextds -draftmode $guide");
+            my $latextds = $prg_lualatextds;
+            $latextds = $prg_lualatextds2 if $guide eq 'usrguide';
+            run("$latextds -draftmode $guide");
+            run("$latextds -draftmode $guide");
             final_begin;
-            run("$prg_lualatextds $guide");
+            run("$latextds $guide");
             final_end;
         };
         install_pdf('base', $guide);
@@ -1147,16 +1153,20 @@ if ($modules{'tools'}) {
     foreach my $entry (@list) {
         my $latextds = $prg_lualatextds;
         $latextds = $prg_pdflatextds if $entry eq 'bm';
+        $latextds = $prg_lualatextds2 if $entry eq 'calc'
+                                      or $entry eq 'rawfonts'
+                                      or $entry eq 'showkeys';
+        my $drv = "$entry.dtx";
         cache 'tools', $entry, sub {
-            run("$latextds -draftmode $entry.dtx");
+            run("$latextds -draftmode $drv");
             run_makeindex("$entry.idx", 'gind.ist');
             run_makeindex("$entry.glo", 'gglo.ist', "$entry.gls");
-            run("$latextds -draftmode $entry.dtx");
+            run("$latextds -draftmode $drv");
             run_makeindex("$entry.idx", 'gind.ist');
             run_makeindex("$entry.glo", 'gglo.ist', "$entry.gls");
-            run("$latextds -draftmode $entry.dtx");
+            run("$latextds -draftmode $drv");
             final_begin;
-            run("$latextds $entry.dtx"); # hypdestopt
+            run("$latextds $drv"); # hypdestopt
             final_end;
         };
         install_pdf('tools', $entry);
@@ -1313,6 +1323,9 @@ if ($modules{'amslatex'}) {
                 or $doc eq 'thmtest'
                 or $doc eq 'cite-xs'
                 or $doc eq 'mathscinet';
+        $latextds = $prg_lualatextds2 if $doc eq 'amsldoc'
+                                      or $doc eq 'subeqn'
+                                      or $doc eq 'textcmds';
         $latextds = $prg_pdflatex
                 if $doc eq 'thmtest';
 
@@ -1396,11 +1409,13 @@ if ($modules{'babel'}) {
         my $file = shift;
         my $file_base = $file;
         $file_base =~ s/\.\w{3}$//;
+        my $latextds = $prg_lualatextds;
+        $latextds = $prg_lualatextds2 if $file eq 'athnum.dtx';
 
         cache 'babel', $file_base, sub {
-            run("$prg_lualatextds -draftmode $file");
+            run("$latextds -draftmode $file");
             final_begin;
-            run("$prg_lualatextds $file");
+            run("$latextds $file");
             final_end;
         };
         install_babel_pdf($file_base);
@@ -1852,7 +1867,6 @@ sub section ($) {
     1;
 }
 
-my $final = 0;
 sub final_check ($) {
     my $expected = shift;
     $final == $expected
