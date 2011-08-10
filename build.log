@@ -436,7 +436,7 @@ Applying patch file ltpatch.ltx
 (/home/one/texmf/tex/latex/oberdiek/kvoptions.sty)
 (/home/one/texmf/tex/latex/base/fixltx2e.sty) )
 Beginning to dump on file pdflatex-tds.fmt
- (format=pdflatex-tds 2011.7.26)
+ (format=pdflatex-tds 2011.8.10)
 7646 strings of total length 125460
 77058 memory locations dumped; current usage is 144&75730
 4655 multiletter control sequences
@@ -947,7 +947,7 @@ loading Unicode properties) (/home/one/texmf/tex/latex/graphics/keyval.sty)
 (/home/one/texmf/tex/latex/tools/calc.sty))
 (/t/texlive/tldevsrc/Master/texmf-dist/tex/latex/xpackages/xbase/xparse.sty) )
 Beginning to dump on file lualatex-tds.fmt
- (format=lualatex-tds 2011.7.26)
+ (format=lualatex-tds 2011.8.10)
 11448 strings using 125719 bytes
 1046233 memory locations dumped; current usage is 124&144861
 9107 multiletter control sequences
@@ -1399,7 +1399,7 @@ loading Unicode properties) (/home/one/texmf/tex/latex/graphics/keyval.sty)
 (/home/one/texmf/tex/latex/tools/calc.sty))
 (/t/texlive/tldevsrc/Master/texmf-dist/tex/latex/xpackages/xbase/xparse.sty) )
 Beginning to dump on file lualatex-tds2.fmt
- (format=lualatex-tds2 2011.7.26)
+ (format=lualatex-tds2 2011.8.10)
 11447 strings using 125711 bytes
 1046233 memory locations dumped; current usage is 124&144814
 9106 multiletter control sequences
@@ -1624,11 +1624,12 @@ Archive:  incoming/ctan/doc.zip
   inflating: build/base/doc/ltnews14.tex  
   inflating: build/base/doc/ltnews16.tex  
   inflating: build/base/doc/ltx3info.tex  
-  inflating: build/base/doc/ltnews20.tex  
   inflating: build/base/doc/clsguide.pdf  
   inflating: build/base/doc/fntguide.pdf  
   inflating: build/base/doc/ltnews16.pdf  
   inflating: build/base/doc/encguide.pdf  
+  inflating: build/base/doc/ltnews20.tex  
+  inflating: build/base/doc/ltnews20.pdf  
 * system: cp -p -p build/base/doc/*.tex build/base/
 * system: unzip incoming/ctan/armtex.zip -dbuild/base
 Archive:  incoming/ctan/armtex.zip
@@ -1938,7 +1939,6 @@ Archive:  incoming/ctan/tools.zip
   inflating: build/tools/somedefs.dtx  
   inflating: build/tools/tabularx.dtx  
   inflating: build/tools/theorem.dtx  
-  inflating: build/tools/varioref.dtx  
   inflating: build/tools/xr.dtx      
   inflating: build/tools/xspace.dtx  
   inflating: build/tools/bm.pdf      
@@ -1981,11 +1981,12 @@ Archive:  incoming/ctan/tools.zip
   inflating: build/tools/rawfonts.pdf  
   inflating: build/tools/somedefs.pdf  
   inflating: build/tools/theorem.pdf  
-  inflating: build/tools/varioref.pdf  
   inflating: build/tools/xr.pdf      
   inflating: build/tools/array.pdf   
   inflating: build/tools/README      
   inflating: build/tools/verbatim.dtx  
+  inflating: build/tools/varioref.dtx  
+  inflating: build/tools/varioref.pdf  
 * system: unzip incoming/ctan/amscls.tds.zip -dbuild/amslatex/texmf
 Archive:  incoming/ctan/amscls.tds.zip
    creating: build/amslatex/texmf/bibtex/
@@ -4494,10 +4495,10 @@ Generating file(s) texmf/tex/latex/tools/varioref.sty
 
 Processing file varioref.dtx (package) -> varioref.sty
 File varioref.dtx ended by \endinput.
-Lines  processed: 2089
-Comments removed: 1329
+Lines  processed: 2096
+Comments removed: 1333
 Comments  passed: 26
-Codelines passed: 727
+Codelines passed: 730
 
 
 Generating file(s) texmf/tex/latex/tools/xr.sty 
@@ -7682,7 +7683,7 @@ ZIP-TimeTree 1.3, 2011/04/15 - Copyright (C) 2006, 2011 by Heiko Oberdiek.
 [stats] 9 time updates
 [stats] 11 directories added
 [stats] 326 files added
---> /home/one/work/texprj/latex-tds/distrib/base.tds.zip (9.773.781 bytes)
+--> /home/one/work/texprj/latex-tds/distrib/base.tds.zip (9.773.829 bytes)
 * system: zip -z /home/one/work/texprj/latex-tds/distrib/base.tds.zip </home/one/work/texprj/latex-tds/build/zip-comment.txt
 enter new zip file comment (end with .):
 * system: /home/one/work/texprj/latex-tds/lib/ziptimetree.pl --verbose --noroot /home/one/work/texprj/latex-tds/distrib/amslatex.tds.zip build/amslatex/texmf
@@ -9556,9 +9557,9 @@ ZIP-TimeTree 1.3, 2011/04/15 - Copyright (C) 2006, 2011 by Heiko Oberdiek.
   adding: doc/latex/tools/longtable.pdf (deflated 5%)
   adding: doc/latex/tools/manifest.txt (deflated 55%)
   adding: doc/latex/tools/multicol.pdf (deflated 3%)
-  adding: doc/latex/tools/rawfonts.pdf (deflated 1%)
+  adding: doc/latex/tools/rawfonts.pdf (deflated 5%)
   adding: doc/latex/tools/readme.txt (deflated 59%)
-  adding: doc/latex/tools/showkeys.pdf (deflated 1%)
+  adding: doc/latex/tools/showkeys.pdf (deflated 4%)
   adding: doc/latex/tools/somedefs.pdf (deflated 6%)
   adding: doc/latex/tools/tabularx.pdf (deflated 5%)
   adding: doc/latex/tools/theorem.pdf (deflated 5%)
@@ -9643,7 +9644,7 @@ ZIP-TimeTree 1.3, 2011/04/15 - Copyright (C) 2006, 2011 by Heiko Oberdiek.
 [stats] 8 time updates
 [stats] 9 directories added
 [stats] 94 files added
---> /home/one/work/texprj/latex-tds/distrib/tools.tds.zip (3.515.078 bytes)
+--> /home/one/work/texprj/latex-tds/distrib/tools.tds.zip (3.327.316 bytes)
 * system: zip -z /home/one/work/texprj/latex-tds/distrib/tools.tds.zip </home/one/work/texprj/latex-tds/build/zip-comment.txt
 enter new zip file comment (end with .):
 * system: /home/one/work/texprj/latex-tds/lib/ziptimetree.pl --verbose --noroot /home/one/work/texprj/latex-tds/distrib/latex-tds.tds.zip build/latex-tds/texmf
@@ -10068,9 +10069,9 @@ ZIP-TimeTree 1.3, 2011/04/15 - Copyright (C) 2006, 2011 by Heiko Oberdiek.
   adding: doc/latex/tools/longtable.pdf (deflated 5%)
   adding: doc/latex/tools/manifest.txt (deflated 55%)
   adding: doc/latex/tools/multicol.pdf (deflated 3%)
-  adding: doc/latex/tools/rawfonts.pdf (deflated 1%)
+  adding: doc/latex/tools/rawfonts.pdf (deflated 5%)
   adding: doc/latex/tools/readme.txt (deflated 59%)
-  adding: doc/latex/tools/showkeys.pdf (deflated 1%)
+  adding: doc/latex/tools/showkeys.pdf (deflated 4%)
   adding: doc/latex/tools/somedefs.pdf (deflated 6%)
   adding: doc/latex/tools/tabularx.pdf (deflated 5%)
   adding: doc/latex/tools/theorem.pdf (deflated 5%)
@@ -11755,7 +11756,7 @@ ZIP-TimeTree 1.3, 2011/04/15 - Copyright (C) 2006, 2011 by Heiko Oberdiek.
 [stats] 103 time updates
 [stats] 114 directories added
 [stats] 1808 files added
---> /home/one/work/texprj/latex-tds/distrib/latex-tds.tds.zip (42.294.603 bytes)
+--> /home/one/work/texprj/latex-tds/distrib/latex-tds.tds.zip (42.106.889 bytes)
 * system: zip -z /home/one/work/texprj/latex-tds/distrib/latex-tds.tds.zip </home/one/work/texprj/latex-tds/build/zip-comment.txt
 enter new zip file comment (end with .):
 * system: /home/one/work/texprj/latex-tds/lib/ziptimetree.pl --verbose --noroot /home/one/work/texprj/latex-tds/distrib/source.tds.zip build/source/texmf
@@ -12018,19 +12019,19 @@ enter new zip file comment (end with .):
 
 * PDF cached/generated: 160/0
 
--rw-r--r--    1 one      users     9773987 2011-07-26 12:41 distrib/base.tds.zip
--rw-r--r--    1 one      users     5291708 2011-07-26 12:41 distrib/amslatex.tds.zip
--rw-r--r--    1 one      users     3642654 2011-07-26 12:41 distrib/babel.tds.zip
--rw-r--r--    1 one      users     1463429 2011-07-26 12:41 distrib/psnfss.tds.zip
--rw-r--r--    1 one      users      653352 2011-07-26 12:41 distrib/cyrillic.tds.zip
--rw-r--r--    1 one      users      871026 2011-07-26 12:41 distrib/graphics.tds.zip
--rw-r--r--    1 one      users     3515284 2011-07-26 12:41 distrib/tools.tds.zip
--rw-r--r--    1 one      users    42294809 2011-07-26 12:41 distrib/latex-tds.tds.zip
--rw-r--r--    1 one      users       89427 2011-07-26 12:41 distrib/source.tds.zip
+-rw-r--r--    1 one      users     9774035 2011-08-10 22:21 distrib/base.tds.zip
+-rw-r--r--    1 one      users     5291708 2011-08-10 22:22 distrib/amslatex.tds.zip
+-rw-r--r--    1 one      users     3642654 2011-08-10 22:22 distrib/babel.tds.zip
+-rw-r--r--    1 one      users     1463429 2011-08-10 22:22 distrib/psnfss.tds.zip
+-rw-r--r--    1 one      users      653352 2011-08-10 22:22 distrib/cyrillic.tds.zip
+-rw-r--r--    1 one      users      871026 2011-08-10 22:22 distrib/graphics.tds.zip
+-rw-r--r--    1 one      users     3327522 2011-08-10 22:22 distrib/tools.tds.zip
+-rw-r--r--    1 one      users    42107095 2011-08-10 22:22 distrib/latex-tds.tds.zip
+-rw-r--r--    1 one      users       89427 2011-08-10 22:22 distrib/source.tds.zip
 -rw-r--r--    1 one      users       22883 2011-07-26 12:37 distrib/readme.txt
--rw-r--r--    1 one      users      253743 2011-07-26 12:41 distrib/tds.tds.zip
--rw-r--r--    1 one      users    16602845 2011-07-26 12:41 distrib/knuth.tds.zip
--rw-r--r--    1 one      users      144890 2011-07-26 12:41 distrib/etex.tds.zip
--rw-r--r--    1 one      users    84621843 2011-07-26 12:41 /home/one/work/texprj/latex-tds/latex-tds.zip
-* Elapsed time: 2:21
+-rw-r--r--    1 one      users      253743 2011-08-10 22:22 distrib/tds.tds.zip
+-rw-r--r--    1 one      users    16602845 2011-08-10 22:22 distrib/knuth.tds.zip
+-rw-r--r--    1 one      users      144890 2011-08-10 22:22 distrib/etex.tds.zip
+-rw-r--r--    1 one      users    84246415 2011-08-10 22:22 /home/one/work/texprj/latex-tds/latex-tds.zip
+* Elapsed time: 2:27
 

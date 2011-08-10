@@ -1,4 +1,4 @@
-readme.txt for project latex-tds, 2011/07/26
+readme.txt for project latex-tds, 2011/08/10
 
 TABLE OF CONTENTS
 =================
@@ -605,3 +605,5 @@ I. HISTORY
 2011/07/26
   * PDF generation: Use of package unicode-math with Latin Modern Math
     where possible.
+2011/08/10
+  * Update of tools.
