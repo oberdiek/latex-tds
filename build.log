@@ -11756,7 +11756,7 @@ ZIP-TimeTree 1.3, 2011/04/15 - Copyright (C) 2006, 2011 by Heiko Oberdiek.
 [stats] 103 time updates
 [stats] 114 directories added
 [stats] 1808 files added
---> /home/one/work/texprj/latex-tds/distrib/latex-tds.tds.zip (42.106.889 bytes)
+--> /home/one/work/texprj/latex-tds/distrib/latex-tds.tds.zip (42.106.897 bytes)
 * system: zip -z /home/one/work/texprj/latex-tds/distrib/latex-tds.tds.zip </home/one/work/texprj/latex-tds/build/zip-comment.txt
 enter new zip file comment (end with .):
 * system: /home/one/work/texprj/latex-tds/lib/ziptimetree.pl --verbose --noroot /home/one/work/texprj/latex-tds/distrib/source.tds.zip build/source/texmf
@@ -11826,7 +11826,7 @@ ZIP-TimeTree 1.3, 2011/04/15 - Copyright (C) 2006, 2011 by Heiko Oberdiek.
 [stats] 8 time updates
 [stats] 8 directories added
 [stats] 44 files added
---> /home/one/work/texprj/latex-tds/distrib/source.tds.zip (89.221 bytes)
+--> /home/one/work/texprj/latex-tds/distrib/source.tds.zip (89.229 bytes)
 * system: zip -z /home/one/work/texprj/latex-tds/distrib/source.tds.zip </home/one/work/texprj/latex-tds/build/zip-comment.txt
 enter new zip file comment (end with .):
 * system: /home/one/work/texprj/latex-tds/lib/ziptimetree.pl --verbose --noroot /home/one/work/texprj/latex-tds/distrib/tds.tds.zip build/tds/texmf
@@ -12019,19 +12019,19 @@ enter new zip file comment (end with .):
 
 * PDF cached/generated: 160/0
 
--rw-r--r--    1 one      users     9774035 2011-08-10 22:21 distrib/base.tds.zip
--rw-r--r--    1 one      users     5291708 2011-08-10 22:22 distrib/amslatex.tds.zip
--rw-r--r--    1 one      users     3642654 2011-08-10 22:22 distrib/babel.tds.zip
--rw-r--r--    1 one      users     1463429 2011-08-10 22:22 distrib/psnfss.tds.zip
--rw-r--r--    1 one      users      653352 2011-08-10 22:22 distrib/cyrillic.tds.zip
--rw-r--r--    1 one      users      871026 2011-08-10 22:22 distrib/graphics.tds.zip
--rw-r--r--    1 one      users     3327522 2011-08-10 22:22 distrib/tools.tds.zip
--rw-r--r--    1 one      users    42107095 2011-08-10 22:22 distrib/latex-tds.tds.zip
--rw-r--r--    1 one      users       89427 2011-08-10 22:22 distrib/source.tds.zip
--rw-r--r--    1 one      users       22883 2011-07-26 12:37 distrib/readme.txt
--rw-r--r--    1 one      users      253743 2011-08-10 22:22 distrib/tds.tds.zip
--rw-r--r--    1 one      users    16602845 2011-08-10 22:22 distrib/knuth.tds.zip
--rw-r--r--    1 one      users      144890 2011-08-10 22:22 distrib/etex.tds.zip
--rw-r--r--    1 one      users    84246415 2011-08-10 22:22 /home/one/work/texprj/latex-tds/latex-tds.zip
-* Elapsed time: 2:27
+-rw-r--r--    1 one      users     9774035 2011-08-10 22:28 distrib/base.tds.zip
+-rw-r--r--    1 one      users     5291708 2011-08-10 22:28 distrib/amslatex.tds.zip
+-rw-r--r--    1 one      users     3642654 2011-08-10 22:28 distrib/babel.tds.zip
+-rw-r--r--    1 one      users     1463429 2011-08-10 22:28 distrib/psnfss.tds.zip
+-rw-r--r--    1 one      users      653352 2011-08-10 22:28 distrib/cyrillic.tds.zip
+-rw-r--r--    1 one      users      871026 2011-08-10 22:28 distrib/graphics.tds.zip
+-rw-r--r--    1 one      users     3327522 2011-08-10 22:28 distrib/tools.tds.zip
+-rw-r--r--    1 one      users    42107103 2011-08-10 22:29 distrib/latex-tds.tds.zip
+-rw-r--r--    1 one      users       89435 2011-08-10 22:29 distrib/source.tds.zip
+-rw-r--r--    1 one      users       22915 2011-08-10 22:26 distrib/readme.txt
+-rw-r--r--    1 one      users      253743 2011-08-10 22:29 distrib/tds.tds.zip
+-rw-r--r--    1 one      users    16602845 2011-08-10 22:29 distrib/knuth.tds.zip
+-rw-r--r--    1 one      users      144890 2011-08-10 22:29 distrib/etex.tds.zip
+-rw-r--r--    1 one      users    84246463 2011-08-10 22:29 /home/one/work/texprj/latex-tds/latex-tds.zip
+* Elapsed time: 2:21
 
