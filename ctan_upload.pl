@@ -12,7 +12,7 @@ my $email = 'heiko.oberdiek@googlemail.com';
 my $ctan_dir = 'macros/latex/contrib/latex-tds';
 my $license = 'free';
 my $freeversion = 'lppl';
-my $DoNotAnnounce = 0;
+my $announce = 0;
 my $file = 'latex-tds.zip';
 my $filename = 'latex-tds.zip';
 my $filetype = 'application/zip';
@@ -54,20 +54,17 @@ my $usage = <<"END_OF_USAGE";
 $0\n
 Syntax: $0 [options]
 Options:
-  --noannounce   "Announcement is not needed"
+  --announce     "Announcement is needed"
   --help         help screen
 END_OF_USAGE
 
 use Getopt::Long;
-my $DoNotAnnounce = 'No';
 GetOptions(
-  'noannounce' => sub { $DoNotAnnounce = 'Yes' },
+  'announce' => sub { $announce = 1 },
   'help' => sub { print $usage; exit(0); },
 ) or die $usage;
 
-if ($DoNotAnnounce) {
-    $args{'DoNotAnnounce'} = $DoNotAnnounce;
-}
+$args{'DoNotAnnounce'} = $announce ? 'Yes' : 'No';
 
 my $date = '';
 open(IN, '<', $file_readme) or die "!!! Error: Cannot open `$file_readme'!\n";
