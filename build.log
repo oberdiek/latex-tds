@@ -1,4 +1,4 @@
-Building latex-tds, 2011/07/26 v1.167, Copyright 2006-2011 Heiko Oberdiek
+Building latex-tds, 2011/11/14 v1.168, Copyright 2006-2011 Heiko Oberdiek
 =========================================================================
 * Build modules: base amslatex babel psnfss cyrillic graphics tools latex-tds source tds knuth etex
 
@@ -436,10 +436,10 @@ Applying patch file ltpatch.ltx
 (/home/one/texmf/tex/latex/oberdiek/kvoptions.sty)
 (/home/one/texmf/tex/latex/base/fixltx2e.sty) )
 Beginning to dump on file pdflatex-tds.fmt
- (format=pdflatex-tds 2011.10.5)
-7646 strings of total length 125460
-77058 memory locations dumped; current usage is 144&75730
-4655 multiletter control sequences
+ (format=pdflatex-tds 2011.11.14)
+7673 strings of total length 125940
+77849 memory locations dumped; current usage is 144&76521
+4682 multiletter control sequences
 \font\nullfont=nullfont
 \font\OMX/cmex/m/n/10=cmex10
 \font\tenln=line10
@@ -953,10 +953,10 @@ loading Unicode properties) (/home/one/texmf/tex/latex/graphics/keyval.sty)
 (/t/texlive/tldevsrc/Master/texmf-dist/tex/latex/l3packages/xparse/xparse.sty) 
 )
 Beginning to dump on file lualatex-tds.fmt
- (format=lualatex-tds 2011.10.5)
-12200 strings using 137631 bytes
-1046233 memory locations dumped; current usage is 133&165809
-9824 multiletter control sequences
+ (format=lualatex-tds 2011.11.14)
+12259 strings using 138671 bytes
+1046233 memory locations dumped; current usage is 133&167086
+9883 multiletter control sequences
 \font\nullfont=nullfont
 \font\OMX/cmex/m/n/10=cmex10
 \font\tenln=line10
@@ -1411,10 +1411,10 @@ loading Unicode properties) (/home/one/texmf/tex/latex/graphics/keyval.sty)
 (/t/texlive/tldevsrc/Master/texmf-dist/tex/latex/l3packages/xparse/xparse.sty) 
 )
 Beginning to dump on file lualatex-tds2.fmt
- (format=lualatex-tds2 2011.10.5)
-12199 strings using 137623 bytes
-1046233 memory locations dumped; current usage is 133&165762
-9823 multiletter control sequences
+ (format=lualatex-tds2 2011.11.14)
+12258 strings using 138663 bytes
+1046233 memory locations dumped; current usage is 133&167039
+9882 multiletter control sequences
 \font\nullfont=nullfont
 \font\OMX/cmex/m/n/10=cmex10
 \font\tenln=line10
@@ -1761,127 +1761,127 @@ Archive:  incoming/ctan/amslatex.zip
 * system: unzip incoming/ctan/babel.zip -dbuild
 Archive:  incoming/ctan/babel.zip
    creating: build/babel/
-  inflating: build/babel/00readme.heb  
+  inflating: build/babel/italian.dtx  
   inflating: build/babel/00readme.txt  
-  inflating: build/babel/GreekFonts.txt  
-  inflating: build/babel/albanian.dtx  
-  inflating: build/babel/albanian.ins  
-  inflating: build/babel/announce.txt  
-  inflating: build/babel/athnum.dtx  
   inflating: build/babel/babel.dtx   
+  inflating: build/babel/todo.txt    
+  inflating: build/babel/language.dat  
+  inflating: build/babel/install.txt  
+  inflating: build/babel/bugs.txt    
+  inflating: build/babel/changes.txt  
+  inflating: build/babel/fixes.txt   
   inflating: build/babel/babel.ins   
+  inflating: build/babel/turkish.dtx  
+  inflating: build/babel/swedish.dtx  
+  inflating: build/babel/spanish.dtx  
+  inflating: build/babel/slovene.dtx  
+  inflating: build/babel/slovak.dtx  
+  inflating: build/babel/romanian.dtx  
+  inflating: build/babel/polish.dtx  
+  inflating: build/babel/portuges.dtx  
+  inflating: build/babel/norsk.dtx   
+  inflating: build/babel/magyar.dtx  
+  inflating: build/babel/germanb.dtx  
+  inflating: build/babel/galician.dtx  
+  inflating: build/babel/finnish.dtx  
+  inflating: build/babel/english.dtx  
+  inflating: build/babel/dutch.dtx   
+  inflating: build/babel/danish.dtx  
+  inflating: build/babel/croatian.dtx  
+  inflating: build/babel/czech.dtx   
+  inflating: build/babel/catalan.dtx  
   inflating: build/babel/bahasa.dtx  
-  inflating: build/babel/bahasa.ins  
-  inflating: build/babel/bahasam.dtx  
-  inflating: build/babel/base.ins    
-  inflating: build/babel/basque.dtx  
-  inflating: build/babel/basque.ins  
-  inflating: build/babel/bbcompat.dtx  
   inflating: build/babel/bbidxglo.dtx  
+  inflating: build/babel/scottish.dtx  
   inflating: build/babel/bbplain.dtx  
   inflating: build/babel/breton.dtx  
-  inflating: build/babel/breton.ins  
-  inflating: build/babel/bugs.txt    
-  inflating: build/babel/bulgarian.dtx  
-  inflating: build/babel/bulgarian.ins  
-  inflating: build/babel/catalan.dtx  
-  inflating: build/babel/catalan.ins  
-  inflating: build/babel/changes.txt  
-  inflating: build/babel/croatian.dtx  
-  inflating: build/babel/croatian.ins  
-  inflating: build/babel/czech.dtx   
-  inflating: build/babel/czech.ins   
-  inflating: build/babel/danish.dtx  
-  inflating: build/babel/danish.ins  
-  inflating: build/babel/dutch.dtx   
-  inflating: build/babel/dutch.ins   
-  inflating: build/babel/english.dtx  
-  inflating: build/babel/english.ins  
-  inflating: build/babel/esperanto.dtx  
-  inflating: build/babel/esperanto.ins  
-  inflating: build/babel/estonian.dtx  
-  inflating: build/babel/estonian.ins  
-  inflating: build/babel/finnish.dtx  
-  inflating: build/babel/finnish.ins  
-  inflating: build/babel/fixes.txt   
-  inflating: build/babel/frenchb.dtx  
-  inflating: build/babel/frenchb.ins  
-  inflating: build/babel/galician.dtx  
-  inflating: build/babel/galician.ins  
-  inflating: build/babel/german.ins  
-  inflating: build/babel/germanb.dtx  
-  inflating: build/babel/greek.dtx   
-  inflating: build/babel/greek.fdd   
-  inflating: build/babel/greek.ins   
-  inflating: build/babel/grmath.dtx  
-  inflating: build/babel/grsymb.dtx  
-  inflating: build/babel/heb209.dtx  
-  inflating: build/babel/hebinp.dtx  
-  inflating: build/babel/hebrew.dtx  
-  inflating: build/babel/hebrew.fdd  
-  inflating: build/babel/hebrew.ins  
-  inflating: build/babel/howtoget.txt  
-  inflating: build/babel/icelandic.dtx  
-  inflating: build/babel/icelandic.ins  
-  inflating: build/babel/install.OzTeX-4  
-  inflating: build/babel/install.OzTeX-pre4  
-  inflating: build/babel/install.txt  
-  inflating: build/babel/interlingua.dtx  
-  inflating: build/babel/interlingua.ins  
-  inflating: build/babel/irish.dtx   
-  inflating: build/babel/irish.ins   
-  inflating: build/babel/italian.dtx  
-  inflating: build/babel/italian.ins  
-  inflating: build/babel/language.dat  
   inflating: build/babel/language.skeleton  
-  inflating: build/babel/latin.dtx   
-  inflating: build/babel/latin.ins   
-  inflating: build/babel/legal.bbl   
+  inflating: build/babel/tb1401.tex  
+  inflating: build/babel/tb1202.tex  
+  inflating: build/babel/usorbian.dtx  
   inflating: build/babel/lsorbian.dtx  
-  inflating: build/babel/magyar.dtx  
-  inflating: build/babel/magyar.ins  
-  inflating: build/babel/manifest.bbl  
+  inflating: build/babel/irish.dtx   
+  inflating: build/babel/estonian.dtx  
+  inflating: build/babel/bbcompat.dtx  
+  inflating: build/babel/grmath.dtx  
+  inflating: build/babel/athnum.dtx  
+  inflating: build/babel/announce.txt  
   inflating: build/babel/ngermanb.dtx  
-  inflating: build/babel/norsk.dtx   
-  inflating: build/babel/norsk.ins   
-  inflating: build/babel/polish.dtx  
-  inflating: build/babel/polish.ins  
-  inflating: build/babel/portuges.dtx  
-  inflating: build/babel/portuges.ins  
-  inflating: build/babel/romanian.dtx  
-  inflating: build/babel/romanian.ins  
+  inflating: build/babel/greek.ins   
+  inflating: build/babel/tb1604.tex  
+  inflating: build/babel/greek.fdd   
+  inflating: build/babel/welsh.dtx   
   inflating: build/babel/russianb.dtx  
+  inflating: build/babel/greek.dtx   
+  inflating: build/babel/frenchb.dtx  
+  inflating: build/babel/manifest.bbl  
+  inflating: build/babel/howtoget.txt  
+  inflating: build/babel/GreekFonts.txt  
+  inflating: build/babel/ukraineb.dtx  
+  inflating: build/babel/scottish.ins  
+  inflating: build/babel/base.ins    
+  inflating: build/babel/welsh.ins   
+  inflating: build/babel/swedish.ins  
+  inflating: build/babel/spanish.ins  
+  inflating: build/babel/slovak.ins  
+  inflating: build/babel/slovene.ins  
+  inflating: build/babel/serbian.dtx  
+  inflating: build/babel/sorbian.ins  
+  inflating: build/babel/serbian.ins  
   inflating: build/babel/russianb.ins  
   inflating: build/babel/samin.dtx   
   inflating: build/babel/samin.ins   
-  inflating: build/babel/scottish.dtx  
-  inflating: build/babel/scottish.ins  
-  inflating: build/babel/serbian.dtx  
-  inflating: build/babel/serbian.ins  
-  inflating: build/babel/slovak.dtx  
-  inflating: build/babel/slovak.ins  
-  inflating: build/babel/slovene.dtx  
-  inflating: build/babel/slovene.ins  
-  inflating: build/babel/sorbian.ins  
-  inflating: build/babel/spanish.dtx  
-  inflating: build/babel/spanish.ins  
-  inflating: build/babel/swedish.dtx  
-  inflating: build/babel/swedish.ins  
-  inflating: build/babel/tb1202.tex  
-  inflating: build/babel/tb1401.tex  
-  inflating: build/babel/tb1604.tex  
-  inflating: build/babel/todo.txt    
-  inflating: build/babel/turkish.dtx  
-  inflating: build/babel/turkish.ins  
-  inflating: build/babel/ukraineb.dtx  
+  inflating: build/babel/install.OzTeX-pre4  
   inflating: build/babel/ukraineb.ins  
-  inflating: build/babel/usage.tex   
-  inflating: build/babel/usorbian.dtx  
-  inflating: build/babel/welsh.dtx   
-  inflating: build/babel/welsh.ins   
+  inflating: build/babel/turkish.ins  
+  inflating: build/babel/romanian.ins  
+  inflating: build/babel/portuges.ins  
+  inflating: build/babel/polish.ins  
+  inflating: build/babel/magyar.ins  
+  inflating: build/babel/norsk.ins   
+  inflating: build/babel/latin.ins   
+  inflating: build/babel/latin.dtx   
+  inflating: build/babel/italian.ins  
+  inflating: build/babel/icelandic.dtx  
+  inflating: build/babel/irish.ins   
   inflating: build/babel/babel.pdf   
-  inflating: build/babel/kurmanji.dtx  
+  inflating: build/babel/heb209.dtx  
+  inflating: build/babel/00readme.heb  
+  inflating: build/babel/icelandic.ins  
+  inflating: build/babel/hebrew.fdd  
+  inflating: build/babel/hebinp.dtx  
+  inflating: build/babel/hebrew.ins  
+  inflating: build/babel/hebrew.dtx  
+  inflating: build/babel/usage.tex   
+  inflating: build/babel/german.ins  
+  inflating: build/babel/galician.ins  
+  inflating: build/babel/finnish.ins  
+  inflating: build/babel/frenchb.ins  
+  inflating: build/babel/estonian.ins  
+  inflating: build/babel/esperanto.dtx  
+  inflating: build/babel/esperanto.ins  
+  inflating: build/babel/english.ins  
+  inflating: build/babel/dutch.ins   
+  inflating: build/babel/czech.ins   
+  inflating: build/babel/danish.ins  
+  inflating: build/babel/croatian.ins  
+  inflating: build/babel/catalan.ins  
+  inflating: build/babel/bulgarian.dtx  
+  inflating: build/babel/bulgarian.ins  
+  inflating: build/babel/basque.dtx  
+  inflating: build/babel/breton.ins  
+  inflating: build/babel/basque.ins  
+  inflating: build/babel/bahasa.ins  
   inflating: build/babel/kurmanji.ins  
+  inflating: build/babel/install.OzTeX-4  
+  inflating: build/babel/kurmanji.dtx  
+  inflating: build/babel/interlingua.ins  
+  inflating: build/babel/interlingua.dtx  
+  inflating: build/babel/grsymb.dtx  
+  inflating: build/babel/legal.bbl   
+  inflating: build/babel/albanian.dtx  
+  inflating: build/babel/bahasam.dtx  
+  inflating: build/babel/albanian.ins  
 * system: unzip incoming/ctan/psnfss.zip -dbuild
 Archive:  incoming/ctan/psnfss.zip
    creating: build/psnfss/
@@ -3028,6 +3028,8 @@ patching file build/amslatex/amscls/amsclass.dtx
 * system: patch build/amslatex/amsrefs/changes.tex patch/changes.tex.diff
 patching file build/amslatex/amsrefs/changes.tex
 * system: recode latin1..utf8 build/amslatex/amsrefs/changes.tex
+* system: patch build/babel/hebrew.fdd patch/hebrew.fdd.diff
+patching file build/babel/hebrew.fdd
 
 === Docstrip ===
 * system: tex -shell-escape unpack.ins
@@ -4689,10 +4691,10 @@ Processing file babel.dtx (package) -> babel.sty
                           (kernel) -> switch.def
                           (kernel,patterns) -> hyphen.cfg
 File babel.dtx ended by \endinput.
-Lines  processed: 5898
-Comments removed: 4144
+Lines  processed: 5887
+Comments removed: 4140
 Comments  passed: 25
-Codelines passed: 1658
+Codelines passed: 1651
 
 
 Generating file(s) texmf/tex/generic/babel/plain.def texmf/tex/generic/babel/bp
@@ -4824,10 +4826,10 @@ bel/user.drv
 Processing file babel.dtx (driver) -> babel.drv
                           (driver,user) -> user.drv
 File babel.dtx ended by \endinput.
-Lines  processed: 5898
-Comments removed: 4144
+Lines  processed: 5887
+Comments removed: 4140
 Comments  passed: 25
-Codelines passed: 1658
+Codelines passed: 1651
 
 
 Generating file(s) texmf/makeindex/babel/bbind.ist texmf/makeindex/babel/bbglo.
@@ -5054,20 +5056,20 @@ Generating file(s) texmf/tex/generic/babel/frenchb.ldf
 
 Processing file frenchb.dtx (code) -> frenchb.ldf
 File frenchb.dtx ended by \endinput.
-Lines  processed: 2658
-Comments removed: 1605
+Lines  processed: 3116
+Comments removed: 1872
 Comments  passed: 38
-Codelines passed: 998
+Codelines passed: 1189
 
 
 Generating file(s) texmf/tex/generic/babel/frenchb.cfg 
 
 Processing file frenchb.dtx (cfg) -> frenchb.cfg
 File frenchb.dtx ended by \endinput.
-Lines  processed: 2658
-Comments removed: 1605
+Lines  processed: 3116
+Comments removed: 1872
 Comments  passed: 38
-Codelines passed: 998
+Codelines passed: 1189
 
 ) (./galician.ins
 
@@ -5459,10 +5461,10 @@ romanidx.sty
 Processing file spanish.dtx (code) -> spanish.ldf
                             (indexes) -> romanidx.sty
 File spanish.dtx ended by \endinput.
-Lines  processed: 2720
-Comments removed: 1736
+Lines  processed: 2728
+Comments removed: 1733
 Comments  passed: 13
-Codelines passed: 966
+Codelines passed: 977
 
 ) (./swedish.ins
 
@@ -5523,10 +5525,10 @@ Codelines passed: 51
 )
 Overall statistics:
 Files  processed: 62
-Lines  processed: 53701
-Comments removed: 33815
+Lines  processed: 54603
+Comments removed: 34338
 Comments  passed: 1517
-Codelines passed: 16899
+Codelines passed: 17278
  ) )
 No pages of output.
 Transcript written on babel.log.
@@ -7171,7 +7173,7 @@ Transcript written on grfguide.log.
 * system: mkdir -p 'build/source/texmf/source/latex/latex-tds/tex'
 * system: cp -p tex/ams.drv tex/babel.tex tex/doc_lppl.tex tex/docstrip.cfg tex/errata.all tex/errata.cfg tex/errata.drv tex/errorlog.drv tex/etex_man.drv tex/greek-usage.tex tex/hyperref.cfg tex/knuth.drv tex/ltnews.cfg tex/ltnews.tex tex/ltugboat.cfg tex/ltxcheck.drv tex/ltxdoc.cfg tex/ltxguide.cfg tex/lualatex-tds.ini tex/lualatex-tds2.ini tex/manual.cfg tex/pdflatex-tds.ini tex/psnfss2e.drv tex/tdsguide.cfg tex/tools-overview.cls tex/tools.tex build/source/texmf/source/latex/latex-tds/tex/
 * system: mkdir -p 'build/source/texmf/source/latex/latex-tds/patch'
-* system: cp -p patch/amsclass.dtx.diff patch/amsldoc.tex.diff patch/changes.tex.diff patch/encguide.tex.diff patch/lb2.err.diff patch/logmac.tex.diff patch/source2e.tex.diff patch/tlc2.err.diff patch/trapman.tex.diff patch/tripman.tex.diff patch/utf8ienc.dtx.diff patch/webman.tex.diff build/source/texmf/source/latex/latex-tds/patch/
+* system: cp -p patch/amsclass.dtx.diff patch/amsldoc.tex.diff patch/changes.tex.diff patch/encguide.tex.diff patch/hebrew.fdd.diff patch/lb2.err.diff patch/logmac.tex.diff patch/source2e.tex.diff patch/tlc2.err.diff patch/trapman.tex.diff patch/tripman.tex.diff patch/utf8ienc.dtx.diff patch/webman.tex.diff build/source/texmf/source/latex/latex-tds/patch/
 * system: mkdir -p 'build/source/texmf/source/latex/latex-tds/lib'
 * system: cp -p /home/one/work/texprj/latex-tds/lib/ziptimetree.pl build/source/texmf/source/latex/latex-tds/lib/
 * system: cp -p /home/one/work/texprj/latex-tds/lib/adjust_checksum.pl build/source/texmf/source/latex/latex-tds/lib/
@@ -7993,131 +7995,9 @@ enter new zip file comment (end with .):
 * system: /home/one/work/texprj/latex-tds/lib/ziptimetree.pl --verbose --noroot /home/one/work/texprj/latex-tds/distrib/babel.tds.zip build/babel/texmf
 ZIP-TimeTree 1.3, 2011/04/15 - Copyright (C) 2006, 2011 by Heiko Oberdiek.
 [zipfile] /home/one/work/texprj/latex-tds/distrib/babel.tds.zip
-[chmod 100644] doc/generic/babel/00readme.heb
-[chmod 100644] doc/generic/babel/00readme.txt
-[chmod 100644] doc/generic/babel/GreekFonts.txt
-[chmod 100644] doc/generic/babel/announce.txt
-[chmod 100644] doc/generic/babel/babel.pdf
-[chmod 100644] doc/generic/babel/bugs.txt
-[chmod 100644] doc/generic/babel/changes.txt
-[chmod 100644] doc/generic/babel/fixes.txt
-[chmod 100644] doc/generic/babel/howtoget.txt
-[chmod 100644] doc/generic/babel/install.OzTeX-4
-[chmod 100644] doc/generic/babel/install.OzTeX-pre4
-[chmod 100644] doc/generic/babel/install.txt
-[chmod 100644] doc/generic/babel/language.dat
-[chmod 100644] doc/generic/babel/language.skeleton
-[chmod 100644] doc/generic/babel/legal.bbl
-[chmod 100644] doc/generic/babel/manifest.bbl
-[chmod 100644] doc/generic/babel/todo.txt
 [touch] doc/generic/babel
 [touch] doc/generic
 [touch] doc
-[chmod 100644] source/generic/babel/albanian.dtx
-[chmod 100644] source/generic/babel/albanian.ins
-[chmod 100644] source/generic/babel/athnum.dtx
-[chmod 100644] source/generic/babel/babel.dtx
-[chmod 100644] source/generic/babel/babel.ins
-[chmod 100644] source/generic/babel/bahasa.dtx
-[chmod 100644] source/generic/babel/bahasa.ins
-[chmod 100644] source/generic/babel/bahasam.dtx
-[chmod 100644] source/generic/babel/base.ins
-[chmod 100644] source/generic/babel/basque.dtx
-[chmod 100644] source/generic/babel/basque.ins
-[chmod 100644] source/generic/babel/bbcompat.dtx
-[chmod 100644] source/generic/babel/bbidxglo.dtx
-[chmod 100644] source/generic/babel/bbplain.dtx
-[chmod 100644] source/generic/babel/breton.dtx
-[chmod 100644] source/generic/babel/breton.ins
-[chmod 100644] source/generic/babel/bulgarian.dtx
-[chmod 100644] source/generic/babel/bulgarian.ins
-[chmod 100644] source/generic/babel/catalan.dtx
-[chmod 100644] source/generic/babel/catalan.ins
-[chmod 100644] source/generic/babel/croatian.dtx
-[chmod 100644] source/generic/babel/croatian.ins
-[chmod 100644] source/generic/babel/czech.dtx
-[chmod 100644] source/generic/babel/czech.ins
-[chmod 100644] source/generic/babel/danish.dtx
-[chmod 100644] source/generic/babel/danish.ins
-[chmod 100644] source/generic/babel/dutch.dtx
-[chmod 100644] source/generic/babel/dutch.ins
-[chmod 100644] source/generic/babel/english.dtx
-[chmod 100644] source/generic/babel/english.ins
-[chmod 100644] source/generic/babel/esperanto.dtx
-[chmod 100644] source/generic/babel/esperanto.ins
-[chmod 100644] source/generic/babel/estonian.dtx
-[chmod 100644] source/generic/babel/estonian.ins
-[chmod 100644] source/generic/babel/finnish.dtx
-[chmod 100644] source/generic/babel/finnish.ins
-[chmod 100644] source/generic/babel/frenchb.dtx
-[chmod 100644] source/generic/babel/frenchb.ins
-[chmod 100644] source/generic/babel/galician.dtx
-[chmod 100644] source/generic/babel/galician.ins
-[chmod 100644] source/generic/babel/german.ins
-[chmod 100644] source/generic/babel/germanb.dtx
-[chmod 100644] source/generic/babel/greek.dtx
-[chmod 100644] source/generic/babel/greek.fdd
-[chmod 100644] source/generic/babel/greek.ins
-[chmod 100644] source/generic/babel/grmath.dtx
-[chmod 100644] source/generic/babel/grsymb.dtx
-[chmod 100644] source/generic/babel/heb209.dtx
-[chmod 100644] source/generic/babel/hebinp.dtx
-[chmod 100644] source/generic/babel/hebrew.dtx
-[chmod 100644] source/generic/babel/hebrew.fdd
-[chmod 100644] source/generic/babel/hebrew.ins
-[chmod 100644] source/generic/babel/icelandic.dtx
-[chmod 100644] source/generic/babel/icelandic.ins
-[chmod 100644] source/generic/babel/interlingua.dtx
-[chmod 100644] source/generic/babel/interlingua.ins
-[chmod 100644] source/generic/babel/irish.dtx
-[chmod 100644] source/generic/babel/irish.ins
-[chmod 100644] source/generic/babel/italian.dtx
-[chmod 100644] source/generic/babel/italian.ins
-[chmod 100644] source/generic/babel/kurmanji.dtx
-[chmod 100644] source/generic/babel/kurmanji.ins
-[chmod 100644] source/generic/babel/language.dat
-[chmod 100644] source/generic/babel/latin.dtx
-[chmod 100644] source/generic/babel/latin.ins
-[chmod 100644] source/generic/babel/lsorbian.dtx
-[chmod 100644] source/generic/babel/magyar.dtx
-[chmod 100644] source/generic/babel/magyar.ins
-[chmod 100644] source/generic/babel/ngermanb.dtx
-[chmod 100644] source/generic/babel/norsk.dtx
-[chmod 100644] source/generic/babel/norsk.ins
-[chmod 100644] source/generic/babel/polish.dtx
-[chmod 100644] source/generic/babel/polish.ins
-[chmod 100644] source/generic/babel/portuges.dtx
-[chmod 100644] source/generic/babel/portuges.ins
-[chmod 100644] source/generic/babel/romanian.dtx
-[chmod 100644] source/generic/babel/romanian.ins
-[chmod 100644] source/generic/babel/russianb.dtx
-[chmod 100644] source/generic/babel/russianb.ins
-[chmod 100644] source/generic/babel/samin.dtx
-[chmod 100644] source/generic/babel/samin.ins
-[chmod 100644] source/generic/babel/scottish.dtx
-[chmod 100644] source/generic/babel/scottish.ins
-[chmod 100644] source/generic/babel/serbian.dtx
-[chmod 100644] source/generic/babel/serbian.ins
-[chmod 100644] source/generic/babel/slovak.dtx
-[chmod 100644] source/generic/babel/slovak.ins
-[chmod 100644] source/generic/babel/slovene.dtx
-[chmod 100644] source/generic/babel/slovene.ins
-[chmod 100644] source/generic/babel/sorbian.ins
-[chmod 100644] source/generic/babel/spanish.dtx
-[chmod 100644] source/generic/babel/spanish.ins
-[chmod 100644] source/generic/babel/swedish.dtx
-[chmod 100644] source/generic/babel/swedish.ins
-[chmod 100644] source/generic/babel/tb1202.tex
-[chmod 100644] source/generic/babel/tb1401.tex
-[chmod 100644] source/generic/babel/tb1604.tex
-[chmod 100644] source/generic/babel/turkish.dtx
-[chmod 100644] source/generic/babel/turkish.ins
-[chmod 100644] source/generic/babel/ukraineb.dtx
-[chmod 100644] source/generic/babel/ukraineb.ins
-[chmod 100644] source/generic/babel/usage.tex
-[chmod 100644] source/generic/babel/usorbian.dtx
-[chmod 100644] source/generic/babel/welsh.dtx
-[chmod 100644] source/generic/babel/welsh.ins
 [touch] source/generic/babel
 [touch] source/generic
 [touch] source
@@ -8133,15 +8013,15 @@ ZIP-TimeTree 1.3, 2011/04/15 - Copyright (C) 2006, 2011 by Heiko Oberdiek.
   adding: doc/generic/babel/announce.txt (deflated 52%)
   adding: doc/generic/babel/athnum.pdf (deflated 4%)
   adding: doc/generic/babel/babel.pdf (deflated 2%)
-  adding: doc/generic/babel/bbcompat.pdf (deflated 5%)
-  adding: doc/generic/babel/bbidxglo.pdf (deflated 6%)
+  adding: doc/generic/babel/bbcompat.pdf (deflated 6%)
+  adding: doc/generic/babel/bbidxglo.pdf (deflated 7%)
   adding: doc/generic/babel/bugs.txt (deflated 54%)
   adding: doc/generic/babel/changes.txt (deflated 73%)
   adding: doc/generic/babel/fixes.txt (deflated 53%)
   adding: doc/generic/babel/greek-fdd.pdf (deflated 6%)
   adding: doc/generic/babel/greek-usage.pdf (deflated 4%)
-  adding: doc/generic/babel/grmath.pdf (deflated 5%)
-  adding: doc/generic/babel/grsymb.pdf (deflated 5%)
+  adding: doc/generic/babel/grmath.pdf (deflated 6%)
+  adding: doc/generic/babel/grsymb.pdf (deflated 6%)
   adding: doc/generic/babel/howtoget.txt (deflated 52%)
   adding: doc/generic/babel/install.OzTeX-4 (deflated 58%)
   adding: doc/generic/babel/install.OzTeX-pre4 (deflated 57%)
@@ -8150,7 +8030,7 @@ ZIP-TimeTree 1.3, 2011/04/15 - Copyright (C) 2006, 2011 by Heiko Oberdiek.
   adding: doc/generic/babel/language.skeleton (deflated 63%)
   adding: doc/generic/babel/legal.bbl (deflated 47%)
   adding: doc/generic/babel/manifest.bbl (deflated 71%)
-  adding: doc/generic/babel/tb1202.pdf (deflated 5%)
+  adding: doc/generic/babel/tb1202.pdf (deflated 6%)
   adding: doc/generic/babel/tb1401.pdf (deflated 6%)
   adding: doc/generic/babel/tb1604.pdf (deflated 6%)
   adding: doc/generic/babel/todo.txt (deflated 48%)
@@ -8410,7 +8290,7 @@ ZIP-TimeTree 1.3, 2011/04/15 - Copyright (C) 2006, 2011 by Heiko Oberdiek.
   adding: tex/generic/babel/slovak.sty (deflated 56%)
   adding: tex/generic/babel/slovene.ldf (deflated 59%)
   adding: tex/generic/babel/slovene.sty (deflated 56%)
-  adding: tex/generic/babel/spanish.ldf (deflated 69%)
+  adding: tex/generic/babel/spanish.ldf (deflated 70%)
   adding: tex/generic/babel/spanish.sty (deflated 56%)
   adding: tex/generic/babel/swedish.ldf (deflated 65%)
   adding: tex/generic/babel/swedish.sty (deflated 56%)
@@ -8423,11 +8303,10 @@ ZIP-TimeTree 1.3, 2011/04/15 - Copyright (C) 2006, 2011 by Heiko Oberdiek.
   adding: tex/generic/babel/usorbian.sty (deflated 56%)
   adding: tex/generic/babel/welsh.ldf (deflated 53%)
   adding: tex/generic/babel/welsh.sty (deflated 56%)
-[stats] 122 mode changes
 [stats] 8 time updates
 [stats] 11 directories added
 [stats] 288 files added
---> /home/one/work/texprj/latex-tds/distrib/babel.tds.zip (3.642.448 bytes)
+--> /home/one/work/texprj/latex-tds/distrib/babel.tds.zip (3.625.579 bytes)
 * system: zip -z /home/one/work/texprj/latex-tds/distrib/babel.tds.zip </home/one/work/texprj/latex-tds/build/zip-comment.txt
 enter new zip file comment (end with .):
 * system: /home/one/work/texprj/latex-tds/lib/ziptimetree.pl --verbose --noroot /home/one/work/texprj/latex-tds/distrib/psnfss.tds.zip build/psnfss/texmf
@@ -8495,9 +8374,6 @@ ZIP-TimeTree 1.3, 2011/04/15 - Copyright (C) 2006, 2011 by Heiko Oberdiek.
 [chmod 100644] source/latex/psnfss/psfonts.dtx
 [chmod 100644] source/latex/psnfss/psfonts.ins
 [chmod 100644] source/latex/psnfss/psnfss2e.tex
-[touch] source/latex/psnfss
-[touch] source/latex
-[touch] source
 [touch] tex/latex
 [touch] tex
 [create] /home/one/work/texprj/latex-tds/distrib/psnfss.tds.zip
@@ -9229,7 +9105,7 @@ ZIP-TimeTree 1.3, 2011/04/15 - Copyright (C) 2006, 2011 by Heiko Oberdiek.
   adding: tex/latex/psnfss/upzd.fd (deflated 18%)
   adding: tex/latex/psnfss/utopia.sty (deflated 46%)
 [stats] 19 mode changes
-[stats] 48 time updates
+[stats] 45 time updates
 [stats] 49 directories added
 [stats] 678 files added
 --> /home/one/work/texprj/latex-tds/distrib/psnfss.tds.zip (1.463.223 bytes)
@@ -9769,7 +9645,6 @@ ZIP-TimeTree 1.3, 2011/04/15 - Copyright (C) 2006, 2011 by Heiko Oberdiek.
 [touch] source/latex/latex-tds/patch
 [touch] source/latex/latex-tds/tex
 [touch] source/latex/latex-tds
-[touch] source/latex/psnfss
 [touch] source/latex/tools
 [chmod 40755] source/latex/amscls
 [chmod 40755] source/latex/amsmath
@@ -9820,15 +9695,15 @@ ZIP-TimeTree 1.3, 2011/04/15 - Copyright (C) 2006, 2011 by Heiko Oberdiek.
   adding: doc/generic/babel/announce.txt (deflated 52%)
   adding: doc/generic/babel/athnum.pdf (deflated 4%)
   adding: doc/generic/babel/babel.pdf (deflated 2%)
-  adding: doc/generic/babel/bbcompat.pdf (deflated 5%)
-  adding: doc/generic/babel/bbidxglo.pdf (deflated 6%)
+  adding: doc/generic/babel/bbcompat.pdf (deflated 6%)
+  adding: doc/generic/babel/bbidxglo.pdf (deflated 7%)
   adding: doc/generic/babel/bugs.txt (deflated 54%)
   adding: doc/generic/babel/changes.txt (deflated 73%)
   adding: doc/generic/babel/fixes.txt (deflated 53%)
   adding: doc/generic/babel/greek-fdd.pdf (deflated 6%)
   adding: doc/generic/babel/greek-usage.pdf (deflated 4%)
-  adding: doc/generic/babel/grmath.pdf (deflated 5%)
-  adding: doc/generic/babel/grsymb.pdf (deflated 5%)
+  adding: doc/generic/babel/grmath.pdf (deflated 6%)
+  adding: doc/generic/babel/grsymb.pdf (deflated 6%)
   adding: doc/generic/babel/howtoget.txt (deflated 52%)
   adding: doc/generic/babel/install.OzTeX-4 (deflated 58%)
   adding: doc/generic/babel/install.OzTeX-pre4 (deflated 57%)
@@ -9837,7 +9712,7 @@ ZIP-TimeTree 1.3, 2011/04/15 - Copyright (C) 2006, 2011 by Heiko Oberdiek.
   adding: doc/generic/babel/language.skeleton (deflated 63%)
   adding: doc/generic/babel/legal.bbl (deflated 47%)
   adding: doc/generic/babel/manifest.bbl (deflated 71%)
-  adding: doc/generic/babel/tb1202.pdf (deflated 5%)
+  adding: doc/generic/babel/tb1202.pdf (deflated 6%)
   adding: doc/generic/babel/tb1401.pdf (deflated 6%)
   adding: doc/generic/babel/tb1604.pdf (deflated 6%)
   adding: doc/generic/babel/todo.txt (deflated 48%)
@@ -11037,6 +10912,7 @@ ZIP-TimeTree 1.3, 2011/04/15 - Copyright (C) 2006, 2011 by Heiko Oberdiek.
   adding: source/latex/latex-tds/patch/amsldoc.tex.diff (deflated 61%)
   adding: source/latex/latex-tds/patch/changes.tex.diff (deflated 56%)
   adding: source/latex/latex-tds/patch/encguide.tex.diff (deflated 68%)
+  adding: source/latex/latex-tds/patch/hebrew.fdd.diff (deflated 70%)
   adding: source/latex/latex-tds/patch/lb2.err.diff (deflated 55%)
   adding: source/latex/latex-tds/patch/logmac.tex.diff (deflated 68%)
   adding: source/latex/latex-tds/patch/source2e.tex.diff (deflated 58%)
@@ -11255,7 +11131,7 @@ ZIP-TimeTree 1.3, 2011/04/15 - Copyright (C) 2006, 2011 by Heiko Oberdiek.
   adding: tex/generic/babel/slovak.sty (deflated 56%)
   adding: tex/generic/babel/slovene.ldf (deflated 59%)
   adding: tex/generic/babel/slovene.sty (deflated 56%)
-  adding: tex/generic/babel/spanish.ldf (deflated 69%)
+  adding: tex/generic/babel/spanish.ldf (deflated 70%)
   adding: tex/generic/babel/spanish.sty (deflated 56%)
   adding: tex/generic/babel/swedish.ldf (deflated 65%)
   adding: tex/generic/babel/swedish.sty (deflated 56%)
@@ -11717,10 +11593,10 @@ ZIP-TimeTree 1.3, 2011/04/15 - Copyright (C) 2006, 2011 by Heiko Oberdiek.
   adding: tex/latex/tools/xr.sty (deflated 55%)
   adding: tex/latex/tools/xspace.sty (deflated 66%)
 [stats] 76 mode changes
-[stats] 104 time updates
+[stats] 103 time updates
 [stats] 114 directories added
-[stats] 1808 files added
---> /home/one/work/texprj/latex-tds/distrib/latex-tds.tds.zip (41.963.610 bytes)
+[stats] 1809 files added
+--> /home/one/work/texprj/latex-tds/distrib/latex-tds.tds.zip (41.947.353 bytes)
 * system: zip -z /home/one/work/texprj/latex-tds/distrib/latex-tds.tds.zip </home/one/work/texprj/latex-tds/build/zip-comment.txt
 enter new zip file comment (end with .):
 * system: /home/one/work/texprj/latex-tds/lib/ziptimetree.pl --verbose --noroot /home/one/work/texprj/latex-tds/distrib/source.tds.zip build/source/texmf
@@ -11750,6 +11626,7 @@ ZIP-TimeTree 1.3, 2011/04/15 - Copyright (C) 2006, 2011 by Heiko Oberdiek.
   adding: source/latex/latex-tds/patch/amsldoc.tex.diff (deflated 61%)
   adding: source/latex/latex-tds/patch/changes.tex.diff (deflated 56%)
   adding: source/latex/latex-tds/patch/encguide.tex.diff (deflated 68%)
+  adding: source/latex/latex-tds/patch/hebrew.fdd.diff (deflated 70%)
   adding: source/latex/latex-tds/patch/lb2.err.diff (deflated 55%)
   adding: source/latex/latex-tds/patch/logmac.tex.diff (deflated 68%)
   adding: source/latex/latex-tds/patch/source2e.tex.diff (deflated 58%)
@@ -11789,8 +11666,8 @@ ZIP-TimeTree 1.3, 2011/04/15 - Copyright (C) 2006, 2011 by Heiko Oberdiek.
   adding: source/latex/latex-tds/readme.txt (deflated 65%)
 [stats] 8 time updates
 [stats] 8 directories added
-[stats] 44 files added
---> /home/one/work/texprj/latex-tds/distrib/source.tds.zip (89.244 bytes)
+[stats] 45 files added
+--> /home/one/work/texprj/latex-tds/distrib/source.tds.zip (89.856 bytes)
 * system: zip -z /home/one/work/texprj/latex-tds/distrib/source.tds.zip </home/one/work/texprj/latex-tds/build/zip-comment.txt
 enter new zip file comment (end with .):
 * system: /home/one/work/texprj/latex-tds/lib/ziptimetree.pl --verbose --noroot /home/one/work/texprj/latex-tds/distrib/tds.tds.zip build/tds/texmf
@@ -11983,19 +11860,19 @@ enter new zip file comment (end with .):
 
 * PDF cached/generated: 160/0
 
--rw-r--r--    1 one      users     9774035 2011-10-05 06:56 distrib/base.tds.zip
--rw-r--r--    1 one      users     5291708 2011-10-05 06:56 distrib/amslatex.tds.zip
--rw-r--r--    1 one      users     3642654 2011-10-05 06:56 distrib/babel.tds.zip
--rw-r--r--    1 one      users     1463429 2011-10-05 06:56 distrib/psnfss.tds.zip
--rw-r--r--    1 one      users      653352 2011-10-05 06:56 distrib/cyrillic.tds.zip
--rw-r--r--    1 one      users      871026 2011-10-05 06:56 distrib/graphics.tds.zip
--rw-r--r--    1 one      users     3184220 2011-10-05 06:56 distrib/tools.tds.zip
--rw-r--r--    1 one      users    41963816 2011-10-05 06:57 distrib/latex-tds.tds.zip
--rw-r--r--    1 one      users       89450 2011-10-05 06:57 distrib/source.tds.zip
--rw-r--r--    1 one      users       22958 2011-10-05 06:53 distrib/readme.txt
--rw-r--r--    1 one      users      253743 2011-10-05 06:57 distrib/tds.tds.zip
--rw-r--r--    1 one      users    16602845 2011-10-05 06:57 distrib/knuth.tds.zip
--rw-r--r--    1 one      users      144890 2011-10-05 06:57 distrib/etex.tds.zip
--rw-r--r--    1 one      users    83959932 2011-10-05 06:57 /home/one/work/texprj/latex-tds/latex-tds.zip
-* Elapsed time: 2:41
+-rw-r--r--    1 one      users     9774035 2011-11-14 04:32 distrib/base.tds.zip
+-rw-r--r--    1 one      users     5291708 2011-11-14 04:33 distrib/amslatex.tds.zip
+-rw-r--r--    1 one      users     3625785 2011-11-14 04:33 distrib/babel.tds.zip
+-rw-r--r--    1 one      users     1463429 2011-11-14 04:33 distrib/psnfss.tds.zip
+-rw-r--r--    1 one      users      653352 2011-11-14 04:33 distrib/cyrillic.tds.zip
+-rw-r--r--    1 one      users      871026 2011-11-14 04:33 distrib/graphics.tds.zip
+-rw-r--r--    1 one      users     3184220 2011-11-14 04:33 distrib/tools.tds.zip
+-rw-r--r--    1 one      users    41947559 2011-11-14 04:33 distrib/latex-tds.tds.zip
+-rw-r--r--    1 one      users       90062 2011-11-14 04:33 distrib/source.tds.zip
+-rw-r--r--    1 one      users       23045 2011-11-14 03:52 distrib/readme.txt
+-rw-r--r--    1 one      users      253743 2011-11-14 04:33 distrib/tds.tds.zip
+-rw-r--r--    1 one      users    16602845 2011-11-14 04:33 distrib/knuth.tds.zip
+-rw-r--r--    1 one      users      144890 2011-11-14 04:33 distrib/etex.tds.zip
+-rw-r--r--    1 one      users    83927505 2011-11-14 04:34 /home/one/work/texprj/latex-tds/latex-tds.zip
+* Elapsed time: 2:42
 
