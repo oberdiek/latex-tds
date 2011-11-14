@@ -636,6 +636,10 @@ section('Patches after source install');
         patch("amslatex/amsrefs/changes.tex");
         run("$prg_recode latin1..utf8 $dir_build/amslatex/amsrefs/changes.tex");
     }
+    
+    if ($modules{'babel'}) {
+        patch("babel/hebrew.fdd");
+    }
 }
 
 ### Docstrip

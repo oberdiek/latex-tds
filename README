@@ -266,6 +266,7 @@ Patches
   patch/amsldoc.tex.diff    patch for amslatex/amsldoc.tex
   patch/changes.tex.diff    patch for amslatex/amsrefs/changes.tex
   patch/encguide.tex.diff   patch for base/encguide.tex
+  patch/hebrew.fdd.diff     patch for babel/hebrew.fdd
   patch/lb2.err.diff        patch for base/lb2.err
   patch/logmac.tex.diff     patch for knuth/errata/logmac.tex
   patch/source2e.tex.diff   patch for base/source2e.tex
