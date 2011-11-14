@@ -1,11 +1,11 @@
-*** hebrew.fdd	2011-11-14 03:48:06.000000000 +0100
---- hebrew.fdd.org	2005-05-21 11:11:00.000000000 +0200
+*** hebrew.fdd.org	2005-05-21 11:11:00.000000000 +0200
+--- hebrew.fdd	2011-11-14 03:57:46.000000000 +0100
 ***************
 *** 656,662 ****
   %</LHEredis>
   %    \end{macrocode}
   %
-! %  \subsection{The \HEH{} encoding definition file}
+! %  \subsection{The \HEH encoding definition file}
   %
   %    The Hebrew font encoding \HEH{} is based upon an extention by
   %    Microsoft to the ISO-8859-8 standard.  This is an 8bit encoding. The
@@ -13,7 +13,7 @@
   %</LHEredis>
   %    \end{macrocode}
   %
-! %  \subsection{The \HEH encoding definition file}
+! %  \subsection{The \HEH{} encoding definition file}
   %
   %    The Hebrew font encoding \HEH{} is based upon an extention by
   %    Microsoft to the ISO-8859-8 standard.  This is an 8bit encoding. The
