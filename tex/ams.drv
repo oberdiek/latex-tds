@@ -136,6 +136,8 @@
 \ifx\x\y
   \PassOptionsToPackage{dvipsnames,usenames}{color}%
   \PassOptionsToPackage{dvipsnames}{xcolor}%
+  \RequirePackage{color}%
+  \definecolor{ForestGreen}{cmyk}{0.91,0,0.88,0.12}%
   \PassOptionsToPackage{%
     pdfusetitle,%
     pdftex,breaklinks=true,colorlinks,%
