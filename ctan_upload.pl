@@ -2,6 +2,7 @@
 #
 # 2008/07/31 First version.
 # 2010/10/27 Email address updated.
+# 2012/05/12 File `readme.txt' renamed to `README'.
 #
 use strict;
 $^W = 1;
@@ -17,7 +18,7 @@ my $file = 'latex-tds.zip';
 my $filename = 'latex-tds.zip';
 my $filetype = 'application/zip';
 my $ctan_upload_url = 'http://dante.ctan.org/cgi-bin/ctan-upload.cgi';
-my $file_readme = 'readme.txt';
+my $file_readme = 'README';
 my $prg_curl = 'curl';
 my $prg_lynx = 'lynx';
 my $file_response = 'ctan_response.html';
