@@ -374,13 +374,15 @@ section('Unpacking');
         unpack_ams('amsrefs', "$dir_incoming_ams/amsrefs.zip");
         unpack_ams('amsmath', "$dir_incoming_ams/amsmath.zip");
         # because of 00readme.txt and amsrefs.dtx
+        # 2012-05-08: 00readme.txt is renamed to README.
+        # 2012-05-08: amsrefs.dtx is fixed on CTAN.
         unpacking('amslatex',
                   "$dir_incoming_ctan/amsrefs.zip",
                   "$dir_build/amslatex/ctan");
-        run("$prg_cp $dir_build/amslatex/ctan/amsrefs/00readme.txt "
-                . "$dir_build/amslatex/texmf/source/latex/amsrefs/00readme.txt");
-        run("$prg_cp $dir_build/amslatex/ctan/amsrefs/amsrefs.dtx "
-                . "$dir_build/amslatex/texmf/source/latex/amsrefs/amsrefs.dtx");
+        run("$prg_cp $dir_build/amslatex/ctan/amsrefs/README "
+                . "$dir_build/amslatex/texmf/source/latex/amsrefs/README");
+        # run("$prg_cp $dir_build/amslatex/ctan/amsrefs/amsrefs.dtx "
+        #         . "$dir_build/amslatex/texmf/source/latex/amsrefs/amsrefs.dtx");
     }
     unpack_psnfss('lw35nfss');
     unpack_psnfss('freenfss');
