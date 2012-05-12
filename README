@@ -1,4 +1,4 @@
-readme.txt for project latex-tds, 2011/11/16
+readme.txt for project latex-tds, 2012/05/12
 
 TABLE OF CONTENTS
 =================
@@ -612,3 +612,5 @@ I. HISTORY
   * Update of tools (varioref).
 2011/11/16
   * Update of babel.
+2012/05/12
+  * Update of amslatex (amsrefs).

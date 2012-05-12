@@ -7,7 +7,7 @@ my $file    = 'build.pl';
 my $version = cvs('$Revision$');
 my $date    = cvs('$Date$');
 my $author  = 'Heiko Oberdiek';
-my $copyright = "Copyright 2006-2011 $author";
+my $copyright = "Copyright 2006-2012 $author";
 chomp(my $license = <<"END_LICENSE");
 % $copyright
 %
@@ -253,7 +253,7 @@ if (@list_modules > 0) {
     download_ctan('babel',         'macros/latex/required');
     download_ctan('amslatex',      'macros/latex/required');
     download_ctan('amsrefs',       'macros/latex/contrib');
-    download_ctan('amsrefs.tds',   'install/macros/latex/contrib');
+    # download_ctan('amsrefs.tds',   'install/macros/latex/contrib');
     download_ctan('amscls.tds',    'install/macros/latex/required/amslatex');
     download_ctan('psnfss',        'macros/latex/required');
     download_ctan('tds',           '');
@@ -272,6 +272,7 @@ if (@list_modules > 0) {
     # download_ams('amslatex',       '');
     # download_ams('amsrefs-tds',    'amslatex/amsrefs');
     # download_ams('amsrefs-ctan',   'amslatex/amsrefs');
+    download_ams('amsrefs', 'amsrefs');
     download_err('manual');
     download_err('lb2');
     download_err('lgc2');
@@ -369,7 +370,8 @@ section('Unpacking');
     map { unpack_ctan($_); } @required_list;
     if ($modules{'amslatex'}) {
         unpack_ams('amscls', "$dir_incoming_ctan/amscls.tds.zip");
-        unpack_ams('amsrefs', "$dir_incoming_ctan/amsrefs.tds.zip");
+        #unpack_ams('amsrefs', "$dir_incoming_ctan/amsrefs.tds.zip");
+        unpack_ams('amsrefs', "$dir_incoming_ams/amsrefs.zip");
         unpack_ams('amsmath', "$dir_incoming_ams/amsmath.zip");
         # because of 00readme.txt and amsrefs.dtx
         unpacking('amslatex',
