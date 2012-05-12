@@ -1,6 +1,6 @@
 % ams.drv
-% 2010/10/27 v1.3 Driver file for amslatex documentation files
-% Copyright 2006-2010 Heiko Oberdiek.
+% 2012/05/12 v1.4 Driver file for amslatex documentation files
+% Copyright 2006-2012 Heiko Oberdiek.
 %
 % This file is part of project `latex-tds'.
 %
@@ -26,6 +26,8 @@
 %   * Update/fix for instr-l.tex.
 %   * Adding missing macro definitions for amsrefs.dtx.
 %   * Fix for changes.tex.
+% 2012/05/12 v1.4
+%   * Update for ForestGreen, option `dvipsnames' also added for xcolor.
 %
 \NeedsTeXFormat{LaTeX2e}
 \makeatletter
@@ -133,6 +135,7 @@
 \expandafter\endgroup
 \ifx\x\y
   \PassOptionsToPackage{dvipsnames,usenames}{color}%
+  \PassOptionsToPackage{dvipsnames}{xcolor}%
   \PassOptionsToPackage{%
     pdfusetitle,%
     pdftex,breaklinks=true,colorlinks,%
