@@ -69,11 +69,10 @@ Module list
 * tools     CTAN:macros/latex/required/tools.zip
 * cyrillic  CTAN:macros/latex/required/cyrillic.zip
 * amslatex  CTAN:install/macros/latex/required/amscls.tds.zip
-            CTAN:install/macros/latex/contrib/amsrefs.tds.zip
-            CTAN:macros/latex/required/amslatex.zip
             CTAN:macros/latex/contrib/amsrefs.zip
+            CTAN:macros/latex/required/amslatex.zip
             ftp://ftp.ams.org/pub/tex/amslatex.zip
-            ftp://ftp.ams.org/pub/tex/amslatex/amsrefs-tds.zip
+            ftp://ftp.ams.org/pub/tex/amsrefs/amsrefs.zip
             ftp://ftp.ams.org/pub/tex/amscls.zip
             ftp://ftp.ams.org/pub/tex/amsmath.zip
 * psnfss    CTAN:macros/latex/required/psnfss.zip
@@ -86,7 +85,7 @@ Module list
             CTAN:systems/knuth/dist/web.zip
             CTAN:systems/knuth/dist/tex.zip
             CTAN:systems/knuth/dist/mf.zip
-*
+* etex      CTAN:systems/e-tex/v2.1/etex_doc.zip
 
 Author
 ------
@@ -167,13 +166,6 @@ Hints
 [graphics]
   * Module graphics doesn't provide all driver files, because some are
     developed independently (pdftex.def, ...).
-[latex3]
-  * The changes of latex-tds are merged into the official sources
-    of expl3. Also expl3 is provided as TDS package:
-    CTAN:install/macros/latex/contrib/expl3.tds.zip
-    There is nothing left for latex-tds to do. Therefore
-    expl3 is removed from module latex3.
-  * The same happened to xpackages, thus the whole module is removed.
 
 
 D. COPYRIGHT, LICENSE
@@ -614,3 +606,4 @@ I. HISTORY
   * Update of babel.
 2012/05/12
   * Update of amslatex (amsrefs).
+  * Update of readme.txt that is renamed to README.

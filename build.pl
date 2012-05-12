@@ -25,7 +25,7 @@ chomp(my $license = <<"END_LICENSE");
 %
 % The Current Maintainer of this work is Heiko Oberdiek.
 %
-% See `readme.txt' for a list of all files belonging to the
+% See `README' for a list of all files belonging to the
 % project `$prj' and additional information.
 %
 END_LICENSE
@@ -55,10 +55,10 @@ my @pkg_list = (
 );
 
 my $zip_comment = <<'END_ZIP_COMMENT';
-**************************************************
-* This file is part of project 'latex-tds', see  *
-* CTAN:macros/latex/contrib/latex-tds/readme.txt *
-**************************************************
+*************************************************
+* This file is part of project 'latex-tds', see *
+* CTAN:macros/latex/contrib/latex-tds/README    *
+*************************************************
 END_ZIP_COMMENT
 
 my $error = "!!! Error:";
@@ -1700,7 +1700,7 @@ if ($modules{'source'}) {
 
     install $dir_dest, qw[
         build.pl
-        readme.txt
+        README
     ];
     install "$dir_dest/tex", glob("$dir_tex/*.*");
     install "$dir_dest/patch", glob("$dir_patch/*.*");
@@ -1708,7 +1708,7 @@ if ($modules{'source'}) {
     install "$dir_dest/lib", $file_adjust_checksum;
     install "$dir_dest/license", "$dir_license/lppl.txt";
     install "$dir_dest/license/ziptimetree", "$dir_license/ziptimetree/lgpl.txt";
-    install $dir_distrib, 'readme.txt';
+    install $dir_distrib, 'README';
 }
 
 ### Module latex-tds
@@ -1757,7 +1757,7 @@ section('Distrib');
 
     if ($opt_all) {
         chdir $dir_distrib;
-        my $cmd = "$prg_zip -0 $file_ctan_distrib readme.txt";
+        my $cmd = "$prg_zip -0 $file_ctan_distrib README";
         for my $pkg (sort @pkg_list) {
             $cmd .= " $pkg.tds.zip";
         }
@@ -1779,7 +1779,7 @@ END_CACHE
         my $file = "$dir_distrib/$pkg.tds.zip";
         if (-f $file) {
             system("$prg_ls -l $file");
-            system("$prg_ls -l $dir_distrib/readme.txt")if $pkg eq 'source';
+            system("$prg_ls -l $dir_distrib/README")if $pkg eq 'source';
         }
         else {
             print "!!! Warning: Missing distribution for `$pkg'!\n";
