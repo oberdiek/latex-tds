@@ -612,6 +612,10 @@ section('Patches after source install');
             close(IN);
         }
 
+        # fix CR/LF line endings of tlc2.err (2012-05-12)
+        run("$prg_zip -ll tlc2.zip tlc2.err");
+        run("$prg_unzip -o tlc2.zip");
+
         chdir $cwd;
 
         patch('base/encguide.tex');
@@ -640,7 +644,7 @@ section('Patches after source install');
         patch("amslatex/amsrefs/changes.tex");
         run("$prg_recode latin1..utf8 $dir_build/amslatex/amsrefs/changes.tex");
     }
-    
+
     if ($modules{'babel'}) {
         patch("babel/hebrew.fdd");
     }
