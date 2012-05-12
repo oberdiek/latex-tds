@@ -7419,26 +7419,26 @@ ZIP-TimeTree 1.3, 2011/04/15 - Copyright (C) 2006, 2011 by Heiko Oberdiek.
   adding: doc/latex/ (stored 0%)
   adding: doc/latex/base/ (stored 0%)
   adding: doc/latex/base/00readme.txt (deflated 63%)
-  adding: doc/latex/base/alltt.pdf (deflated 7%)
+  adding: doc/latex/base/alltt.pdf (deflated 8%)
   adding: doc/latex/base/autoload.txt (deflated 54%)
   adding: doc/latex/base/bugs.txt (deflated 58%)
   adding: doc/latex/base/cfgguide.pdf (deflated 5%)
   adding: doc/latex/base/changes.txt (deflated 75%)
-  adding: doc/latex/base/classes.pdf (deflated 4%)
+  adding: doc/latex/base/classes.pdf (deflated 5%)
   adding: doc/latex/base/clsguide.pdf (deflated 4%)
   adding: doc/latex/base/cmfonts.pdf (deflated 5%)
-  adding: doc/latex/base/cyrguide.pdf (deflated 6%)
+  adding: doc/latex/base/cyrguide.pdf (deflated 5%)
   adding: doc/latex/base/doc.pdf (deflated 4%)
   adding: doc/latex/base/docstrip.pdf (deflated 3%)
   adding: doc/latex/base/encguide.pdf (deflated 7%)
-  adding: doc/latex/base/exscale.pdf (deflated 6%)
+  adding: doc/latex/base/exscale.pdf (deflated 7%)
   adding: doc/latex/base/fixltx2e.pdf (deflated 5%)
   adding: doc/latex/base/fntguide.pdf (deflated 4%)
-  adding: doc/latex/base/graphpap.pdf (deflated 6%)
+  adding: doc/latex/base/graphpap.pdf (deflated 7%)
   adding: doc/latex/base/ifthen.pdf (deflated 6%)
-  adding: doc/latex/base/inputenc.pdf (deflated 4%)
-  adding: doc/latex/base/latex209.pdf (deflated 4%)
-  adding: doc/latex/base/latexsym.pdf (deflated 5%)
+  adding: doc/latex/base/inputenc.pdf (deflated 5%)
+  adding: doc/latex/base/latex209.pdf (deflated 5%)
+  adding: doc/latex/base/latexsym.pdf (deflated 6%)
   adding: doc/latex/base/lb2.pdf (deflated 1%)
   adding: doc/latex/base/legal.txt (deflated 49%)
   adding: doc/latex/base/letter.pdf (deflated 4%)
@@ -7451,19 +7451,19 @@ ZIP-TimeTree 1.3, 2011/04/15 - Copyright (C) 2006, 2011 by Heiko Oberdiek.
   adding: doc/latex/base/ltnews.pdf (deflated 3%)
   adding: doc/latex/base/ltx3info.pdf (deflated 5%)
   adding: doc/latex/base/ltxcheck.pdf (deflated 5%)
-  adding: doc/latex/base/ltxdoc.pdf (deflated 5%)
-  adding: doc/latex/base/makeindx.pdf (deflated 5%)
+  adding: doc/latex/base/ltxdoc.pdf (deflated 6%)
+  adding: doc/latex/base/makeindx.pdf (deflated 6%)
   adding: doc/latex/base/manifest.txt (deflated 71%)
   adding: doc/latex/base/manual.pdf (deflated 6%)
   adding: doc/latex/base/modguide.pdf (deflated 6%)
-  adding: doc/latex/base/newlfont.pdf (deflated 6%)
-  adding: doc/latex/base/oldlfont.pdf (deflated 6%)
+  adding: doc/latex/base/newlfont.pdf (deflated 7%)
+  adding: doc/latex/base/oldlfont.pdf (deflated 7%)
   adding: doc/latex/base/patches.txt (deflated 54%)
   adding: doc/latex/base/proc.pdf (deflated 6%)
-  adding: doc/latex/base/slides.pdf (deflated 4%)
+  adding: doc/latex/base/slides.pdf (deflated 5%)
   adding: doc/latex/base/slifonts.pdf (deflated 6%)
-  adding: doc/latex/base/source2e.pdf (deflated 6%)
-  adding: doc/latex/base/syntonly.pdf (deflated 6%)
+  adding: doc/latex/base/source2e.pdf (deflated 5%)
+  adding: doc/latex/base/syntonly.pdf (deflated 7%)
   adding: doc/latex/base/tex2.txt (deflated 57%)
   adding: doc/latex/base/texpert.txt (deflated 59%)
   adding: doc/latex/base/tlc2.pdf (deflated 3%)
@@ -7756,7 +7756,7 @@ ZIP-TimeTree 1.3, 2011/04/15 - Copyright (C) 2006, 2011 by Heiko Oberdiek.
 [stats] 9 time updates
 [stats] 11 directories added
 [stats] 326 files added
---> /home/one/work/texprj/latex-tds/distrib/base.tds.zip (9.775.879 bytes)
+--> /home/one/work/texprj/latex-tds/distrib/base.tds.zip (9.604.358 bytes)
 * system: zip -z /home/one/work/texprj/latex-tds/distrib/base.tds.zip </home/one/work/texprj/latex-tds/build/zip-comment.txt
 enter new zip file comment (end with .):
 * system: /home/one/work/texprj/latex-tds/lib/ziptimetree.pl --verbose --noroot /home/one/work/texprj/latex-tds/distrib/amslatex.tds.zip build/amslatex/texmf
@@ -7871,7 +7871,6 @@ ZIP-TimeTree 1.3, 2011/04/15 - Copyright (C) 2006, 2011 by Heiko Oberdiek.
 [chmod 100644] tex/latex/amscls/amsmidx.sty
 [chmod 100644] tex/latex/amscls/amsproc.cls
 [chmod 100644] tex/latex/amscls/upref.sty
-[touch] tex/latex/amscls
 [chmod 100644] tex/latex/amsmath/amsbsy.sty
 [chmod 100644] tex/latex/amsmath/amscd.sty
 [chmod 100644] tex/latex/amsmath/amsgen.sty
@@ -8050,10 +8049,10 @@ ZIP-TimeTree 1.3, 2011/04/15 - Copyright (C) 2006, 2011 by Heiko Oberdiek.
   adding: tex/latex/amsrefs/rkeyval.sty (deflated 76%)
   adding: tex/latex/amsrefs/textcmds.sty (deflated 63%)
 [stats] 116 mode changes
-[stats] 21 time updates
+[stats] 20 time updates
 [stats] 21 directories added
 [stats] 128 files added
---> /home/one/work/texprj/latex-tds/distrib/amslatex.tds.zip (5.295.146 bytes)
+--> /home/one/work/texprj/latex-tds/distrib/amslatex.tds.zip (5.262.774 bytes)
 * system: zip -z /home/one/work/texprj/latex-tds/distrib/amslatex.tds.zip </home/one/work/texprj/latex-tds/build/zip-comment.txt
 enter new zip file comment (end with .):
 * system: /home/one/work/texprj/latex-tds/lib/ziptimetree.pl --verbose --noroot /home/one/work/texprj/latex-tds/distrib/babel.tds.zip build/babel/texmf
@@ -8440,6 +8439,9 @@ ZIP-TimeTree 1.3, 2011/04/15 - Copyright (C) 2006, 2011 by Heiko Oberdiek.
 [chmod 100644] source/latex/psnfss/psfonts.dtx
 [chmod 100644] source/latex/psnfss/psfonts.ins
 [chmod 100644] source/latex/psnfss/psnfss2e.tex
+[touch] source/latex/psnfss
+[touch] source/latex
+[touch] source
 [touch] tex/latex
 [touch] tex
 [create] /home/one/work/texprj/latex-tds/distrib/psnfss.tds.zip
@@ -9171,7 +9173,7 @@ ZIP-TimeTree 1.3, 2011/04/15 - Copyright (C) 2006, 2011 by Heiko Oberdiek.
   adding: tex/latex/psnfss/upzd.fd (deflated 18%)
   adding: tex/latex/psnfss/utopia.sty (deflated 46%)
 [stats] 19 mode changes
-[stats] 45 time updates
+[stats] 48 time updates
 [stats] 49 directories added
 [stats] 678 files added
 --> /home/one/work/texprj/latex-tds/distrib/psnfss.tds.zip (1.463.223 bytes)
@@ -9709,6 +9711,7 @@ ZIP-TimeTree 1.3, 2011/04/15 - Copyright (C) 2006, 2011 by Heiko Oberdiek.
 [touch] source/latex/latex-tds/patch
 [touch] source/latex/latex-tds/tex
 [touch] source/latex/latex-tds
+[touch] source/latex/psnfss
 [touch] source/latex/tools
 [chmod 40755] source/latex/amscls
 [chmod 40755] source/latex/amsmath
@@ -9722,7 +9725,6 @@ ZIP-TimeTree 1.3, 2011/04/15 - Copyright (C) 2006, 2011 by Heiko Oberdiek.
 [touch] source/tds
 [touch] source
 [touch] tex/generic
-[touch] tex/latex/amscls
 [touch] tex/latex/amsmath
 [touch] tex/latex/amsrefs
 [touch] tex/latex/base
@@ -9867,26 +9869,26 @@ ZIP-TimeTree 1.3, 2011/04/15 - Copyright (C) 2006, 2011 by Heiko Oberdiek.
   adding: doc/latex/amsrefs/textcmds.pdf (deflated 5%)
   adding: doc/latex/base/ (stored 0%)
   adding: doc/latex/base/00readme.txt (deflated 63%)
-  adding: doc/latex/base/alltt.pdf (deflated 7%)
+  adding: doc/latex/base/alltt.pdf (deflated 8%)
   adding: doc/latex/base/autoload.txt (deflated 54%)
   adding: doc/latex/base/bugs.txt (deflated 58%)
   adding: doc/latex/base/cfgguide.pdf (deflated 5%)
   adding: doc/latex/base/changes.txt (deflated 75%)
-  adding: doc/latex/base/classes.pdf (deflated 4%)
+  adding: doc/latex/base/classes.pdf (deflated 5%)
   adding: doc/latex/base/clsguide.pdf (deflated 4%)
   adding: doc/latex/base/cmfonts.pdf (deflated 5%)
-  adding: doc/latex/base/cyrguide.pdf (deflated 6%)
+  adding: doc/latex/base/cyrguide.pdf (deflated 5%)
   adding: doc/latex/base/doc.pdf (deflated 4%)
   adding: doc/latex/base/docstrip.pdf (deflated 3%)
   adding: doc/latex/base/encguide.pdf (deflated 7%)
-  adding: doc/latex/base/exscale.pdf (deflated 6%)
+  adding: doc/latex/base/exscale.pdf (deflated 7%)
   adding: doc/latex/base/fixltx2e.pdf (deflated 5%)
   adding: doc/latex/base/fntguide.pdf (deflated 4%)
-  adding: doc/latex/base/graphpap.pdf (deflated 6%)
+  adding: doc/latex/base/graphpap.pdf (deflated 7%)
   adding: doc/latex/base/ifthen.pdf (deflated 6%)
-  adding: doc/latex/base/inputenc.pdf (deflated 4%)
-  adding: doc/latex/base/latex209.pdf (deflated 4%)
-  adding: doc/latex/base/latexsym.pdf (deflated 5%)
+  adding: doc/latex/base/inputenc.pdf (deflated 5%)
+  adding: doc/latex/base/latex209.pdf (deflated 5%)
+  adding: doc/latex/base/latexsym.pdf (deflated 6%)
   adding: doc/latex/base/lb2.pdf (deflated 1%)
   adding: doc/latex/base/legal.txt (deflated 49%)
   adding: doc/latex/base/letter.pdf (deflated 4%)
@@ -9899,19 +9901,19 @@ ZIP-TimeTree 1.3, 2011/04/15 - Copyright (C) 2006, 2011 by Heiko Oberdiek.
   adding: doc/latex/base/ltnews.pdf (deflated 3%)
   adding: doc/latex/base/ltx3info.pdf (deflated 5%)
   adding: doc/latex/base/ltxcheck.pdf (deflated 5%)
-  adding: doc/latex/base/ltxdoc.pdf (deflated 5%)
-  adding: doc/latex/base/makeindx.pdf (deflated 5%)
+  adding: doc/latex/base/ltxdoc.pdf (deflated 6%)
+  adding: doc/latex/base/makeindx.pdf (deflated 6%)
   adding: doc/latex/base/manifest.txt (deflated 71%)
   adding: doc/latex/base/manual.pdf (deflated 6%)
   adding: doc/latex/base/modguide.pdf (deflated 6%)
-  adding: doc/latex/base/newlfont.pdf (deflated 6%)
-  adding: doc/latex/base/oldlfont.pdf (deflated 6%)
+  adding: doc/latex/base/newlfont.pdf (deflated 7%)
+  adding: doc/latex/base/oldlfont.pdf (deflated 7%)
   adding: doc/latex/base/patches.txt (deflated 54%)
   adding: doc/latex/base/proc.pdf (deflated 6%)
-  adding: doc/latex/base/slides.pdf (deflated 4%)
+  adding: doc/latex/base/slides.pdf (deflated 5%)
   adding: doc/latex/base/slifonts.pdf (deflated 6%)
-  adding: doc/latex/base/source2e.pdf (deflated 6%)
-  adding: doc/latex/base/syntonly.pdf (deflated 6%)
+  adding: doc/latex/base/source2e.pdf (deflated 5%)
+  adding: doc/latex/base/syntonly.pdf (deflated 7%)
   adding: doc/latex/base/tex2.txt (deflated 57%)
   adding: doc/latex/base/texpert.txt (deflated 59%)
   adding: doc/latex/base/tlc2.pdf (deflated 3%)
@@ -11662,7 +11664,7 @@ ZIP-TimeTree 1.3, 2011/04/15 - Copyright (C) 2006, 2011 by Heiko Oberdiek.
 [stats] 106 time updates
 [stats] 114 directories added
 [stats] 1810 files added
---> /home/one/work/texprj/latex-tds/distrib/latex-tds.tds.zip (41.953.648 bytes)
+--> /home/one/work/texprj/latex-tds/distrib/latex-tds.tds.zip (41.749.828 bytes)
 * system: zip -z /home/one/work/texprj/latex-tds/distrib/latex-tds.tds.zip </home/one/work/texprj/latex-tds/build/zip-comment.txt
 enter new zip file comment (end with .):
 * system: /home/one/work/texprj/latex-tds/lib/ziptimetree.pl --verbose --noroot /home/one/work/texprj/latex-tds/distrib/source.tds.zip build/source/texmf
@@ -11733,7 +11735,7 @@ ZIP-TimeTree 1.3, 2011/04/15 - Copyright (C) 2006, 2011 by Heiko Oberdiek.
 [stats] 8 time updates
 [stats] 8 directories added
 [stats] 45 files added
---> /home/one/work/texprj/latex-tds/distrib/source.tds.zip (89.900 bytes)
+--> /home/one/work/texprj/latex-tds/distrib/source.tds.zip (89.973 bytes)
 * system: zip -z /home/one/work/texprj/latex-tds/distrib/source.tds.zip </home/one/work/texprj/latex-tds/build/zip-comment.txt
 enter new zip file comment (end with .):
 * system: /home/one/work/texprj/latex-tds/lib/ziptimetree.pl --verbose --noroot /home/one/work/texprj/latex-tds/distrib/tds.tds.zip build/tds/texmf
@@ -11926,19 +11928,19 @@ enter new zip file comment (end with .):
 
 * PDF cached/generated: 160/0
 
--rw-r--r--    1 one      users     9776081 2012-05-12 13:14 distrib/base.tds.zip
--rw-r--r--    1 one      users     5295348 2012-05-12 13:14 distrib/amslatex.tds.zip
--rw-r--r--    1 one      users     3626338 2012-05-12 13:14 distrib/babel.tds.zip
--rw-r--r--    1 one      users     1463425 2012-05-12 13:14 distrib/psnfss.tds.zip
--rw-r--r--    1 one      users      653348 2012-05-12 13:14 distrib/cyrillic.tds.zip
--rw-r--r--    1 one      users      871022 2012-05-12 13:14 distrib/graphics.tds.zip
--rw-r--r--    1 one      users     3184216 2012-05-12 13:14 distrib/tools.tds.zip
--rw-r--r--    1 one      users    41953850 2012-05-12 13:14 distrib/latex-tds.tds.zip
--rw-r--r--    1 one      users       90102 2012-05-12 13:14 distrib/source.tds.zip
--rw-r--r--    1 one      users       22815 2012-05-12 13:13 distrib/README
--rw-r--r--    1 one      users      253739 2012-05-12 13:14 distrib/tds.tds.zip
--rw-r--r--    1 one      users    16602841 2012-05-12 13:14 distrib/knuth.tds.zip
--rw-r--r--    1 one      users      144886 2012-05-12 13:14 distrib/etex.tds.zip
--rw-r--r--    1 one      users    83939809 2012-05-12 13:14 /home/one/work/texprj/latex-tds/latex-tds.zip
-* Elapsed time: 1:06
+-rw-r--r--    1 one      users     9604560 2012-05-12 22:05 distrib/base.tds.zip
+-rw-r--r--    1 one      users     5262976 2012-05-12 22:05 distrib/amslatex.tds.zip
+-rw-r--r--    1 one      users     3626338 2012-05-12 22:05 distrib/babel.tds.zip
+-rw-r--r--    1 one      users     1463425 2012-05-12 22:06 distrib/psnfss.tds.zip
+-rw-r--r--    1 one      users      653348 2012-05-12 22:06 distrib/cyrillic.tds.zip
+-rw-r--r--    1 one      users      871022 2012-05-12 22:06 distrib/graphics.tds.zip
+-rw-r--r--    1 one      users     3184216 2012-05-12 22:06 distrib/tools.tds.zip
+-rw-r--r--    1 one      users    41750030 2012-05-12 22:06 distrib/latex-tds.tds.zip
+-rw-r--r--    1 one      users       90175 2012-05-12 22:06 distrib/source.tds.zip
+-rw-r--r--    1 one      users       22816 2012-05-12 22:04 distrib/README
+-rw-r--r--    1 one      users      253739 2012-05-12 22:06 distrib/tds.tds.zip
+-rw-r--r--    1 one      users    16602841 2012-05-12 22:06 distrib/knuth.tds.zip
+-rw-r--r--    1 one      users      144886 2012-05-12 22:06 distrib/etex.tds.zip
+-rw-r--r--    1 one      users    83532170 2012-05-12 22:06 /home/one/work/texprj/latex-tds/latex-tds.zip
+* Elapsed time: 1:19
 
