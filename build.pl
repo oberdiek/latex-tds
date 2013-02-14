@@ -4,10 +4,10 @@ $^W=1;
 
 my $prj     = 'latex-tds';
 my $file    = 'build.pl';
-my $version = cvs('$Revision$');
-my $date    = cvs('$Date$');
+my $version = '1.174';
+my $date    = '2014-02-14';
 my $author  = 'Heiko Oberdiek';
-my $copyright = "Copyright 2006-2012 $author";
+my $copyright = "Copyright 2006-2013 $author";
 chomp(my $license = <<"END_LICENSE");
 % $copyright
 %
@@ -253,8 +253,9 @@ if (@list_modules > 0) {
     download_ctan('babel',         'macros/latex/required');
     download_ctan('amslatex',      'macros/latex/required');
     download_ctan('amsrefs',       'macros/latex/contrib');
-    # download_ctan('amsrefs.tds',   'install/macros/latex/contrib');
+    download_ctan('amsrefs.tds',   'install/macros/latex/contrib');
     download_ctan('amscls.tds',    'install/macros/latex/required/amslatex');
+    download_ctan('math.tds',      'install/macros/latex/required/amslatex');
     download_ctan('psnfss',        'macros/latex/required');
     download_ctan('tds',           '');
     download_ctan('texware',       'systems/knuth/dist');
@@ -370,17 +371,18 @@ section('Unpacking');
     map { unpack_ctan($_); } @required_list;
     if ($modules{'amslatex'}) {
         unpack_ams('amscls', "$dir_incoming_ctan/amscls.tds.zip");
-        #unpack_ams('amsrefs', "$dir_incoming_ctan/amsrefs.tds.zip");
-        unpack_ams('amsrefs', "$dir_incoming_ams/amsrefs.zip");
-        unpack_ams('amsmath', "$dir_incoming_ams/amsmath.zip");
-        # because of 00readme.txt and amsrefs.dtx
-        # 2012-05-08: 00readme.txt is renamed to README.
-        # 2012-05-08: amsrefs.dtx is fixed on CTAN.
-        unpacking('amslatex',
-                  "$dir_incoming_ctan/amsrefs.zip",
-                  "$dir_build/amslatex/ctan");
-        run("$prg_cp $dir_build/amslatex/ctan/amsrefs/README "
-                . "$dir_build/amslatex/texmf/source/latex/amsrefs/README");
+        unpack_ams('amsrefs', "$dir_incoming_ctan/amsrefs.tds.zip");
+        unpack_ams('amsmath', "$dir_incoming/ctan/math.tds.zip");
+        #unpack_ams('amsrefs', "$dir_incoming_ams/amsrefs.zip");
+        #unpack_ams('amsmath', "$dir_incoming_ams/amsmath.zip");
+        ## because of 00readme.txt and amsrefs.dtx
+        ## 2012-05-08: 00readme.txt is renamed to README.
+        ## 2012-05-08: amsrefs.dtx is fixed on CTAN.
+        ##unpacking('amslatex',
+        ##          "$dir_incoming_ctan/amsrefs.zip",
+        ##          "$dir_build/amslatex/ctan");
+        ##run("$prg_cp $dir_build/amslatex/ctan/amsrefs/README "
+        ##        . "$dir_build/amslatex/texmf/source/latex/amsrefs/README");
         # run("$prg_cp $dir_build/amslatex/ctan/amsrefs/amsrefs.dtx "
         #         . "$dir_build/amslatex/texmf/source/latex/amsrefs/amsrefs.dtx");
     }
@@ -670,12 +672,12 @@ section('Docstrip');
     docstrip('tools',    'tools');
     docstrip('babel',    'babel');
 
-    # patch for amsthm.sty, part 1/2
-    if ($modules{'amslatex'}) {
-        chdir "$dir_build/amslatex/amscls";
-        run("$prg_docstrip ams-c1.ins");
-        chdir $cwd;
-    }
+    ## patch for amsthm.sty, part 1/2
+    #if ($modules{'amslatex'}) {
+    #    chdir "$dir_build/amslatex/amscls";
+    #    run("$prg_docstrip ams-c1.ins");
+    #    chdir $cwd;
+    #}
 }
 
 section('TDS cleanup');
@@ -695,17 +697,23 @@ section('TDS cleanup');
             *.template
             diffs-c.txt
         ];
+        run(sprintf "%s %s %s",
+            $prg_mv,
+            "$dir_tds/source/latex/amsmath/diffs-m.txt",
+            "$dir_tds/doc/latex/amsmath/"
+        );
         cleanup_tds 'source/latex/amsmath', qw[
-            diffs-m.txt
             amstex.sty
         ];
-        run("$prg_mv $dir_tds/source/latex/amsrefs/amsrefs.faq"
-            . " $dir_tds/doc/latex/amsrefs/");
-        cleanup_tds 'source/latex/amsrefs', qw[
-            cite-x*.tex
-            jr.bib
-            gktest.ltb
-        ];
+        {
+          my @list = map { glob("$dir_tds/source/latex/amsrefs/$_"); } qw[
+              amsrefs.faq
+          ];
+          # 2013-02-13: Classified as test files that remain in
+          # the source tree:
+          #   cite-x*.tex jr.bib
+          map { run("$prg_mv $_ $dir_tds/doc/latex/amsrefs/"); } @list;
+        }
         # CTAN:macros/latex/required/amslatex/other/*
         run("$prg_cp $dir_build/amslatex/other/amsbooka.sty"
             . " $dir_build/amslatex/texmf/tex/latex/amscls/amsbooka.sty");
@@ -853,14 +861,14 @@ section('Install tex doc');
         chdir $cwd;
     }
 
-    # patch for amsthm.sty, part 2/2
-    if ($modules{'amslatex'}) {
-        chdir "$dir_build/amslatex/amscls";
-        my $dest_dir = '../texmf/tex/latex/amscls';
-        ensure_directory($dest_dir);
-        install($dest_dir, 'amsthm.sty');
-        chdir $cwd;
-    }
+    ## patch for amsthm.sty, part 2/2
+    #if ($modules{'amslatex'}) {
+    #    chdir "$dir_build/amslatex/amscls";
+    #    my $dest_dir = '../texmf/tex/latex/amscls';
+    #    ensure_directory($dest_dir);
+    #    install($dest_dir, 'amsthm.sty');
+    #    chdir $cwd;
+    #}
 
 my $dummy = <<'END_DUMMY';
     if ($modules{'babel'}) {
@@ -1191,11 +1199,15 @@ if ($modules{'tools'}) {
     my ($mday, $month, $year) = splice @time, 3, 3;
     my $release_info = sprintf "%04d/%02d/%02d Tools overview (HO)",
         $year + 1900, $month + 1, $mday;
-    open(OUT, ">$texfile") or die "$error Cannot open `$texfile'!\n";
-    print OUT <<"END_HEADER";
-\\NeedsTeXFormat{LaTeX2e}
-\\ProvidesFile{tools.tex}%
-  [$release_info]
+    my $tools_old = '';
+    if (-f $texfile) {
+        open(IN, '<', $texfile) or die "$error Cannot open `$texfile'!\n";
+        while (<IN>) {
+            $tools_old .= $_ unless $. < 3 and /^\\(NeedsTeXFormat|ProvidesFile)/;
+        }
+        close(IN);
+    }
+    my $tools_new = <<"END_HEADER";
 $license
 \\documentclass{tools-overview}
 \\begin{document}
@@ -1230,16 +1242,32 @@ END_TRACE
         my $text = $db{$entry};
         $text =~ s/^\s*/  /mg;
         chomp $text;
-        print OUT <<"END_ENTRY";
+        $tools_new .= <<"END_ENTRY";
 \\entry{$entry}{%
 $text
 }%
 END_ENTRY
     }
-    print OUT <<'END_TRAILER';
+    $tools_new .=  <<'END_TRAILER';
 \end{document}
 END_TRAILER
-    close(OUT);
+    if ($tools_old eq $tools_new) {
+        info("tools.tex is already uptodate");
+    }
+    else {
+        open(OUT, ">$texfile") or die "$error Cannot open `$texfile'!\n";
+        print OUT <<"END_FILE";
+\\NeedsTeXFormat{LaTeX2e}
+\\ProvidesFile{tools.tex}[$release_info]
+END_FILE
+        print OUT $tools_new;
+        close(OUT);
+        info("tools.tex has changed");
+        foreach my $ext (qw[pdf log]) {
+            my $file_cache = "$dir_cache/tools/tools.$ext";
+            unlink $file_cache if -f $file_cache;
+        }
+    }
     cache 'tools', 'tools', sub {
         final_begin;
         run("$prg_pdflatextds tools.tex");
@@ -1340,6 +1368,7 @@ if ($modules{'amslatex'}) {
                                       or $doc eq 'textcmds';
         $latextds = $prg_pdflatex
                 if $doc eq 'thmtest';
+        $latextds = $prg_lualatex if $doc eq 'amsrdoc';
 
         symlink $ams_drv, "$doc.drv";
         cache 'amslatex', $doc, sub {
@@ -1377,10 +1406,11 @@ if ($modules{'amslatex'}) {
     chdir "$dir_build/amslatex/amsrefs";
     symlink '../texmf', 'texmf';
     map { generate_doc 'amsrefs', $_; } qw[
-        cite-xa cite-xb cite-xh cite-xs
         amsrdoc changes
         amsrefs amsxport ifoption mathscinet pcatcode rkeyval textcmds
     ];
+    # 2013-02-13: Excluded as test files:
+    #   cite-xa cite-xb cite-xh cite-xs
     chdir $cwd;
 }
 

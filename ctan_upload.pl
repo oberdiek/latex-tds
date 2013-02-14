@@ -3,6 +3,7 @@
 # 2008/07/31 First version.
 # 2010/10/27 Email address updated.
 # 2012/05/12 File `readme.txt' renamed to `README'.
+# 2013/02/14 New CTAN interface.
 #
 use strict;
 $^W = 1;
@@ -10,19 +11,26 @@ $^W = 1;
 my $prj = 'latex-tds';
 my $name = 'Heiko Oberdiek';
 my $email = 'heiko.oberdiek@googlemail.com';
-my $ctan_dir = 'macros/latex/contrib/latex-tds';
-my $license = 'free';
-my $freeversion = 'lppl';
-my $announce = 1;
+my $ctan_dir = '/macros/latex/contrib/latex-tds';
+my $license = 'lppl';
+my $announce = 0;
 my $file = 'latex-tds.zip';
 my $filename = 'latex-tds.zip';
 my $filetype = 'application/zip';
-my $ctan_upload_url = 'http://dante.ctan.org/cgi-bin/ctan-upload.cgi';
+my $ctan_upload_url = 'http://www.ctan.org/upload/';
 my $file_readme = 'README';
 my $prg_curl = 'curl';
 my $prg_lynx = 'lynx';
 my $file_response = 'ctan_response.html';
+my $dry = 0;
 my $limit = 0;
+
+my $summary = <<"END_SUMMARY";
+Providing TDS compliant ZIP files with hyperlinked documentation
+for LaTeX base and required packages, e-TeX manual and other.
+END_SUMMARY
+chomp $summary;
+$summary =~ s/\s*\n\s*/ /g;
 
 my $description = <<"END_DESCRIPTION";
 CTAN's package description:
@@ -36,6 +44,19 @@ CTAN's package description:
   A further module (knuth) performs the same service for Knuth's
   software distribution (knuth-dist).
 END_DESCRIPTION
+
+my $note = '';
+
+my $date = '';
+open(IN, '<', $file_readme) or die "!!! Error: Cannot open `$file_readme'!\n";
+$_ = <IN>;
+if (/\s(\d{4}\/\d{2}\/\d{2})$/) {
+    $date = $1;
+}
+else {
+    die "!!! Error: Cannot find release date in `$file_readme'!\n";
+}
+
 my $hist_prolog = <<'END_HIST_PROLOG';
 Latest changes (see readme.txt):
 
@@ -43,12 +64,14 @@ END_HIST_PROLOG
 my $hist_prefix = '  ';
 
 my %args = (
-    'contribution'  => $prj,
-    'name'          => $name,
+    'pkg'           => $prj,
+    'vers'          => $date,
+    'author'        => $name,
     'email'         => $email,
-    'directory'     => $ctan_dir,
+    'description'   => $summary,
+    'ctanPath'      => $ctan_dir,
     'license'       => $license,
-    'freeversion'   => $freeversion,
+    'note'          => $note,
     'SUBMIT'        => 'Submit contribution',
     'file'          => "\@$file;type=$filetype;filename=$filename",
 );
@@ -66,25 +89,13 @@ use Getopt::Long;
 GetOptions(
   'announce!' => \$announce,
   'limit=s' => \$limit,
+  'dry-run!' => \$dry,
   'help' => sub { print $usage; exit(0); },
 ) or die $usage;
-
-# $args{'DoNotAnnounce'} = $announce ? 'Yes' : 'No';
-# $args{'DoNotAnnounce'} = 'No';
 
 $limit =~ /^\d+[kKmMgG]?$/ or die "!!! Error: Invalid limit ($limit)!\n";
 $limit .= 'k' if $limit =~ /^\d*[1-9]\d*$/;
 
-my $date = '';
-open(IN, '<', $file_readme) or die "!!! Error: Cannot open `$file_readme'!\n";
-$_ = <IN>;
-if (/\s(\d{4}\/\d{2}\/\d{2})$/) {
-    $date = $1;
-    $args{'version'} = $date;
-}
-else {
-    die "!!! Error: Cannot find release date in `$file_readme'!\n";
-}
 my $history = '';
 my $hist_date = '';
 while (<IN>) {
@@ -106,14 +117,37 @@ if ($hist_date ne $date) {
     die "!!! Error: Release date ($date) differs from"
         . " last history entry ($hist_date)!\n";
 }
-$args{'summary'} = "latex-tds $date";
 if ($announce) {
-    $args{'announce'} = "$description\n$history";
+    $args{'type'} = 'announce';
+    $args{'announcement'} = "$description\n$history";
 }
 else {
-    $args{'DoNotAnnounce'} = 'No';
-    $args{'notes'} = "$history\n\nAnnouncement is not needed.";
+    $args{'type'} = 'silent';
 }
+
+### Validation
+
+sub check_length ($$$) {
+    my $name = shift;
+    my $desc = shift;
+    my $max = shift;
+    my $txt = $args{$name};
+    my $len = length $txt;
+    if ($len < $max) {
+        print "* OK: length($name) = $len < $max\n";
+    }
+    else {
+        die "!!! Error: $desc ($len) is too long (max=128)!\n";
+    }
+}
+
+check_length 'author', 'Author name', 128;
+check_length 'description', 'Summary', 128;
+check_length 'ctanPath', 'Proposed CTAN path', 255;
+check_length 'announcement', 'Announcement text', 2048 if $announce;
+check_length 'note', 'Note text', 2048;
+
+### Construct command line
 
 my @args;
 foreach my $key (sort keys %args) {
@@ -152,6 +186,11 @@ for (my $i = 1; $i < @args; $i++) {
     else {
         print "$argkey\n";
     }
+}
+
+if ($dry) {
+    print "\n*** DRY-RUN ***\n";
+    exit(0);
 }
 
 print "\n*** Press <return> to continue *** ";

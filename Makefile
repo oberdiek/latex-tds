@@ -23,7 +23,7 @@ license/ziptimetree license/latex-tds:
 # update:
 # 	./update.sh
 
-spell: readme.txt ispell.dict
+spell: README ispell.dict
 	ispell -p ispell.dict $<
 ispell.dict:
 	touch $@

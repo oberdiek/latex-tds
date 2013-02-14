@@ -1,4 +1,4 @@
-readme.txt for project latex-tds, 2012/05/12
+README for project latex-tds, 2013/02/14
 
 TABLE OF CONTENTS
 =================
@@ -91,6 +91,14 @@ Author
 ------
 Heiko Oberdiek <heiko.oberdiek at googlemail.com>
 
+Home
+----
+CTAN home with distribution files:
+  CTAN:macros/latex/contrib/latex-tds/
+
+Source repository:
+  https://github.com/oberdiek/latex-tds
+
 
 C. DOWNLOAD
 ===========
@@ -99,7 +107,7 @@ The home of the project is located at:
   CTAN:macros/latex/contrib/latex-tds/
 
 The following files can be downloaded:
-* readme.txt (this file)
+* README (this file)
 * The module distribution files, see the module list above
   for the available modules, e.g:
     base.tds.zip
@@ -199,7 +207,7 @@ They are projects of their own.
 
 Documentation
 -------------
-  readme.txt                this file
+  README                    this file
 
 Licenses
 --------
@@ -608,3 +616,10 @@ I. HISTORY
   * Update of amslatex (amsrefs).
   * Update of readme.txt that is renamed to README (CTAN convention).
   * Update of tlc2.err.
+2013/02/14
+  * Update of amslatex (amsrefs).
+  * Module amslatex: cite-x*.tex, jb.bib in TDS:source/, because
+    these files are now classified as test files.
+  * Module base: lb2.err and tlc2.err updated.
+  * Change in version control system from CVS to git with public
+    source repository.
