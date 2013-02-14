@@ -1,4 +1,4 @@
-README for project latex-tds, 2013/02/14
+README for project latex-tds, 2013/02/15
 
 TABLE OF CONTENTS
 =================
@@ -623,3 +623,5 @@ I. HISTORY
   * Module base: lb2.err and tlc2.err updated.
   * Change in version control system from CVS to git with public
     source repository.
+2013/02/15
+  * Module amslatex: amsfonts added.

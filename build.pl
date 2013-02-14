@@ -256,6 +256,7 @@ if (@list_modules > 0) {
     download_ctan('amsrefs.tds',   'install/macros/latex/contrib');
     download_ctan('amscls.tds',    'install/macros/latex/required/amslatex');
     download_ctan('math.tds',      'install/macros/latex/required/amslatex');
+    download_ctan('amsfonts.tds',  'install/fonts/');
     download_ctan('psnfss',        'macros/latex/required');
     download_ctan('tds',           '');
     download_ctan('texware',       'systems/knuth/dist');
@@ -373,6 +374,7 @@ section('Unpacking');
         unpack_ams('amscls', "$dir_incoming_ctan/amscls.tds.zip");
         unpack_ams('amsrefs', "$dir_incoming_ctan/amsrefs.tds.zip");
         unpack_ams('amsmath', "$dir_incoming/ctan/math.tds.zip");
+        unpack_ams('amsfonts', "$dir_incoming/ctan/amsfonts.tds.zip");
         #unpack_ams('amsrefs', "$dir_incoming_ams/amsrefs.zip");
         #unpack_ams('amsmath', "$dir_incoming_ams/amsmath.zip");
         ## because of 00readme.txt and amsrefs.dtx
@@ -644,6 +646,8 @@ section('Patches after source install');
     if ($modules{'amslatex'}) {
         patch("amslatex/amscls/amsclass.dtx");
         patch("amslatex/amsrefs/changes.tex");
+        patch("amslatex/amsfonts/amsfndoc.def");
+        patch("amslatex/amsfonts/amsfndoc.tex");
         run("$prg_recode latin1..utf8 $dir_build/amslatex/amsrefs/changes.tex");
     }
 
@@ -1362,13 +1366,17 @@ if ($modules{'amslatex'}) {
                 if $doc eq 'testmath'
                 or $doc eq 'thmtest'
                 or $doc eq 'cite-xs'
-                or $doc eq 'mathscinet';
-        $latextds = $prg_lualatextds2 if $doc eq 'amsldoc'
-                                      or $doc eq 'subeqn'
-                                      or $doc eq 'textcmds';
+                or $doc eq 'mathscinet'
+                or $doc eq 'eufrak'
+                or $doc eq 'euscript';
+        $latextds = $prg_lualatextds2
+                if $doc eq 'amsldoc'
+                or $doc eq 'subeqn'
+                or $doc eq 'textcmds';
         $latextds = $prg_pdflatex
                 if $doc eq 'thmtest';
-        $latextds = $prg_lualatex if $doc eq 'amsrdoc';
+        $latextds = $prg_lualatex
+                if $doc eq 'amsrdoc';
 
         symlink $ams_drv, "$doc.drv";
         cache 'amslatex', $doc, sub {
@@ -1384,7 +1392,12 @@ if ($modules{'amslatex'}) {
             run("$latextds $doc.drv");
             final_end;
         };
-        install_pdf($amspkg, $doc);
+        if ($amspkg eq 'amsfonts') {
+            install_gen_pdf('fonts', $amspkg, $doc);
+        }
+        else {
+            install_pdf($amspkg, $doc);
+        }
     }
 
     chdir "$dir_build/amslatex/amsmath";
@@ -1411,6 +1424,24 @@ if ($modules{'amslatex'}) {
     ];
     # 2013-02-13: Excluded as test files:
     #   cite-xa cite-xb cite-xh cite-xs
+    chdir $cwd;
+
+    chdir "$dir_build/amslatex/amsfonts";
+    symlink '../texmf', 'texmf';
+    map {generate_doc 'amsfonts', $_; } qw[
+        amsfonts amssymb cmmib57 eufrak euscript
+    ];
+    # plain: amsfndoc
+    {
+        my $doc = 'amsfndoc';
+        cache 'amslatex', $doc, sub {
+            run("$prg_pdftex -draftmode $doc.tex");
+            final_begin;
+            run("$prg_pdftex $doc.tex");
+            final_end;
+        };
+    }
+    install_gen_pdf('fonts', 'amsfonts', 'amsfndoc');
     chdir $cwd;
 }
 

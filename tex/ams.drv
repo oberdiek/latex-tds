@@ -1,6 +1,6 @@
 % ams.drv
-% 2012/05/12 v1.4 Driver file for amslatex documentation files
-% Copyright 2006-2012 Heiko Oberdiek.
+% 2013/02/15 v1.5 Driver file for amslatex documentation files
+% Copyright 2006-2013 Heiko Oberdiek.
 %
 % This file is part of project `latex-tds'.
 %
@@ -28,6 +28,8 @@
 %   * Fix for changes.tex.
 % 2012/05/12 v1.4
 %   * Update for ForestGreen, option `dvipsnames' also added for xcolor.
+% 2013/02/15 v1.5
+%   * Support for amsfonts added.
 %
 \NeedsTeXFormat{LaTeX2e}
 \makeatletter
@@ -53,11 +55,16 @@
   \endinput
 }
 
-%%% Patch for amsrefs/changes.tex
+%%% Support math symbols for amsfonts/amsfonts.dtx
+\PassOptionsToPackage{pdfencoding=auto,psdextra}{hyperref}
+
+%%% Patch for amsrefs/changes.tex and amsfonts/amsfonts.dtx
 \AtBeginDocument{%
   \@ifundefined{pdfstringdefDisableCommands}{}{%
     \pdfstringdefDisableCommands{%
       \def\cs#1{\textbackslash#1}%
+      \let\fnt\@firstofone
+      \def\meta#1{\textlangle#1\textrangle}%
     }%
   }%
 }
@@ -242,7 +249,7 @@
     \AtEndDocument{\PrintIndex}%
   }{%
     \PackageError{ams.drv}{%
-      Cannot find document source
+      Cannot find document source%
     }{\csname @ehc\endcsname}%
   }%
 }
