@@ -75,6 +75,7 @@ Module list
             ftp://ftp.ams.org/pub/tex/amsrefs/amsrefs.zip
             ftp://ftp.ams.org/pub/tex/amscls.zip
             ftp://ftp.ams.org/pub/tex/amsmath.zip
+* amsfonts  CTAN:install/fonts/amsfonts.tds.zip
 * psnfss    CTAN:macros/latex/required/psnfss.zip
 * babel     CTAN:macros/latex/required/babel.zip
 * tds       CTAN:tds.zip
@@ -263,6 +264,8 @@ Documentation driver
 Patches
 -------
   patch/amsclass.dtx.diff   patch for amslatex/amsclass.dtx
+  patch/amsfndoc.def.diff   patch for amsfonts/amsfndoc.def
+  patch/amsfndoc.tex.diff   patch for amsfonts/amsfndoc.tex
   patch/amsldoc.tex.diff    patch for amslatex/amsldoc.tex
   patch/changes.tex.diff    patch for amslatex/amsrefs/changes.tex
   patch/encguide.tex.diff   patch for base/encguide.tex
@@ -318,14 +321,6 @@ Tools
 * Added: tools.pdf as overview/contents/index file with links
   and short descriptions of the single packages. (It uses
   the data from manifest.txt).
-* ...
-
-AmSLaTeX
---------
-* The distribution from the AMS ftp site is used, because
-  the files are already sorted in TDS:
-    ftp://ftp.ams.org/pub/tex/amslatex.zip
-    ftp://ftp.ams.org/pub/tex/amsrefs.zip
 * ...
 
 Babel
@@ -420,15 +415,10 @@ done in which way.
 The *.zip with TDS trees are the goal of the project, not the
 build process. Some remarks, if someone wants to build the
 modules himself:
-* TeX compiler: recent pdfTeX, below 1.30 some of the packages
-  will not work.
-* An up-to-date LaTeX installation is recommended.
-* Additional packages can be necessary, e.g. I had to install
-  language/armenian, fonts/tipa, fonts/wsuipa, fonts/fc,
-  fonts/utopia, fonts/greek/cbfonts, ...
-  Probably TeX Live would be a good idea (I haven't tested).
-* Some new packages of mine I will put on CTAN, but at time
-  of writing, they aren't available yet.
+* TeX compiler: LuaTeX and pdfTeX (>= 1.30).
+* An up-to-date LaTeX installation, at least TeX Live 2012.
+* Additional packages can be necessary, e.g.
+  CTAN:language/armenian/armtex.zip is not in TeX Live 2012.
 * Most of the PDF files are generated using lualatex and package
   `fontspec' that uses the Latin Modern fonts as default. They
   are available as OpenType fonts. LuaTeX generates with OpenType
@@ -624,4 +614,4 @@ I. HISTORY
   * Change in version control system from CVS to git with public
     source repository.
 2013/02/15
-  * Module amslatex: amsfonts added.
+  * Module amsfonts added.

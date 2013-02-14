@@ -2,8 +2,10 @@ ac
 albanian
 amsclass
 amscls
-AmSLaTeX
+amsfndoc
+amsfonts
 amslatex
+AmSLaTeX
 amsldoc
 amsmath
 amsrefs
@@ -51,6 +53,7 @@ fontenc
 fontspec
 freiburg
 frenchb
+github
 googlemail
 grayf
 greek
@@ -61,6 +64,7 @@ hebrew
 heiko
 html
 http
+https
 hyperref
 iahyphen
 icehyph
@@ -96,8 +100,8 @@ ltxcheck
 ltxdoc
 ltxguide
 Lua
-LuaLaTeX
 lualatex
+LuaLaTeX
 LuaTeX
 makeindex
 manfnt
@@ -114,11 +118,11 @@ oberdiek
 OpenType
 org
 pdf
-PDFBox
 pdfbox
+PDFBox
 pdflatex
-pdfTeX
 pdftex
+pdfTeX
 Perl
 pl
 PS

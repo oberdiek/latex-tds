@@ -4,8 +4,8 @@ $^W=1;
 
 my $prj     = 'latex-tds';
 my $file    = 'build.pl';
-my $version = '1.174';
-my $date    = '2014-02-14';
+my $version = '1.175';
+my $date    = '2014-02-15';
 my $author  = 'Heiko Oberdiek';
 my $copyright = "Copyright 2006-2013 $author";
 chomp(my $license = <<"END_LICENSE");
@@ -52,6 +52,7 @@ my @pkg_list = (
     'tds',
     'knuth',
     'etex',
+    'amsfonts',
 );
 
 my $zip_comment = <<'END_ZIP_COMMENT';
@@ -374,7 +375,6 @@ section('Unpacking');
         unpack_ams('amscls', "$dir_incoming_ctan/amscls.tds.zip");
         unpack_ams('amsrefs', "$dir_incoming_ctan/amsrefs.tds.zip");
         unpack_ams('amsmath', "$dir_incoming/ctan/math.tds.zip");
-        unpack_ams('amsfonts', "$dir_incoming/ctan/amsfonts.tds.zip");
         #unpack_ams('amsrefs', "$dir_incoming_ams/amsrefs.zip");
         #unpack_ams('amsmath', "$dir_incoming_ams/amsmath.zip");
         ## because of 00readme.txt and amsrefs.dtx
@@ -387,6 +387,15 @@ section('Unpacking');
         ##        . "$dir_build/amslatex/texmf/source/latex/amsrefs/README");
         # run("$prg_cp $dir_build/amslatex/ctan/amsrefs/amsrefs.dtx "
         #         . "$dir_build/amslatex/texmf/source/latex/amsrefs/amsrefs.dtx");
+    }
+    if ($modules{'amsfonts'}) {
+        ensure_directory("$dir_build/amsfonts");
+        unpacking('amsfonts',
+                  "$dir_incoming_ctan/amsfonts.tds.zip",
+                  "$dir_build/amsfonts/texmf");
+        my $src = "$dir_build/amsfonts";
+        ensure_directory($src);
+        run("$prg_cp $dir_build/amsfonts/texmf/source/latex/amsfonts/* $src/");
     }
     unpack_psnfss('lw35nfss');
     unpack_psnfss('freenfss');
@@ -646,9 +655,12 @@ section('Patches after source install');
     if ($modules{'amslatex'}) {
         patch("amslatex/amscls/amsclass.dtx");
         patch("amslatex/amsrefs/changes.tex");
-        patch("amslatex/amsfonts/amsfndoc.def");
-        patch("amslatex/amsfonts/amsfndoc.tex");
         run("$prg_recode latin1..utf8 $dir_build/amslatex/amsrefs/changes.tex");
+    }
+
+    if ($modules{'amsfonts'}) {
+        patch("amsfonts/amsfndoc.def");
+        patch("amsfonts/amsfndoc.tex");
     }
 
     if ($modules{'babel'}) {
@@ -1338,24 +1350,24 @@ END_CODE
     chdir $cwd;
 }
 
+sub makeindex ($) {
+    my $doc = shift;
+    my $style;
+    $style = 'gind.ist' unless $doc eq 'amsldoc';
+    run_makeindex("$doc.idx", $style);
+}
+
+sub bibtex ($) {
+    my $doc = shift;
+
+    if ($doc =~ /^cite-x[bh]$/) {
+        run("$prg_bibtex $doc");
+    }
+}
+
 ### Generate documentation for amslatex
 if ($modules{'amslatex'}) {
     section('Documentation: amslatex');
-
-    sub makeindex ($) {
-        my $doc = shift;
-        my $style;
-        $style = 'gind.ist' unless $doc eq 'amsldoc';
-        run_makeindex("$doc.idx", $style);
-    }
-
-    sub bibtex ($) {
-        my $doc = shift;
-
-        if ($doc =~ /^cite-x[bh]$/) {
-            run("$prg_bibtex $doc");
-        }
-    }
 
     sub generate_doc ($$) {
         my $amspkg = shift;
@@ -1366,9 +1378,7 @@ if ($modules{'amslatex'}) {
                 if $doc eq 'testmath'
                 or $doc eq 'thmtest'
                 or $doc eq 'cite-xs'
-                or $doc eq 'mathscinet'
-                or $doc eq 'eufrak'
-                or $doc eq 'euscript';
+                or $doc eq 'mathscinet';
         $latextds = $prg_lualatextds2
                 if $doc eq 'amsldoc'
                 or $doc eq 'subeqn'
@@ -1392,12 +1402,7 @@ if ($modules{'amslatex'}) {
             run("$latextds $doc.drv");
             final_end;
         };
-        if ($amspkg eq 'amsfonts') {
-            install_gen_pdf('fonts', $amspkg, $doc);
-        }
-        else {
-            install_pdf($amspkg, $doc);
-        }
+        install_pdf($amspkg, $doc);
     }
 
     chdir "$dir_build/amslatex/amsmath";
@@ -1425,10 +1430,38 @@ if ($modules{'amslatex'}) {
     # 2013-02-13: Excluded as test files:
     #   cite-xa cite-xb cite-xh cite-xs
     chdir $cwd;
+}
 
-    chdir "$dir_build/amslatex/amsfonts";
-    symlink '../texmf', 'texmf';
-    map {generate_doc 'amsfonts', $_; } qw[
+if ($modules{'amsfonts'}) {
+    section('Documentation: amsfonts');
+
+    sub generate_doc2 ($$) {
+        my $amspkg = shift;
+        my $doc = shift;
+        my $ams_drv = "$cwd/$dir_tex/ams.drv";
+        my $latextds = $prg_lualatextds;
+        $latextds = $prg_pdflatextds
+                if $doc eq 'eufrak'
+                or $doc eq 'euscript';
+
+        symlink $ams_drv, "$doc.drv";
+        cache 'amsfonts', $doc, sub {
+            run("$latextds -draftmode $doc.drv");
+            makeindex($doc);
+            bibtex($doc);
+            run("$latextds -draftmode $doc.drv");
+            makeindex($doc);
+            run("$latextds -draftmode $doc.drv");
+            makeindex($doc);
+            final_begin;
+            run("$latextds $doc.drv");
+            final_end;
+        };
+        install_gen_pdf('fonts', $amspkg, $doc);
+    }
+
+    chdir "$dir_build/amsfonts";
+    map {generate_doc2 'amsfonts', $_; } qw[
         amsfonts amssymb cmmib57 eufrak euscript
     ];
     # plain: amsfndoc
