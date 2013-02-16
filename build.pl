@@ -4,8 +4,8 @@ $^W=1;
 
 my $prj     = 'latex-tds';
 my $file    = 'build.pl';
-my $version = '1.175';
-my $date    = '2014-02-15';
+my $version = '1.176';
+my $date    = '2014-02-16';
 my $author  = 'Heiko Oberdiek';
 my $copyright = "Copyright 2006-2013 $author";
 chomp(my $license = <<"END_LICENSE");
@@ -632,10 +632,16 @@ section('Patches after source install');
         chdir $cwd;
 
         patch('base/encguide.tex');
-        patch('base/lb2.err');
         patch('base/source2e.tex');
         patch('base/tlc2.err');
         patch('base/utf8ienc.dtx');
+        # lb2.err contains <CR><LF> line endings, a patch file
+        # created by diff in Linux would create mixed line endings
+        # causing trouble for subversion (Karl Berry).
+        # Therefore the percent character is inserted by sed.
+        run("$prg_sed -i -e '"
+           . 's/\\\\usepackage\[latin1]{inputenc}/%\\\\usepackage[latin1]{inputenc}/'
+           . "' $dir_build/base/lb2.err");
         run("$prg_recode latin1..utf8 $dir_build/base/lb2.err");
     }
 

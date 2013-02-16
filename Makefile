@@ -28,8 +28,13 @@ spell: README ispell.dict
 ispell.dict:
 	touch $@
 
+check: spell
+
 ziptimetree: lib/ziptimetree.pl
 lib/ziptimetree.pl: $(HOME)/bin/ziptimetree
 	install -m 755 $< $@
 
-.PHONY: all build distrib update incoming ziptimetree spell license
+clean:
+	-$(RM) README.bak
+
+.PHONY: all build distrib update incoming ziptimetree spell license check clean

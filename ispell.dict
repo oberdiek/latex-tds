@@ -4,8 +4,8 @@ amsclass
 amscls
 amsfndoc
 amsfonts
-amslatex
 AmSLaTeX
+amslatex
 amsldoc
 amsmath
 amsrefs
@@ -100,8 +100,8 @@ ltxcheck
 ltxdoc
 ltxguide
 Lua
-lualatex
 LuaLaTeX
+lualatex
 LuaTeX
 makeindex
 manfnt
@@ -118,11 +118,11 @@ oberdiek
 OpenType
 org
 pdf
-pdfbox
 PDFBox
+pdfbox
 pdflatex
-pdftex
 pdfTeX
+pdftex
 Perl
 pl
 PS
@@ -130,6 +130,7 @@ psnfss
 readme
 romanidx
 rtest
+sed
 sourceforge
 src
 tb

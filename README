@@ -1,4 +1,4 @@
-README for project latex-tds, 2013/02/15
+README for project latex-tds, 2013/02/16
 
 TABLE OF CONTENTS
 =================
@@ -270,7 +270,6 @@ Patches
   patch/changes.tex.diff    patch for amslatex/amsrefs/changes.tex
   patch/encguide.tex.diff   patch for base/encguide.tex
   patch/hebrew.fdd.diff     patch for babel/hebrew.fdd
-  patch/lb2.err.diff        patch for base/lb2.err
   patch/logmac.tex.diff     patch for knuth/errata/logmac.tex
   patch/source2e.tex.diff   patch for base/source2e.tex
   patch/tlc2.err.diff       patch for base/tlc2.err
@@ -615,3 +614,5 @@ I. HISTORY
     source repository.
 2013/02/15
   * Module amsfonts added.
+2013/02/16
+  * Patch file lb2.err.diff removed by call of sed inside build.pl.
