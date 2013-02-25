@@ -57,7 +57,7 @@ lib/ziptimetree.pl: $(HOME)/bin/ziptimetree
 	install -m 755 $< $@
 
 clean:
-	-$(RM) README.bak
+	-$(RM) README.bak README.asciidoc.bak
 
 .PHONY: all build distrib update incoming ziptimetree spell license \
         check check-links clean readme
