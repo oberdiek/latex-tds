@@ -37,12 +37,20 @@ README.pdf: README.asciidoc
 # update:
 # 	./update.sh
 
-spell: README ispell.dict
+spell: README.asciidoc ispell.dict
 	ispell -p ispell.dict $<
 ispell.dict:
 	touch $@
 
-check: spell
+check: spell check-links
+
+check-links: README.html
+	-linkchecker \
+	    --anchors \
+	    --no-warnings \
+	    --file-output=text/check-links.log \
+	    $<
+#	    --ignore-url=ftp://ftp.ams.org/ \
 
 ziptimetree: lib/ziptimetree.pl
 lib/ziptimetree.pl: $(HOME)/bin/ziptimetree
@@ -52,4 +60,4 @@ clean:
 	-$(RM) README.bak
 
 .PHONY: all build distrib update incoming ziptimetree spell license \
-        check clean readme
+        check check-links clean readme

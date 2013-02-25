@@ -10,21 +10,6 @@ README for project latex-tds
 // This file is formatted in the text document format AsciiDoc.
 
 
-Abbreviations, Glossary
------------------------
-CTAN::
-    Comprehensive TeX Archive Network. +
-    FAQ entry: http://www.tex.ac.uk/cgi-bin/texfaq2html?label=archives +
-    For example, you can resolve the prefix +CTAN:+ by using
-    +{ctan}+.
-latex-tds::
-    The name of this project.
-TDS::
-    TeX Directory Structure. +
-    FAQ entry: http://www.tex.ac.uk/cgi-bin/texfaq2html?label=tds +
-    Specification: http://www.ctan.org/pkg/tds
-
-
 Project latex-tds
 -----------------
 
@@ -71,10 +56,10 @@ Module list
   {ctan}macros/latex/required/cyrillic.zip[CTAN:macros/latex/required/cyrillic.zip]
 
 *amslatex*::
-  {ctan}install/macros/latex/required/amscls.tds.zip[CTAN:install/macros/latex/required/amscls.tds.zip] +
+  {ctan}install/macros/latex/required/amslatex/amscls.tds.zip[CTAN:install/macros/latex/required/amslatex/amscls.tds.zip] +
+  {ctan}install/macros/latex/required/amslatex/math.tds.zip[CTAN:install/macros/latex/required/amslatex/math.tds.zip] +
   {ctan}macros/latex/contrib/amsrefs.zip[CTAN:macros/latex/contrib/amsrefs.zip] +
   {ctan}macros/latex/required/amslatex.zip[CTAN:macros/latex/required/amslatex.zip] +
-  ftp://ftp.ams.org/pub/tex/amslatex.zip +
   ftp://ftp.ams.org/pub/tex/amsrefs/amsrefs.zip +
   ftp://ftp.ams.org/pub/tex/amscls.zip +
   ftp://ftp.ams.org/pub/tex/amsmath.zip
@@ -112,6 +97,21 @@ Source repository (without distribution files):
 ____
 https://github.com/oberdiek/latex-tds
 ____
+
+
+Abbreviations, Glossary
+-----------------------
+CTAN::
+    Comprehensive TeX Archive Network. +
+    FAQ entry: http://www.tex.ac.uk/cgi-bin/texfaq2html?label=archives +
+    For example, you can resolve the prefix +CTAN:+ by using
+    +{ctan}+.
+latex-tds::
+    The name of this project.
+TDS::
+    TeX Directory Structure. +
+    FAQ entry: http://www.tex.ac.uk/cgi-bin/texfaq2html?label=tds +
+    Specification: http://www.ctan.org/pkg/tds
 
 
 Download
@@ -490,7 +490,7 @@ modules himself:
         translation operations, ...)
         -> +pdfbox-rewrite.jar+.
      b. For reading and writing the PDF file I have used PDFBox
-        -> +PDFBox-0.7.2.jar+ (http://www.pdfbox.org/).
+        -> +PDFBox-0.7.2.jar+ (http://pdfbox.apache.org/).
      c. To get better results I patched some of the classes
         of PDFBox (especially the write module)
         -> +pdfbox-rewrite.jar+.
@@ -679,5 +679,7 @@ History
   * Module amsfonts added.
 2013/02/25::
   * Patch file +lb2.err.diff+ removed by call of sed inside +build.pl+.
-  * README rewritten in text document format http://www.methods.co.nz/asciidoc/[AsciiDoc]
+  * +README+ rewritten in text document format http://www.methods.co.nz/asciidoc/[AsciiDoc]
     and added as HTML and PDF files.
+  * +README.asciidoc+ updated.
+  * +Makefile+: Target `check-links' added.

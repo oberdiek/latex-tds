@@ -1,11 +1,14 @@
 build
+build.log
+build-last.log
 cache
-texmf
+check-links.log
 distrib
 incoming
 latex-tds.zip
-build-last.log
-scratch
+README.asciidoc.bak
 README.bak
 README.html
 README.pdf
+scratch
+texmf
