@@ -4,6 +4,7 @@
 # 2010/10/27 Email address updated.
 # 2012/05/12 File `readme.txt' renamed to `README'.
 # 2013/02/14 New CTAN interface.
+# 2013/02/25 Using `README.asciidoc' instead of `README'.
 #
 use strict;
 $^W = 1;
@@ -18,7 +19,7 @@ my $file = 'latex-tds.zip';
 my $filename = 'latex-tds.zip';
 my $filetype = 'application/zip';
 my $ctan_upload_url = 'http://www.ctan.org/upload/save';
-my $file_readme = 'README';
+my $file_readme = 'README.asciidoc';
 my $prg_curl = 'curl';
 my $prg_lynx = 'lynx';
 my $file_response = 'ctan_response.html';
@@ -49,13 +50,13 @@ my $note = '';
 
 my $date = '';
 open(IN, '<', $file_readme) or die "!!! Error: Cannot open `$file_readme'!\n";
-$_ = <IN>;
-if (/\s(\d{4}\/\d{2}\/\d{2})$/) {
-    $date = $1;
+while (<IN>) {
+    if (/^:revdate:\s*(\d{4}\/\d{2}\/\d{2})$/) {
+        $date = $1;
+        last;
+    }
 }
-else {
-    die "!!! Error: Cannot find release date in `$file_readme'!\n";
-}
+$date or die "!!! Error: Cannot find release date in `$file_readme'!\n";
 
 my $hist_prolog = <<'END_HIST_PROLOG';
 Latest changes (see readme.txt):
@@ -99,7 +100,7 @@ $limit .= 'k' if $limit =~ /^\d*[1-9]\d*$/;
 my $history = '';
 my $hist_date = '';
 while (<IN>) {
-    if (/^(\d{4}\/\d{2}\/\d{2})$/) {
+    if (/^(\d{4}\/\d{2}\/\d{2})::$/) {
         $hist_date = $1;
         $history = "$hist_prefix$_";
         next;

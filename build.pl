@@ -4,8 +4,8 @@ $^W=1;
 
 my $prj     = 'latex-tds';
 my $file    = 'build.pl';
-my $version = '1.176';
-my $date    = '2014-02-16';
+my $version = '1.177';
+my $date    = '2013-02-25';
 my $author  = 'Heiko Oberdiek';
 my $copyright = "Copyright 2006-2013 $author";
 chomp(my $license = <<"END_LICENSE");
@@ -56,10 +56,10 @@ my @pkg_list = (
 );
 
 my $zip_comment = <<'END_ZIP_COMMENT';
-*************************************************
-* This file is part of project 'latex-tds', see *
-* CTAN:macros/latex/contrib/latex-tds/README    *
-*************************************************
+***************************************************
+* This file is part of project 'latex-tds', see   *
+* CTAN:macros/latex/contrib/latex-tds/README.html *
+***************************************************
 END_ZIP_COMMENT
 
 my $error = "!!! Error:";
@@ -89,9 +89,10 @@ my $file_ctan_distrib = "$cwd/$prj.zip";
 my $file_ziptimetree = get_perl_script('ziptimetree');
 my $file_adjust_checksum = get_perl_script('adjust_checksum');
 
+my $prg_asciidoc     = 'asciidoc';
+my $prg_bibtex       = 'bibtex';
 my $prg_checksum     = $file_adjust_checksum;
-my $prg_bibtex       = "bibtex";
-my $prg_chmod        = "chmod";
+my $prg_chmod        = 'chmod';
 my $prg_cp           = 'cp -p';
 my $prg_curl         = 'curl';
 my $prg_docstrip     = 'tex -shell-escape';
@@ -105,7 +106,8 @@ my $prg_ls           = "ls";
 my $prg_makeindex    = 'makeindex';
 my $prg_mkdir        = 'mkdir';
 my $prg_mv           = 'mv';
-my $prg_patch        = "patch";
+my $prg_patch        = 'patch';
+my $prg_lowriter     = 'lowriter';
 my $prg_lualatex     = 'lualatex';
 my $prg_lualatextds  = "lualatex -fmt=$cwd/$dir_build/lualatex-tds";
 my $prg_lualatextds2 = "lualatex -fmt=$cwd/$dir_build/lualatex-tds2";
@@ -1799,13 +1801,39 @@ if ($modules{'etex'}) {
 if ($modules{'source'}) {
     section('Module source');
 
-    my $dir_dest = "$dir_build/source/texmf/source/latex/latex-tds";
+    my $dir_build_source = "$dir_build/source";
+    my $dir_dest = "$dir_build_source/texmf/source/latex/latex-tds";
+    my $dir_doc = "$dir_build_source/texmf/doc/latex/latex-tds";
     my $dir_scripts = "$dir_build/source/texmf/scripts";
+    my $file_readme_html = "README.html";
+    my $file_readme_pdf = "README.pdf";
+    my $file_readme_notoc_html = "$dir_build_source/README-notoc.html";
+    
+    ensure_directory($dir_build_source);
+
+    # generate README.html
+    run("$prg_asciidoc --backend=xhtml11 README.asciidoc");
+
+    # generate README.pdf
+    run("$prg_asciidoc --out-file=$file_readme_notoc_html"
+        . " --backend=xhtml11"
+        . " -a disable-javascript"
+        . " -a toc!"
+        . " README.asciidoc"
+    );
+    run("$prg_lowriter --invisible --convert-to odt "
+            . "--outdir $dir_build_source $file_readme_notoc_html");
+    run("$prg_lowriter --invisible --convert-to pdf "
+            . "--outdir $dir_build_source $dir_build_source/README-notoc.odt");
+    run("$prg_cp -p $dir_build_source/README-notoc.pdf $file_readme_pdf");
+    
+    run("$prg_cp -p README.asciidoc $dir_build_source/README");
 
     install $dir_dest, qw[
         build.pl
-        README
+        README.asciidoc
     ];
+    
     install "$dir_dest/tex", glob("$dir_tex/*.*");
     install "$dir_dest/patch", glob("$dir_patch/*.*");
     install "$dir_dest/lib", $file_ziptimetree;
@@ -1813,7 +1841,11 @@ if ($modules{'source'}) {
     install "$dir_dest/license/latex-tds", "$dir_license/latex-tds/lppl.txt";
     install "$dir_dest/license/adjust_checksum", "$dir_license/adjust_checksum/lppl.txt";
     install "$dir_dest/license/ziptimetree", "$dir_license/ziptimetree/lgpl.txt";
-    install $dir_distrib, 'README';
+    install $dir_distrib, "$dir_build_source/README";
+    install $dir_distrib, $file_readme_html;
+    install $dir_distrib, $file_readme_pdf;
+    install $dir_doc, $file_readme_html;
+    install $dir_doc, $file_readme_pdf;
 }
 
 ### Module latex-tds
@@ -1862,7 +1894,7 @@ section('Distrib');
 
     if ($opt_all) {
         chdir $dir_distrib;
-        my $cmd = "$prg_zip -0 $file_ctan_distrib README";
+        my $cmd = "$prg_zip -0 $file_ctan_distrib README README.html README.pdf";
         for my $pkg (sort @pkg_list) {
             $cmd .= " $pkg.tds.zip";
         }
