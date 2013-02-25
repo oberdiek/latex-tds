@@ -26,7 +26,7 @@ A. ABBREVIATIONS, GLOSSARY
 [TDS]
     TeX Directory Structure.
     FAQ entry: http://www.tex.ac.uk/cgi-bin/texfaq2html?label=tds
-    Specification: CTAN:tds.zip
+    Specification: http://www.ctan.org/pkg/tds
 
 
 B. PROJECT LATEX-TDS
@@ -124,7 +124,7 @@ The following files can be downloaded:
     latex-tds.tds.zip
 
 
-C. INSTALLATION HINTS
+D. INSTALLATION HINTS
 =====================
 
 Hopefully the result of this project helps you in the installation
@@ -180,7 +180,7 @@ Hints
 D. COPYRIGHT, LICENSE
 =====================
 
-Copyright 2006-2011 Heiko Oberdiek.
+Copyright 2006-2013 Heiko Oberdiek.
 
 License is LPPL 1.3c:
 
