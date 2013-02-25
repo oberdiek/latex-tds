@@ -13,6 +13,8 @@ README for project latex-tds
 Project latex-tds
 -----------------
 
+Version: {revdate}
+
 How it has started
 ~~~~~~~~~~~~~~~~~~
 The project started as I wanted to install the new LaTeX release 2005/12/01
