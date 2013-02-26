@@ -1882,6 +1882,7 @@ if ($modules{'source'}) {
     install $dir_dest, qw[
         build.pl
         README.asciidoc
+        README-docinfo.html
     ];
 
     install "$dir_dest/tex", glob("$dir_tex/*.*");

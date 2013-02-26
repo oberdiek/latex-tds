@@ -23,7 +23,7 @@ license/ziptimetree license/latex-tds:
 # README
 
 readme: README.html README.pdf
-README.html: README.asciidoc README-docinfo.html README.conf
+README.html: README.asciidoc README-docinfo.html
 	asciidoc $<
 README.pdf: README.html
 	wkhtmltopdf $< $@

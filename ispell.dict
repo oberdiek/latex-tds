@@ -19,6 +19,7 @@ babel
 babel's
 bbcompat
 bghyphen
+Catalogue
 cbfonts
 cd
 cfg
@@ -35,6 +36,7 @@ dat
 def
 diff
 dist
+docinfo
 docstrip
 drv
 dtx
@@ -172,6 +174,7 @@ varioref
 VTeX
 webmac
 webman
+wkhtmltopdf
 wsuipa
 www
 xpackages
