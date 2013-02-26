@@ -23,16 +23,18 @@ license/ziptimetree license/latex-tds:
 # README
 
 readme: README.html README.pdf
-README.html: README.asciidoc
+README.html: README.asciidoc README-docinfo.html README.conf
 	asciidoc $<
-NOTOC_HTML = build/README-notoc.html
-README.pdf: README.asciidoc
-	-mkdir build
-	asciidoc --out-file $(NOTOC_HTML) \
-	    -a disable-javascript -a toc! $<
-	lowriter --invisible --convert-to odt --outdir build $(NOTOC_HTML)
-	cp build/README-notoc.odt build/README.odt
-	lowriter --invisible --convert-to pdf build/README.odt
+README.pdf: README.html
+	wkhtmltopdf $< $@
+#NOTOC_HTML = build/README-notoc.html
+#README.pdf: README.asciidoc
+#	-mkdir build
+#	asciidoc --out-file $(NOTOC_HTML) \
+#	    -a disable-javascript -a toc! $<
+#	lowriter --invisible --convert-to odt --outdir build $(NOTOC_HTML)
+#	cp build/README-notoc.odt build/README.odt
+#	lowriter --invisible --convert-to pdf build/README.odt
 
 # update:
 # 	./update.sh
