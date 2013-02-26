@@ -6,6 +6,7 @@ README for project latex-tds
 :toc:
 :numbered:
 :docinfo:
+:conf-files:    README.conf
 :ctan:          http://mirror.ctan.org/
 // Description is taken from the TeX Catalogue
 :description:   This bundle `latex-tds' provides a set of zip file +
