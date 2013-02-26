@@ -4,8 +4,8 @@ $^W=1;
 
 my $prj     = 'latex-tds';
 my $file    = 'build.pl';
-my $version = '1.178';
-my $date    = '2013-02-26';
+my $version = '1.179';
+my $date    = '2013-02-27';
 my $author  = 'Heiko Oberdiek';
 my $copyright = "Copyright 2006-2013 $author";
 chomp(my $license = <<"END_LICENSE");
@@ -124,6 +124,7 @@ my $prg_unzip        = 'unzip';
 my $prg_w3m          = 'w3m';
 my $prg_weave        = 'weave';
 my $prg_wget         = 'wget';
+my $prg_wkhtmltopdf  = 'wkhtmltopdf'; # with patched qt
 my $prg_zip          = 'zip';
 my $prg_ziptimetree  = $file_ziptimetree;
 
@@ -1809,7 +1810,7 @@ if ($modules{'source'}) {
     my $file_readme = 'README';
     my $file_readme_html = 'README.html';
     my $file_readme_pdf = 'README.pdf';
-    my $file_readme_notoc_html = "$dir_build_source/README-notoc.html";
+    # my $file_readme_notoc_html = "$dir_build_source/README-notoc.html";
     my $file_readme_w3m_txt = "$dir_build_source/README-w3m.txt";
 
     ensure_directory($dir_build_source);
@@ -1818,17 +1819,18 @@ if ($modules{'source'}) {
     run("$prg_asciidoc --backend=xhtml11 README.asciidoc");
 
     # generate README.pdf
-    run("$prg_asciidoc --out-file=$file_readme_notoc_html"
-        . " --backend=xhtml11"
-        . " -a disable-javascript"
-        . " -a toc!"
-        . " README.asciidoc"
-    );
-    run("$prg_lowriter --invisible --convert-to odt "
-            . "--outdir $dir_build_source $file_readme_notoc_html");
-    run("$prg_lowriter --invisible --convert-to pdf "
-            . "--outdir $dir_build_source $dir_build_source/README-notoc.odt");
-    run("$prg_cp -p $dir_build_source/README-notoc.pdf $file_readme_pdf");
+    # run("$prg_asciidoc --out-file=$file_readme_notoc_html"
+    #     . " --backend=xhtml11"
+    #     . " -a disable-javascript"
+    #     . " -a toc!"
+    #     . " README.asciidoc"
+    # );
+    # run("$prg_lowriter --invisible --convert-to odt "
+    #         . "--outdir $dir_build_source $file_readme_notoc_html");
+    # run("$prg_lowriter --invisible --convert-to pdf "
+    #         . "--outdir $dir_build_source $dir_build_source/README-notoc.odt");
+    # run("$prg_cp -p $dir_build_source/README-notoc.pdf $file_readme_pdf");
+    run("$prg_wkhtmltopdf $file_readme_html $file_readme_pdf");
 
     # run("$prg_cp -p README.asciidoc $dir_build_source/README");
     run("$prg_w3m -dump README.html>$file_readme_w3m_txt");
