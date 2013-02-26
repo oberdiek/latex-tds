@@ -153,7 +153,7 @@ or unzip's option ``-d``:
 
   $ unzip latex-tds -d /some/where/texmf
 
-Instead of the universe ZIP files single modules can be selected.
+Instead of the universe ZIP file single modules can be selected.
 
 Important to remember, point your unpack process right in
 the root directory of your TDS tree. The directory structure
