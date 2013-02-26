@@ -7,6 +7,7 @@ README for project latex-tds
 :numbered:
 :docinfo:
 :ctan:          http://mirror.ctan.org/
+:asciidoc:      http://www.methods.co.nz/asciidoc/[AsciiDoc]
 :colon:         :
 // Description is taken from the TeX Catalogue
 :description:   Bundle `latex-tds' provides a set of ZIP file +
@@ -249,7 +250,11 @@ Documentation
 ~~~~~~~~~~~~~
 [cols=".3literal,.7", frame="topbot", grid="rows"]
 |===
-|README                    |this file
+|README                    |plain text file
+|README.html               |standalone HTML file
+|README.pdf                |PDF version
+|README.asciidoc           |main source code in text document format {AsciiDoc}
+|README-docinfo.html       |source code, read by asciidoc to generate +README.html+
 |===
 
 Licenses
@@ -281,10 +286,10 @@ Configuration
 |tex/errata.cfg            |for errata lists of latex/base
 |tex/hyperref.cfg          |hyperref configuration file
 |tex/ltnews.cfg            |for LaTeX News of latex/base
+|tex/ltugboat.cls          |setup for class ltugboat
 |tex/ltxdoc.cfg            |setup for class ltxdoc
 |tex/ltxguide.cfg          |setup for the guide manuals in latex/base
                             and required/psnfss
-|tex/ltugboat.cls          |setup for class ltugboat
 |tex/lualatex-tds.ini      |init file for format generation for LuaTeX
 |tex/lualatex-tds2.ini     |init file for LuaTeX format without LM Math
 |tex/manual.cfg            |setup for errata list of the LaTeX manual
@@ -330,8 +335,8 @@ Patches
 |patch/logmac.tex.diff     |knuth/errata/logmac.tex
 |patch/source2e.tex.diff   |base/source2e.tex
 |patch/tlc2.err.diff       |base/tlc2.err
-|patch/tripman.tex.diff    |knuth/tex/tripman.tex
 |patch/trapman.tex.diff    |knuth/mf/trapman.tex
+|patch/tripman.tex.diff    |knuth/tex/tripman.tex
 |patch/utf8ienc.dtx.diff   |base/utf8ienc.dtx
 |patch/webman.tex.diff     |knuth/web/webman.tex
 |===
@@ -688,7 +693,7 @@ History
   * Module amsfonts added.
 2013/02/25::
   * Patch file +lb2.err.diff+ removed by call of sed inside +build.pl+.
-  * +README+ rewritten in text document format http://www.methods.co.nz/asciidoc/[AsciiDoc]
+  * +README+ rewritten in text document format {AsciiDoc}
     and added as HTML and PDF files.
   * +README.asciidoc+ updated.
   * +Makefile+: Target `check-links' added.
