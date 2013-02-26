@@ -194,7 +194,7 @@ Module base
 Module babel
 ^^^^^^^^^^^^
   * Most hyphenation patterns aren't provided here. Usually you can
-    find them somewhere below {ctan}language/hyphenation[CTAN:language/hyphenation].
+    find them somewhere below {ctan}language/hyphenation/[CTAN:language/hyphenation/].
   * Language configuration (+language.dat+), see the documentation of
     your TeX distribution.
   * Formats need rebuilding.
@@ -377,10 +377,10 @@ Babel
 ~~~~~
 * Babel's TeX files consists of three groups of files:
 +
-  1. Hyphenation pattern, see below
+  1. Hyphenation pattern, see below.
   2. Generic files:
      - +*.ldf+ (language definition files)
-     - +*.sty+ (from bbcompat.dtx, these are plain TeX files,
+     - +*.sty+ (from +bbcompat.dtx+, these are plain TeX files,
             LaTeX user have the package babel)
      - +babel.def+, +switch.def+
      - +plain.def+
@@ -634,10 +634,10 @@ History
     because the later archive file is out of sync.
 2011/06/30::
   * Module base:
-    * Update of LaTeX, release 2011/06/27.
-    * Patch +ltpatch.ltx+ to match the kernel version.
-    * Patch +lppl.tex.diff+ removed (no longer needed).
-    * Patch +ltfssdcl.dtx.diff+ added (checksum fixed).
+    - Update of LaTeX, release 2011/06/27.
+    - Patch +ltpatch.ltx+ to match the kernel version.
+    - Patch +lppl.tex.diff+ removed (no longer needed).
+    - Patch +ltfssdcl.dtx.diff+ added (checksum fixed).
   * Module tools: Release 2011/06.
   * Module babel: Release 2011/06.
 2011/07/01::
