@@ -4,8 +4,8 @@ $^W=1;
 
 my $prj     = 'latex-tds';
 my $file    = 'build.pl';
-my $version = '1.177';
-my $date    = '2013-02-25';
+my $version = '1.178';
+my $date    = '2013-02-26';
 my $author  = 'Heiko Oberdiek';
 my $copyright = "Copyright 2006-2013 $author";
 chomp(my $license = <<"END_LICENSE");
@@ -121,6 +121,7 @@ my $prg_sed          = "sed";
 my $prg_sort         = "sort";
 my $prg_texhash      = "texhash";
 my $prg_unzip        = 'unzip';
+my $prg_w3m          = 'w3m';
 my $prg_weave        = 'weave';
 my $prg_wget         = 'wget';
 my $prg_zip          = 'zip';
@@ -1805,10 +1806,12 @@ if ($modules{'source'}) {
     my $dir_dest = "$dir_build_source/texmf/source/latex/latex-tds";
     my $dir_doc = "$dir_build_source/texmf/doc/latex/latex-tds";
     my $dir_scripts = "$dir_build/source/texmf/scripts";
-    my $file_readme_html = "README.html";
-    my $file_readme_pdf = "README.pdf";
+    my $file_readme = 'README';
+    my $file_readme_html = 'README.html';
+    my $file_readme_pdf = 'README.pdf';
     my $file_readme_notoc_html = "$dir_build_source/README-notoc.html";
-    
+    my $file_readme_w3m_txt = "$dir_build_source/README-w3m.txt";
+
     ensure_directory($dir_build_source);
 
     # generate README.html
@@ -1826,14 +1829,59 @@ if ($modules{'source'}) {
     run("$prg_lowriter --invisible --convert-to pdf "
             . "--outdir $dir_build_source $dir_build_source/README-notoc.odt");
     run("$prg_cp -p $dir_build_source/README-notoc.pdf $file_readme_pdf");
-    
-    run("$prg_cp -p README.asciidoc $dir_build_source/README");
+
+    # run("$prg_cp -p README.asciidoc $dir_build_source/README");
+    run("$prg_w3m -dump README.html>$file_readme_w3m_txt");
+    my @lines_pre;
+    my @lines_toc;
+    my @lines_post;
+    my $state = 'pre';
+    open(IN, '<', $file_readme_w3m_txt)
+            or die "$error Cannot open `$file_readme_w3m_txt'!\n";
+    while (<IN>) {
+        if (/^README for project/) {
+            push @lines_pre, '=' x (length($_) - 1) . "\n";
+            push @lines_pre, $_;
+            push @lines_pre, '=' x (length($_) - 1) . "\n";
+            next;
+        }
+        if (/^Table of Contents/i) {
+            push @lines_pre, "\n";
+            push @lines_pre, "\n";
+            push @lines_pre, $_;
+            push @lines_pre, '=' x (length($_)-1) . "\n";
+            next;
+        }
+        if (/^(\d+)\.(\d+\.)? /) {
+            push @lines_post, "\n" unless $2;
+            push @lines_post, $_;
+            push @lines_post, ($2 ? '-' : '=') x length($_) . "\n";
+            my $prefix = ' ' x (3 * ($2 ? 2 : 1));
+            s/^(\d+)\.(\d+\.)? /($1<10 ? ' ' : '') . "$1.$2 "/e;
+            push @lines_toc, "$prefix$_";
+            next;
+        }
+        if (/^JavaScript must be enabled/) {
+            $state = 'post';
+            next;
+        }
+        if ($state eq 'pre') {
+            push @lines_pre, $_;
+        }
+        else {
+            push @lines_post, $_;
+        }
+    }
+    close(IN);
+    open(OUT, '>', $file_readme) or die "$error Cannot write `$file_readme'!\n";
+    print OUT @lines_pre, @lines_toc, @lines_post;
+    close(OUT);
 
     install $dir_dest, qw[
         build.pl
         README.asciidoc
     ];
-    
+
     install "$dir_dest/tex", glob("$dir_tex/*.*");
     install "$dir_dest/patch", glob("$dir_patch/*.*");
     install "$dir_dest/lib", $file_ziptimetree;
@@ -1841,9 +1889,10 @@ if ($modules{'source'}) {
     install "$dir_dest/license/latex-tds", "$dir_license/latex-tds/lppl.txt";
     install "$dir_dest/license/adjust_checksum", "$dir_license/adjust_checksum/lppl.txt";
     install "$dir_dest/license/ziptimetree", "$dir_license/ziptimetree/lgpl.txt";
-    install $dir_distrib, "$dir_build_source/README";
+    install $dir_distrib, $file_readme;
     install $dir_distrib, $file_readme_html;
     install $dir_distrib, $file_readme_pdf;
+    install $dir_doc, $file_readme;
     install $dir_doc, $file_readme_html;
     install $dir_doc, $file_readme_pdf;
 }

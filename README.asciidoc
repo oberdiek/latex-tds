@@ -1,7 +1,7 @@
 README for project latex-tds
 ============================
 :author:        Heiko Oberdiek
-:revdate:       2013/02/25
+:revdate:       2013/02/26
 :lang:          en
 :toc:
 :numbered:
@@ -18,7 +18,7 @@ Version: {revdate}
 How it has started
 ~~~~~~~~~~~~~~~~~~
 The project started as I wanted to install the new LaTeX release 2005/12/01
-that was announced at 2006/04/27. However the files aren't packed in
+that was announced at 2006/04/27. However the files are not packed in
 TDS format, ready for unpacking in the destination directory. And
 the documentation files were not yet generated or the provided
 PDF files are lacking of basic features such as bookmarks or link support.
@@ -36,14 +36,14 @@ Goals of the project
 
 Scope
 ~~~~~
-I don't have the time to assemble a TeX distribution with
+I do not have the time to assemble a TeX distribution with
 thousands of packages. Therefore I restricted myself to the
 LaTeX base distribution and the required bundles.
 In the following I will use the term `module' for a package bundle.
 
 Module list
 ~~~~~~~~~~~
-*base*::    
+*base*::
   {ctan}macros/latex/base.zip[CTAN:macros/latex/base.zip] +
   {ctan}macros/latex/doc.zip[CTAN:macros/latex/doc.zip] +
   http://www.latex-project.org/guides/lb2.err +
@@ -193,7 +193,7 @@ Module base
 
 Module babel
 ^^^^^^^^^^^^
-  * Most hyphenation patterns aren't provided here. Usually you can
+  * Most hyphenation patterns are not provided here. Usually you can
     find them somewhere below {ctan}language/hyphenation/[CTAN:language/hyphenation/].
   * Language configuration (+language.dat+), see the documentation of
     your TeX distribution.
@@ -205,7 +205,7 @@ Module psnfss
 
 Module graphics
 ^^^^^^^^^^^^^^^
-  * Module graphics doesn't provide all driver files, because some are
+  * Module graphics does not provide all driver files, because some are
     developed independently (+pdftex.def+, ...).
 
 
@@ -465,7 +465,7 @@ e-TeX
 Build Hints
 -----------
 
-The most important advice I can give: `forget it'!
+The most important advice I can give: `Forget it'!
 The purpose of the source files are rather to show, what was
 done in which way.
 The +*.zip+ with TDS trees are the goal of the project, not the
@@ -685,3 +685,5 @@ History
     and added as HTML and PDF files.
   * +README.asciidoc+ updated.
   * +Makefile+: Target `check-links' added.
+2013/02/26::
+  * +README+ generated from +README.asciidoc+ via +README.html+.

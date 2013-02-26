@@ -2,7 +2,7 @@ README for project latex-tds
 ============================
 
 :Author: Heiko Oberdiek
-:Version:   2013/02/25
+:Version:   2013/02/26
 
 .. contents:: Table of Contents
    :backlinks: entry
@@ -17,7 +17,7 @@ Project latex-tds
 How it has started
 ~~~~~~~~~~~~~~~~~~
 The project started as I wanted to install the new LaTeX release 2005/12/01
-that was announced at 2006/04/27. However the files aren't packed in
+that was announced at 2006/04/27. However the files are not packed in
 TDS format, ready for unpacking in the destination directory. And
 the documentation files were not yet generated or the provided
 PDF files are lacking of basic features such as bookmarks or link support.
@@ -35,7 +35,7 @@ Goals of the project
 
 Scope
 ~~~~~
-I don't have the time to assemble a TeX distribution with
+I do not have the time to assemble a TeX distribution with
 thousands of packages. Therefore I restricted myself to the
 LaTeX base distribution and the required bundles.
 In the following I will use the term 'module' for a package bundle.
@@ -149,7 +149,7 @@ Example:
 
 or unzip's option ``-d``:
 
-.. code-block:: bash
+.. code:: bash
 
   $ unzip latex-tds -d /some/where/texmf
 
@@ -157,9 +157,7 @@ Instead of the universe ZIP file single modules can be selected.
 
 Important to remember, point your unpack process right in
 the root directory of your TDS tree. The directory structure
-in the ZIP files start with the top-level directories:
-
-.. code-block::
+in the ZIP files start with the top-level directories::
 
   doc/latex/base/...
   tex/latex/tools/...
@@ -189,7 +187,7 @@ Module base
 
 Module babel
 ^^^^^^^^^^^^
-  * Most hyphenation patterns aren't provided here. Usually you can
+  * Most hyphenation patterns are not provided here. Usually you can
     find them somewhere below `CTAN:language/hyphenation <http://mirror.ctan.org/language/hyphenation/>`_.
   * Language configuration (``language.dat``), see the documentation of
     your TeX distribution.
@@ -201,7 +199,7 @@ Module psnfss
 
 Module graphics
 ^^^^^^^^^^^^^^^
-  * Module graphics doesn't provide all driver files, because some are
+  * Module graphics does not provide all driver files, because some are
     developed independently (``pdftex.def``, ...).
 
 
@@ -283,7 +281,7 @@ Configuration
 +--------------------------+---------------------------------------------+
 | tex/ltugboat.cls         | setup for class ltugboat                    |
 +--------------------------+---------------------------------------------+
-| tex/lualatex-tds.ini     | init file for format generation for LuaTeX  |  
+| tex/lualatex-tds.ini     | init file for format generation for LuaTeX  |
 +--------------------------+---------------------------------------------+
 | tex/lualatex-tds2.ini    | init file for LuaTeX format without LM Math |
 +--------------------------+---------------------------------------------+
@@ -304,7 +302,7 @@ Documentation driver
 +--------------------------+------------------------------------------------------+
 | tex/babel.tex            | doc driver with patches for ``babel.drv``            |
 +--------------------------+------------------------------------------------------+
-| tex/doc_lppl.tex         | doc driver for ``base/lppl.tex``                     | 
+| tex/doc_lppl.tex         | doc driver for ``base/lppl.tex``                     |
 +--------------------------+------------------------------------------------------+
 | tex/errata.all           | doc driver for ``knuth/errata/errata.pdf``           |
 +--------------------------+------------------------------------------------------+
@@ -531,7 +529,7 @@ modules himself:
   If you give the build script the option ``--nopostprocess``,
   then it will skip the postprocess steps (building is faster,
   the pdf files a little larger).
-  
+
   Install the jar files in the directory ``lib`` where
   they are expected by the build script.
 
@@ -712,4 +710,5 @@ History
     and added as HTML and PDF files.
   * ``README.asciidoc`` updated.
   * ``Makefile``: Target 'check-links' added.
-
+:2013/02/26:
+  * ``README`` generated from ``README.rst`` via ``README.html``.
