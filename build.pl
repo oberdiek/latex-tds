@@ -4,8 +4,8 @@ $^W=1;
 
 my $prj     = 'latex-tds';
 my $file    = 'build.pl';
-my $version = '1.179';
-my $date    = '2013-02-27';
+my $version = '1.180';
+my $date    = '2013-03-01';
 my $author  = 'Heiko Oberdiek';
 my $copyright = "Copyright 2006-2013 $author";
 chomp(my $license = <<"END_LICENSE");
@@ -76,7 +76,20 @@ my $dir_patch = 'patch';
 my $dir_distrib = 'distrib';
 my $dir_texmf = 'texmf';
 chomp(my $cwd = `pwd`);
-my $dir_cache = "$cwd/cache";
+
+# cache directory
+use File::HomeDir;
+my $homedir = File::HomeDir->my_home;
+my $dir_cache;
+if ($homedir && -d "$homedir/.cache") {
+    $dir_cache = "$homedir/.cache/latex-tds";
+    -d $dir_cache or mkdir $dir_cache
+            or die "$error Cannot make directory `$dir_cache'!\n";
+    symlink $dir_cache, "$cwd/cache";
+}
+else {
+    $dir_cache = "$cwd/cache";
+}
 
 my $jar_pdfbox_rewrite = "$cwd/$dir_lib/pdfbox-rewrite.jar";
 my $jar_multivalent = "$cwd/$dir_lib/Multivalent20060102.jar";

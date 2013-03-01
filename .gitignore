@@ -1,7 +1,7 @@
 /build/
 /build.log
 /build-last.log
-/cache/
+/cache
 /check-links.log
 /distrib/
 incoming/
