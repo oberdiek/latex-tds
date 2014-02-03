@@ -1,7 +1,7 @@
 README for project latex-tds
 ============================
 :author:        Heiko Oberdiek
-:revdate:       2013/03/10
+:revdate:       2014/02/03
 :lang:          en
 :toc:
 :numbered:
@@ -91,8 +91,6 @@ The link addresses are the sources for the modules.
   {ctan}install/fonts/amsfonts.tds.zip[CTAN:install/fonts/amsfonts.tds.zip]
 *psnfss*::
   {ctan}macros/latex/required/psnfss.zip[CTAN:macros/latex/required/psnfss.zip]
-*babel*::
-  {ctan}macros/latex/required/babel.zip[CTAN:macros/latex/required/babel.zip]
 *tds*::
   {ctan}tds.zip[CTAN:tds.zip]
 *knuth*::
@@ -197,14 +195,6 @@ Module base
     such as Unix (web2c), MikTeX, ...
   * Formats need rebuilding (e.g., fmtutil).
 
-Module babel
-^^^^^^^^^^^^
-  * Most hyphenation patterns are not provided here. Usually you can
-    find them somewhere below {ctan}language/hyphenation/[CTAN:language/hyphenation/].
-  * Language configuration (+language.dat+), see the documentation of
-    your TeX distribution.
-  * Formats need rebuilding.
-
 Module psnfss
 ^^^^^^^^^^^^^
   * The map files need further configuring (e.g., updmap).
@@ -218,7 +208,7 @@ Module graphics
 Copyright, License
 ------------------
 
-Copyright (C) 2006-2013 Heiko Oberdiek.
+Copyright (C) 2006-2014 Heiko Oberdiek.
 
 License is **LPPL 1.3c**:
 
@@ -303,15 +293,14 @@ Documentation driver
 [cols="1*.3literal,1*.7", frame="topbot", grid="rows"]
 |===
 |tex/ams.drv               |generic doc driver for files from the
-                            amslatex and babel bundle
-|tex/babel.tex             |doc driver with patches for +babel.drv+
+                            amslatex bundle
 |tex/doc_lppl.tex          |doc driver for +base/lppl.tex+
 |tex/errata.all            |doc driver for +knuth/errata/errata.pdf+
 |tex/errata.drv            |doc driver for +knuth/errata/errata_*.pdf+
 |tex/errorlog.drv          |doc driver for +knuth/errata/errorlog.tex+
 |tex/etex_man.drv          |doc driver for +etex/etex_man.tex+
-|tex/greek-usage.tex       |doc driver with patches for +babel/usage.tex+
 |tex/knuth.drv             |doc driver for +knuth/+{+texware+,+mfware+,+etc+}+/*.web+
+|tex/knuth-outline.tex     |outline file list for module knuth
 |tex/ltnews.tex            |master file that merges all +base/ltnews*.tex+
 |tex/ltxcheck.drv          |doc driver with patches for +ltxcheck.tex+
 |tex/psnfss2e.drv          |doc driver with patches for +psnfss2e.tex+
@@ -331,7 +320,7 @@ Patches
 |patch/amsldoc.tex.diff    |amslatex/amsldoc.tex
 |patch/changes.tex.diff    |amslatex/amsrefs/changes.tex
 |patch/encguide.tex.diff   |base/encguide.tex
-|patch/hebrew.fdd.diff     |babel/hebrew.fdd
+|patch/errorlog.tex.diff   |knuth/errata/errorlog.tex
 |patch/logmac.tex.diff     |knuth/errata/logmac.tex
 |patch/source2e.tex.diff   |base/source2e.tex
 |patch/tlc2.err.diff       |base/tlc2.err
@@ -384,47 +373,6 @@ Tools
   and short descriptions of the single packages. (It uses
   the data from +manifest.txt+).
 * ...
-
-Babel
-~~~~~
-* Babel's TeX files consists of three groups of files:
-+
-  1. Hyphenation pattern, see below.
-  2. Generic files:
-     - +*.ldf+ (language definition files)
-     - +*.sty+ (from +bbcompat.dtx+, these are plain TeX files,
-            LaTeX user have the package babel)
-     - +babel.def+, +switch.def+
-     - +plain.def+
-     - +b*plain.tex+
-     - +esbst.tex+
-  3. LaTeX files:
-     - +*.fd+
-     - +*enc.def+ (for package fontenc)
-     - +cp*.def+, +8859-8.def+, +si960.def+ (for package inputenc)
-     - +babel.sty+
-     - +romanidx.tex+
-     - +athnum.sty+, +grmath.sty+, +grsymb.sty+ (+greek.ins+)
-     - +heb*.sty+
-
-+
-Full TDS compliance would use different format subtrees
-  for the generic and LaTeX files. However practice (TeX Live, teTeX,
-  VTeX, ...) put them in +generic+, mainly because of maintenance issues.
-  Also babel's +*.ins+ files specify +\usedir{tex/generic/babel}+.
-  There can be problems, if different TDS trees have different
-  babel versions installed and the same file can be found both
-  in generic and latex. The natural search strategy for TDS compliant
-  trees would be to look first in +tex/latex+ across the trees, then
-  in tex/generic. Thus it can happen to use files from the same
-  package, but different versions.
-  Therefore latex-tds put these files in the +generic+ subtree.
---
-* Babel already contains +babel.pdf+ as documentation. It is a superset
-  of +user.pdf+. Thus I have dropped the latter one to avoid redundancy.
-  Also the name +babel.pdf+ is much more useful (texdoc).
-* ...
---
 
 Knuth
 ~~~~~
@@ -706,3 +654,10 @@ History
   * Update of amslatex (amsrefs 2013/03/06 v2.13).
 2013/03/10::
   * Update of amslatex (amsrefs 2013/03/07 v2.14).
+2013/03/30::
+  * Update of babel (3.9) including reorganization of language files.
+2014/02/03::
+  * Removal of module babel. It has a new maintainer and the
+    languages are now maintained separately.
+  * Update of knuth (2014/01/19).
+  * Update of base (errata lists: +lb2.err+, +tlc2.err+).

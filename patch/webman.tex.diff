@@ -1,5 +1,5 @@
-*** webman.tex.org	1990-09-06 02:00:00.000000000 +0200
---- webman.tex	2008-07-10 15:03:49.000000000 +0200
+*** webman.tex.org	1990-09-06 00:53:28.000000000 +0200
+--- webman.tex	2014-02-03 21:10:39.734399312 +0100
 ***************
 *** 13,25 ****
   \def\pb{\.{|...|}}
@@ -338,3 +338,16 @@
   
   \yskip\noindent
   This description assumes that you already have a working \TeX82 system.
+***************
+*** 1669,1672 ****
+  the whole project is not impossibly difficult, because in fact the entire
+  development of \.{WEAVE} and \.{TANGLE} (including the writing of the
+  programs and this manual) took less than two months of work.
+! \vfill\end
+--- 1723,1728 ----
+  the whole project is not impossibly difficult, because in fact the entire
+  development of \.{WEAVE} and \.{TANGLE} (including the writing of the
+  programs and this manual) took less than two months of work.
+! \vfill
+! \input knuth-outline.tex
+! \end

@@ -1,5 +1,5 @@
-*** tripman.tex.org	1992-01-13 23:55:40.000000000 +0100
---- tripman.tex	2008-07-10 22:43:32.000000000 +0200
+*** tripman.tex.org	1992-01-14 00:55:40.000000000 +0100
+--- tripman.tex	2014-02-03 20:51:41.181649319 +0100
 ***************
 *** 22,27 ****
 --- 22,42 ----
@@ -197,7 +197,7 @@
   \runninghead{APPENDIX G: \.{TRIPOS.TEX} (CONTINUED)}
   
 ***************
-*** 404,410 ****
+*** 404,413 ****
   \vfill\eject
   
   \section Appendix H: The \.{TRIP.FOT} file.
@@ -205,7 +205,10 @@
   \runninghead{APPENDIX H: \.{TRIP.FOT} (CONTINUED)}
   
   \vskip8pt
---- 457,463 ----
+  \verbatim{trip.fot}
+  
+! \vfill\end
+--- 457,468 ----
   \vfill\eject
   
   \section Appendix H: The \.{TRIP.FOT} file.
@@ -213,3 +216,8 @@
   \runninghead{APPENDIX H: \.{TRIP.FOT} (CONTINUED)}
   
   \vskip8pt
+  \verbatim{trip.fot}
+  
+! \vfill
+! \input knuth-outline.tex
+! \end

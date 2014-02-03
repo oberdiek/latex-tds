@@ -1,0 +1,8 @@
+# source set-vars
+export TEXINPUTS=`pwd`/tex:texmf/tex//:
+export BSTINPUTS=.:texmf/bibtex//:
+export TFMFONTS=texmf/fonts/tfm//:
+export VFFONTS=texmf/fonts/vf//:
+export INDEXSTYLE=.:texmf/makeindex//:
+export TEXMFHOME=`pwd`/texmf:~/texmf:
+export TEXFORMATS=`pwd`/build:

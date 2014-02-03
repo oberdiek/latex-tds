@@ -4,10 +4,10 @@ $^W=1;
 
 my $prj     = 'latex-tds';
 my $file    = 'build.pl';
-my $version = '1.180';
-my $date    = '2013-03-01';
+my $version = '1.182';
+my $date    = '2014-02-03';
 my $author  = 'Heiko Oberdiek';
-my $copyright = "Copyright 2006-2013 $author";
+my $copyright = "Copyright 2006-2014 $author";
 chomp(my $license = <<"END_LICENSE");
 % $copyright
 %
@@ -38,7 +38,6 @@ my $url_ltxprj = 'http://www.latex-project.org/';
 
 my @required_list = (
     'amslatex',
-    'babel',
     'psnfss',
     'cyrillic',
     'graphics',
@@ -204,15 +203,37 @@ GetOptions(
 
 info("Build modules: @list_modules");
 
+### Helper functions
+
+sub cd ($) {
+    my $dir = shift;
+    chdir $dir or die "$error Cannot change to directory `$dir'!\n";
+}
+
 ### Format generation
 if (@list_modules > 0) {
     section('Format generation');
 
     ensure_directory($dir_build);
+    
+    sub make_ini ($$) {
+        my $prg = shift;
+        my $fmt = shift;
+        if (-f "$dir_cache/$fmt.fmt" and -f "$dir_cache/$fmt.log"
+            and (stat "$dir_cache/$fmt.fmt")[9] > (stat "$cwd/tex/$fmt.ini")[9]
+        ) {
+            run("$prg_cp $dir_cache/$fmt.fmt $dir_cache/$fmt.log .");
+        }
+        else {
+            run("$prg -ini -etex $cwd/tex/$fmt.ini");
+            run("$prg_cp $fmt.fmt $fmt.log $dir_cache");
+        }
+    }
+    
     chdir $dir_build;
-    run("$prg_pdflatex -ini -etex ../tex/pdflatex-tds.ini");
-    run("$prg_lualatex -ini -etex ../tex/lualatex-tds.ini");
-    run("$prg_lualatex -ini -etex ../tex/lualatex-tds2.ini");
+    make_ini($prg_pdflatex, 'pdflatex-tds');
+    make_ini($prg_lualatex, 'lualatex-tds');
+    make_ini($prg_lualatex, 'lualatex-tds2');
     chdir $cwd;
 }
 
@@ -268,7 +289,6 @@ if (@list_modules > 0) {
     download_ctan('tools',         'macros/latex/required');
     download_ctan('graphics',      'macros/latex/required');
     download_ctan('cyrillic',      'macros/latex/required');
-    download_ctan('babel',         'macros/latex/required');
     download_ctan('amslatex',      'macros/latex/required');
     download_ctan('amsrefs',       'macros/latex/contrib');
     download_ctan('amsrefs.tds',   'install/macros/latex/contrib');
@@ -387,7 +407,9 @@ section('Unpacking');
                   "$dir_incoming_ctan/armtex.zip",
                   "$dir_build/base");
     }
-    map { unpack_ctan($_); } @required_list;
+    map { 
+        unpack_ctan($_);
+    } @required_list;
     if ($modules{'amslatex'}) {
         unpack_ams('amscls', "$dir_incoming_ctan/amscls.tds.zip");
         unpack_ams('amsrefs', "$dir_incoming_ctan/amsrefs.tds.zip");
@@ -463,12 +485,8 @@ section('Patches');
     if ($modules{'amslatex'}) {
         patch("amslatex/amsmath/amsldoc.tex");
     }
-
-#    if ($modules{'babel'}) {
-#        map { patch("babel/$_"); } qw[
-#        ];
-#    }
 }
+
 
 ### Install TDS/source
 section('Install source');
@@ -527,16 +545,6 @@ section('Install source');
         '*.dtx',
         '*.ins'
     );
-    install_gen_source('generic', 'babel', qw[
-        *.ins
-        *.dtx
-        *.fdd
-        *.dat
-        usage.tex
-        tb*.tex
-    ]);
-    # babel/manifest.txt: to be removed in a future release
-    # already removed: bghyphen.tex, bghyphsi.tex
     install_gen_source('', 'tds', qw[
         Makefile
         tds2texi.el
@@ -665,10 +673,11 @@ section('Patches after source install');
     if ($modules{'knuth'}) {
 
         foreach my $file (qw[
-            webman.tex
-            tripman.tex
-            trapman.tex
+            errorlog.tex
             logmac.tex
+            trapman.tex
+            tripman.tex
+            webman.tex
         ]) {
             patch("knuth/$file");
         }
@@ -684,10 +693,6 @@ section('Patches after source install');
     if ($modules{'amsfonts'}) {
         patch("amsfonts/amsfndoc.def");
         patch("amsfonts/amsfndoc.tex");
-    }
-
-    if ($modules{'babel'}) {
-        patch("babel/hebrew.fdd");
     }
 }
 
@@ -709,7 +714,6 @@ section('Docstrip');
     docstrip('graphics', 'graphics');
     docstrip('graphics', 'graphics-drivers');
     docstrip('tools',    'tools');
-    docstrip('babel',    'babel');
 
     ## patch for amsthm.sty, part 1/2
     #if ($modules{'amslatex'}) {
@@ -756,14 +760,6 @@ section('TDS cleanup');
         # CTAN:macros/latex/required/amslatex/other/*
         run("$prg_cp $dir_build/amslatex/other/amsbooka.sty"
             . " $dir_build/amslatex/texmf/tex/latex/amscls/amsbooka.sty");
-    }
-
-    if ($modules{'babel'}) {
-        my $tds_dir  = "$dir_build/babel/texmf";
-        my $from_dir = "$tds_dir/source/generic/babel";
-
-        ### Correction for *.drv files
-        run("$prg_mv $from_dir/*.drv $dir_build/babel");
     }
 }
 
@@ -846,19 +842,6 @@ section('Install tex doc');
         chdir $cwd;
     }
 
-    if ($modules{'babel'}) {
-        chdir "$dir_build/babel";
-        install('texmf/doc/generic/babel', qw[
-            *.txt
-            *.heb
-            *.bbl
-            *.dat
-            *.skeleton
-            install.OzTeX*
-        ]);
-        chdir $cwd;
-    }
-
     if ($modules{'tds'}) {
         chdir "$dir_build/tds";
         install('texmf/doc/tds', qw[
@@ -908,23 +891,6 @@ section('Install tex doc');
     #    install($dest_dir, 'amsthm.sty');
     #    chdir $cwd;
     #}
-
-my $dummy = <<'END_DUMMY';
-    if ($modules{'babel'}) {
-        chdir "$dir_build/babel";
-        install('texmf/tex/generic/bghyph',
-            'bghyphen.txt',
-            'bghyphsi.tex',
-            'catmik.tex',
-            'mik2t2.tex'
-        );
-        install('texmf/tex/generic/hyphen',
-            'icehyph.tex',
-            'lahyph.tex'
-        );
-        chdir $cwd;
-    }
-END_DUMMY
 }
 
 ### Preparation for documentation
@@ -1523,84 +1489,6 @@ if ($modules{'psnfss'}) {
         final_end;
     };
     install_pdf('psnfss', 'psnfss2e');
-
-    chdir $cwd;
-}
-
-### Generate documentation for babel
-if ($modules{'babel'}) {
-    section('Documentation: babel');
-
-    sub install_babel_pdf ($) {
-        install_gen_pdf('generic', 'babel', shift);
-    }
-    sub simple_doc ($) {
-        my $file = shift;
-        my $file_base = $file;
-        $file_base =~ s/\.\w{3}$//;
-        my $latextds = $prg_lualatextds;
-        $latextds = $prg_lualatextds2 if $file eq 'athnum.dtx';
-
-        cache 'babel', $file_base, sub {
-            run("$latextds -draftmode $file");
-            final_begin;
-            run("$latextds $file");
-            final_end;
-        };
-        install_babel_pdf($file_base);
-    }
-    sub generate_babel_doc ($) {
-        my $doc  = shift;
-        my $drv  = "$cwd/$dir_tex/ams.drv";
-
-        symlink $drv, "$doc.drv";
-        cache 'babel', $doc, sub {
-            run("$prg_lualatextds -draftmode $doc.drv");
-            run("$prg_lualatextds -draftmode $doc.drv");
-            run("$prg_lualatextds -draftmode $doc.drv");
-            final_begin;
-            run("$prg_lualatextds $doc.drv");
-            final_end;
-        };
-        install_babel_pdf($doc);
-    }
-
-    chdir "$dir_build/babel";
-
-    my $greek_fdd = 'greek-fdd.drv';
-    open(OUT, ">$greek_fdd") or die "$error Cannot open `$greek_fdd'!\n";
-    print OUT "\\input{greek.fdd}\n";
-    close(OUT);
-
-    map { simple_doc($_); }
-        $greek_fdd, qw[
-        athnum.dtx
-        grmath.dtx
-        grsymb.dtx
-        bbidxglo.dtx
-        bbcompat.dtx
-        greek-usage.tex
-    ];
-
-    map { generate_babel_doc($_); } qw[
-        tb1202
-        tb1401
-        tb1604
-    ];
-
-    cache 'babel', 'babel', sub {
-        run("$prg_pdflatextds -draftmode babel.tex");
-        run_makeindex('babel.idx', 'bbind.ist');
-        run_makeindex('babel.glo', 'bbglo.ist', 'babel.gls');
-        run("$prg_pdflatextds -draftmode babel.tex");
-        run_makeindex('babel.idx', 'bbind.ist');
-        run_makeindex('babel.glo', 'bbglo.ist', 'babel.gls');
-        run("$prg_pdflatextds -draftmode babel.tex");
-        final_begin;
-        run("$prg_pdflatextds babel.tex");
-        final_end;
-    };
-    install_babel_pdf('babel');
 
     chdir $cwd;
 }

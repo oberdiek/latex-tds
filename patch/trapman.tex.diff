@@ -1,5 +1,5 @@
-*** trapman.tex.org	1993-09-21 23:41:30.000000000 +0200
---- trapman.tex	2008-07-10 22:45:58.000000000 +0200
+*** trapman.tex.org	1993-09-22 00:41:30.000000000 +0200
+--- trapman.tex	2014-02-03 21:08:57.964670496 +0100
 ***************
 *** 24,29 ****
 --- 24,44 ----
@@ -186,7 +186,7 @@
   
   {\let\tt=\eighttt\leftskip 1in\baselineskip 9pt plus .1pt minus .1pt
 ***************
-*** 391,397 ****
+*** 391,400 ****
   \vfill\eject
   
   \section Appendix G: The \.{TRAP.FOT} file.
@@ -194,7 +194,10 @@
   \runninghead{APPENDIX G: \.{TRAP.FOT} (CONTINUED)}
   
   \vskip8pt
---- 443,449 ----
+  \verbatim{trap.fot}
+  
+! \vfill\end
+--- 443,454 ----
   \vfill\eject
   
   \section Appendix G: The \.{TRAP.FOT} file.
@@ -202,3 +205,8 @@
   \runninghead{APPENDIX G: \.{TRAP.FOT} (CONTINUED)}
   
   \vskip8pt
+  \verbatim{trap.fot}
+  
+! \vfill
+! \input knuth-outline.tex
+! \end
