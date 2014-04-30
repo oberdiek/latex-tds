@@ -44,7 +44,12 @@ spell: README.asciidoc ispell.dict
 ispell.dict:
 	touch $@
 
-check: spell check-links
+check: spell check-files check-links
+
+check-files: README.asciidoc build.pl build.sh ctan_upload.pl \
+             tex/* lib/* license/*
+	lib/check-eolspaces.pl $+
+	lib/check-ascii.pl $+
 
 check-links: README.html
 	-linkchecker \
@@ -62,4 +67,4 @@ clean:
 	-$(RM) README.bak README.asciidoc.bak
 
 .PHONY: all build distrib update incoming ziptimetree spell license \
-        check check-links clean readme
+        check check-links check-files clean readme

@@ -24,7 +24,9 @@
 % 2006/06/02 v1.0: First version.
 % 2009/09/25 v1.1: \usepackage disabled.
 % 2011/07/01 v1.2: Fixes.
-% 2014/02/29 v1.3: Update for LaTeX 2014/05/01.
+% 2014/02/30 v1.3:
+%  * Update for LaTeX 2014/05/01.
+%  * Fix for anchor positions of issue titles.
 %
 \providecommand*{\lastissue}{20}
 \InputIfFileExists{ltnews-lastissue.cfg}{}{}
@@ -148,23 +150,30 @@
       \fi
     \endgroup
   }%
-  \makeatother
   \renewcommand*{\documentclass}[2][]{%
     \setcounter{footnote}{0}%
     \gobbleopt
   }%
   \newcommand*{\gobbleopt}[1][]{}%
+  \let\org@twocolumn\twocolumn
   \renewenvironment{document}{%
     \clearpage
-    \pdfbookmark[0]{\printissue}{issue\theissue}%
-    \begingroup
-      \let\WriteBookmarks\relax
-      \phantomsection
-      \addcontentsline{toc}{part}{\printissue}%
-    \endgroup
+    \def\twocolumn[{%
+      \let\twocolumn\org@twocolumn
+      \org@twocolumn[%
+      {% because of optional argument of \twocolumn
+        \pdfbookmark[0]{\printissue}{issue\theissue}%
+      }%
+      \begingroup
+        \let\WriteBookmarks\relax
+        \phantomsection
+        \addcontentsline{toc}{part}{\printissue}%
+      \endgroup
+    }%
   }{%
     \clearpage
   }%
+  \makeatother
   \loop
   \ifnum\value{issue}<\lastissue
     \stepcounter{issue}%

@@ -254,7 +254,7 @@ Licenses
 |license/lppl.txt              |LPPL (The LaTeX Project Public License)
                                 for latex-tds and adjust_checksum
 |license/ziptimetree/lgpl.txt  |LGPL (GNU Lesser General Public License)
-                                for ziptimetree
+                                for ziptimetree, check-ascii, check-eolspaces
 |===
 
 Scripts
@@ -666,4 +666,6 @@ History
 2014/04/30::
   * Update of LaTeX, release 2014/05/01.
     Modules: base, cyrillic, graphics, tools.
+  * Line ends are normalized in source text files of the LaTeX modules.
+    Trailing spaces are removed and the line ends are Unix line ends.
   * Update of armtex (needed to generate module base).
