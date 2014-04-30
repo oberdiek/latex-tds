@@ -4,8 +4,8 @@ $^W=1;
 
 my $prj     = 'latex-tds';
 my $file    = 'build.pl';
-my $version = '1.182';
-my $date    = '2014-02-03';
+my $version = '1.183';
+my $date    = '2014-04-30';
 my $author  = 'Heiko Oberdiek';
 my $copyright = "Copyright 2006-2014 $author";
 chomp(my $license = <<"END_LICENSE");
@@ -210,12 +210,32 @@ sub cd ($) {
     chdir $dir or die "$error Cannot change to directory `$dir'!\n";
 }
 
+### Line end sanitizing
+
+sub lf ($) {
+    my $file = shift;
+    open(IN, '<', $file) or die "!!! Error: Cannot open `$file'!\n";
+    my @lines = <IN>;
+    close(IN);
+    my $found = 0;
+    $found += s/\s+$/\n/ for @lines;
+    if ($found) {
+        open(OUT, '>', $file) or die "!!! Error: Cannot write `$file'!\n";
+        print OUT @lines;
+        close(OUT);
+        print "-->  lf($file): $found line(s) fixed.\n";
+    }
+    else {
+        print "--> lf($file): nothing to do.\n";
+    }
+}
+
 ### Format generation
 if (@list_modules > 0) {
     section('Format generation');
 
     ensure_directory($dir_build);
-    
+
     sub make_ini ($$) {
         my $prg = shift;
         my $fmt = shift;
@@ -229,7 +249,7 @@ if (@list_modules > 0) {
             run("$prg_cp $fmt.fmt $fmt.log $dir_cache");
         }
     }
-    
+
     chdir $dir_build;
     make_ini($prg_pdflatex, 'pdflatex-tds');
     make_ini($prg_lualatex, 'lualatex-tds');
@@ -384,8 +404,18 @@ section('Unpacking');
         run("$prg_unzip -j $zipfile -d$dir");
     }
 
+    sub eols (@) {
+        for my $pat (@_) {
+            for my $file (glob "$dir_build/$pat") {
+                next if $file =~ /\.(?:pdf|zip)$/i;
+                lf $file;
+            }
+        }
+    }
+
     ensure_directory($dir_build);
     unpack_ctan('base');
+    eols("base/*");
     if ($modules{'base'}) {
         # replace .err files
         foreach my $name (qw[
@@ -397,18 +427,21 @@ section('Unpacking');
             my $file = "$dir_incoming_ltxprj/$name.err";
             my $dest = "$dir_build/base/$name.err";
             run("$prg_cp $file $dest");
+            eols("base/$name.err");
         }
         run("$prg_rm -rf $dir_build/base/doc");
         unpacking('base',
                   "$dir_incoming_ctan/doc.zip",
                   "$dir_build/base");
+        eols("base/doc/*.tex");
         run("$prg_cp -p $dir_build/base/doc/*.tex $dir_build/base/");
         unpacking('base',
                   "$dir_incoming_ctan/armtex.zip",
                   "$dir_build/base");
     }
-    map { 
+    map {
         unpack_ctan($_);
+        eols("$_/*");
     } @required_list;
     if ($modules{'amslatex'}) {
         unpack_ams('amscls', "$dir_incoming_ctan/amscls.tds.zip");
@@ -635,31 +668,14 @@ section('Patches after source install');
             close(IN);
         }
 
-        # base: TDS:makeindex/base -> TDS:makeindex/latex
-        {
-            my $file_ins = 'docstrip.ins';
-            my $file_org = 'docstrip.ins.org';
-            rename $file_ins, $file_org;
-            open(IN, '<', $file_org) or die "$error Cannot open `$file_org'!\n";
-            open(OUT, '>', $file_ins) or die "$error Cannot write `$file_ins'!\n";
-            while (<IN>) {
-                s|makeindex/base|makeindex/latex|;
-                print OUT;
-            }
-            close(OUT);
-            close(IN);
-        }
-
-        # fix CR/LF line endings of tlc2.err (2012-05-12)
-        run("$prg_zip -ll tlc2.zip tlc2.err");
-        run("$prg_unzip -o tlc2.zip");
-
         chdir $cwd;
 
+        lf("$dir_build/base/encguide.tex");
         patch('base/encguide.tex');
         patch('base/source2e.tex');
         patch('base/tlc2.err');
         patch('base/utf8ienc.dtx');
+        #
         # lb2.err contains <CR><LF> line endings, a patch file
         # created by diff in Linux would create mixed line endings
         # causing trouble for subversion (Karl Berry).
@@ -896,15 +912,7 @@ section('Install tex doc');
 ### Preparation for documentation
 if ($modules{'base'}) {
     my $dir_src = "$dir_build/base/armtex";
-    my $tds_mf = "$dir_texmf/fonts/source/public/armtex";
-    my $tds_tfm = "$dir_texmf/fonts/tfm/public/armtex";
-    my $tds_latex = "$dir_texmf/tex/latex/armtex";
-    my @tds_mf = map {chomp;$_} glob "$dir_src/mf/*.mf";
-    my @tds_tfm = map {chomp;$_} glob "$dir_src/tfm/*.tfm";
-    my @tds_latex = map {chomp;$_} glob "$dir_src/latex/*.*";
-    install($tds_mf, @tds_mf);
-    install($tds_tfm, @tds_tfm);
-    install($tds_latex, @tds_latex);
+    run("$prg_cp -r $dir_build/base/armtex/* $dir_texmf/");
     run("$prg_texhash $dir_texmf");
 }
 
@@ -951,6 +959,7 @@ if ($modules{'base'}) {
         cache 'base', $guide, sub {
             my $latextds = $prg_lualatextds;
             $latextds = $prg_lualatextds2 if $guide eq 'usrguide';
+            $latextds = $prg_pdflatextds if $guide eq 'encguide';
             run("$latextds -draftmode $guide");
             run("$latextds -draftmode $guide");
             final_begin;
@@ -1177,7 +1186,8 @@ if ($modules{'tools'}) {
     map { s/\.dtx$//; } @list;
     foreach my $entry (@list) {
         my $latextds = $prg_lualatextds;
-        $latextds = $prg_pdflatextds if $entry eq 'bm';
+        $latextds = $prg_pdflatextds if $entry eq 'bm'
+                                     or $entry eq 'multicol';
         $latextds = $prg_lualatextds2 if $entry eq 'calc'
                                       or $entry eq 'rawfonts'
                                       or $entry eq 'showkeys';

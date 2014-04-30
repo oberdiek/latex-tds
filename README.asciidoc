@@ -1,7 +1,7 @@
 README for project latex-tds
 ============================
 :author:        Heiko Oberdiek
-:revdate:       2014/02/03
+:revdate:       2014/04/30
 :lang:          en
 :toc:
 :numbered:
@@ -264,6 +264,8 @@ Scripts
 |build.pl                  |main script for building the distribution
 |lib/adjust_checksum.pl    |Perl script that runs a DTX file through
                             LaTeX and corrects its +\Checksum+ if necessary
+|lib/check-ascii.pl        |Perl script that looks for non-ASCII characters
+|lib/check-eolspaces.pl    |Perl script that looks for trailing spaces
 |lib/ziptimetree.pl        |Perl script that generates a ZIP file from
                             a directory tree with sorted entries (LGPL)
 |===
@@ -661,3 +663,7 @@ History
     languages are now maintained separately.
   * Update of knuth (2014/01/19).
   * Update of base (errata lists: +lb2.err+, +tlc2.err+).
+2014/04/30::
+  * Update of LaTeX, release 2014/05/01.
+    Modules: base, cyrillic, graphics, tools.
+  * Update of armtex (needed to generate module base).

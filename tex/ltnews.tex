@@ -24,6 +24,7 @@
 % 2006/06/02 v1.0: First version.
 % 2009/09/25 v1.1: \usepackage disabled.
 % 2011/07/01 v1.2: Fixes.
+% 2014/02/29 v1.3: Update for LaTeX 2014/05/01.
 %
 \providecommand*{\lastissue}{20}
 \InputIfFileExists{ltnews-lastissue.cfg}{}{}
@@ -52,6 +53,7 @@
 
 \RequirePackage[T1]{fontenc}
 \RequirePackage{lmodern}
+\RequirePackage{hologo}
 
 \documentclass{ltnews}
 
@@ -137,7 +139,11 @@
         \def\y{|lmodern,url}%
         \ifx\x\y
         \else
-          \@latex@error{\string\usepackage[#1]{#2} found}\@ehc
+          \def\y{|lmodern,url,hologo}%
+          \ifx\x\y
+          \else
+            \@latex@error{ltnews.tex: \string\usepackage[#1]{#2} found}\@ehc
+          \fi
         \fi
       \fi
     \endgroup

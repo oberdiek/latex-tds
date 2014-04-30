@@ -3,23 +3,23 @@
 ***************
 *** 71,76 ****
 --- 71,81 ----
-  
+
   \documentclass{ltxdoc}
-  
+
 + \newdimen\OldHeadHeight
 + \OldHeadHeight=\headheight
 + \newdimen\OldHeadSep
 + \OldHeadSep=\headsep
-+ 
++
   \listfiles
-  
+
   % Do not index some TeX primitives, and some common plain TeX commands.
 ***************
 *** 301,306 ****
 --- 306,325 ----
   \clearpage
   \pagestyle{headings}
-  
+
 + \makeatletter
 + \headheight=\OldHeadHeight
 + \headsep=\OldHeadSep
@@ -33,16 +33,16 @@
 + \@colht\textheight
 + \@colroom\textheight
 + \makeatother
-+ 
++
   % Make TeX shut up.
   \hbadness=10000
   \newcount\hbadness
 ***************
 *** 315,320 ****
 --- 334,359 ----
-  
+
   \clearpage
-  
+
 + \makeatletter
 + \footskip=85pt
 + \addtolength{\footskip}{\OldFootSkip}
@@ -62,7 +62,7 @@
 +   \let\@evenfoot\@oddfoot
 + }%
 + \makeatother
-+ 
++
   % makeindex needs a symbol between the parts of composite page numbers
   % but we dont want one, so:
   \typeout{%

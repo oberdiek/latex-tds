@@ -2,11 +2,20 @@
 --- utf8ienc.dtx	2008-09-10 16:16:45.000000000 +0200
 ***************
 *** 30,35 ****
---- 30,36 ----
+--- 30,45 ----
   % \iffalse
   %<*driver>
   \documentclass{ltxdoc}
-+ \usepackage[utf8]{inputenc}
++ \usepackage{ifluatex,ifxetex}
++ \ifluatex
++   \usepackage{fontspec}
++ \else
++   \ifxetex
++     \usepackage{fontspec}
++   \else
++     \usepackage[utf8]{inputenc}
++   \fi
++ \fi
   \GetFileInfo{utf8.def}
   \title{Providing some UTF-8 support via \texttt{inputenc}}
   \date{\fileversion\space\filedate{} printed \today}
