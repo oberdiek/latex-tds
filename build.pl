@@ -4,8 +4,8 @@ $^W=1;
 
 my $prj     = 'latex-tds';
 my $file    = 'build.pl';
-my $version = '1.183';
-my $date    = '2014-04-30';
+my $version = '1.184';
+my $date    = '2014-05-01';
 my $author  = 'Heiko Oberdiek';
 my $copyright = "Copyright 2006-2014 $author";
 chomp(my $license = <<"END_LICENSE");
@@ -67,6 +67,8 @@ my $dir_incoming = 'incoming';
 my $dir_incoming_ctan = "$dir_incoming/ctan";
 my $dir_incoming_ams = "$dir_incoming/ams";
 my $dir_incoming_ltxprj = "$dir_incoming/ltxprj";
+my $dir_ltxpub = "latex2e-public";
+my $dir_incoming_ltxpub = "$dir_incoming/$dir_ltxpub";
 my $dir_build = 'build';
 my $dir_lib = 'lib';
 my $dir_license = 'license';
@@ -125,13 +127,14 @@ my $prg_lualatextds  = "lualatex -fmt=$cwd/$dir_build/lualatex-tds";
 my $prg_lualatextds2 = "lualatex -fmt=$cwd/$dir_build/lualatex-tds2";
 my $prg_pdflatex     = 'pdflatex';
 my $prg_pdflatextds  = "pdflatex -fmt=$cwd/$dir_build/pdflatex-tds";
-my $prg_pdftex       = "pdftex";
-my $prg_recode       = "recode";
-my $prg_rm           = "rm";
-my $prg_rsync        = "rsync";
+my $prg_pdftex       = 'pdftex';
+my $prg_recode       = 'recode';
+my $prg_rm           = 'rm';
+my $prg_rsync        = 'rsync';
 my $prg_sed          = "sed";
-my $prg_sort         = "sort";
-my $prg_texhash      = "texhash";
+my $prg_sort         = 'sort';
+my $prg_svn          = 'svn';
+my $prg_texhash      = 'texhash';
 my $prg_unzip        = 'unzip';
 my $prg_w3m          = 'w3m';
 my $prg_weave        = 'weave';
@@ -172,6 +175,8 @@ my $usage = <<"END_OF_USAGE";
 Usage: build.pl [options]
 General options:
   --(no)download      (check for newer files, disabled by default)
+  --(no)vcs           (use version control files)
+  --(no)vcs-update    (update version control files)
   --(no)postprocess   (pdf files are postprocessed, enabled by default)
   --(no)cache         (use cached pdf files, enabled by default)
 Module options:
@@ -180,6 +185,8 @@ END_OF_USAGE
 map { $usage .= "  --(no)$_\n"; } @pkg_list;
 
 my $opt_download    = 0;
+my $opt_vcs         = 0;
+my $opt_vcs_update  = 0;
 my $opt_postprocess = 0;
 my $opt_cache       = 1;
 my $opt_all         = 0;
@@ -195,6 +202,8 @@ GetOptions(
             map { $modules{$_} = 1; } @pkg_list;
         },
     'download!'    => \$opt_download,
+    'vcs!'         => \$opt_vcs,
+    'vcs-update!'  => \$opt_vcs_update,
     'postprocess!' => \$opt_postprocess,
     'cache!'       => \$opt_cache,
 ) or die $usage;
@@ -340,6 +349,24 @@ if (@list_modules > 0) {
     download_ctan_file('armtex.zip', 'language/armenian');
 }
 
+### VCS
+{
+    section('VCS');
+
+    if ($opt_vcs_update) {
+        if (-d "$dir_incoming_ltxpub/.svn") {
+            chdir $dir_incoming_ltxpub;
+            run("$prg_svn update");
+        }
+        else {
+            chdir $dir_incoming;
+            run("$prg_svn checkout http://latex-project.org/svnroot/latex2e-public/ $dir_ltxpub");
+        }
+        chdir $cwd;
+    }
+}
+
+
 ### Remove previous build
 section('Remove previous build');
 {
@@ -414,35 +441,49 @@ section('Unpacking');
     }
 
     ensure_directory($dir_build);
-    unpack_ctan('base');
-    eols("base/*");
+
     if ($modules{'base'}) {
-        # replace .err files
-        foreach my $name (qw[
-            lb2
-            lgc2
-            manual
-            tlc2
-        ]) {
-            my $file = "$dir_incoming_ltxprj/$name.err";
-            my $dest = "$dir_build/base/$name.err";
-            run("$prg_cp $file $dest");
-            eols("base/$name.err");
+        ensure_directory("$dir_build/base");
+        if ($opt_vcs) {
+            run("$prg_cp -r $dir_incoming_ltxpub/base/* $dir_build/base/");
+            run("$prg_cp $dir_incoming_ltxpub/doc/*.tex $dir_build/base/");
         }
-        run("$prg_rm -rf $dir_build/base/doc");
-        unpacking('base',
-                  "$dir_incoming_ctan/doc.zip",
-                  "$dir_build/base");
-        eols("base/doc/*.tex");
-        run("$prg_cp -p $dir_build/base/doc/*.tex $dir_build/base/");
+        else {
+            unpack_ctan('base');
+            # replace .err files
+            foreach my $name (qw[
+                lb2
+                lgc2
+                manual
+                tlc2
+            ]) {
+                my $file = "$dir_incoming_ltxprj/$name.err";
+                my $dest = "$dir_build/base/$name.err";
+                run("$prg_cp $file $dest");
+            }
+            run("$prg_rm -rf $dir_build/base/doc");
+            unpacking('base',
+                      "$dir_incoming_ctan/doc.zip",
+                      "$dir_build/base");
+            run("$prg_cp -p $dir_build/base/doc/*.tex $dir_build/base/");
+        }
         unpacking('base',
                   "$dir_incoming_ctan/armtex.zip",
                   "$dir_build/base");
+        eols("base/*") if $modules{'base'};
     }
+
     map {
-        unpack_ctan($_);
-        eols("$_/*");
+        ensure_directory("$dir_build/$_");
+        if ($opt_vcs and /cyrillic|graphics|tools/) {
+            run("$prg_cp -r $dir_incoming_ltxpub/required/$_/* $dir_build/$_/");
+        }
+        else {
+            unpack_ctan($_);
+        }
+        eols("$_/*") if $modules{$_};
     } @required_list;
+
     if ($modules{'amslatex'}) {
         unpack_ams('amscls', "$dir_incoming_ctan/amscls.tds.zip");
         unpack_ams('amsrefs', "$dir_incoming_ctan/amsrefs.tds.zip");
@@ -460,6 +501,7 @@ section('Unpacking');
         # run("$prg_cp $dir_build/amslatex/ctan/amsrefs/amsrefs.dtx "
         #         . "$dir_build/amslatex/texmf/source/latex/amsrefs/amsrefs.dtx");
     }
+
     if ($modules{'amsfonts'}) {
         ensure_directory("$dir_build/amsfonts");
         unpacking('amsfonts',
