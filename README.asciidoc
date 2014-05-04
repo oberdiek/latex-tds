@@ -1,7 +1,7 @@
 README for project latex-tds
 ============================
 :author:        Heiko Oberdiek
-:revdate:       2014/05/01
+:revdate:       2014/05/03
 :lang:          en
 :toc:
 :numbered:
@@ -663,8 +663,9 @@ History
     languages are now maintained separately.
   * Update of knuth (2014/01/19).
   * Update of base (errata lists: +lb2.err+, +tlc2.err+).
-2014/05/01::
-  * Update of LaTeX, release 2014/05/01.
+2014/05/03::
+  * Update of LaTeX, release 2014/05/01
+    using public subversion repository of LaTeX2e.
     Modules: base, cyrillic, graphics, tools.
   * Line ends are normalized in source text files of the LaTeX modules.
     Trailing spaces are removed and the line ends are Unix line ends.
