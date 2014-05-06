@@ -1,7 +1,7 @@
 README for project latex-tds
 ============================
 :author:        Heiko Oberdiek
-:revdate:       2014/05/03
+:revdate:       2014/05/05
 :lang:          en
 :toc:
 :numbered:
@@ -672,3 +672,5 @@ History
   * Update of armtex (needed to generate module base).
   * New options +--vcs+ and +--vcs-update+ for using the files of
     the public source repository of the LaTeX project.
+2014/05/05::
+  * Using LaTeX modules from CTAN.
