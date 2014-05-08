@@ -23,8 +23,10 @@ license/ziptimetree license/latex-tds:
 # README
 
 readme: README.html README.pdf
-README.html: README.asciidoc README-docinfo.html
-	asciidoc $<
+README.html: build/README.html
+	perl -pe 's/\s+$$/\n/' <$< >$@
+build/README.html: README.asciidoc README-docinfo.html
+	asciidoc --out-file $@ $<
 README.pdf: README.html
 	wkhtmltopdf $< $@
 #NOTOC_HTML = build/README-notoc.html
@@ -46,7 +48,7 @@ ispell.dict:
 
 check: spell check-files check-links
 
-check-files: README.asciidoc build.pl build.sh ctan_upload.pl \
+check-files: README.asciidoc README.html build.pl build.sh ctan_upload.pl \
              tex/* lib/* license/*
 	lib/check-eolspaces.pl $+
 	lib/check-ascii.pl $+

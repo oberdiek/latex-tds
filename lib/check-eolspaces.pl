@@ -28,12 +28,16 @@ $^W=1;
 #
 # 2014-02-30 v1.0 First version
 #
-my $found = 0;
+my $all_found = 0;
+my $all_eol = 0;
 
 for my $file (@ARGV) {
+    my $found = 0;
+    my $eol = 0;
     open(IN, '<', $file) or die "!!! Error: Cannot open `$file': $!\n";
     while (<IN>) {
-        s/[\r\n]+$//;
+        s/\n$//;
+        $eol += s/\r$//;
         next unless /\s$/;
         /(\s+)$/;
         my $len = length $1;
@@ -42,11 +46,19 @@ for my $file (@ARGV) {
         $found++;
     }
     close(IN);
+    print "!!! SPACE [$file] = $found\n" if $found;
+    print "!!! CR [$file] = $eol\n" if $eol;
+    $all_found += $found;
+    $all_eol += $eol;
 }
 
-if ($found) {
+if ($all_found) {
     die sprintf "==> %d line%s with trailing spaces found!\n",
-                $found, ($found == 1 ? '' : 's');
+                $all_found, ($all_found == 1 ? '' : 's');
+}
+if ($all_eol) {
+    die sprintf "==> %d line%s with line ends containing CR found!\n",
+                $all_eol, ($all_eol == 1 ? '' : 's');
 }
 1;
 __END__

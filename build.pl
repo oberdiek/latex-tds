@@ -4,8 +4,8 @@ $^W=1;
 
 my $prj     = 'latex-tds';
 my $file    = 'build.pl';
-my $version = '1.184';
-my $date    = '2014-05-01';
+my $version = '1.185';
+my $date    = '2014-05-08';
 my $author  = 'Heiko Oberdiek';
 my $copyright = "Copyright 2006-2014 $author";
 chomp(my $license = <<"END_LICENSE");
@@ -75,6 +75,8 @@ my $dir_license = 'license';
 my $dir_tex = 'tex';
 my $dir_patch = 'patch';
 my $dir_distrib = 'distrib';
+my $dir_build_distrib = "$dir_build/distrib";
+my $dir_build_distrib_data = "$dir_build_distrib/$prj";
 my $dir_texmf = 'texmf';
 chomp(my $cwd = `pwd`);
 
@@ -259,11 +261,11 @@ if (@list_modules > 0) {
         }
     }
 
-    chdir $dir_build;
+    cd $dir_build;
     make_ini($prg_pdflatex, 'pdflatex-tds');
     make_ini($prg_lualatex, 'lualatex-tds');
     make_ini($prg_lualatex, 'lualatex-tds2');
-    chdir $cwd;
+    cd $cwd;
 }
 
 ### Download
@@ -355,14 +357,14 @@ if (@list_modules > 0) {
 
     if ($opt_vcs_update) {
         if (-d "$dir_incoming_ltxpub/.svn") {
-            chdir $dir_incoming_ltxpub;
+            cd $dir_incoming_ltxpub;
             run("$prg_svn update");
         }
         else {
-            chdir $dir_incoming;
+            cd $dir_incoming;
             run("$prg_svn checkout http://latex-project.org/svnroot/latex2e-public/ $dir_ltxpub");
         }
-        chdir $cwd;
+        cd $cwd;
     }
 }
 
@@ -532,13 +534,13 @@ section('Patches');
     ; #
 
     if ($modules{'psnfss'}) {
-        chdir "$dir_build/psnfss";
+        cd "$dir_build/psnfss";
         run("$prg_checksum psfonts.dtx");
-        chdir $cwd;
+        cd $cwd;
     }
 
     if ($modules{'knuth'}) {
-        chdir "$dir_build/knuth";
+        cd "$dir_build/knuth";
         my @files = qw[
             trip.fot
             tripin.log
@@ -554,7 +556,7 @@ section('Patches');
             trap.typ
         ];
         run("$prg_chmod -x @files");
-        chdir $cwd;
+        cd $cwd;
     }
 
     if ($modules{'amslatex'}) {
@@ -571,18 +573,18 @@ section('Install source');
         my $pkg  = shift;
         my @list = @_;
         $modules{$pkg} or return 1;
-        chdir "$dir_build/$pkg";
+        cd "$dir_build/$pkg";
         install "texmf/source/$fmt/$pkg", @list;
-        chdir $cwd;
+        cd $cwd;
     }
     sub install_generic_source ($$@) {
         my $pkg = shift;
         my $dir = shift;
         my @list = @_;
         $modules{$pkg} or return 1;
-        chdir "$dir_build/$pkg";
+        cd "$dir_build/$pkg";
         install "texmf/source/$dir", @list;
-        chdir $cwd;
+        cd $cwd;
     }
     sub install_source ($@) {
         my $pkg = shift;
@@ -692,7 +694,7 @@ section('Install source');
 section('Patches after source install');
 {
     if ($modules{'base'}) {
-        chdir "$dir_build/base";
+        cd "$dir_build/base";
 
         # ltdirchk.dtx must be patched to fool it in
         # not having texsys.cfg
@@ -710,7 +712,7 @@ section('Patches after source install');
             close(IN);
         }
 
-        chdir $cwd;
+        cd $cwd;
 
         lf("$dir_build/base/encguide.tex");
         patch('base/encguide.tex');
@@ -761,9 +763,9 @@ section('Docstrip');
         my $pkg = shift;
         my $ins = shift;
         $modules{$pkg} or return 1;
-        chdir "$dir_build/$pkg";
+        cd "$dir_build/$pkg";
         run("$prg_docstrip $ins.ins");
-        chdir $cwd;
+        cd $cwd;
         1;
     }
     docstrip('base',     'unpack');
@@ -775,9 +777,9 @@ section('Docstrip');
 
     ## patch for amsthm.sty, part 1/2
     #if ($modules{'amslatex'}) {
-    #    chdir "$dir_build/amslatex/amscls";
+    #    cd "$dir_build/amslatex/amscls";
     #    run("$prg_docstrip ams-c1.ins");
-    #    chdir $cwd;
+    #    cd $cwd;
     #}
 }
 
@@ -825,7 +827,7 @@ section('TDS cleanup');
 section('Install tex doc');
 {
     if ($modules{'base'}) {
-        chdir "$dir_build/base";
+        cd "$dir_build/base";
         install 'texmf/doc/latex/base', qw[
             00readme.txt
             autoload.txt
@@ -851,40 +853,40 @@ section('Install tex doc');
         install 'texmf/tex/latex/base', qw[
             texsys.cfg
         ];
-        chdir $cwd;
+        cd $cwd;
     }
 
     if ($modules{'tools'}) {
-        chdir "$dir_build/tools";
+        cd "$dir_build/tools";
         install 'texmf/doc/latex/tools', qw[
             changes.txt
             manifest.txt
             readme.txt
         ];
-        chdir $cwd;
+        cd $cwd;
     }
 
     if ($modules{'graphics'}) {
-        chdir "$dir_build/graphics";
+        cd "$dir_build/graphics";
         install('texmf/doc/latex/graphics',
             '*.txt'
         );
         install('texmf/tex/latex/graphics',
             '*.def'
         );
-        chdir $cwd;
+        cd $cwd;
     }
 
     if ($modules{'cyrillic'}) {
-        chdir "$dir_build/cyrillic";
+        cd "$dir_build/cyrillic";
         install('texmf/doc/latex/cyrillic',
             '*.txt'
         );
-        chdir $cwd;
+        cd $cwd;
     }
 
     if ($modules{'psnfss'}) {
-        chdir "$dir_build/psnfss";
+        cd "$dir_build/psnfss";
         install('texmf/doc/latex/psnfss',
             '*.txt'
         );
@@ -897,11 +899,11 @@ section('Install tex doc');
         install('texmf/fonts/map/dvips/psnfss',
             '*.map'
         );
-        chdir $cwd;
+        cd $cwd;
     }
 
     if ($modules{'tds'}) {
-        chdir "$dir_build/tds";
+        cd "$dir_build/tds";
         install('texmf/doc/tds', qw[
             README
             ChangeLog
@@ -910,11 +912,11 @@ section('Install tex doc');
         install('texmf/doc/info', qw[
             tds.info
         ]);
-        chdir $cwd;
+        cd $cwd;
     }
 
     if ($modules{'knuth'}) {
-        chdir "$dir_build/knuth";
+        cd "$dir_build/knuth";
         install('texmf/doc/knuth/tex', qw[
             texbook.tex
         ]);
@@ -926,11 +928,11 @@ section('Install tex doc');
             mf84.bug
             tex82.bug
         ]);
-        chdir $cwd;
+        cd $cwd;
     }
 
     if ($modules{'etex'}) {
-        chdir "$dir_build/etex";
+        cd "$dir_build/etex";
         my $doc_dir = 'texmf/doc/etex/base';
         my $src_dir = 'texmf/source/etex/base';
         ensure_directory($doc_dir);
@@ -938,16 +940,16 @@ section('Install tex doc');
         install($src_dir, qw[
             etex_man.tex etex_man.sty
         ]);
-        chdir $cwd;
+        cd $cwd;
     }
 
     ## patch for amsthm.sty, part 2/2
     #if ($modules{'amslatex'}) {
-    #    chdir "$dir_build/amslatex/amscls";
+    #    cd "$dir_build/amslatex/amscls";
     #    my $dest_dir = '../texmf/tex/latex/amscls';
     #    ensure_directory($dest_dir);
     #    install($dest_dir, 'amsthm.sty');
-    #    chdir $cwd;
+    #    cd $cwd;
     #}
 }
 
@@ -1062,7 +1064,7 @@ if ($modules{'base'}) {
         install_pdf('base', "$base");
         1;
     }
-    chdir "$dir_build/base";
+    cd "$dir_build/base";
 
     ## source2e
     cache 'base', 'source2e', sub {
@@ -1216,14 +1218,14 @@ END_CODE
         }
     }
 
-    chdir $cwd;
+    cd $cwd;
 }
 
 ### Generate documentation for tools
 if ($modules{'tools'}) {
     section('Documentation: tools');
 
-    chdir "$dir_build/tools";
+    cd "$dir_build/tools";
     my @list = glob("*.dtx");
     map { s/\.dtx$//; } @list;
     foreach my $entry (@list) {
@@ -1331,14 +1333,14 @@ END_FILE
         final_end;
     };
     install_pdf('tools', 'tools');
-    chdir $cwd;
+    cd $cwd;
 }
 
 ### Generate documentation for cyrillic
 if ($modules{'cyrillic'}) {
     section('Documentation: cyrillic');
 
-    chdir "$dir_build/cyrillic";
+    cd "$dir_build/cyrillic";
     my @list = (glob("*.dtx"), glob("*.fdd"));
     foreach my $entry (@list) {
         my $base = $entry;
@@ -1352,14 +1354,14 @@ if ($modules{'cyrillic'}) {
         };
         install_pdf('cyrillic', $base);
     }
-    chdir $cwd;
+    cd $cwd;
 }
 
 ### Generate documentation for graphics
 if ($modules{'graphics'}) {
     section('Documentation: graphics');
 
-    chdir "$dir_build/graphics";
+    cd "$dir_build/graphics";
     my @list = glob("*.dtx");
     map { s/\.dtx$//; } @list;
     foreach my $entry (@list) {
@@ -1388,7 +1390,7 @@ END_CODE
         final_end;
     };
     install_pdf('graphics', 'grfguide');
-    chdir $cwd;
+    cd $cwd;
 }
 
 sub makeindex ($) {
@@ -1446,23 +1448,23 @@ if ($modules{'amslatex'}) {
         install_pdf($amspkg, $doc);
     }
 
-    chdir "$dir_build/amslatex/amsmath";
+    cd "$dir_build/amslatex/amsmath";
     symlink '../texmf', 'texmf';
     map { generate_doc 'amsmath', $_; } qw[
         amsldoc subeqn technote testmath
         amsbsy amscd amsgen amsmath amsopn amstext amsxtra
     ];
-    chdir $cwd;
+    cd $cwd;
 
-    chdir "$dir_build/amslatex/amscls";
+    cd "$dir_build/amslatex/amscls";
     symlink '../texmf', 'texmf';
     map { generate_doc 'amscls', $_; } qw[
         amsthdoc instr-l thmtest
         amsclass amsdtx amsmidx upref
     ];
-    chdir $cwd;
+    cd $cwd;
 
-    chdir "$dir_build/amslatex/amsrefs";
+    cd "$dir_build/amslatex/amsrefs";
     symlink '../texmf', 'texmf';
     map { generate_doc 'amsrefs', $_; } qw[
         amsrdoc changes
@@ -1470,7 +1472,7 @@ if ($modules{'amslatex'}) {
     ];
     # 2013-02-13: Excluded as test files:
     #   cite-xa cite-xb cite-xh cite-xs
-    chdir $cwd;
+    cd $cwd;
 }
 
 if ($modules{'amsfonts'}) {
@@ -1501,7 +1503,7 @@ if ($modules{'amsfonts'}) {
         install_gen_pdf('fonts', $amspkg, $doc);
     }
 
-    chdir "$dir_build/amsfonts";
+    cd "$dir_build/amsfonts";
     map {generate_doc2 'amsfonts', $_; } qw[
         amsfonts amssymb cmmib57 eufrak euscript
     ];
@@ -1516,14 +1518,14 @@ if ($modules{'amsfonts'}) {
         };
     }
     install_gen_pdf('fonts', 'amsfonts', 'amsfndoc');
-    chdir $cwd;
+    cd $cwd;
 }
 
 ### Generate documentation for psnfss
 if ($modules{'psnfss'}) {
     section('Documentation: psnfss');
 
-    chdir "$dir_build/psnfss";
+    cd "$dir_build/psnfss";
 
     cache 'psnfss', 'psfonts', sub {
         run("$prg_pdflatextds -draftmode psfonts.dtx");
@@ -1542,14 +1544,14 @@ if ($modules{'psnfss'}) {
     };
     install_pdf('psnfss', 'psnfss2e');
 
-    chdir $cwd;
+    cd $cwd;
 }
 
 ### Generate documentation for tds
 if ($modules{'tds'}) {
     section('Documentation: tds');
 
-    chdir "$dir_build/tds";
+    cd "$dir_build/tds";
 
     my $file_tds = 'tds.tex';
     my $file_tds_new = 'tds.new';
@@ -1582,14 +1584,14 @@ END_TEXT
     };
     install_gen_pdf('', 'tds', 'tds');
 
-    chdir $cwd;
+    cd $cwd;
 }
 
 ### Generate documentation for knuth
 if ($modules{'knuth'}) {
     section('Documentation: knuth');
 
-    chdir "$dir_build/knuth";
+    cd "$dir_build/knuth";
 
     my $knuth_drv = "$cwd/$dir_tex/knuth.drv";
 
@@ -1728,14 +1730,14 @@ if ($modules{'knuth'}) {
     };
     install_gen_pdf('knuth', 'errata', 'errata');
 
-    chdir $cwd;
+    cd $cwd;
 }
 
 ### Generate documentation for etex
 if ($modules{'etex'}) {
     section('Documentation: etex');
 
-    chdir "$dir_build/etex";
+    cd "$dir_build/etex";
 
     my $entry = 'etex_man';
     my $etex_man_drv = "$cwd/$dir_tex/$entry.drv";
@@ -1749,7 +1751,7 @@ if ($modules{'etex'}) {
     };
     install_gen_pdf('etex', 'base', $entry);
 
-    chdir $cwd;
+    cd $cwd;
 }
 
 ### Module source
@@ -1770,6 +1772,7 @@ if ($modules{'source'}) {
 
     # generate README.html
     run("$prg_asciidoc --backend=xhtml11 README.asciidoc");
+    lf("README.html");
 
     # generate README.pdf
     # run("$prg_asciidoc --out-file=$file_readme_notoc_html"
@@ -1812,7 +1815,7 @@ if ($modules{'source'}) {
             push @lines_post, $_;
             push @lines_post, ($2 ? '-' : '=') x length($_) . "\n";
             my $prefix = ' ' x (3 * ($2 ? 2 : 1));
-            s/^(\d+)\.(\d+\.)? /($1<10 ? ' ' : '') . "$1.$2 "/e;
+            s/^(\d+)\.((?:\d+\.)?) /($1<10 ? ' ' : '') . "$1.$2 "/e;
             push @lines_toc, "$prefix$_";
             next;
         }
@@ -1898,13 +1901,29 @@ section('Distrib');
     }
 
     if ($opt_all) {
-        chdir $dir_distrib;
-        my $cmd = "$prg_zip -0 $file_ctan_distrib README README.html README.pdf";
-        for my $pkg (sort @pkg_list) {
-            $cmd .= " $pkg.tds.zip";
+        ensure_directory($dir_build_distrib);
+        my @files = map {"$cwd/$_"} qw[
+                README
+                README.html
+                README.pdf
+            ],
+            map {"$dir_distrib/$_.tds.zip"} sort @pkg_list;
+        run("$prg_rm -rf $dir_build_distrib_data") if -d $dir_build_distrib_data;
+        ensure_directory($dir_build_distrib_data);
+        cd $dir_build_distrib_data;
+        my @list;
+        foreach my $file (@files) {
+            $file =~ m|/([^/]+)$| or die "!!! Error: Cannot extract file name (`$file')!\n";
+            my $file_new = $1;
+            -f $file or die "!!! Error: File `$file' not found!\n";
+            link $file, $file_new or die "!!! Error: Cannot link `$file' => `$file_new': $!\n";
+            push @list, "$prj/$file_new";
         }
+        cd $cwd;
+        cd $dir_build_distrib;
+        my $cmd = "$prg_zip -0 $file_ctan_distrib $prj @list";
         run($cmd);
-        chdir $cwd;
+        cd $cwd;
     }
 }
 
