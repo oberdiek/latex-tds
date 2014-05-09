@@ -675,6 +675,6 @@ History
 2014/05/05::
   * Using LaTeX modules from CTAN.
 2014/05/08::
-  * Update of base and graphics (subversion version).
+  * Update of base and graphics.
   * +README.html+ with Unix line ends.
   * ZIP file for CTAN upload with top level directory +latex-tds+.
