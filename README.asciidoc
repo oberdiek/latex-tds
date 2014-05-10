@@ -678,3 +678,5 @@ History
   * Update of base and graphics.
   * +README.html+ with Unix line ends.
   * ZIP file for CTAN upload with top level directory +latex-tds+.
+2014/05/10::
+  * Module cyrillic: Missing ++00readme.txt++ added.

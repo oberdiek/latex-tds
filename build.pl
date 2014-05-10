@@ -4,8 +4,8 @@ $^W=1;
 
 my $prj     = 'latex-tds';
 my $file    = 'build.pl';
-my $version = '1.185';
-my $date    = '2014-05-08';
+my $version = '1.186';
+my $date    = '2014-05-10';
 my $author  = 'Heiko Oberdiek';
 my $copyright = "Copyright 2006-2014 $author";
 chomp(my $license = <<"END_LICENSE");
@@ -826,8 +826,21 @@ section('TDS cleanup');
 ### Install TDS/tex, TDS/doc files
 section('Install tex doc');
 {
+    sub check_readme ($) {
+        my $module = shift;
+        my $readme = $module eq 'tools' ? 'readme.txt' : '00readme.txt';
+        if (-f "README" and not -f $readme) {
+            run("$prg_cp README $readme");
+        }
+        -f $readme or
+                die "!!! Errror($module): Missing readme!\n";
+        -f "readme.txt" and -f "00readme.txt" and
+                die "!!! Error($module): Duplicate readme!\n";
+    }
+
     if ($modules{'base'}) {
         cd "$dir_build/base";
+        check_readme 'base';
         install 'texmf/doc/latex/base', qw[
             00readme.txt
             autoload.txt
@@ -858,6 +871,8 @@ section('Install tex doc');
 
     if ($modules{'tools'}) {
         cd "$dir_build/tools";
+        check_readme 'tools';
+        die "!!! Error(tools): Check readme names!\n" if -f "00readme.txt";
         install 'texmf/doc/latex/tools', qw[
             changes.txt
             manifest.txt
@@ -868,6 +883,7 @@ section('Install tex doc');
 
     if ($modules{'graphics'}) {
         cd "$dir_build/graphics";
+        check_readme 'graphics';
         install('texmf/doc/latex/graphics',
             '*.txt'
         );
@@ -879,6 +895,7 @@ section('Install tex doc');
 
     if ($modules{'cyrillic'}) {
         cd "$dir_build/cyrillic";
+        check_readme 'cyrillic';
         install('texmf/doc/latex/cyrillic',
             '*.txt'
         );
