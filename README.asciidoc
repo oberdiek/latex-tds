@@ -680,3 +680,5 @@ History
   * ZIP file for CTAN upload with top level directory +latex-tds+.
 2014/05/10::
   * Module cyrillic: Missing ++00readme.txt++ added.
+2014/05/13::
+  * Module base: +fix-cm+ has changed (2014/05/13 v1.1q).
