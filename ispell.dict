@@ -4,8 +4,8 @@ amsclass
 amscls
 amsfndoc
 amsfonts
-AmSLaTeX
 amslatex
+AmSLaTeX
 amsldoc
 amsmath
 amsrefs
@@ -13,8 +13,8 @@ amsthm
 armenian
 armtex
 ascii
-AsciiDoc
 asciidoc
+AsciiDoc
 athnum
 babel
 babel's
@@ -110,8 +110,8 @@ ltxcheck
 ltxdoc
 ltxguide
 Lua
-LuaLaTeX
 lualatex
+LuaLaTeX
 LuaTeX
 makeindex
 manfnt
@@ -129,11 +129,11 @@ oberdiek
 OpenType
 org
 pdf
-PDFBox
 pdfbox
+PDFBox
 pdflatex
-pdfTeX
 pdftex
+pdfTeX
 Perl
 piedmontese
 pkg
@@ -147,6 +147,7 @@ rtest
 sed
 sourceforge
 src
+tabularx
 tb
 tds
 tdsguide

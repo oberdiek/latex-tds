@@ -4,8 +4,8 @@ $^W=1;
 
 my $prj     = 'latex-tds';
 my $file    = 'build.pl';
-my $version = '1.186';
-my $date    = '2014-05-10';
+my $version = '1.187';
+my $date    = '2014-05-14';
 my $author  = 'Heiko Oberdiek';
 my $copyright = "Copyright 2006-2014 $author";
 chomp(my $license = <<"END_LICENSE");
@@ -828,7 +828,8 @@ section('Install tex doc');
 {
     sub check_readme ($) {
         my $module = shift;
-        my $readme = $module eq 'tools' ? 'readme.txt' : '00readme.txt';
+        # my $readme = $module eq 'tools' ? 'readme.txt' : '00readme.txt';
+        my $readme = '00readme.txt'; # since LaTeX revision 307
         if (-f "README" and not -f $readme) {
             run("$prg_cp README $readme");
         }
@@ -872,11 +873,10 @@ section('Install tex doc');
     if ($modules{'tools'}) {
         cd "$dir_build/tools";
         check_readme 'tools';
-        die "!!! Error(tools): Check readme names!\n" if -f "00readme.txt";
         install 'texmf/doc/latex/tools', qw[
             changes.txt
             manifest.txt
-            readme.txt
+            00readme.txt
         ];
         cd $cwd;
     }
