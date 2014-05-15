@@ -1,7 +1,7 @@
 README for project latex-tds
 ============================
 :author:        Heiko Oberdiek
-:revdate:       2014/05/14
+:revdate:       2014/05/15
 :lang:          en
 :toc:
 :numbered:
@@ -680,7 +680,8 @@ History
   * ZIP file for CTAN upload with top level directory +latex-tds+.
 2014/05/10::
   * Module cyrillic: Missing ++00readme.txt++ added.
-2014/05/14::
+2014/05/15::
   * Module base: +fix-cm+ updated (2014/05/13 v1.1q).
   * Module tools: +tabularx+ updated (2014/05/13 v2.10).
   * Module tools: +readme.txt+ renamed to +00readme.txt++.
+  * Module knuth: +.web+ files are put below +TDS:web/knuth//+.

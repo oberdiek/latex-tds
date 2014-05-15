@@ -4,8 +4,8 @@ $^W=1;
 
 my $prj     = 'latex-tds';
 my $file    = 'build.pl';
-my $version = '1.187';
-my $date    = '2014-05-14';
+my $version = '1.188';
+my $date    = '2014-05-15';
 my $author  = 'Heiko Oberdiek';
 my $copyright = "Copyright 2006-2014 $author";
 chomp(my $license = <<"END_LICENSE");
@@ -586,6 +586,15 @@ section('Install source');
         install "texmf/source/$dir", @list;
         cd $cwd;
     }
+    sub install_web_knuth ($@) {
+        my $pkg = 'knuth';
+        my $dir = shift;
+        my @list = @_;
+        $modules{$pkg} or return 1;
+        cd "$dir_build/$pkg";
+        install "texmf/web/$pkg/$dir", @list;
+        cd $cwd;
+    }
     sub install_source ($@) {
         my $pkg = shift;
         my @list = @_;
@@ -629,30 +638,34 @@ section('Install source');
         tds.sed
         tds.tex
     ]);
-    install_generic_source('knuth', 'knuth/texware', qw[
+    install_web_knuth('texware', qw[
         dvitype.web
         pltotf.web
         pooltype.web
         tftopl.web
     ]);
-    install_generic_source('knuth', 'knuth/mfware', qw[
+    install_web_knuth('mfware', qw[
         gftodvi.web
         gftype.web
         gftopk.web
         mft.web
     ]);
-    install_generic_source('knuth', 'knuth/etc', qw[
+    install_web_knuth('etc', qw[
         vptovf.web
         vftovp.web
     ]);
-    install_generic_source('knuth', 'knuth/web', qw[
+    install_web_knuth('web', qw[
         tangle.web
         weave.web
+    ]);
+    install_generic_source('knuth', 'knuth/web', qw[
         webman.tex
     ]);
-    install_generic_source('knuth', 'knuth/tex', qw[
+    install_web_knuth('tex', qw[
         glue.web
         tex.web
+    ]);
+    install_generic_source('knuth', 'knuth/tex', qw[
         trip.fot
         tripin.log
         trip.log
@@ -662,8 +675,10 @@ section('Install source');
         trip.tex
         trip.typ
     ]);
-    install_generic_source('knuth', 'knuth/mf', qw[
+    install_web_knuth('mf', qw[
         mf.web
+    ]);
+    install_generic_source('knuth', 'knuth/mf', qw[
         trap.fot
         trapin.log
         trap.log
