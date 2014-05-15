@@ -1,8 +1,8 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesFile{ltnews.tex}%
-  [2009/09/25 v1.1 Master file for ltnews*.tex (HO)]
+  [2014/05/15 v1.4 Master file for ltnews*.tex (HO)]
 %
-% Copyright 2006, 2009 Heiko Oberdiek
+% Copyright 2006, 2009, 2011, 2014 Heiko Oberdiek
 %
 % This file is part of project `latex-tds'.
 %
@@ -27,6 +27,8 @@
 % 2014/02/30 v1.3:
 %  * Update for LaTeX 2014/05/01.
 %  * Fix for anchor positions of issue titles.
+% 2014/05/15 v1.4:
+%  * Updates for ltnews21.tex.
 %
 \providecommand*{\lastissue}{20}
 \InputIfFileExists{ltnews-lastissue.cfg}{}{}
@@ -64,6 +66,7 @@
 
 \RequirePackage{hyperref}
 \hypersetup{colorlinks}
+\RequirePackage{bookmark}
 
 \makeatletter
 
@@ -158,6 +161,43 @@
   \let\org@twocolumn\twocolumn
   \renewenvironment{document}{%
     \clearpage
+    \ifnum\@issue=20 %
+      \addtocontents{toc}{\protect\setcounter{tocdepth}{5}}%
+      \addtocontents{toc}{%
+        \protect\makeatletter
+       }%
+       \addtocontents{toc}{%
+         \let\protect\saved@l@paragraph\protect\l@paragraph
+       }%
+       \addtocontents{toc}{%
+         \let\protect\l@paragraph\protect\l@subsection
+       }%
+    \fi
+    \ifnum\@issue=21 %
+      \addtocontents{toc}{%
+        \let\protect\l@paragraph\protect\saved@l@paragraph
+      }%
+      \def\toclevel@subsection{1}%
+      \def\toclevel@subsubsection{2}%
+      \addtocontents{toc}{\protect\setcounter{tocdepth}{4}}%
+      \renewcommand*{\tableofcontents}{%
+        \section*{\contentsname}%
+        \@starttoc{toc21}%
+      }%
+      \let\saved@addtocontents\addtocontents
+      \renewcommand*{\addtocontents}[2]{%
+        \saved@addtocontents{##1}{##2}%
+        \def\temp@toc{toc}%
+        \def\temp@param{##1}%
+        \ifx\temp@toc\temp@param
+          \saved@addtocontents{toc21}{##2}%
+        \fi
+      }%
+      \let\l@subsubsection\l@subsection
+      \let\l@subsection\l@section
+      \let\l@section\l@part
+      \let\l@part\@gobbletwo
+    \fi
     \def\twocolumn[{%
       \let\twocolumn\org@twocolumn
       \org@twocolumn[%
@@ -166,6 +206,9 @@
       }%
       \begingroup
         \let\WriteBookmarks\relax
+        \@firstofone{% inside opt. arg. of \twocolumn: protect "]"
+          \renewcommand*{\Hy@writebookmark}[5]{}%
+        }%
         \phantomsection
         \addcontentsline{toc}{part}{\printissue}%
       \endgroup

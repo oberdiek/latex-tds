@@ -4,8 +4,8 @@ $^W=1;
 
 my $prj     = 'latex-tds';
 my $file    = 'build.pl';
-my $version = '1.188';
-my $date    = '2014-05-15';
+my $version = '1.190';
+my $date    = '2014-05-16';
 my $author  = 'Heiko Oberdiek';
 my $copyright = "Copyright 2006-2014 $author";
 chomp(my $license = <<"END_LICENSE");
@@ -78,7 +78,9 @@ my $dir_distrib = 'distrib';
 my $dir_build_distrib = "$dir_build/distrib";
 my $dir_build_distrib_data = "$dir_build_distrib/$prj";
 my $dir_texmf = 'texmf';
-chomp(my $cwd = `pwd`);
+
+my $prg_pwd = 'pwd';
+chomp(my $cwd = `$prg_pwd`);
 
 # cache directory
 use File::HomeDir;
@@ -488,6 +490,11 @@ section('Unpacking');
 
     if ($modules{'amslatex'}) {
         unpack_ams('amscls', "$dir_incoming_ctan/amscls.tds.zip");
+        # Rename TDS:bibtex/bst/ams -> TDS:bibtex/bst/amscls
+        my $dir_bibtex_ams = "$dir_build/amslatex/texmf/bibtex/bst/ams";
+        my $dir_bibtex_amscls = "${dir_bibtex_ams}cls";
+        run("$prg_mv $dir_bibtex_ams $dir_bibtex_amscls") if
+                -d $dir_bibtex_ams and not -d $dir_bibtex_amscls;
         unpack_ams('amsrefs', "$dir_incoming_ctan/amsrefs.tds.zip");
         unpack_ams('amsmath', "$dir_incoming/ctan/math.tds.zip");
         #unpack_ams('amsrefs', "$dir_incoming_ams/amsrefs.zip");

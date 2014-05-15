@@ -1,7 +1,7 @@
 README for project latex-tds
 ============================
 :author:        Heiko Oberdiek
-:revdate:       2014/05/15
+:revdate:       2014/05/16
 :lang:          en
 :toc:
 :numbered:
@@ -261,13 +261,15 @@ Scripts
 ~~~~~~~
 [cols=".3literal,.7", frame="topbot", grid="rows"]
 |===
-|build.pl                  |main script for building the distribution
-|lib/adjust_checksum.pl    |Perl script that runs a DTX file through
-                            LaTeX and corrects its +\Checksum+ if necessary
-|lib/check-ascii.pl        |Perl script that looks for non-ASCII characters
-|lib/check-eolspaces.pl    |Perl script that looks for trailing spaces
-|lib/ziptimetree.pl        |Perl script that generates a ZIP file from
-                            a directory tree with sorted entries (LGPL)
+|build.pl                      |main script for building the distribution
+|lib/adjust_checksum.pl        |Perl script that runs a DTX file through
+                                LaTeX and corrects its +\Checksum+ if necessary
+|lib/check-ascii.pl            |Perl script that looks for non-ASCII characters
+|lib/check-eolspaces.pl        |Perl script that looks for trailing spaces
+|lib/check-tds-installation.pl |Perl script that compares a module with
+                                an installation inside a TDS tree.
+|lib/ziptimetree.pl            |Perl script that generates a ZIP file from
+                                a directory tree with sorted entries (LGPL)
 |===
 
 Configuration
@@ -276,6 +278,7 @@ Configuration
 |===
 |tex/docstrip.cfg          |enables TDS feature and creates directories
 |tex/errata.cfg            |for errata lists of latex/base
+|tex/fix-expl3-lua.ini     |fix for expl3, if used in format file
 |tex/hyperref.cfg          |hyperref configuration file
 |tex/ltnews.cfg            |for LaTeX News of latex/base
 |tex/ltugboat.cls          |setup for class ltugboat
@@ -685,3 +688,8 @@ History
   * Module tools: +tabularx+ updated (2014/05/13 v2.10).
   * Module tools: +readme.txt+ renamed to +00readme.txt++.
   * Module knuth: +.web+ files are put below +TDS:web/knuth//+.
+2014/05/16::
+  * Module base: Formatting of +ltnews.pdf+ fixed.
+  * +fix-expl3-lua.ini+ added to support putting package expl into a format.
+  * Script +check-tds-installation.pl+ added.
+  * Module amslatex: +TDS:bibtex/bst/ams+ renamed to +TDS:bibtex/bst/amscls+.
