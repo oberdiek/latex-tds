@@ -1,7 +1,7 @@
 README for project latex-tds
 ============================
 :author:        Heiko Oberdiek
-:revdate:       2014/05/16
+:revdate:       2014/05/21
 :lang:          en
 :toc:
 :numbered:
@@ -86,7 +86,8 @@ The link addresses are the sources for the modules.
   {ctan}macros/latex/required/amslatex.zip[CTAN:macros/latex/required/amslatex.zip] +
   ftp://ftp.ams.org/pub/tex/amsrefs/amsrefs.zip +
   ftp://ftp.ams.org/pub/tex/amscls.zip +
-  ftp://ftp.ams.org/pub/tex/amsmath.zip
+  ftp://ftp.ams.org/pub/tex/amsmath.zip +
+  http://tug.org/~karl/amsbooka.zip
 *amsfonts*::
   {ctan}install/fonts/amsfonts.tds.zip[CTAN:install/fonts/amsfonts.tds.zip]
 *psnfss*::
@@ -693,3 +694,5 @@ History
   * +fix-expl3-lua.ini+ added to support putting package expl into a format.
   * Script +check-tds-installation.pl+ added.
   * Module amslatex: +TDS:bibtex/bst/ams+ renamed to +TDS:bibtex/bst/amscls+.
+2014/05/21::
+  * Module amslatex: Sources for +amsbooka+ added.

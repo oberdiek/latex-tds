@@ -1,11 +1,12 @@
 ac
 albanian
+amsbooka
 amsclass
 amscls
 amsfndoc
 amsfonts
-AmSLaTeX
 amslatex
+AmSLaTeX
 amsldoc
 amsmath
 amsrefs
@@ -13,8 +14,8 @@ amsthm
 armenian
 armtex
 ascii
-AsciiDoc
 asciidoc
+AsciiDoc
 athnum
 babel
 babel's
@@ -87,6 +88,7 @@ install's
 instr
 io
 jb
+karl
 knuth
 lahyph
 lang
@@ -112,8 +114,8 @@ ltxcheck
 ltxdoc
 ltxguide
 lua
-LuaLaTeX
 lualatex
+LuaLaTeX
 LuaTeX
 makeindex
 manfnt
@@ -131,11 +133,11 @@ oberdiek
 OpenType
 org
 pdf
-PDFBox
 pdfbox
+PDFBox
 pdflatex
-pdfTeX
 pdftex
+pdfTeX
 Perl
 piedmontese
 pkg

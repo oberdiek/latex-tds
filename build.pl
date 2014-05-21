@@ -4,8 +4,8 @@ $^W=1;
 
 my $prj     = 'latex-tds';
 my $file    = 'build.pl';
-my $version = '1.190';
-my $date    = '2014-05-16';
+my $version = '1.191';
+my $date    = '2014-05-21';
 my $author  = 'Heiko Oberdiek';
 my $copyright = "Copyright 2006-2014 $author";
 chomp(my $license = <<"END_LICENSE");
@@ -34,6 +34,7 @@ my $time_start = time;
 
 my $url_ctan = 'ftp://dante.ctan.org/tex-archive';
 my $url_ams = 'ftp://ftp.ams.org/pub/tex';
+my $url_amsbooka = 'http://tug.org/~karl/amsbooka.zip';
 my $url_ltxprj = 'http://www.latex-project.org/';
 
 my @required_list = (
@@ -66,6 +67,7 @@ my $error = "!!! Error:";
 my $dir_incoming = 'incoming';
 my $dir_incoming_ctan = "$dir_incoming/ctan";
 my $dir_incoming_ams = "$dir_incoming/ams";
+my $dir_incoming_amsbooka = "$dir_incoming/amsbooka";
 my $dir_incoming_ltxprj = "$dir_incoming/ltxprj";
 my $dir_ltxpub = "latex2e-public";
 my $dir_incoming_ltxpub = "$dir_incoming/$dir_ltxpub";
@@ -351,6 +353,8 @@ if (@list_modules > 0) {
     download_err('lgc2');
     download_err('tlc2');
     download_ctan_file('armtex.zip', 'language/armenian');
+    ensure_directory($dir_incoming_amsbooka);
+    download("$dir_incoming_amsbooka/amsbooka.zip", $url_amsbooka);
 }
 
 ### VCS
@@ -509,6 +513,9 @@ section('Unpacking');
         ##        . "$dir_build/amslatex/texmf/source/latex/amsrefs/README");
         # run("$prg_cp $dir_build/amslatex/ctan/amsrefs/amsrefs.dtx "
         #         . "$dir_build/amslatex/texmf/source/latex/amsrefs/amsrefs.dtx");
+        unpacking_flat('amslatex',
+                       "$dir_incoming_amsbooka/amsbooka.zip",
+                       "$dir_build/amslatex");
     }
 
     if ($modules{'amsfonts'}) {
@@ -710,6 +717,14 @@ section('Install source');
         errorlog.tex
         logmac.tex
     ]);
+    if ($modules{'amslatex'}) {
+        cd "$dir_build/amslatex";
+        install "texmf/source/latex/amscls", qw[
+            amsbooka.dtx
+            amsbooka.ins
+        ];
+        cd $cwd;
+    }
 }
 
 ### Patch source files after source install
@@ -753,7 +768,6 @@ section('Patches after source install');
     }
 
     if ($modules{'knuth'}) {
-
         foreach my $file (qw[
             errorlog.tex
             logmac.tex
@@ -763,7 +777,6 @@ section('Patches after source install');
         ]) {
             patch("knuth/$file");
         }
-
     }
 
     if ($modules{'amslatex'}) {
@@ -796,6 +809,7 @@ section('Docstrip');
     docstrip('graphics', 'graphics');
     docstrip('graphics', 'graphics-drivers');
     docstrip('tools',    'tools');
+    docstrip('amslatex', 'amsbooka');
 
     ## patch for amsthm.sty, part 1/2
     #if ($modules{'amslatex'}) {
@@ -839,9 +853,6 @@ section('TDS cleanup');
           #   cite-x*.tex jr.bib
           map { run("$prg_mv $_ $dir_tds/doc/latex/amsrefs/"); } @list;
         }
-        # CTAN:macros/latex/required/amslatex/other/*
-        run("$prg_cp $dir_build/amslatex/other/amsbooka.sty"
-            . " $dir_build/amslatex/texmf/tex/latex/amscls/amsbooka.sty");
     }
 }
 
@@ -979,6 +990,12 @@ section('Install tex doc');
         install($src_dir, qw[
             etex_man.tex etex_man.sty
         ]);
+        cd $cwd;
+    }
+
+    if ($modules{'amslatex'}) {
+        cd "$dir_build/amslatex";
+        install('texmf/tex/latex/amscls', 'amsbooka.sty');
         cd $cwd;
     }
 
@@ -1501,6 +1518,10 @@ if ($modules{'amslatex'}) {
         amsthdoc instr-l thmtest
         amsclass amsdtx amsmidx upref
     ];
+    cd $cwd;
+
+    cd "$dir_build/amslatex";
+    generate_doc 'amscls', 'amsbooka';
     cd $cwd;
 
     cd "$dir_build/amslatex/amsrefs";
