@@ -1,7 +1,7 @@
 README for project latex-tds
 ============================
 :author:        Heiko Oberdiek
-:revdate:       2014/05/21
+:revdate:       2014/06/12
 :lang:          en
 :toc:
 :numbered:
@@ -696,3 +696,5 @@ History
   * Module amslatex: +TDS:bibtex/bst/ams+ renamed to +TDS:bibtex/bst/amscls+.
 2014/05/21::
   * Module amslatex: Sources for +amsbooka+ added.
+2014/06/12::
+  * Module base: Update of +fixltx2e.dtx+.
