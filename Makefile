@@ -42,7 +42,7 @@ README.pdf: README.html
 # 	./update.sh
 
 spell: README.asciidoc ispell.dict
-	ispell -p ispell.dict $<
+	ispell -d american-huge -p ispell.dict $<
 ispell.dict:
 	touch $@
 

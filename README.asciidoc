@@ -1,7 +1,7 @@
 README for project latex-tds
 ============================
 :author:        Heiko Oberdiek
-:revdate:       2014/09/17
+:revdate:       2014/11/03
 :lang:          en
 :toc:
 :numbered:
@@ -701,3 +701,6 @@ History
 2014/09/17::
   * Module tools: Update of packages +varioref+ and +multicol+.
   * Module base: Update of +fixltx2e+.
+2014/11/03::
+  * Module base: Update (2014-10-12).
+  * Module tools: Update (2014-10-28).
