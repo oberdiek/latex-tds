@@ -1,7 +1,7 @@
 README for project latex-tds
 ============================
 :author:        Heiko Oberdiek
-:revdate:       2014/11/12
+:revdate:       2014/11/13
 :lang:          en
 :toc:
 :numbered:
@@ -252,10 +252,12 @@ Licenses
 ~~~~~~~~
 [cols=".3literal,.7", frame="topbot", grid="rows"]
 |===
-|license/lppl.txt              |LPPL (The LaTeX Project Public License)
-                                for latex-tds and adjust_checksum
-|license/ziptimetree/lgpl.txt  |LGPL (GNU Lesser General Public License)
-                                for ziptimetree, check-ascii, check-eolspaces
+|license/adjust_checksum/lppl.txt |LPPL (The LaTeX Project Public License)
+                                   for adjust_checksum
+|license/latex-tds/lppl.txt       |LPPL (The LaTeX Project Public License)
+                                   for latex-tds
+|license/ziptimetree/lgpl.txt     |LGPL (GNU Lesser General Public License)
+                                   for ziptimetree, check-ascii, check-eolspaces
 |===
 
 Scripts
@@ -267,6 +269,9 @@ Scripts
                                 LaTeX and corrects its +\Checksum+ if necessary
 |lib/check-ascii.pl            |Perl script that looks for non-ASCII characters
 |lib/check-eolspaces.pl        |Perl script that looks for trailing spaces
+|lib/check-manifest.pl         |Perl script that compares the manifest section
+                                of `README.asciidoc` with the distribution
+                                file `source.tds.zip`.
 |lib/check-tds-installation.pl |Perl script that compares a module with
                                 an installation inside a TDS tree.
 |lib/ziptimetree.pl            |Perl script that generates a ZIP file from
@@ -282,7 +287,7 @@ Configuration
 |tex/fix-expl3-lua.ini     |fix for expl3, if used in format file
 |tex/hyperref.cfg          |hyperref configuration file
 |tex/ltnews.cfg            |for LaTeX News of latex/base
-|tex/ltugboat.cls          |setup for class ltugboat
+|tex/ltugboat.cfg          |setup for class ltugboat
 |tex/ltxdoc.cfg            |setup for class ltxdoc
 |tex/ltxguide.cfg          |setup for the guide manuals in latex/base
                             and required/psnfss
@@ -337,6 +342,7 @@ Patches
 |patch/webman.tex.diff     |knuth/web/webman.tex
 |===
 
+// end of manifest
 
 Design Principles
 -----------------
@@ -711,3 +717,6 @@ History
     +00readme.txt+ renamed to +README+.
   * Module amslatex: Missing +amsbooka.zip+ added to directory +patch+
     (until it is resolved at the AMS side).
+2014/11/13::
+  * Program +lib/check-manifest.pl+ added, manifest section
+    of +README+ fixed, and missing source files added to module source.

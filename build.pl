@@ -4,8 +4,8 @@ $^W=1;
 
 my $prj     = 'latex-tds';
 my $file    = 'build.pl';
-my $version = '1.192';
-my $date    = '2014-11-12';
+my $version = '1.193';
+my $date    = '2014-11-13';
 my $author  = 'Heiko Oberdiek';
 my $copyright = "Copyright 2006-2014 $author";
 chomp(my $license = <<"END_LICENSE");
@@ -1909,6 +1909,14 @@ if ($modules{'source'}) {
     install "$dir_dest/patch", glob("$dir_patch/*.*");
     install "$dir_dest/lib", $file_ziptimetree;
     install "$dir_dest/lib", $file_adjust_checksum;
+    for my $file (qw[
+        ascii
+        eolspaces
+        manifest
+        tds-installation
+    ]) {
+        install "$dir_dest/lib", "$dir_lib/check-$file.pl";
+    }
     install "$dir_dest/license/latex-tds", "$dir_license/latex-tds/lppl.txt";
     install "$dir_dest/license/adjust_checksum", "$dir_license/adjust_checksum/lppl.txt";
     install "$dir_dest/license/ziptimetree", "$dir_license/ziptimetree/lgpl.txt";

@@ -46,7 +46,7 @@ spell: README.asciidoc ispell.dict
 ispell.dict:
 	touch $@
 
-check: spell check-files check-links
+check: spell check-files check-links check-manifest
 
 check-files: README.asciidoc README.html build.pl build.sh ctan_upload.pl \
              tex/* lib/* license/*
@@ -61,6 +61,9 @@ check-links: README.html
 	    $<
 #	    --ignore-url=ftp://ftp.ams.org/ \
 
+check-manifest: ./lib/check-manifest.pl
+	$<
+
 ziptimetree: lib/ziptimetree.pl
 lib/ziptimetree.pl: $(HOME)/bin/ziptimetree
 	install -m 755 $< $@
@@ -69,4 +72,4 @@ clean:
 	-$(RM) README.bak README.asciidoc.bak
 
 .PHONY: all build distrib update incoming ziptimetree spell license \
-        check check-links check-files clean readme
+        check check-links check-files check-manifest clean readme
