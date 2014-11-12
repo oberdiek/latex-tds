@@ -4,8 +4,8 @@ $^W=1;
 
 my $prj     = 'latex-tds';
 my $file    = 'build.pl';
-my $version = '1.191';
-my $date    = '2014-05-21';
+my $version = '1.192';
+my $date    = '2014-11-12';
 my $author  = 'Heiko Oberdiek';
 my $copyright = "Copyright 2006-2014 $author";
 chomp(my $license = <<"END_LICENSE");
@@ -34,7 +34,6 @@ my $time_start = time;
 
 my $url_ctan = 'ftp://dante.ctan.org/tex-archive';
 my $url_ams = 'ftp://ftp.ams.org/pub/tex';
-my $url_amsbooka = 'http://tug.org/~karl/amsbooka.zip';
 my $url_ltxprj = 'http://www.latex-project.org/';
 
 my @required_list = (
@@ -67,7 +66,6 @@ my $error = "!!! Error:";
 my $dir_incoming = 'incoming';
 my $dir_incoming_ctan = "$dir_incoming/ctan";
 my $dir_incoming_ams = "$dir_incoming/ams";
-my $dir_incoming_amsbooka = "$dir_incoming/amsbooka";
 my $dir_incoming_ltxprj = "$dir_incoming/ltxprj";
 my $dir_ltxpub = "latex2e-public";
 my $dir_incoming_ltxpub = "$dir_incoming/$dir_ltxpub";
@@ -76,6 +74,7 @@ my $dir_lib = 'lib';
 my $dir_license = 'license';
 my $dir_tex = 'tex';
 my $dir_patch = 'patch';
+my $dir_patch_amsbooka = $dir_patch;
 my $dir_distrib = 'distrib';
 my $dir_build_distrib = "$dir_build/distrib";
 my $dir_build_distrib_data = "$dir_build_distrib/$prj";
@@ -353,8 +352,6 @@ if (@list_modules > 0) {
     download_err('lgc2');
     download_err('tlc2');
     download_ctan_file('armtex.zip', 'language/armenian');
-    ensure_directory($dir_incoming_amsbooka);
-    download("$dir_incoming_amsbooka/amsbooka.zip", $url_amsbooka);
 }
 
 ### VCS
@@ -514,7 +511,7 @@ section('Unpacking');
         # run("$prg_cp $dir_build/amslatex/ctan/amsrefs/amsrefs.dtx "
         #         . "$dir_build/amslatex/texmf/source/latex/amsrefs/amsrefs.dtx");
         unpacking_flat('amslatex',
-                       "$dir_incoming_amsbooka/amsbooka.zip",
+                       "$dir_patch_amsbooka/amsbooka.zip",
                        "$dir_build/amslatex");
     }
 
@@ -862,9 +859,14 @@ section('Install tex doc');
     sub check_readme ($) {
         my $module = shift;
         # my $readme = $module eq 'tools' ? 'readme.txt' : '00readme.txt';
-        my $readme = '00readme.txt'; # since LaTeX revision 307
-        if (-f "README" and not -f $readme) {
-            run("$prg_cp README $readme");
+        # my $readme = '00readme.txt'; # since LaTeX revision 307
+        # Since LaTeX 2014-11 switch to README.
+        my $readme = 'README';
+        # if (-f "README" and not -f $readme) {
+        #     run("$prg_cp README $readme");
+        # }
+        if (-f '00readme.txt' and not -f $readme) {
+            run("$prg_cp 00readme.txt $readme");
         }
         -f $readme or
                 die "!!! Errror($module): Missing readme!\n";
@@ -876,7 +878,7 @@ section('Install tex doc');
         cd "$dir_build/base";
         check_readme 'base';
         install 'texmf/doc/latex/base', qw[
-            00readme.txt
+            README
             autoload.txt
             bugs.txt
             changes.txt
@@ -909,7 +911,7 @@ section('Install tex doc');
         install 'texmf/doc/latex/tools', qw[
             changes.txt
             manifest.txt
-            00readme.txt
+            README
         ];
         cd $cwd;
     }
@@ -917,9 +919,10 @@ section('Install tex doc');
     if ($modules{'graphics'}) {
         cd "$dir_build/graphics";
         check_readme 'graphics';
-        install('texmf/doc/latex/graphics',
-            '*.txt'
-        );
+        install 'texmf/doc/latex/graphics', qw[
+            README
+            *.txt
+        ];
         install('texmf/tex/latex/graphics',
             '*.def'
         );
@@ -929,9 +932,10 @@ section('Install tex doc');
     if ($modules{'cyrillic'}) {
         cd "$dir_build/cyrillic";
         check_readme 'cyrillic';
-        install('texmf/doc/latex/cyrillic',
-            '*.txt'
-        );
+        install 'texmf/doc/latex/cyrillic', qw[
+            README
+            *.txt
+        ];
         cd $cwd;
     }
 

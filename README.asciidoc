@@ -1,7 +1,7 @@
 README for project latex-tds
 ============================
 :author:        Heiko Oberdiek
-:revdate:       2014/11/03
+:revdate:       2014/11/12
 :lang:          en
 :toc:
 :numbered:
@@ -87,7 +87,7 @@ The link addresses are the sources for the modules.
   ftp://ftp.ams.org/pub/tex/amsrefs/amsrefs.zip +
   ftp://ftp.ams.org/pub/tex/amscls.zip +
   ftp://ftp.ams.org/pub/tex/amsmath.zip +
-  http://tug.org/~karl/amsbooka.zip
+  patch/amsbooka.zip
 *amsfonts*::
   {ctan}install/fonts/amsfonts.tds.zip[CTAN:install/fonts/amsfonts.tds.zip]
 *psnfss*::
@@ -320,6 +320,7 @@ Patches
 [cols=".3l,.7l", options="header", frame="topbot", grid="rows"]
 |===
 |Diff/patch file|Patched file
+|patch/amsbooka.zip        |amslatex/amsbooka.*
 |patch/amsclass.dtx.diff   |amslatex/amsclass.dtx
 |patch/amsfndoc.def.diff   |amsfonts/amsfndoc.def
 |patch/amsfndoc.tex.diff   |amsfonts/amsfndoc.tex
@@ -704,3 +705,9 @@ History
 2014/11/03::
   * Module base: Update (2014-10-12).
   * Module tools: Update (2014-10-28).
+2014/11/12::
+  * Module graphics: Update (2014-11-07).
+  * Modules base, cyrillic, graphics, tools:
+    +00readme.txt+ renamed to +README+.
+  * Module amslatex: Missing +amsbooka.zip+ added to directory +patch+
+    (until it is resolved at the AMS side).
